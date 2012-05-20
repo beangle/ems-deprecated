@@ -6,7 +6,7 @@ package org.beangle.ems.event;
 
 import java.util.List;
 
-import org.beangle.dao.Entity;
+import org.beangle.commons.dao.Entity;
 
 /**
  * 实体删除事件
@@ -16,10 +16,10 @@ import org.beangle.dao.Entity;
  */
 public class EntityRemovalEvent<T extends Entity<?>> extends BusinessEntityEvent<T> {
 
-	private static final long serialVersionUID = 8762083590144399436L;
+  private static final long serialVersionUID = 8762083590144399436L;
 
-	public EntityRemovalEvent(Class<T> clazz, List<T> source) {
-		super(clazz, source);
-	}
+  public EntityRemovalEvent(Class<T> clazz, List<T> source) {
+    super(clazz, source);
+  }
 
 }

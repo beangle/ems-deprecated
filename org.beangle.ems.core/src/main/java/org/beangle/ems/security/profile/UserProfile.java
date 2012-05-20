@@ -16,12 +16,12 @@ import org.beangle.ems.security.User;
  */
 public interface UserProfile extends Profile {
 
-	public List<UserProperty> getProperties();
+  public List<UserProperty> getProperties();
 
-	public UserProperty getProperty(PropertyMeta meta);
+  public UserProperty getProperty(PropertyMeta meta);
 
-	public UserProperty getProperty(String name);
+  public UserProperty getProperty(String name);
 
-	public User getUser();
+  public User getUser();
 
 }

@@ -14,20 +14,20 @@ import org.beangle.ems.security.profile.PropertyMeta;
  */
 public interface UserDataProvider {
 
-	/**
-	 * extract data from source
-	 * 
-	 * @param <T>
-	 * @param type
-	 * @param source
-	 * @return
-	 */
-	public <T> List<T> getData(PropertyMeta field, String source);
+  /**
+   * extract data from source
+   * 
+   * @param <T>
+   * @param type
+   * @param source
+   * @return
+   */
+  public <T> List<T> getData(PropertyMeta field, String source);
 
-	/**
-	 * provider's unique name
-	 * 
-	 * @return
-	 */
-	public String getName();
+  /**
+   * provider's unique name
+   * 
+   * @return
+   */
+  public String getName();
 }

@@ -10,21 +10,21 @@ import org.beangle.util.i18n.TextResource;
 
 public class RolePropertyExtractor extends DefaultPropertyExtractor {
 
-	public RolePropertyExtractor() {
-		super();
-	}
+  public RolePropertyExtractor() {
+    super();
+  }
 
-	public RolePropertyExtractor(TextResource textResource) {
-		super(textResource);
-	}
+  public RolePropertyExtractor(TextResource textResource) {
+    super(textResource);
+  }
 
-	public Object getPropertyValue(Object target, String property) throws Exception {
-		Role role = (Role) target;
-		if ("users".equals(property)) {
-			return getPropertyIn(role.getMembers(), "user.name");
-		} else {
-			return super.getPropertyValue(target, property);
-		}
-	}
+  public Object getPropertyValue(Object target, String property) throws Exception {
+    Role role = (Role) target;
+    if ("users".equals(property)) {
+      return getPropertyIn(role.getMembers(), "user.name");
+    } else {
+      return super.getPropertyValue(target, property);
+    }
+  }
 
 }

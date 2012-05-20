@@ -23,46 +23,46 @@ import org.beangle.ems.web.action.SecurityActionSupport;
  */
 public class HomeAction extends SecurityActionSupport {
 
-	private MenuService menuService;
+  private MenuService menuService;
 
-	public String index() {
-		User user = entityDao.get(User.class, getUserId());
-		List<MenuProfile> profiles = menuService.getProfiles(user);
+  public String index() {
+    User user = entityDao.get(User.class, getUserId());
+    List<MenuProfile> profiles = menuService.getProfiles(user);
 
-		if (profiles.isEmpty()) {
-			put("menus", Collections.EMPTY_LIST);
-		} else {
-			Long profileId = getLong("security.menuProfileId");
-			MenuProfile profile = null;
-			if (null != profileId) profile = menuService.getProfile(user, profileId);
-			else profile = profiles.get(0);
-			put("menus", HierarchyEntityUtils.getRoots(menuService.getMenus(profile, user)));
-			put("profile", profile);
-		}
-		put("menuProfiles", profiles);
-		put("user", user);
-		return forward();
-	}
+    if (profiles.isEmpty()) {
+      put("menus", Collections.EMPTY_LIST);
+    } else {
+      Long profileId = getLong("security.menuProfileId");
+      MenuProfile profile = null;
+      if (null != profileId) profile = menuService.getProfile(user, profileId);
+      else profile = profiles.get(0);
+      put("menus", HierarchyEntityUtils.getRoots(menuService.getMenus(profile, user)));
+      put("profile", profile);
+    }
+    put("menuProfiles", profiles);
+    put("user", user);
+    return forward();
+  }
 
-	public String welcome() {
-		put("date", new Date(System.currentTimeMillis()));
-		put("user", SecurityUtils.getFullname());
-		return forward();
-	}
+  public String welcome() {
+    put("date", new Date(System.currentTimeMillis()));
+    put("user", SecurityUtils.getFullname());
+    return forward();
+  }
 
-	protected MenuProfile getMenuProfile(Long categoryId) {
-		OqlBuilder<MenuProfile> query = OqlBuilder.from(MenuProfile.class, "mp");
-		query.where("category.id=:categoryId", categoryId).cacheable();
-		List<MenuProfile> mps = entityDao.search(query);
-		if (mps.isEmpty()) {
-			return null;
-		} else {
-			return mps.get(0);
-		}
-	}
+  protected MenuProfile getMenuProfile(Long categoryId) {
+    OqlBuilder<MenuProfile> query = OqlBuilder.from(MenuProfile.class, "mp");
+    query.where("category.id=:categoryId", categoryId).cacheable();
+    List<MenuProfile> mps = entityDao.search(query);
+    if (mps.isEmpty()) {
+      return null;
+    } else {
+      return mps.get(0);
+    }
+  }
 
-	public void setMenuService(MenuService menuService) {
-		this.menuService = menuService;
-	}
+  public void setMenuService(MenuService menuService) {
+    this.menuService = menuService;
+  }
 
 }

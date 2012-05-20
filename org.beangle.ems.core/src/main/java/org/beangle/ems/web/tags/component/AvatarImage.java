@@ -6,7 +6,7 @@ package org.beangle.ems.web.tags.component;
 
 import java.security.Principal;
 
-import org.beangle.lang.StrUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.security.access.AuthorityManager;
 
 import com.opensymphony.xwork2.util.ValueStack;
@@ -19,33 +19,33 @@ import com.opensymphony.xwork2.util.ValueStack;
  */
 public class AvatarImage extends SecurityUIBean {
 
-	private String username;
+  private String username;
 
-	public static final String AvatarResource = "/avatar/user";
+  public static final String AvatarResource = "/avatar/user";
 
-	public AvatarImage(ValueStack stack, AuthorityManager authorityManager) {
-		super(stack, authorityManager);
-	}
+  public AvatarImage(ValueStack stack, AuthorityManager authorityManager) {
+    super(stack, authorityManager);
+  }
 
-	public String getAvatarUrl() {
-		return render(StrUtils.concat(AvatarResource, "?user.name=", username));
-	}
+  public String getAvatarUrl() {
+    return render(Strings.concat(AvatarResource, "?user.name=", username));
+  }
 
-	@Override
-	protected String getResource() {
-		return AvatarResource;
-	}
+  @Override
+  protected String getResource() {
+    return AvatarResource;
+  }
 
-	public void setUser(Object user) {
-		if (null == user) {
-			this.username = null;
-			return;
-		}
-		if (user instanceof Principal) {
-			this.username = ((Principal) user).getName();
-		} else {
-			this.username = user.toString();
-		}
-	}
+  public void setUser(Object user) {
+    if (null == user) {
+      this.username = null;
+      return;
+    }
+    if (user instanceof Principal) {
+      this.username = ((Principal) user).getName();
+    } else {
+      this.username = user.toString();
+    }
+  }
 
 }

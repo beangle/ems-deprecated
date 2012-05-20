@@ -14,12 +14,12 @@ import org.beangle.ems.rule.RuleBase;
  */
 public interface PatternMatcher {
 
-	/**
-	 * 根据规则集，判断哪些属于这次的执行范围
-	 * 
-	 * @param base
-	 * @param context
-	 * @return
-	 */
-	public Agenda buildAgenda(RuleBase base, Context context);
+  /**
+   * 根据规则集，判断哪些属于这次的执行范围
+   * 
+   * @param base
+   * @param context
+   * @return
+   */
+  public Agenda buildAgenda(RuleBase base, Context context);
 }

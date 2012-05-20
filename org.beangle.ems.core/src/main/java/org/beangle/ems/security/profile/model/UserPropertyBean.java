@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.profile.UserProfile;
 import org.beangle.ems.security.profile.UserProperty;
@@ -26,55 +26,55 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @Cache(region = "beangle.security", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserPropertyBean extends LongIdObject implements UserProperty {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**值*/
-	@Size(max=1000)
-	private String value;
+  /** 值 */
+  @Size(max = 1000)
+  private String value;
 
-	/**属性元*/
-	@NotNull
-	@ManyToOne
-	private PropertyMeta meta;
+  /** 属性元 */
+  @NotNull
+  @ManyToOne
+  private PropertyMeta meta;
 
-	/**用户属性配置*/
-	@NotNull
-	@ManyToOne
-	private UserProfile profile;
+  /** 用户属性配置 */
+  @NotNull
+  @ManyToOne
+  private UserProfile profile;
 
-	public UserPropertyBean() {
-		super();
-	}
+  public UserPropertyBean() {
+    super();
+  }
 
-	public UserPropertyBean(UserProfileBean profile, PropertyMeta meta, String value) {
-		super();
-		this.profile = profile;
-		this.meta = meta;
-		this.value = value;
-	}
+  public UserPropertyBean(UserProfileBean profile, PropertyMeta meta, String value) {
+    super();
+    this.profile = profile;
+    this.meta = meta;
+    this.value = value;
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-	public PropertyMeta getMeta() {
-		return meta;
-	}
+  public PropertyMeta getMeta() {
+    return meta;
+  }
 
-	public void setMeta(PropertyMeta meta) {
-		this.meta = meta;
-	}
+  public void setMeta(PropertyMeta meta) {
+    this.meta = meta;
+  }
 
-	public UserProfile getProfile() {
-		return profile;
-	}
+  public UserProfile getProfile() {
+    return profile;
+  }
 
-	public void setProfile(UserProfile profile) {
-		this.profile = profile;
-	}
+  public void setProfile(UserProfile profile) {
+    this.profile = profile;
+  }
 
 }

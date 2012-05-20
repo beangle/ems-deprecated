@@ -6,18 +6,19 @@ package org.beangle.ems.event;
 
 import java.util.List;
 
-import org.beangle.dao.Entity;
+import org.beangle.commons.dao.Entity;
 
 /**
  * 实体创建事件
+ * 
  * @author chaostone
  * @version $Id: EntityCreationEvent.java Mar 3, 2012 9:05:40 PM chaostone $
  */
 public class EntityCreationEvent<T extends Entity<?>> extends BusinessEntityEvent<T> {
 
-	private static final long serialVersionUID = -3370162531310618366L;
+  private static final long serialVersionUID = -3370162531310618366L;
 
-	public EntityCreationEvent(Class<T> clazz, List<T> source) {
-		super(clazz,source);
-	}
+  public EntityCreationEvent(Class<T> clazz, List<T> source) {
+    super(clazz, source);
+  }
 }

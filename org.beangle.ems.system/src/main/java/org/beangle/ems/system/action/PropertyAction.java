@@ -17,90 +17,90 @@ import org.beangle.struts2.action.BaseAction;
 
 public class PropertyAction extends BaseAction {
 
-	private PropertyConfigFactory configFactory;
+  private PropertyConfigFactory configFactory;
 
-	private EntityDao entityDao;
-	
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
+  private EntityDao entityDao;
 
-	public String bulkEdit() {
-		OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
-		builder.orderBy("config.name");
-		List<PropertyConfigItemBean> configs = entityDao.search(builder);
-		put("propertyConfigs", configs);
-		Set<String> staticNames = configFactory.getConfig().getNames();
-		for (PropertyConfigItemBean config : configs) {
-			staticNames.remove(config.getName());
-		}
-		put("config", configFactory.getConfig());
-		put("staticNames", staticNames);
-		return forward();
-	}
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
 
-	public String save() {
-		List<PropertyConfigItemBean> configs = entityDao.getAll(PropertyConfigItemBean.class);
-		Set<String> names = CollectUtils.newHashSet();
-		for (PropertyConfigItemBean config : configs) {
-			names.add(config.getName());
-		}
-		String msg = "info.save.success";
-		PropertyConfigItemBean newConfig = populate(PropertyConfigItemBean.class, "configNew");
-		if (StringUtils.isNotBlank(newConfig.getName()) && StringUtils.isNotBlank(newConfig.getValue())
-				&& !names.contains(newConfig.getName())) {
-			entityDao.saveOrUpdate(newConfig);
-		}
-		configFactory.reload();
-		return redirect("dynaInfo", msg);
-	}
+  public String bulkEdit() {
+    OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
+    builder.orderBy("config.name");
+    List<PropertyConfigItemBean> configs = entityDao.search(builder);
+    put("propertyConfigs", configs);
+    Set<String> staticNames = configFactory.getConfig().getNames();
+    for (PropertyConfigItemBean config : configs) {
+      staticNames.remove(config.getName());
+    }
+    put("config", configFactory.getConfig());
+    put("staticNames", staticNames);
+    return forward();
+  }
 
-	public String bulkSave() {
-		List<PropertyConfigItemBean> configs = entityDao.getAll(PropertyConfigItemBean.class);
-		Set<String> names = CollectUtils.newHashSet();
-		for (PropertyConfigItemBean config : configs) {
-			populate(config, "config" + config.getId());
-			names.add(config.getName());
-		}
-		entityDao.saveOrUpdate(configs);
-		configFactory.reload();
-		return redirect("dynaInfo", "info.save.success");
-	}
+  public String save() {
+    List<PropertyConfigItemBean> configs = entityDao.getAll(PropertyConfigItemBean.class);
+    Set<String> names = CollectUtils.newHashSet();
+    for (PropertyConfigItemBean config : configs) {
+      names.add(config.getName());
+    }
+    String msg = "info.save.success";
+    PropertyConfigItemBean newConfig = populate(PropertyConfigItemBean.class, "configNew");
+    if (StringUtils.isNotBlank(newConfig.getName()) && StringUtils.isNotBlank(newConfig.getValue())
+        && !names.contains(newConfig.getName())) {
+      entityDao.saveOrUpdate(newConfig);
+    }
+    configFactory.reload();
+    return redirect("dynaInfo", msg);
+  }
 
-	public String remove() {
-		PropertyConfigItemBean config = entityDao.get(PropertyConfigItemBean.class, getLong("config.id"));
-		if (null != config) entityDao.remove(config);
-		return redirect("dynaInfo", "info.save.success");
-	}
+  public String bulkSave() {
+    List<PropertyConfigItemBean> configs = entityDao.getAll(PropertyConfigItemBean.class);
+    Set<String> names = CollectUtils.newHashSet();
+    for (PropertyConfigItemBean config : configs) {
+      populate(config, "config" + config.getId());
+      names.add(config.getName());
+    }
+    entityDao.saveOrUpdate(configs);
+    configFactory.reload();
+    return redirect("dynaInfo", "info.save.success");
+  }
 
-	public String index() {
-		OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
-		builder.orderBy("config.name");
-		List<PropertyConfigItemBean> configs = entityDao.search(builder);
-		Set<String> staticNames = configFactory.getConfig().getNames();
-		for (PropertyConfigItemBean config : configs) {
-			staticNames.remove(config.getName());
-		}
-		put("config", configFactory.getConfig());
-		put("staticNames", staticNames);
-		return forward();
-	}
+  public String remove() {
+    PropertyConfigItemBean config = entityDao.get(PropertyConfigItemBean.class, getLong("config.id"));
+    if (null != config) entityDao.remove(config);
+    return redirect("dynaInfo", "info.save.success");
+  }
 
-	public String dynaInfo() {
-		OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
-		builder.orderBy("config.name");
-		List<PropertyConfigItemBean> configs = entityDao.search(builder);
-		put("propertyConfigs", configs);
-		put("config", configFactory.getConfig());
-		return forward();
-	}
+  public String index() {
+    OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
+    builder.orderBy("config.name");
+    List<PropertyConfigItemBean> configs = entityDao.search(builder);
+    Set<String> staticNames = configFactory.getConfig().getNames();
+    for (PropertyConfigItemBean config : configs) {
+      staticNames.remove(config.getName());
+    }
+    put("config", configFactory.getConfig());
+    put("staticNames", staticNames);
+    return forward();
+  }
 
-	public String newConfig() {
-		return "form";
-	}
+  public String dynaInfo() {
+    OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
+    builder.orderBy("config.name");
+    List<PropertyConfigItemBean> configs = entityDao.search(builder);
+    put("propertyConfigs", configs);
+    put("config", configFactory.getConfig());
+    return forward();
+  }
 
-	public void setConfigFactory(PropertyConfigFactory configFactory) {
-		this.configFactory = configFactory;
-	}
+  public String newConfig() {
+    return "form";
+  }
+
+  public void setConfigFactory(PropertyConfigFactory configFactory) {
+    this.configFactory = configFactory;
+  }
 
 }

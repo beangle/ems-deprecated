@@ -15,6 +15,6 @@ import org.beangle.ems.rule.Rule;
  */
 public interface Agenda {
 
-	public List<Rule> getRules();
+  public List<Rule> getRules();
 
 }

@@ -4,26 +4,26 @@
  */
 package org.beangle.ems;
 
-import org.beangle.context.inject.AbstractBindModule;
+import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.web.io.SplitStreamDownloader;
 import org.beangle.ems.avatar.service.FileSystemAvatarBase;
 import org.beangle.ems.config.service.DaoPropertyConfigProvider;
 import org.beangle.ems.dictionary.service.impl.BaseCodeServiceImpl;
 import org.beangle.ems.dictionary.service.impl.SeqCodeGenerator;
 import org.beangle.ems.io.ClasspathDocLoader;
 import org.beangle.ems.log.service.BusinessEventLogger;
-import org.beangle.web.io.SplitStreamDownloader;
 
 public class BaseServiceModule extends AbstractBindModule {
 
-	@Override
-	protected void doBinding() {
-		bind(FileSystemAvatarBase.class);
-		bind(DaoPropertyConfigProvider.class, ClasspathDocLoader.class).shortName();
-		bind("streamDownloader", SplitStreamDownloader.class);
+  @Override
+  protected void doBinding() {
+    bind(FileSystemAvatarBase.class);
+    bind(DaoPropertyConfigProvider.class, ClasspathDocLoader.class).shortName();
+    bind("streamDownloader", SplitStreamDownloader.class);
 
-		bind("baseCodeService", BaseCodeServiceImpl.class);
-		bind(SeqCodeGenerator.class);
-		bind(BusinessEventLogger.class);
-	}
+    bind("baseCodeService", BaseCodeServiceImpl.class);
+    bind(SeqCodeGenerator.class);
+    bind(BusinessEventLogger.class);
+  }
 
 }

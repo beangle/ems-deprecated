@@ -4,52 +4,51 @@
  */
 package org.beangle.ems.dictionary.service;
 
-
 import java.util.Map;
 
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
+
 /**
-*
-* @author chaostone
-* @version $Id: CodeFixture.java May 5, 2011 3:48:37 PM chaostone $
-*/
+ * @author chaostone
+ * @version $Id: CodeFixture.java May 5, 2011 3:48:37 PM chaostone $
+ */
 public class CodeFixture {
 
-	private Map<String, Object> params = CollectUtils.newHashMap();
+  private Map<String, Object> params = CollectUtils.newHashMap();
 
-	private String script;
+  private String script;
 
-	private Object entity;
-	
-	public CodeFixture(Object entity) {
-		super();
-		this.entity = entity;
-	}
+  private Object entity;
 
-	public CodeFixture(Object entity, String script) {
-		super();
-		this.entity = entity;
-		this.script = script;
-	}
+  public CodeFixture(Object entity) {
+    super();
+    this.entity = entity;
+  }
 
-	public Map<String, Object> getParams() {
-		return params;
-	}
+  public CodeFixture(Object entity, String script) {
+    super();
+    this.entity = entity;
+    this.script = script;
+  }
 
-	public String getScript() {
-		return script;
-	}
+  public Map<String, Object> getParams() {
+    return params;
+  }
 
-	public void setParams(Map<String, Object> params) {
-		this.params = params;
-	}
+  public String getScript() {
+    return script;
+  }
 
-	public void setScript(String script) {
-		this.script = script;
-	}
+  public void setParams(Map<String, Object> params) {
+    this.params = params;
+  }
 
-	public final Object getEntity() {
-		return entity;
-	}
+  public void setScript(String script) {
+    this.script = script;
+  }
+
+  public final Object getEntity() {
+    return entity;
+  }
 
 }

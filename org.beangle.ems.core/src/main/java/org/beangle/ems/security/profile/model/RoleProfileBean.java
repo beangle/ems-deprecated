@@ -11,12 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Role;
+import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.profile.RoleProfile;
 import org.beangle.ems.security.profile.RoleProperty;
-import org.beangle.ems.security.profile.PropertyMeta;
 
 /**
  * 角色属性配置
@@ -27,58 +27,58 @@ import org.beangle.ems.security.profile.PropertyMeta;
 @Entity(name = "org.beangle.ems.security.profile.RoleProfile")
 public class RoleProfileBean extends LongIdObject implements RoleProfile {
 
-	private static final long serialVersionUID = -9047586316477373803L;
+  private static final long serialVersionUID = -9047586316477373803L;
 
-	/** 角色 */
-	@ManyToOne
-	private Role role;
-	
-	/**角色自定义属性*/
-	@OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
-	protected List<RoleProperty> properties = CollectUtils.newArrayList();
+  /** 角色 */
+  @ManyToOne
+  private Role role;
 
-	public Role getRole() {
-		return role;
-	}
+  /** 角色自定义属性 */
+  @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+  protected List<RoleProperty> properties = CollectUtils.newArrayList();
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+  public Role getRole() {
+    return role;
+  }
 
-	public List<RoleProperty> getProperties() {
-		return properties;
-	}
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-	public void setProperties(List<RoleProperty> properties) {
-		this.properties = properties;
-	}
+  public List<RoleProperty> getProperties() {
+    return properties;
+  }
 
-	public RoleProperty getProperty(PropertyMeta meta) {
-		if (null == properties || properties.isEmpty()) {
-			return null;
-		} else {
-			for (RoleProperty p : properties) {
-				if (p.getMeta().equals(meta)) return p;
-			}
-		}
-		return null;
-	}
+  public void setProperties(List<RoleProperty> properties) {
+    this.properties = properties;
+  }
 
-	public void setProperty(PropertyMeta meta, String text) {
-		RoleProperty property = getProperty(meta);
-		if (null == property) {
-			property = new RolePropertyBean(this, meta, text);
-			properties.add(property);
-		} else {
-			property.setValue(text);
-		}
-	}
+  public RoleProperty getProperty(PropertyMeta meta) {
+    if (null == properties || properties.isEmpty()) {
+      return null;
+    } else {
+      for (RoleProperty p : properties) {
+        if (p.getMeta().equals(meta)) return p;
+      }
+    }
+    return null;
+  }
 
-	// public RoleProperty getField(String paramName) {
-	// for (final RoleProperty param : fields) {
-	// if (param.getName().equals(paramName)) { return param; }
-	// }
-	// return null;
-	// }
+  public void setProperty(PropertyMeta meta, String text) {
+    RoleProperty property = getProperty(meta);
+    if (null == property) {
+      property = new RolePropertyBean(this, meta, text);
+      properties.add(property);
+    } else {
+      property.setValue(text);
+    }
+  }
+
+  // public RoleProperty getField(String paramName) {
+  // for (final RoleProperty param : fields) {
+  // if (param.getName().equals(paramName)) { return param; }
+  // }
+  // return null;
+  // }
 
 }

@@ -13,8 +13,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.beangle.bean.converters.Converter;
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.bean.converters.Converter;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.service.UserDataProvider;
 import org.beangle.ems.security.service.UserDataResolver;
@@ -28,107 +28,100 @@ import org.beangle.ems.security.service.UserDataResolver;
  */
 public class CsvDataResolver implements UserDataResolver, UserDataProvider {
 
-	public String marshal(PropertyMeta property, Collection<?> items) {
-		if (null == items) {
-			return null;
-		}
-		List<String> properties = CollectUtils.newArrayList();
-		if (null != property.getKeyName()) {
-			properties.add(property.getKeyName());
-		}
-		if (null != property.getPropertyNames()) {
-			String[] names = StringUtils
-					.split(property.getPropertyNames(), ",");
-			properties.addAll(Arrays.asList(names));
-		}
-		StringBuilder sb = new StringBuilder();
-		if (properties.isEmpty()) {
-			for (Object obj : items) {
-				if (null != obj) {
-					sb.append(String.valueOf(obj)).append(',');
-				}
-			}
-		} else {
-			for (String prop : properties) {
-				sb.append(prop).append(';');
-			}
-			sb.deleteCharAt(sb.length() - 1).append(',');
-			for (Object obj : items) {
-				for (String prop : properties) {
-					Object value = null;
-					try {
-						value = PropertyUtils.getProperty(obj, prop);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					sb.append(String.valueOf(value)).append(';');
-				}
-				sb.deleteCharAt(sb.length() - 1);
-				sb.append(',');
-			}
-		}
-		if (sb.length() > 0) {
-			sb.deleteCharAt(sb.length() - 1);
-		}
-		return sb.toString();
-	}
+  public String marshal(PropertyMeta property, Collection<?> items) {
+    if (null == items) { return null; }
+    List<String> properties = CollectUtils.newArrayList();
+    if (null != property.getKeyName()) {
+      properties.add(property.getKeyName());
+    }
+    if (null != property.getPropertyNames()) {
+      String[] names = StringUtils.split(property.getPropertyNames(), ",");
+      properties.addAll(Arrays.asList(names));
+    }
+    StringBuilder sb = new StringBuilder();
+    if (properties.isEmpty()) {
+      for (Object obj : items) {
+        if (null != obj) {
+          sb.append(String.valueOf(obj)).append(',');
+        }
+      }
+    } else {
+      for (String prop : properties) {
+        sb.append(prop).append(';');
+      }
+      sb.deleteCharAt(sb.length() - 1).append(',');
+      for (Object obj : items) {
+        for (String prop : properties) {
+          Object value = null;
+          try {
+            value = PropertyUtils.getProperty(obj, prop);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          sb.append(String.valueOf(value)).append(';');
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append(',');
+      }
+    }
+    if (sb.length() > 0) {
+      sb.deleteCharAt(sb.length() - 1);
+    }
+    return sb.toString();
+  }
 
-	@SuppressWarnings("unchecked")
-	public <T> List<T> unmarshal(PropertyMeta property, String source) {
-		if (StringUtils.isEmpty(source)) {
-			return Collections.emptyList();
-		}
-		List<String> properties = CollectUtils.newArrayList();
-		if (null != property.getKeyName()) {
-			properties.add(property.getKeyName());
-		}
-		if (null != property.getPropertyNames()) {
-			String[] names = StringUtils
-					.split(property.getPropertyNames(), ",");
-			properties.addAll(Arrays.asList(names));
-		}
-		String[] datas = StringUtils.split(source, ",");
-		try {
-			Class<?> type = null;
-			type = Class.forName(property.getValueType());
-			List<T> rs = CollectUtils.newArrayList();
-			if (properties.isEmpty()) {
-				ConvertUtilsBean converter = Converter.getDefault();
-				for (String data : datas) {
-					rs.add((T) converter.convert(data, type));
-				}
-				return rs;
-			} else {
-				properties.clear();
-				int startIndex = 0;
-				String[] names = new String[] { property.getKeyName() };
-				if (-1 != datas[0].indexOf(';')) {
-					names = StringUtils.split(datas[0], ";");
-					startIndex = 1;
-				}
-				properties.addAll(Arrays.asList(names));
-				for (int i = startIndex; i < datas.length; i++) {
-					Object obj = type.newInstance();
-					String[] dataItems = StringUtils.split(datas[i], ";");
-					for (int j = 0; j < properties.size(); j++) {
-						BeanUtils.setProperty(obj, properties.get(j),
-								dataItems[j]);
-					}
-					rs.add((T) obj);
-				}
-			}
-			return rs;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+  @SuppressWarnings("unchecked")
+  public <T> List<T> unmarshal(PropertyMeta property, String source) {
+    if (StringUtils.isEmpty(source)) { return Collections.emptyList(); }
+    List<String> properties = CollectUtils.newArrayList();
+    if (null != property.getKeyName()) {
+      properties.add(property.getKeyName());
+    }
+    if (null != property.getPropertyNames()) {
+      String[] names = StringUtils.split(property.getPropertyNames(), ",");
+      properties.addAll(Arrays.asList(names));
+    }
+    String[] datas = StringUtils.split(source, ",");
+    try {
+      Class<?> type = null;
+      type = Class.forName(property.getValueType());
+      List<T> rs = CollectUtils.newArrayList();
+      if (properties.isEmpty()) {
+        ConvertUtilsBean converter = Converter.getDefault();
+        for (String data : datas) {
+          rs.add((T) converter.convert(data, type));
+        }
+        return rs;
+      } else {
+        properties.clear();
+        int startIndex = 0;
+        String[] names = new String[] { property.getKeyName() };
+        if (-1 != datas[0].indexOf(';')) {
+          names = StringUtils.split(datas[0], ";");
+          startIndex = 1;
+        }
+        properties.addAll(Arrays.asList(names));
+        for (int i = startIndex; i < datas.length; i++) {
+          Object obj = type.newInstance();
+          String[] dataItems = StringUtils.split(datas[i], ";");
+          for (int j = 0; j < properties.size(); j++) {
+            BeanUtils.setProperty(obj, properties.get(j), dataItems[j]);
+          }
+          rs.add((T) obj);
+        }
+      }
+      return rs;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-	public <T> List<T> getData(PropertyMeta property, String source) {
-		return unmarshal(property, source);
-	}
+  public <T> List<T> getData(PropertyMeta property, String source) {
+    return unmarshal(property, source);
+  }
 
-	public String getName() {
-		return "csv";
-	}
+  public String getName() {
+    return "csv";
+  }
 
 }

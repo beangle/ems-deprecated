@@ -14,46 +14,45 @@ import org.beangle.ems.dictionary.service.CodeGenerator;
 import bsh.Interpreter;
 
 /**
- *
  * @author chaostone
  * @version $Id: ScriptCodeGenerator.java May 5, 2011 3:53:15 PM chaostone $
  */
 
 public class ScriptCodeGenerator implements CodeGenerator {
 
-	protected Interpreter interpreter = new Interpreter();
+  protected Interpreter interpreter = new Interpreter();
 
-	public void setUp() throws Exception {
-	}
+  public void setUp() throws Exception {
+  }
 
-	public String gen(CodeFixture fixture) {
-		try {
-			interpreter.set("entity", fixture.getEntity());
-			setUp();
-			return (String) interpreter.eval(fixture.getScript());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+  public String gen(CodeFixture fixture) {
+    try {
+      interpreter.set("entity", fixture.getEntity());
+      setUp();
+      return (String) interpreter.eval(fixture.getScript());
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-	public String test(CodeFixture fixture) {
-		try {
-			for (Iterator<String> iter = fixture.getParams().keySet().iterator(); iter.hasNext();) {
-				String param = iter.next();
-				interpreter.set(param, fixture.getParams().get(param));
-			}
-			if (StringUtils.isNotEmpty(fixture.getScript())) {
-				interpreter.eval(fixture.getScript());
-			}
-			return gen(fixture);
-		} catch (Exception e) {
-			return ExceptionUtils.getFullStackTrace(e);
-		}
-	}
+  public String test(CodeFixture fixture) {
+    try {
+      for (Iterator<String> iter = fixture.getParams().keySet().iterator(); iter.hasNext();) {
+        String param = iter.next();
+        interpreter.set(param, fixture.getParams().get(param));
+      }
+      if (StringUtils.isNotEmpty(fixture.getScript())) {
+        interpreter.eval(fixture.getScript());
+      }
+      return gen(fixture);
+    } catch (Exception e) {
+      return ExceptionUtils.getFullStackTrace(e);
+    }
+  }
 
-	public boolean isValidCode(String code) {
-		return (StringUtils.isNotEmpty(code)) && (code.length() <= CodeGenerator.MAX_LENGTH)
-				&& !CodeGenerator.MARK.equals(code);
-	}
+  public boolean isValidCode(String code) {
+    return (StringUtils.isNotEmpty(code)) && (code.length() <= CodeGenerator.MAX_LENGTH)
+        && !CodeGenerator.MARK.equals(code);
+  }
 
 }

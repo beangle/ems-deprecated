@@ -19,31 +19,31 @@ import org.beangle.struts2.convention.route.Action;
  */
 public class MyUploadAction extends SecurityActionSupport {
 
-	protected AvatarBase avatarBase;
+  protected AvatarBase avatarBase;
 
-	public String index() {
-		Avatar avatar = avatarBase.getAvatar(getUsername());
-		put("avatar", avatar);
-		put("user", getUser());
-		return forward();
-	}
+  public String index() {
+    Avatar avatar = avatarBase.getAvatar(getUsername());
+    put("avatar", avatar);
+    put("user", getUser());
+    return forward();
+  }
 
-	public String upload() throws Exception {
-		File[] files = (File[]) getAll("avatar");
-		if (files.length > 0) {
-			String type = StringUtils.substringAfter(get("avatarFileName"), ".");
-			boolean passed = avatarBase.containType(type);
-			if (passed) {
-				avatarBase.updateAvatar(getUsername(), files[0], type);
-			} else {
-				return forward("upload");
-			}
-		}
-		return redirect(new Action(MyAction.class, "info"), "info.upload.success");
-	}
+  public String upload() throws Exception {
+    File[] files = (File[]) getAll("avatar");
+    if (files.length > 0) {
+      String type = StringUtils.substringAfter(get("avatarFileName"), ".");
+      boolean passed = avatarBase.containType(type);
+      if (passed) {
+        avatarBase.updateAvatar(getUsername(), files[0], type);
+      } else {
+        return forward("upload");
+      }
+    }
+    return redirect(new Action(MyAction.class, "info"), "info.upload.success");
+  }
 
-	public void setAvatarBase(AvatarBase avatarBase) {
-		this.avatarBase = avatarBase;
-	}
+  public void setAvatarBase(AvatarBase avatarBase) {
+    this.avatarBase = avatarBase;
+  }
 
 }

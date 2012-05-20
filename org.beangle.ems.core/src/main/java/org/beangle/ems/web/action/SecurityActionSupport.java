@@ -8,103 +8,104 @@ import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.NoParameters;
-import org.beangle.dao.EntityDao;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.web.util.RequestUtils;
 import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.SecurityUtils;
 import org.beangle.ems.security.profile.UserProfile;
 import org.beangle.ems.security.restrict.Restriction;
 import org.beangle.ems.security.restrict.service.RestrictionService;
 import org.beangle.ems.security.service.AuthorityService;
-import org.beangle.lang.StrUtils;
 import org.beangle.security.access.AccessDeniedException;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.struts2.action.BaseAction;
-import org.beangle.web.util.RequestUtils;
 
 public abstract class SecurityActionSupport extends BaseAction implements NoParameters {
 
-	protected AuthorityService authorityService;
+  protected AuthorityService authorityService;
 
-	protected RestrictionService restrictionService;
+  protected RestrictionService restrictionService;
 
-	protected EntityDao entityDao;
-	
-	protected Resource getResource() {
-		String resourceName = SecurityUtils.getResource();
-		if (null == resourceName) {
-			resourceName = authorityService.extractResource(RequestUtils.getServletPath(ServletActionContext
-					.getRequest()));
-		}
-		return authorityService.getResource(resourceName);
-	}
+  protected EntityDao entityDao;
 
-	protected boolean isAdmin() {
-		return authorityService.getUserService().isRoot(getUserId());
-	}
+  protected Resource getResource() {
+    String resourceName = SecurityUtils.getResource();
+    if (null == resourceName) {
+      resourceName = authorityService.extractResource(RequestUtils.getServletPath(ServletActionContext
+          .getRequest()));
+    }
+    return authorityService.getResource(resourceName);
+  }
 
-	protected List<Restriction> getRestrictions() {
-		// final Map<String, Object> session = ActionContext.getContext().getSession();
-		// @SuppressWarnings("unchecked")
-		// Map<Long, List<Restriction>> restrictionMap = (Map<Long, List<Restriction>>) session
-		// .get("security.restriction");
-		// if (null == restrictionMap) {
-		// restrictionMap = CollectUtils.newHashMap();
-		// session.put("security.restriction", restrictionMap);
-		// }
-		Resource resource = getResource();
-		// if (resource.getEntities().isEmpty()) { return Collections.emptyList(); }
-		// List<Restriction> realms = restrictionMap.get(resource.getId());
-//		User user = entityDao.get(User.class, getUserId());
-		// if (null == realms) {
-		UserProfile profile = getUserProfile();
-		List<Restriction> holders = restrictionService.getRestrictions(profile, resource);
-		// restrictionMap.put(resource.getId(), realms);
-		// }
-		// 没有权限就报错
-		if (holders.isEmpty()) { throw new AccessDeniedException(SecurityContextHolder.getContext()
-				.getAuthentication(), resource.getName()); }
-		return holders;
-	}
+  protected boolean isAdmin() {
+    return authorityService.getUserService().isRoot(getUserId());
+  }
 
-	protected Object getUserPropertyValue(String name) {
-		UserProfile profile = getUserProfile();
-		if (null == profile) return null;
-		else return restrictionService.getPropertyValue(name, profile);
-	}
+  protected List<Restriction> getRestrictions() {
+    // final Map<String, Object> session = ActionContext.getContext().getSession();
+    // @SuppressWarnings("unchecked")
+    // Map<Long, List<Restriction>> restrictionMap = (Map<Long, List<Restriction>>) session
+    // .get("security.restriction");
+    // if (null == restrictionMap) {
+    // restrictionMap = CollectUtils.newHashMap();
+    // session.put("security.restriction", restrictionMap);
+    // }
+    Resource resource = getResource();
+    // if (resource.getEntities().isEmpty()) { return Collections.emptyList(); }
+    // List<Restriction> realms = restrictionMap.get(resource.getId());
+    // User user = entityDao.get(User.class, getUserId());
+    // if (null == realms) {
+    UserProfile profile = getUserProfile();
+    List<Restriction> holders = restrictionService.getRestrictions(profile, resource);
+    // restrictionMap.put(resource.getId(), realms);
+    // }
+    // 没有权限就报错
+    if (holders.isEmpty()) { throw new AccessDeniedException(SecurityContextHolder.getContext()
+        .getAuthentication(), resource.getName()); }
+    return holders;
+  }
 
-	protected UserProfile getUserProfile() {
-		OqlBuilder<UserProfile> builder=OqlBuilder.from(UserProfile.class,"up").where("up.user.id=:userId",getUserId());
-		List<UserProfile> profiles=entityDao.search(builder);
-		return profiles.isEmpty()?null:profiles.get(0);
-	}
+  protected Object getUserPropertyValue(String name) {
+    UserProfile profile = getUserProfile();
+    if (null == profile) return null;
+    else return restrictionService.getPropertyValue(name, profile);
+  }
 
-	protected void applyRestriction(OqlBuilder<?> query) {
-		restrictionService.apply(query, getRestrictions(), getUserProfile());
-	}
+  protected UserProfile getUserProfile() {
+    OqlBuilder<UserProfile> builder = OqlBuilder.from(UserProfile.class, "up").where("up.user.id=:userId",
+        getUserId());
+    List<UserProfile> profiles = entityDao.search(builder);
+    return profiles.isEmpty() ? null : profiles.get(0);
+  }
 
-	protected Long getUserId() {
-		return SecurityUtils.getUserId();
-	}
+  protected void applyRestriction(OqlBuilder<?> query) {
+    restrictionService.apply(query, getRestrictions(), getUserProfile());
+  }
 
-	protected String getUsername() {
-		return SecurityUtils.getUsername();
-	}
+  protected Long getUserId() {
+    return SecurityUtils.getUserId();
+  }
 
-	protected String getUser() {
-		return StrUtils.concat(SecurityUtils.getUsername(), "(", SecurityUtils.getFullname(), ")");
-	}
+  protected String getUsername() {
+    return SecurityUtils.getUsername();
+  }
 
-	public void setAuthorityService(AuthorityService authorityService) {
-		this.authorityService = authorityService;
-	}
+  protected String getUser() {
+    return Strings.concat(SecurityUtils.getUsername(), "(", SecurityUtils.getFullname(), ")");
+  }
 
-	public void setRestrictionService(RestrictionService restrictionService) {
-		this.restrictionService = restrictionService;
-	}
+  public void setAuthorityService(AuthorityService authorityService) {
+    this.authorityService = authorityService;
+  }
 
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
-	
+  public void setRestrictionService(RestrictionService restrictionService) {
+    this.restrictionService = restrictionService;
+  }
+
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
+
 }

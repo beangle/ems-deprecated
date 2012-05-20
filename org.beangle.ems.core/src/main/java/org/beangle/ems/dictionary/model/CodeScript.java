@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.dao.pojo.LongIdTimeObject;
+import org.beangle.commons.orm.pojo.LongIdTimeObject;
 
 /**
  * 系统编码规则
@@ -16,84 +16,84 @@ import org.beangle.dao.pojo.LongIdTimeObject;
  * @author chaostone
  * @version $Id: CodeScript.java May 5, 2011 3:56:23 PM chaostone $
  */
-@Entity(name="org.beangle.ems.dictionary.model.CodeScript")
+@Entity(name = "org.beangle.ems.dictionary.model.CodeScript")
 public class CodeScript extends LongIdTimeObject {
 
-	private static final long serialVersionUID = -2771592539431465165L;
+  private static final long serialVersionUID = -2771592539431465165L;
 
-	/** 编码对象 */
-	@NotNull
-	@Size(max = 40)
-	private String codeName;
+  /** 编码对象 */
+  @NotNull
+  @Size(max = 40)
+  private String codeName;
 
-	/** 编码属性 */
-	@NotNull
-	@Size(max = 20)
-	private String attr;
+  /** 编码属性 */
+  @NotNull
+  @Size(max = 20)
+  private String attr;
 
-	/** 编码对象的类名 */
-	@NotNull
-	@Size(max = 100)
-	private String codeClassName;
+  /** 编码对象的类名 */
+  @NotNull
+  @Size(max = 100)
+  private String codeClassName;
 
-	/** 编码脚本 */
-	@NotNull
-	@Size(max = 500)
-	private String script;
+  /** 编码脚本 */
+  @NotNull
+  @Size(max = 500)
+  private String script;
 
-	/** 编码简要描述 */
-	@NotNull
-	@Size(max = 100)
-	private String description;
+  /** 编码简要描述 */
+  @NotNull
+  @Size(max = 100)
+  private String description;
 
-	public CodeScript() {
-		super();
-	}
+  public CodeScript() {
+    super();
+  }
 
-	public CodeScript(String codeClassName, String attr, String script) {
-		this.codeClassName = codeClassName;
-		this.attr = attr;
-		this.script = script;
-	}
+  public CodeScript(String codeClassName, String attr, String script) {
+    this.codeClassName = codeClassName;
+    this.attr = attr;
+    this.script = script;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public String getCodeClassName() {
-		return codeClassName;
-	}
+  public String getCodeClassName() {
+    return codeClassName;
+  }
 
-	public void setCodeClassName(String codeClassName) {
-		this.codeClassName = codeClassName;
-	}
+  public void setCodeClassName(String codeClassName) {
+    this.codeClassName = codeClassName;
+  }
 
-	public String getCodeName() {
-		return codeName;
-	}
+  public String getCodeName() {
+    return codeName;
+  }
 
-	public void setCodeName(String codeName) {
-		this.codeName = codeName;
-	}
+  public void setCodeName(String codeName) {
+    this.codeName = codeName;
+  }
 
-	public String getScript() {
-		return script;
-	}
+  public String getScript() {
+    return script;
+  }
 
-	public void setScript(String script) {
-		this.script = script;
-	}
+  public void setScript(String script) {
+    this.script = script;
+  }
 
-	public String getAttr() {
-		return attr;
-	}
+  public String getAttr() {
+    return attr;
+  }
 
-	public void setAttr(String attr) {
-		this.attr = attr;
-	}
+  public void setAttr(String attr) {
+    this.attr = attr;
+  }
 
 }

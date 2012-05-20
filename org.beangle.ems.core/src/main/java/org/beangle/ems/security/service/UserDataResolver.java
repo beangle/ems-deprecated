@@ -11,22 +11,22 @@ import org.beangle.ems.security.profile.PropertyMeta;
 
 public interface UserDataResolver {
 
-	/**
-	 * Marshal list of objects to text format
-	 * 
-	 * @param field
-	 * @param items
-	 * @return
-	 */
-	public String marshal(PropertyMeta field, Collection<?> items);
+  /**
+   * Marshal list of objects to text format
+   * 
+   * @param field
+   * @param items
+   * @return
+   */
+  public String marshal(PropertyMeta field, Collection<?> items);
 
-	/**
-	 * Convert text to list of objects
-	 * 
-	 * @param <T>
-	 * @param field
-	 * @param text
-	 * @return
-	 */
-	public <T> List<T> unmarshal(PropertyMeta field, String text);
+  /**
+   * Convert text to list of objects
+   * 
+   * @param <T>
+   * @param field
+   * @param text
+   * @return
+   */
+  public <T> List<T> unmarshal(PropertyMeta field, String text);
 }

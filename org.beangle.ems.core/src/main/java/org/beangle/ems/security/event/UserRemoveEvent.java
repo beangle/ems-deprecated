@@ -9,21 +9,19 @@ import java.util.List;
 import org.beangle.ems.security.User;
 
 /**
- *
  * @author chaostone
  * @version $Id: UserRemoveEvent.java Jul 27, 2011 10:24:33 AM chaostone $
  */
 public class UserRemoveEvent extends UserEvent {
-	private static final long serialVersionUID = -6477958983678067472L;
+  private static final long serialVersionUID = -6477958983678067472L;
 
-	public UserRemoveEvent(List<User> users) {
-		super(users);
-	}
+  public UserRemoveEvent(List<User> users) {
+    super(users);
+  }
 
-	@Override
-	public String getDescription() {
-		return "删除了"+getUserNames();
-	}
-	
+  @Override
+  public String getDescription() {
+    return "删除了" + getUserNames();
+  }
 
 }

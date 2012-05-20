@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security;
 
-import org.beangle.dao.pojo.LongIdTimeEntity;
+import org.beangle.commons.dao.entity.LongIdTimeEntity;
 
 /**
  * @author chaostone
@@ -12,76 +12,76 @@ import org.beangle.dao.pojo.LongIdTimeEntity;
  */
 public interface Member extends LongIdTimeEntity {
 
-	/**
-	 * get role
-	 * 
-	 * @return
-	 */
-	public Role getRole();
+  /**
+   * get role
+   * 
+   * @return
+   */
+  public Role getRole();
 
-	/**
-	 * set role
-	 * 
-	 * @param role
-	 */
-	public void setRole(Role role);
+  /**
+   * set role
+   * 
+   * @param role
+   */
+  public void setRole(Role role);
 
-	/**
-	 * Get User
-	 * 
-	 * @return
-	 */
-	public User getUser();
+  /**
+   * Get User
+   * 
+   * @return
+   */
+  public User getUser();
 
-	/**
-	 * 是否为成员
-	 * 
-	 * @return
-	 */
-	public boolean isMember();
+  /**
+   * 是否为成员
+   * 
+   * @return
+   */
+  public boolean isMember();
 
-	/**
-	 * 是否是为管理者
-	 * 
-	 * @return
-	 */
-	public boolean isManager();
+  /**
+   * 是否是为管理者
+   * 
+   * @return
+   */
+  public boolean isManager();
 
-	/**
-	 * 是否能授权
-	 * 
-	 * @return
-	 */
-	public boolean isGranter();
+  /**
+   * 是否能授权
+   * 
+   * @return
+   */
+  public boolean isGranter();
 
-	/**
-	 * membership
-	 * 
-	 * @return
-	 */
-	public boolean is(Ship ship);
+  /**
+   * membership
+   * 
+   * @return
+   */
+  public boolean is(Ship ship);
 
-	/**
-	 * 成员关系
-	 * 
-	 * @author chaostone
-	 */
-	public enum Ship {
-		/**
-		 * just role member
-		 */
-		MEMBER,
+  /**
+   * 成员关系
+   * 
+   * @author chaostone
+   */
+  public enum Ship {
+    /**
+     * just role member
+     */
+    MEMBER,
 
-		/**
-		 * manage role perperties and permissions
-		 */
-		MANAGER,
+    /**
+     * manage role perperties and permissions
+     */
+    MANAGER,
 
-		/**
-		 * Can grant/revoke role to/from member
-		 */
-		GRANTER;
+    /**
+     * Can grant/revoke role to/from member
+     */
+    GRANTER;
 
-	}
+  }
 
 }

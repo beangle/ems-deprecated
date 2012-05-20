@@ -6,10 +6,9 @@ package org.beangle.ems.security;
 
 import org.beangle.context.spring.SpringTestCase;
 
-
 public class ConfigTest extends SpringTestCase {
 
-	public void testCfg() {
-		System.out.println("config is ok");
-	}
+  public void testCfg() {
+    System.out.println("config is ok");
+  }
 }

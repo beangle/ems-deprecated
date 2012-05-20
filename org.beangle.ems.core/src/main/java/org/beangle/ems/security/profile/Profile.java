@@ -6,7 +6,7 @@ package org.beangle.ems.security.profile;
 
 import java.util.List;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 属性配置
@@ -14,10 +14,10 @@ import org.beangle.dao.pojo.LongIdEntity;
  * @author chaostone
  * @version $Id: Profile.java Oct 21, 2011 8:43:35 AM chaostone $
  */
-public interface Profile extends LongIdEntity{
+public interface Profile extends LongIdEntity {
 
-	public List<? extends Property> getProperties();
+  public List<? extends Property> getProperties();
 
-	public Property getProperty(PropertyMeta meta);
+  public Property getProperty(PropertyMeta meta);
 
 }

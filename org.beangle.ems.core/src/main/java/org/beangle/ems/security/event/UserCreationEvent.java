@@ -14,15 +14,15 @@ import org.beangle.ems.security.User;
  */
 public class UserCreationEvent extends UserEvent {
 
-	private static final long serialVersionUID = -3314980522326237621L;
+  private static final long serialVersionUID = -3314980522326237621L;
 
-	public UserCreationEvent(List<User> users) {
-		super(users);
-	}
+  public UserCreationEvent(List<User> users) {
+    super(users);
+  }
 
-	@Override
-	public String getDescription() {
-		return "创建了" + getUserNames();
-	}
+  @Override
+  public String getDescription() {
+    return "创建了" + getUserNames();
+  }
 
 }

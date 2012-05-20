@@ -12,9 +12,9 @@ import org.beangle.ems.dev.struts2.action.ConfigBrowserAction;
 
 public final class WebModule extends AbstractBindModule {
 
-	@Override
-	protected void doBinding() {
-		bind(SpringAction.class, ConfigBrowserAction.class, CacheAction.class).in(Scope.SINGLETON);
-	}
+  @Override
+  protected void doBinding() {
+    bind(SpringAction.class, ConfigBrowserAction.class, CacheAction.class).in(Scope.SINGLETON);
+  }
 
 }

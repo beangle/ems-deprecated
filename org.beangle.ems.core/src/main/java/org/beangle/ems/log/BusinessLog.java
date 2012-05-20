@@ -6,7 +6,7 @@ package org.beangle.ems.log;
 
 import java.util.Date;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 业务日志
@@ -16,60 +16,60 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface BusinessLog extends LongIdEntity {
 
-	/**
-	 * 操作人员
-	 * 
-	 * @return
-	 */
-	public String getOperator();
+  /**
+   * 操作人员
+   * 
+   * @return
+   */
+  public String getOperator();
 
-	/**
-	 * 操作内容
-	 * 
-	 * @return
-	 */
-	public String getOperation();
+  /**
+   * 操作内容
+   * 
+   * @return
+   */
+  public String getOperation();
 
-	/**
-	 * 操作资源
-	 * 
-	 * @return
-	 */
-	public String getResource();
+  /**
+   * 操作资源
+   * 
+   * @return
+   */
+  public String getResource();
 
-	/**
-	 * 操作时间
-	 * 
-	 * @return
-	 */
-	public Date getOperateAt();
+  /**
+   * 操作时间
+   * 
+   * @return
+   */
+  public Date getOperateAt();
 
-	/**
-	 * 操作地址
-	 * 
-	 * @return
-	 */
-	public String getIp();
+  /**
+   * 操作地址
+   * 
+   * @return
+   */
+  public String getIp();
 
-	/**
-	 * 操作的系统入口
-	 * 
-	 * @return
-	 */
-	public String getEntry();
+  /**
+   * 操作的系统入口
+   * 
+   * @return
+   */
+  public String getEntry();
 
-	/**
-	 * 客户端代理
-	 * 
-	 * @return
-	 */
-	public String getAgent();
+  /**
+   * 客户端代理
+   * 
+   * @return
+   */
+  public String getAgent();
 
-	/**
-	 * 详细内容
-	 * 
-	 * @return
-	 */
-	public BusinessLogDetail getDetail();
+  /**
+   * 详细内容
+   * 
+   * @return
+   */
+  public BusinessLogDetail getDetail();
 
 }

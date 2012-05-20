@@ -13,14 +13,14 @@ import org.beangle.ems.security.Role;
  */
 public class RoleEvent extends BusinessEvent {
 
-	private static final long serialVersionUID = 2633756457351411934L;
+  private static final long serialVersionUID = 2633756457351411934L;
 
-	public RoleEvent(Role role) {
-		super(role);
-		this.resource = "角色管理";
-	}
+  public RoleEvent(Role role) {
+    super(role);
+    this.resource = "角色管理";
+  }
 
-	protected Role getRole() {
-		return (Role) source;
-	}
+  protected Role getRole() {
+    return (Role) source;
+  }
 }

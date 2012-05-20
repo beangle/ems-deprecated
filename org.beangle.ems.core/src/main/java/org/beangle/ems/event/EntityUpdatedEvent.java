@@ -6,7 +6,7 @@ package org.beangle.ems.event;
 
 import java.util.List;
 
-import org.beangle.dao.Entity;
+import org.beangle.commons.dao.Entity;
 
 /**
  * 实体更新事件
@@ -16,9 +16,9 @@ import org.beangle.dao.Entity;
  */
 public class EntityUpdatedEvent<T extends Entity<?>> extends BusinessEntityEvent<T> {
 
-	private static final long serialVersionUID = 9143547450045431391L;
+  private static final long serialVersionUID = 9143547450045431391L;
 
-	public EntityUpdatedEvent(Class<T> clazz, List<T> source) {
-		super(clazz, source);
-	}
+  public EntityUpdatedEvent(Class<T> clazz, List<T> source) {
+    super(clazz, source);
+  }
 }

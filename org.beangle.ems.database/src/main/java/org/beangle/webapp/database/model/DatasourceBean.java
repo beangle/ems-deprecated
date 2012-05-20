@@ -13,76 +13,76 @@ import org.beangle.model.pojo.LongIdObject;
  */
 public class DatasourceBean extends LongIdObject {
 
-	private static final long serialVersionUID = -6769975441732211022L;
+  private static final long serialVersionUID = -6769975441732211022L;
 
-	private DatasourceProviderBean provider;
+  private DatasourceProviderBean provider;
 
-	private String name;
+  private String name;
 
-	private String url;
+  private String url;
 
-	private String username;
+  private String username;
 
-	private String password;
+  private String password;
 
-	private String driverClassName;
+  private String driverClassName;
 
-	private Set<DatasourcePropertyBean> properties;
+  private Set<DatasourcePropertyBean> properties;
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getUrl() {
-		return url;
-	}
+  public String getUrl() {
+    return url;
+  }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+  public void setUrl(String url) {
+    this.url = url;
+  }
 
-	public String getUsername() {
-		return username;
-	}
+  public String getUsername() {
+    return username;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	public String getPassword() {
-		return password;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public String getDriverClassName() {
-		return driverClassName;
-	}
+  public String getDriverClassName() {
+    return driverClassName;
+  }
 
-	public void setDriverClassName(String driverClassName) {
-		this.driverClassName = driverClassName;
-	}
+  public void setDriverClassName(String driverClassName) {
+    this.driverClassName = driverClassName;
+  }
 
-	public Set<DatasourcePropertyBean> getProperties() {
-		return properties;
-	}
+  public Set<DatasourcePropertyBean> getProperties() {
+    return properties;
+  }
 
-	public void setProperties(Set<DatasourcePropertyBean> properties) {
-		this.properties = properties;
-	}
+  public void setProperties(Set<DatasourcePropertyBean> properties) {
+    this.properties = properties;
+  }
 
-	public DatasourceProviderBean getProvider() {
-		return provider;
-	}
+  public DatasourceProviderBean getProvider() {
+    return provider;
+  }
 
-	public void setProvider(DatasourceProviderBean provider) {
-		this.provider = provider;
-	}
+  public void setProvider(DatasourceProviderBean provider) {
+    this.provider = provider;
+  }
 
 }

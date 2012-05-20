@@ -12,15 +12,15 @@ import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
 public class MenuProfileAction extends SecurityEntityActionSupport {
 
-	protected void editSetting(Entity<?> entity) {
-		OqlBuilder<Role> builder = OqlBuilder.from(Role.class, "g");
-		builder.orderBy("g.code");
-		put("roles", entityDao.search(builder));
-	}
+  protected void editSetting(Entity<?> entity) {
+    OqlBuilder<Role> builder = OqlBuilder.from(Role.class, "g");
+    builder.orderBy("g.code");
+    put("roles", entityDao.search(builder));
+  }
 
-	@Override
-	protected String getEntityName() {
-		return MenuProfile.class.getName();
-	}
+  @Override
+  protected String getEntityName() {
+    return MenuProfile.class.getName();
+  }
 
 }

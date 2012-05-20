@@ -19,23 +19,23 @@ import org.beangle.struts2.helper.QueryHelper;
  */
 public class LogAction extends SecurityEntityActionSupport {
 
-	@Override
-	protected String getEntityName() {
-		return BusinessLog.class.getName();
-	}
+  @Override
+  protected String getEntityName() {
+    return BusinessLog.class.getName();
+  }
 
-	@Override
-	protected QueryBuilder<?> getQueryBuilder() {
-		OqlBuilder<BusinessLog> builder = OqlBuilder.from(BusinessLog.class, "log");
-		populateConditions(builder);
-		QueryHelper.addDateIntervalCondition(builder, "operateAt", "beginDate", "endDate");
-		builder.limit(getPageLimit());
-		String orderBy = get("orderBy");
-		if (StringUtils.isEmpty(orderBy)) {
-			orderBy = "log.operateAt desc";
-		}
-		builder.orderBy(orderBy);
-		return builder;
-	}
+  @Override
+  protected QueryBuilder<?> getQueryBuilder() {
+    OqlBuilder<BusinessLog> builder = OqlBuilder.from(BusinessLog.class, "log");
+    populateConditions(builder);
+    QueryHelper.addDateIntervalCondition(builder, "operateAt", "beginDate", "endDate");
+    builder.limit(getPageLimit());
+    String orderBy = get("orderBy");
+    if (StringUtils.isEmpty(orderBy)) {
+      orderBy = "log.operateAt desc";
+    }
+    builder.orderBy(orderBy);
+    return builder;
+  }
 
 }

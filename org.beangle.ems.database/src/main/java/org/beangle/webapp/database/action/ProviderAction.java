@@ -8,9 +8,9 @@ import org.beangle.webapp.security.action.SecurityActionSupport;
 
 public class ProviderAction extends SecurityActionSupport {
 
-	@Override
-	protected String getShortName() {
-		return "provider";
-	}
+  @Override
+  protected String getShortName() {
+    return "provider";
+  }
 
 }

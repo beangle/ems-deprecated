@@ -8,68 +8,68 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 
 /**
  * 系统配置项
  * 
  * @author chaostone
  */
-@Entity(name="org.beangle.ems.config.model.PropertyConfigItemBean")
+@Entity(name = "org.beangle.ems.config.model.PropertyConfigItemBean")
 public class PropertyConfigItemBean extends LongIdObject {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**名称*/
-	@NotNull
-	@Size(max = 100)
-	private String name;
+  /** 名称 */
+  @NotNull
+  @Size(max = 100)
+  private String name;
 
-	/**值*/
-	@NotNull
-	@Size(max = 500)
-	private String value;
+  /** 值 */
+  @NotNull
+  @Size(max = 500)
+  private String value;
 
-	/**描述*/
-	@NotNull
-	@Size(max = 500)
-	private String description;
+  /** 描述 */
+  @NotNull
+  @Size(max = 500)
+  private String description;
 
-	/**类型*/
-	@NotNull
-	@Size(max = 500)
-	private String type;
+  /** 类型 */
+  @NotNull
+  @Size(max = 500)
+  private String type;
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+  public void setType(String type) {
+    this.type = type;
+  }
 
 }

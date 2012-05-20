@@ -11,8 +11,8 @@ import org.beangle.ems.rule.engine.PatternMatcher;
 
 public class FullPatternMatcher implements PatternMatcher {
 
-	public Agenda buildAgenda(RuleBase base, Context context) {
-		return new ListAgenda(base.getRules());
-	}
+  public Agenda buildAgenda(RuleBase base, Context context) {
+    return new ListAgenda(base.getRules());
+  }
 
 }

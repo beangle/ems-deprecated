@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security.restrict;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 数据限制对象
@@ -13,25 +13,25 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface RestrictEntity extends LongIdEntity {
 
-	/**
-	 * 名称
-	 * 
-	 * @return
-	 */
-	public String getName();
+  /**
+   * 名称
+   * 
+   * @return
+   */
+  public String getName();
 
-	/**
-	 * 实体类名
-	 * 
-	 * @return
-	 */
-	public String getType();
+  /**
+   * 实体类名
+   * 
+   * @return
+   */
+  public String getType();
 
-	/**
-	 * 备注
-	 * 
-	 * @return
-	 */
-	public String getRemark();
+  /**
+   * 备注
+   * 
+   * @return
+   */
+  public String getRemark();
 
 }

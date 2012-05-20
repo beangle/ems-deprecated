@@ -22,25 +22,25 @@ import com.octo.captcha.service.image.ImageCaptchaService;
  */
 public class CaptchaAction extends BaseAction {
 
-	private ByteArrayInputStream inputStream;
+  private ByteArrayInputStream inputStream;
 
-	private ImageCaptchaService captchaService;
+  private ImageCaptchaService captchaService;
 
-	public String index() throws IOException {
-		String captchaId = getRequest().getSession().getId();
-		BufferedImage challenge = captchaService.getImageChallengeForID(captchaId, getLocale());
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		ImageIO.write(challenge, "JPEG", os);
-		inputStream = new ByteArrayInputStream(os.toByteArray());
-		return "success";
-	}
+  public String index() throws IOException {
+    String captchaId = getRequest().getSession().getId();
+    BufferedImage challenge = captchaService.getImageChallengeForID(captchaId, getLocale());
+    ByteArrayOutputStream os = new ByteArrayOutputStream();
+    ImageIO.write(challenge, "JPEG", os);
+    inputStream = new ByteArrayInputStream(os.toByteArray());
+    return "success";
+  }
 
-	public void setCaptchaService(ImageCaptchaService captchaService) {
-		this.captchaService = captchaService;
-	}
+  public void setCaptchaService(ImageCaptchaService captchaService) {
+    this.captchaService = captchaService;
+  }
 
-	public ByteArrayInputStream getInputStream() {
-		return inputStream;
-	}
+  public ByteArrayInputStream getInputStream() {
+    return inputStream;
+  }
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.rule.RuleParameter;
 
 /**
@@ -20,45 +20,45 @@ import org.beangle.ems.rule.RuleParameter;
 @Entity(name = "org.beangle.ems.rule.model.RuleConfigParam")
 public class RuleConfigParam extends LongIdObject {
 
-	private static final long serialVersionUID = 8711866530914907008L;
+  private static final long serialVersionUID = 8711866530914907008L;
 
-	/** 标准-规则 */
-	@NotNull
-	@ManyToOne
-	private RuleConfig config;
+  /** 标准-规则 */
+  @NotNull
+  @ManyToOne
+  private RuleConfig config;
 
-	/** 规则参数 */
-	@NotNull
-	@ManyToOne
-	private RuleParameter param;
+  /** 规则参数 */
+  @NotNull
+  @ManyToOne
+  private RuleParameter param;
 
-	/** 参数值 */
-	@NotNull
-	@Size(max = 500)
-	private String value;
+  /** 参数值 */
+  @NotNull
+  @Size(max = 500)
+  private String value;
 
-	public RuleParameter getParam() {
-		return param;
-	}
+  public RuleParameter getParam() {
+    return param;
+  }
 
-	public void setParam(RuleParameter param) {
-		this.param = param;
-	}
+  public void setParam(RuleParameter param) {
+    this.param = param;
+  }
 
-	public RuleConfig getConfig() {
-		return config;
-	}
+  public RuleConfig getConfig() {
+    return config;
+  }
 
-	public void setConfig(RuleConfig config) {
-		this.config = config;
-	}
+  public void setConfig(RuleConfig config) {
+    this.config = config;
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
 }

@@ -8,26 +8,26 @@ import org.beangle.model.pojo.LongIdObject;
 
 public class DatasourceProviderBean extends LongIdObject {
 
-	private static final long serialVersionUID = -7792635675766559389L;
+  private static final long serialVersionUID = -7792635675766559389L;
 
-	private String dialect;
+  private String dialect;
 
-	private String name;
+  private String name;
 
-	public String getDialect() {
-		return dialect;
-	}
+  public String getDialect() {
+    return dialect;
+  }
 
-	public void setDialect(String dialect) {
-		this.dialect = dialect;
-	}
+  public void setDialect(String dialect) {
+    this.dialect = dialect;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
 }

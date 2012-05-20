@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.rule.impl;
 
-import org.beangle.context.spring.SpringTestCase;
+import org.beangle.commons.context.spring.SpringTestCase;
 import org.beangle.ems.rule.Context;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleBase;
@@ -18,23 +18,23 @@ import org.beangle.ems.rule.model.SimpleContext;
 
 public class SimpleEngineTest extends SpringTestCase {
 
-	public void testEngine() {
-		Context context = new SimpleContext();
-		Engine engine = new SimpleEngine();
-		RuleBase ruleBase = new TestRuleBase();
-		// Rule rule1 = new BusinessRule();
-		// rule1.setFactory(DefaultRuleExecutorBuilder.SPRING);
-		// rule1.setServiceName("ruleExecutor1");
+  public void testEngine() {
+    Context context = new SimpleContext();
+    Engine engine = new SimpleEngine();
+    RuleBase ruleBase = new TestRuleBase();
+    // Rule rule1 = new BusinessRule();
+    // rule1.setFactory(DefaultRuleExecutorBuilder.SPRING);
+    // rule1.setServiceName("ruleExecutor1");
 
-		Rule rule2 = new RuleBean();
-		rule2.setFactory(DefaultRuleExecutorBuilder.BEAN);
-		rule2.setServiceName("org.beangle.rule.impl.RuleExecutor2");
+    Rule rule2 = new RuleBean();
+    rule2.setFactory(DefaultRuleExecutorBuilder.BEAN);
+    rule2.setServiceName("org.beangle.rule.impl.RuleExecutor2");
 
-		// ruleBase.getRules().add(rule1);
-		ruleBase.getRules().add(rule2);
-		engine.setRuleExecutorBuilder((RuleExecutorBuilder) applicationContext.getBean("ruleExecutorBuilder"));
-		engine.setRuleBase(ruleBase);
-		engine.setPatternMatcher(new FullPatternMatcher());
-		engine.execute(context);
-	}
+    // ruleBase.getRules().add(rule1);
+    ruleBase.getRules().add(rule2);
+    engine.setRuleExecutorBuilder((RuleExecutorBuilder) applicationContext.getBean("ruleExecutorBuilder"));
+    engine.setRuleBase(ruleBase);
+    engine.setPatternMatcher(new FullPatternMatcher());
+    engine.execute(context);
+  }
 }

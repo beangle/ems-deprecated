@@ -3,8 +3,8 @@
  * http://www.gnu.org/licenses
  */
 package org.beangle.ems.dev.spring.action;
+
 /**
- *
  * @author chaostone
  * @version $Id: SpringAction.java Dec 24, 2011 4:12:26 PM chaostone $
  */

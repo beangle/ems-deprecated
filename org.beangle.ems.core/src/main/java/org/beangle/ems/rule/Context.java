@@ -7,7 +7,7 @@ package org.beangle.ems.rule;
 import java.util.List;
 import java.util.Map;
 
-import org.beangle.util.i18n.Message;
+import org.beangle.commons.i18n.Message;
 
 /**
  * 规则执行上下文
@@ -16,13 +16,13 @@ import org.beangle.util.i18n.Message;
  */
 public interface Context {
 
-	public Map<String, Object> getParams();
+  public Map<String, Object> getParams();
 
-	public List<Message> getMessages();
+  public List<Message> getMessages();
 
-	public void addMessage(Message message);
+  public void addMessage(Message message);
 
-	public List<Message> getErrors();
+  public List<Message> getErrors();
 
-	public void addError(Message message);
+  public void addError(Message message);
 }

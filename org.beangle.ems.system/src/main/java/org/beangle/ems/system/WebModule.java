@@ -21,16 +21,16 @@ import org.beangle.ems.web.action.LogoutAction;
 
 public final class WebModule extends AbstractBindModule {
 
-	@Override
-	protected void doBinding() {
-		// property
-		bind(FileAction.class, InfoAction.class, PropertyAction.class).in(Scope.PROTOTYPE);
-		// home
-		bind(LoginAction.class, LogoutAction.class, HomeAction.class).in(Scope.PROTOTYPE);
+  @Override
+  protected void doBinding() {
+    // property
+    bind(FileAction.class, InfoAction.class, PropertyAction.class).in(Scope.PROTOTYPE);
+    // home
+    bind(LoginAction.class, LogoutAction.class, HomeAction.class).in(Scope.PROTOTYPE);
 
-		bind(LogAction.class, RuleAction.class, RuleParamAction.class).in(Scope.PROTOTYPE);
+    bind(LogAction.class, RuleAction.class, RuleParamAction.class).in(Scope.PROTOTYPE);
 
-		bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class).in(Scope.PROTOTYPE);
-	}
+    bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class).in(Scope.PROTOTYPE);
+  }
 
 }

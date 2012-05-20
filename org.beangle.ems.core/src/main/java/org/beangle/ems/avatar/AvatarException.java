@@ -6,22 +6,22 @@ package org.beangle.ems.avatar;
 
 public class AvatarException extends RuntimeException {
 
-	private static final long serialVersionUID = -923476532971742640L;
+  private static final long serialVersionUID = -923476532971742640L;
 
-	public AvatarException() {
-		super();
-	}
+  public AvatarException() {
+    super();
+  }
 
-	public AvatarException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public AvatarException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public AvatarException(String message) {
-		super(message);
-	}
+  public AvatarException(String message) {
+    super(message);
+  }
 
-	public AvatarException(Throwable cause) {
-		super(cause);
-	}
+  public AvatarException(Throwable cause) {
+    super(cause);
+  }
 
 }

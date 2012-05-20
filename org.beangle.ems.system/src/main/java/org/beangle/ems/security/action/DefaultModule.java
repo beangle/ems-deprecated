@@ -12,20 +12,20 @@ import org.beangle.ems.security.helper.UserDashboardHelper;
 
 public final class DefaultModule extends AbstractBindModule {
 
-	@Override
-	protected void doBinding() {
-		// security
-		bind(SessioninfoLogAction.class, AuthorityAction.class, RoleAction.class, IndexAction.class,
-				MenuAction.class, MenuNavAction.class, MenuProfileAction.class, MonitorAction.class,
-				MyAction.class, PasswordAction.class, ResourceAction.class, UserAction.class,
-				CaptchaAction.class, ProfileAction.class, RestrictionAction.class).in(Scope.PROTOTYPE);
+  @Override
+  protected void doBinding() {
+    // security
+    bind(SessioninfoLogAction.class, AuthorityAction.class, RoleAction.class, IndexAction.class,
+        MenuAction.class, MenuNavAction.class, MenuProfileAction.class, MonitorAction.class, MyAction.class,
+        PasswordAction.class, ResourceAction.class, UserAction.class, CaptchaAction.class,
+        ProfileAction.class, RestrictionAction.class).in(Scope.PROTOTYPE);
 
-		bind(UserDashboardHelper.class).shortName();
+    bind(UserDashboardHelper.class).shortName();
 
-		// avatar
-		bind(BoardAction.class, org.beangle.ems.avatar.action.MyAction.class, MyUploadAction.class,
-				org.beangle.ems.avatar.action.UserAction.class).in(Scope.PROTOTYPE);
+    // avatar
+    bind(BoardAction.class, org.beangle.ems.avatar.action.MyAction.class, MyUploadAction.class,
+        org.beangle.ems.avatar.action.UserAction.class).in(Scope.PROTOTYPE);
 
-	}
+  }
 
 }

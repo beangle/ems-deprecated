@@ -11,68 +11,68 @@ import java.util.List;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.EntityDao;
-import org.beangle.dao.metadata.EntityType;
-import org.beangle.dao.metadata.Model;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.dao.metadata.EntityType;
+import org.beangle.commons.dao.metadata.Model;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.service.UserDataResolver;
 import org.springframework.beans.BeanUtils;
 
 public class IdentifierDataResolver implements UserDataResolver {
 
-	protected EntityDao entityDao;
+  protected EntityDao entityDao;
 
-	public String marshal(PropertyMeta field, Collection<?> items) {
-		StringBuilder sb = new StringBuilder();
-		for (Object obj : items) {
-			try {
-				Object value = obj;
-				if (null != field.getKeyName()) {
-					value = PropertyUtils.getProperty(obj, field.getKeyName());
-				}
-				sb.append(String.valueOf(value)).append(',');
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (sb.length() > 0) {
-			sb.deleteCharAt(sb.length() - 1);
-		}
-		return sb.toString();
-	}
+  public String marshal(PropertyMeta field, Collection<?> items) {
+    StringBuilder sb = new StringBuilder();
+    for (Object obj : items) {
+      try {
+        Object value = obj;
+        if (null != field.getKeyName()) {
+          value = PropertyUtils.getProperty(obj, field.getKeyName());
+        }
+        sb.append(String.valueOf(value)).append(',');
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    if (sb.length() > 0) {
+      sb.deleteCharAt(sb.length() - 1);
+    }
+    return sb.toString();
+  }
 
-	@SuppressWarnings("unchecked")
-	public <T> List<T> unmarshal(PropertyMeta field, String text) {
-		if(null==field.getValueType()){
-			return (List<T>)CollectUtils.newArrayList(StringUtils.split(text,","));
-		}else{
-			Class<?> clazz=null;
-			try {
-				clazz = Class.forName(field.getValueType());
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}
-			EntityType myType=Model.getEntityType(clazz);
-			OqlBuilder<T> builder=OqlBuilder.from(myType.getEntityName(), "restrictField");
-			
-			String[] ids=StringUtils.split(text,",");
-			PropertyDescriptor pd=BeanUtils.getPropertyDescriptor(clazz, field.getKeyName());
-			Class<?> propertyType=pd.getReadMethod().getReturnType();
-			List<Object> realIds=CollectUtils.newArrayList(ids.length);
-			for(String id:ids){
-				Object realId=ConvertUtils.convert(id, propertyType);
-				realIds.add(realId);
-			}
-			builder.where("restrictField."+field.getKeyName()+" in (:ids)",realIds).cacheable();
-			return entityDao.search(builder);
-		}
-	}
+  @SuppressWarnings("unchecked")
+  public <T> List<T> unmarshal(PropertyMeta field, String text) {
+    if (null == field.getValueType()) {
+      return (List<T>) CollectUtils.newArrayList(StringUtils.split(text, ","));
+    } else {
+      Class<?> clazz = null;
+      try {
+        clazz = Class.forName(field.getValueType());
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
+      EntityType myType = Model.getEntityType(clazz);
+      OqlBuilder<T> builder = OqlBuilder.from(myType.getEntityName(), "restrictField");
 
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
+      String[] ids = StringUtils.split(text, ",");
+      PropertyDescriptor pd = BeanUtils.getPropertyDescriptor(clazz, field.getKeyName());
+      Class<?> propertyType = pd.getReadMethod().getReturnType();
+      List<Object> realIds = CollectUtils.newArrayList(ids.length);
+      for (String id : ids) {
+        Object realId = ConvertUtils.convert(id, propertyType);
+        realIds.add(realId);
+      }
+      builder.where("restrictField." + field.getKeyName() + " in (:ids)", realIds).cacheable();
+      return entityDao.search(builder);
+    }
+  }
+
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
 
 }

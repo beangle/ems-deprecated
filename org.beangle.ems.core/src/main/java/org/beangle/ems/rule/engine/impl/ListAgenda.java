@@ -6,7 +6,7 @@ package org.beangle.ems.rule.engine.impl;
 
 import java.util.List;
 
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.engine.Agenda;
 
@@ -17,22 +17,22 @@ import org.beangle.ems.rule.engine.Agenda;
  */
 public class ListAgenda implements Agenda {
 
-	private List<Rule> rules = CollectUtils.newArrayList();
+  private List<Rule> rules = CollectUtils.newArrayList();
 
-	public ListAgenda() {
-		super();
-	}
+  public ListAgenda() {
+    super();
+  }
 
-	public ListAgenda(List<Rule> rules) {
-		this.rules = rules;
-	}
+  public ListAgenda(List<Rule> rules) {
+    this.rules = rules;
+  }
 
-	public List<Rule> getRules() {
-		return rules;
-	}
+  public List<Rule> getRules() {
+    return rules;
+  }
 
-	public void setRules(List<Rule> rules) {
-		this.rules = rules;
-	}
+  public void setRules(List<Rule> rules) {
+    this.rules = rules;
+  }
 
 }

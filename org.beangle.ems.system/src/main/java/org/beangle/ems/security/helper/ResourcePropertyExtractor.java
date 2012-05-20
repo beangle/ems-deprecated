@@ -14,19 +14,19 @@ import org.beangle.util.i18n.TextResource;
  */
 public class ResourcePropertyExtractor extends DefaultPropertyExtractor {
 
-	public ResourcePropertyExtractor() {
-		super();
-	}
+  public ResourcePropertyExtractor() {
+    super();
+  }
 
-	public ResourcePropertyExtractor(TextResource textResource) {
-		super(textResource);
-	}
+  public ResourcePropertyExtractor(TextResource textResource) {
+    super(textResource);
+  }
 
-	public Object getPropertyValue(Object target, String property) throws Exception {
-		Resource resource = (Resource) target;
-		if ("enabled".equals(property)) {
-			return resource.isEnabled() ? "激活" : "冻结";
-		} else return super.getPropertyValue(target, property);
-	}
+  public Object getPropertyValue(Object target, String property) throws Exception {
+    Resource resource = (Resource) target;
+    if ("enabled".equals(property)) {
+      return resource.isEnabled() ? "激活" : "冻结";
+    } else return super.getPropertyValue(target, property);
+  }
 
 }

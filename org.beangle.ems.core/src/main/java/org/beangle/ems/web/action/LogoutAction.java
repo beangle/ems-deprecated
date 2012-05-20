@@ -17,28 +17,28 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class LogoutAction extends BaseAction {
 
-	private LogoutHandlerStack handlerStack;
+  private LogoutHandlerStack handlerStack;
 
-	public String index() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String result = "success";
-		if (AuthenticationUtils.isValid(auth)) {
-			if (null != handlerStack) handlerStack.logout(getRequest(), getResponse(), auth);
-			((SessionMap<?, ?>) ActionContext.getContext().getSession()).invalidate();
-			String targetUrl = determineTargetUrl(getRequest());
-			if (null != targetUrl) {
-				result = "redirect:" + targetUrl;
-			}
-		}
-		return result;
-	}
+  public String index() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String result = "success";
+    if (AuthenticationUtils.isValid(auth)) {
+      if (null != handlerStack) handlerStack.logout(getRequest(), getResponse(), auth);
+      ((SessionMap<?, ?>) ActionContext.getContext().getSession()).invalidate();
+      String targetUrl = determineTargetUrl(getRequest());
+      if (null != targetUrl) {
+        result = "redirect:" + targetUrl;
+      }
+    }
+    return result;
+  }
 
-	protected String determineTargetUrl(HttpServletRequest request) {
-		return get("logoutSuccessUrl");
-	}
+  protected String determineTargetUrl(HttpServletRequest request) {
+    return get("logoutSuccessUrl");
+  }
 
-	public void setHandlerStack(LogoutHandlerStack handlerStack) {
-		this.handlerStack = handlerStack;
-	}
+  public void setHandlerStack(LogoutHandlerStack handlerStack) {
+    this.handlerStack = handlerStack;
+  }
 
 }

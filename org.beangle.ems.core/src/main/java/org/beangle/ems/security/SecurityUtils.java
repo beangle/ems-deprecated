@@ -11,33 +11,33 @@ import org.beangle.security.core.context.SecurityContextHolder;
 
 public final class SecurityUtils {
 
-	private static ThreadLocal<String> resource = new ThreadLocal<String>();
+  private static ThreadLocal<String> resource = new ThreadLocal<String>();
 
-	public static UserToken getPrincipal() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (null == auth) throw new AuthenticationException();
-		UserToken user = (UserToken) auth.getPrincipal();
-		if (null == user.getId()) throw new AuthenticationException();
-		return user;
-	}
+  public static UserToken getPrincipal() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (null == auth) throw new AuthenticationException();
+    UserToken user = (UserToken) auth.getPrincipal();
+    if (null == user.getId()) throw new AuthenticationException();
+    return user;
+  }
 
-	public static Long getUserId() {
-		return getPrincipal().getId();
-	}
+  public static Long getUserId() {
+    return getPrincipal().getId();
+  }
 
-	public static String getUsername() {
-		return getPrincipal().getUsername();
-	}
+  public static String getUsername() {
+    return getPrincipal().getUsername();
+  }
 
-	public static String getFullname() {
-		return getPrincipal().getFullname();
-	}
+  public static String getFullname() {
+    return getPrincipal().getFullname();
+  }
 
-	public static String getResource() {
-		return resource.get();
-	}
+  public static String getResource() {
+    return resource.get();
+  }
 
-	public static void setResource(String name) {
-		resource.set(name);
-	}
+  public static void setResource(String name) {
+    resource.set(name);
+  }
 }

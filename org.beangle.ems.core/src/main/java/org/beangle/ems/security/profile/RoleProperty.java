@@ -4,12 +4,10 @@
  */
 package org.beangle.ems.security.profile;
 
-
 /**
- *
  * @author chaostone
  * @version $Id: RoleProperty.java Oct 18, 2011 8:58:25 AM chaostone $
  */
-public interface RoleProperty extends Property{
+public interface RoleProperty extends Property {
 
 }

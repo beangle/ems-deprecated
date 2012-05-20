@@ -22,68 +22,68 @@ import org.beangle.transfer.exporter.PropertyExtractor;
  */
 public class ResourceAction extends SecurityEntityActionSupport {
 
-	private CacheableAuthorityManager authorityManager;
+  private CacheableAuthorityManager authorityManager;
 
-	/**
-	 * 禁用或激活一个或多个模块
-	 * 
-	 * @return
-	 */
-	public String activate() {
-		Long[] resourceIds = getIds("resource");
-		Boolean enabled = getBoolean("enabled");
-		if (null == enabled) {
-			enabled = Boolean.FALSE;
-		}
-		authorityService.updateState(resourceIds, enabled.booleanValue());
-		authorityManager.refreshCache();
-		return redirect("search", "info.save.success");
-	}
+  /**
+   * 禁用或激活一个或多个模块
+   * 
+   * @return
+   */
+  public String activate() {
+    Long[] resourceIds = getIds("resource");
+    Boolean enabled = getBoolean("enabled");
+    if (null == enabled) {
+      enabled = Boolean.FALSE;
+    }
+    authorityService.updateState(resourceIds, enabled.booleanValue());
+    authorityManager.refreshCache();
+    return redirect("search", "info.save.success");
+  }
 
-	@Override
-	public String index() {
-		return forward(new Action(this, "search"));
-	}
+  @Override
+  public String index() {
+    return forward(new Action(this, "search"));
+  }
 
-	protected String saveAndForward(Entity<?> entity) {
-		Resource resource = (Resource) entity;
-		if (null != resource) {
-			if (entityDao.duplicate(Resource.class, resource.getId(), "name", resource.getName())) { return redirect(
-					"edit", "error.notUnique"); }
-		}
-		entityDao.saveOrUpdate(resource);
-		authorityManager.refreshCache();
+  protected String saveAndForward(Entity<?> entity) {
+    Resource resource = (Resource) entity;
+    if (null != resource) {
+      if (entityDao.duplicate(Resource.class, resource.getId(), "name", resource.getName())) { return redirect(
+          "edit", "error.notUnique"); }
+    }
+    entityDao.saveOrUpdate(resource);
+    authorityManager.refreshCache();
 
-		logger.info("save resource success {}", resource.getTitle());
-		return redirect("search", "info.save.success");
-	}
+    logger.info("save resource success {}", resource.getTitle());
+    return redirect("search", "info.save.success");
+  }
 
-	public String info() {
-		Long entityId = getId(getShortName());
-		Entity<?> entity = getModel(getEntityName(), entityId);
-		OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
-		query.join("menu.resources", "r").where("r.id=:resourceId", entity.getIdentifier())
-				.orderBy("menu.profile.id,menu.code");
+  public String info() {
+    Long entityId = getId(getShortName());
+    Entity<?> entity = getModel(getEntityName(), entityId);
+    OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
+    query.join("menu.resources", "r").where("r.id=:resourceId", entity.getIdentifier())
+        .orderBy("menu.profile.id,menu.code");
 
-		OqlBuilder<Permission> roleQuery = OqlBuilder.from(Permission.class, "auth");
-		roleQuery.where("auth.resource=:resource", entity).select("auth.role");
-		put(getShortName(), entity);
-		put("roles", entityDao.search(roleQuery));
-		put("menus", entityDao.search(query));
-		return forward();
-	}
+    OqlBuilder<Permission> roleQuery = OqlBuilder.from(Permission.class, "auth");
+    roleQuery.where("auth.resource=:resource", entity).select("auth.role");
+    put(getShortName(), entity);
+    put("roles", entityDao.search(roleQuery));
+    put("menus", entityDao.search(query));
+    return forward();
+  }
 
-	public void setAuthorityManager(CacheableAuthorityManager authorityManager) {
-		this.authorityManager = authorityManager;
-	}
+  public void setAuthorityManager(CacheableAuthorityManager authorityManager) {
+    this.authorityManager = authorityManager;
+  }
 
-	protected PropertyExtractor getPropertyExtractor() {
-		return new ResourcePropertyExtractor(getTextResource());
-	}
+  protected PropertyExtractor getPropertyExtractor() {
+    return new ResourcePropertyExtractor(getTextResource());
+  }
 
-	@Override
-	protected String getEntityName() {
-		return Resource.class.getName();
-	}
+  @Override
+  protected String getEntityName() {
+    return Resource.class.getName();
+  }
 
 }

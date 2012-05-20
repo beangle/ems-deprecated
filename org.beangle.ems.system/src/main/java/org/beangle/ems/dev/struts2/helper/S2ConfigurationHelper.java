@@ -29,111 +29,112 @@ import com.opensymphony.xwork2.validator.ActionValidatorManager;
  */
 public class S2ConfigurationHelper {
 
-	private Configuration configuration;
-	private Container container;
-	private ObjectFactory objectFactory;
-	private ReflectionProvider reflectionProvider;
-	private ReflectionContextFactory reflectionContextFactory;
-	private ActionValidatorManager actionValidatorManager;
+  private Configuration configuration;
+  private Container container;
+  private ObjectFactory objectFactory;
+  private ReflectionProvider reflectionProvider;
+  private ReflectionContextFactory reflectionContextFactory;
+  private ActionValidatorManager actionValidatorManager;
 
-	@Inject
-	public void setConfiguration(Configuration config) {
-		this.configuration = config;
-	}
+  @Inject
+  public void setConfiguration(Configuration config) {
+    this.configuration = config;
+  }
 
-	@Inject
-	public void setContainer(Container container) {
-		this.container = container;
-	}
+  @Inject
+  public void setContainer(Container container) {
+    this.container = container;
+  }
 
-	public Set<String> getNamespaces() {
-		Set<String> namespaces = Collections.emptySet();
-		Map<String, ?> allActionConfigs = configuration.getRuntimeConfiguration().getActionConfigs();
-		if (allActionConfigs != null) {
-			namespaces = allActionConfigs.keySet();
-		}
-		return namespaces;
-	}
+  public Set<String> getNamespaces() {
+    Set<String> namespaces = Collections.emptySet();
+    Map<String, ?> allActionConfigs = configuration.getRuntimeConfiguration().getActionConfigs();
+    if (allActionConfigs != null) {
+      namespaces = allActionConfigs.keySet();
+    }
+    return namespaces;
+  }
 
-	public Set<String> getActionNames(String namespace) {
-		Set<String> actionNames = Collections.emptySet();
-		Map<String, Map<String, ActionConfig>> allActionConfigs = configuration.getRuntimeConfiguration()
-				.getActionConfigs();
-		if (allActionConfigs != null) {
-			Map<String, ?> actionMappings = allActionConfigs.get(namespace);
-			if (actionMappings != null) {
-				actionNames = actionMappings.keySet();
-			}
-		}
-		return actionNames;
-	}
+  public Set<String> getActionNames(String namespace) {
+    Set<String> actionNames = Collections.emptySet();
+    Map<String, Map<String, ActionConfig>> allActionConfigs = configuration.getRuntimeConfiguration()
+        .getActionConfigs();
+    if (allActionConfigs != null) {
+      Map<String, ?> actionMappings = allActionConfigs.get(namespace);
+      if (actionMappings != null) {
+        actionNames = actionMappings.keySet();
+      }
+    }
+    return actionNames;
+  }
 
-	public ActionConfig getActionConfig(String namespace, String actionName) {
-		ActionConfig config = null;
-		Map<String, Map<String, ActionConfig>> allActionConfigs = configuration.getRuntimeConfiguration()
-				.getActionConfigs();
-		if (allActionConfigs != null) {
-			Map<String, ActionConfig> actionMappings = allActionConfigs.get(namespace);
-			if (actionMappings != null) config = actionMappings.get(actionName);
-		}
-		return config;
-	}
+  public ActionConfig getActionConfig(String namespace, String actionName) {
+    ActionConfig config = null;
+    Map<String, Map<String, ActionConfig>> allActionConfigs = configuration.getRuntimeConfiguration()
+        .getActionConfigs();
+    if (allActionConfigs != null) {
+      Map<String, ActionConfig> actionMappings = allActionConfigs.get(namespace);
+      if (actionMappings != null) config = actionMappings.get(actionName);
+    }
+    return config;
+  }
 
-	public List<Properties> getJarProperties() {
-		@SuppressWarnings("rawtypes")
-		ResolverUtil<?> resolver = new ResolverUtil();
-		List<Properties> poms = new ArrayList<Properties>();
-		resolver.findNamedResource("pom.properties", "META-INF/maven");
-		Set<URL> urls = resolver.getResources();
-		for (URL url : urls) {
-			Properties p = new Properties();
-			try {
-				p.load(url.openStream());
-				poms.add(p);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return poms;
-	}
+  public List<Properties> getJarProperties() {
+    @SuppressWarnings("rawtypes")
+    ResolverUtil<?> resolver = new ResolverUtil();
+    List<Properties> poms = new ArrayList<Properties>();
+    resolver.findNamedResource("pom.properties", "META-INF/maven");
+    Set<URL> urls = resolver.getResources();
+    for (URL url : urls) {
+      Properties p = new Properties();
+      try {
+        p.load(url.openStream());
+        poms.add(p);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return poms;
+  }
 
-	public Container getContainer() {
-		return container;
-	}
+  public Container getContainer() {
+    return container;
+  }
 
-	public ObjectFactory getObjectFactory() {
-		return objectFactory;
-	}
+  public ObjectFactory getObjectFactory() {
+    return objectFactory;
+  }
 
-	@Inject
-	public void setObjectFactory(ObjectFactory objectFactory) {
-		this.objectFactory = objectFactory;
-	}
+  @Inject
+  public void setObjectFactory(ObjectFactory objectFactory) {
+    this.objectFactory = objectFactory;
+  }
 
-	public ReflectionProvider getReflectionProvider() {
-		return reflectionProvider;
-	}
+  public ReflectionProvider getReflectionProvider() {
+    return reflectionProvider;
+  }
 
-	@Inject
-	public void setReflectionProvider(ReflectionProvider reflectionProvider) {
-		this.reflectionProvider = reflectionProvider;
-	}
+  @Inject
+  public void setReflectionProvider(ReflectionProvider reflectionProvider) {
+    this.reflectionProvider = reflectionProvider;
+  }
 
-	@Inject
-	public void setReflectionContextFactory(ReflectionContextFactory reflectionContextFactory) {
-		this.reflectionContextFactory = reflectionContextFactory;
-	}
+  @Inject
+  public void setReflectionContextFactory(ReflectionContextFactory reflectionContextFactory) {
+    this.reflectionContextFactory = reflectionContextFactory;
+  }
 
-	public ReflectionContextFactory getReflectionContextFactory() {
-		return reflectionContextFactory;
-	}
+  public ReflectionContextFactory getReflectionContextFactory() {
+    return reflectionContextFactory;
+  }
 
-	public ActionValidatorManager getActionValidatorManager() {
-		return actionValidatorManager;
-	}
-	@Inject
-	public void setActionValidatorManager(ActionValidatorManager actionValidatorManager) {
-		this.actionValidatorManager = actionValidatorManager;
-	}
+  public ActionValidatorManager getActionValidatorManager() {
+    return actionValidatorManager;
+  }
+
+  @Inject
+  public void setActionValidatorManager(ActionValidatorManager actionValidatorManager) {
+    this.actionValidatorManager = actionValidatorManager;
+  }
 
 }

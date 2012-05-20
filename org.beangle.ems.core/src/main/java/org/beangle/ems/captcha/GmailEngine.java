@@ -33,33 +33,32 @@ import com.octo.captcha.image.gimpy.GimpyFactory;
  */
 public class GmailEngine extends ListImageCaptchaEngine {
 
-	protected void buildInitialFactories() {
-		Integer minWordLength = new Integer(4);
-		Integer maxWordLength = new Integer(5);
-		Integer imageWidth = new Integer(90);
-		Integer imageHeight = new Integer(35);
-		int fontSize = 21;
+  protected void buildInitialFactories() {
+    Integer minWordLength = new Integer(4);
+    Integer maxWordLength = new Integer(5);
+    Integer imageWidth = new Integer(90);
+    Integer imageHeight = new Integer(35);
+    int fontSize = 21;
 
-		// word generator
-		WordGenerator dictionnaryWords = new ComposeDictionaryWordGenerator(new FileDictionary("toddlist"));
+    // word generator
+    WordGenerator dictionnaryWords = new ComposeDictionaryWordGenerator(new FileDictionary("toddlist"));
 
-		// word2image components
-		TextPaster randomPaster = new DecoratedRandomTextPaster(minWordLength, maxWordLength,
-				new RandomListColorGenerator(new Color[] { new Color(23, 170, 27), new Color(220, 34, 11),
-						new Color(23, 67, 172) }), new TextDecorator[] {});
-		BackgroundGenerator background = new UniColorBackgroundGenerator(imageWidth, imageHeight, Color.white);
-		FontGenerator font = new RandomFontGenerator(new Integer(fontSize), Integer.valueOf(fontSize),
-				new Font[] { new Font("nyala", Font.BOLD, fontSize),
-						new Font("Bell MT", Font.PLAIN, fontSize),
-						new Font("Credit valley", Font.BOLD, fontSize) });
+    // word2image components
+    TextPaster randomPaster = new DecoratedRandomTextPaster(minWordLength, maxWordLength,
+        new RandomListColorGenerator(new Color[] { new Color(23, 170, 27), new Color(220, 34, 11),
+            new Color(23, 67, 172) }), new TextDecorator[] {});
+    BackgroundGenerator background = new UniColorBackgroundGenerator(imageWidth, imageHeight, Color.white);
+    FontGenerator font = new RandomFontGenerator(new Integer(fontSize), Integer.valueOf(fontSize),
+        new Font[] { new Font("nyala", Font.BOLD, fontSize), new Font("Bell MT", Font.PLAIN, fontSize),
+            new Font("Credit valley", Font.BOLD, fontSize) });
 
-		ImageDeformation postDef = new ImageDeformationByFilters(new ImageFilter[] {});
-		ImageDeformation backDef = new ImageDeformationByFilters(new ImageFilter[] {});
-		ImageDeformation textDef = new ImageDeformationByFilters(new ImageFilter[] {});
+    ImageDeformation postDef = new ImageDeformationByFilters(new ImageFilter[] {});
+    ImageDeformation backDef = new ImageDeformationByFilters(new ImageFilter[] {});
+    ImageDeformation textDef = new ImageDeformationByFilters(new ImageFilter[] {});
 
-		WordToImage word2image = new DeformedComposedWordToImage(font, background, randomPaster, backDef,
-				textDef, postDef);
-		addFactory(new GimpyFactory(dictionnaryWords, word2image));
-	}
+    WordToImage word2image = new DeformedComposedWordToImage(font, background, randomPaster, backDef,
+        textDef, postDef);
+    addFactory(new GimpyFactory(dictionnaryWords, word2image));
+  }
 
 }

@@ -19,28 +19,28 @@ import org.beangle.struts2.convention.route.Action;
  */
 public class RuleAction extends SecurityEntityActionSupport {
 
-	@Override
-	protected String saveAndForward(Entity<?> entity) {
-		Rule rule = (Rule) entity;
-		if (null == rule.getId()) {
-			rule.setCreatedAt(new Date());
-			rule.setUpdatedAt(new Date());
-		} else {
-			rule.setUpdatedAt(new Date());
-		}
-		entityDao.saveOrUpdate(rule);
-		return redirect("search", "info.save.success");
-	}
+  @Override
+  protected String saveAndForward(Entity<?> entity) {
+    Rule rule = (Rule) entity;
+    if (null == rule.getId()) {
+      rule.setCreatedAt(new Date());
+      rule.setUpdatedAt(new Date());
+    } else {
+      rule.setUpdatedAt(new Date());
+    }
+    entityDao.saveOrUpdate(rule);
+    return redirect("search", "info.save.success");
+  }
 
-	@Override
-	protected String getEntityName() {
-		return Rule.class.getName();
-	}
+  @Override
+  protected String getEntityName() {
+    return Rule.class.getName();
+  }
 
-	public String params() {
-		return redirect(
-				Action.to(RuleParamAction.class).method("search")
-						.param("ruleParameter.rule.id", getLong("rule.id")), null);
-	}
+  public String params() {
+    return redirect(
+        Action.to(RuleParamAction.class).method("search").param("ruleParameter.rule.id", getLong("rule.id")),
+        null);
+  }
 
 }

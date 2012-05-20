@@ -10,44 +10,44 @@ import org.beangle.webapp.database.model.DatasourceBean;
 
 public class QueryContext {
 
-	private DataSource dataSource;
+  private DataSource dataSource;
 
-	private DatasourceBean datasourceBean;
+  private DatasourceBean datasourceBean;
 
-	private String schema;
+  private String schema;
 
-	public QueryContext() {
-		super();
-	}
+  public QueryContext() {
+    super();
+  }
 
-	public QueryContext(DataSource dataSource, DatasourceBean datasourceBean) {
-		super();
-		this.dataSource = dataSource;
-		this.datasourceBean = datasourceBean;
-	}
+  public QueryContext(DataSource dataSource, DatasourceBean datasourceBean) {
+    super();
+    this.dataSource = dataSource;
+    this.datasourceBean = datasourceBean;
+  }
 
-	public DataSource getDataSource() {
-		return dataSource;
-	}
+  public DataSource getDataSource() {
+    return dataSource;
+  }
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+  public void setDataSource(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
-	public DatasourceBean getDatasourceBean() {
-		return datasourceBean;
-	}
+  public DatasourceBean getDatasourceBean() {
+    return datasourceBean;
+  }
 
-	public void setDatasourceBean(DatasourceBean datasourceBean) {
-		this.datasourceBean = datasourceBean;
-	}
+  public void setDatasourceBean(DatasourceBean datasourceBean) {
+    this.datasourceBean = datasourceBean;
+  }
 
-	public String getSchema() {
-		return schema;
-	}
+  public String getSchema() {
+    return schema;
+  }
 
-	public void setSchema(String schema) {
-		this.schema = schema;
-	}
+  public void setSchema(String schema) {
+    this.schema = schema;
+  }
 
 }

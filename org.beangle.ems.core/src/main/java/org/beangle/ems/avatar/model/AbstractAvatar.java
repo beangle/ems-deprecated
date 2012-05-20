@@ -10,38 +10,38 @@ import org.beangle.ems.avatar.Avatar;
 
 public abstract class AbstractAvatar implements Avatar {
 
-	private String name;
+  private String name;
 
-	private String type;
+  private String type;
 
-	private Date updatedAt;
+  private Date updatedAt;
 
-	public double getKBSize() {
-		return ((double) getSize() / 1024);
-	}
+  public double getKBSize() {
+    return ((double) getSize() / 1024);
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+  public void setType(String type) {
+    this.type = type;
+  }
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
 }

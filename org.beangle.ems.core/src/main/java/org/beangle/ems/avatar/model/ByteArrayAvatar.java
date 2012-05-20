@@ -11,25 +11,25 @@ import org.beangle.ems.avatar.AvatarException;
 
 public class ByteArrayAvatar extends AbstractAvatar {
 
-	byte[] buf;
+  byte[] buf;
 
-	public ByteArrayAvatar() {
-		super();
-	}
+  public ByteArrayAvatar() {
+    super();
+  }
 
-	public ByteArrayAvatar(String name, String type, byte[] buf) {
-		super();
-		setName(name);
-		setType(type);
-		this.buf = buf;
-	}
+  public ByteArrayAvatar(String name, String type, byte[] buf) {
+    super();
+    setName(name);
+    setType(type);
+    this.buf = buf;
+  }
 
-	public InputStream getInputStream() throws AvatarException {
-		return new ByteArrayInputStream(buf);
-	}
+  public InputStream getInputStream() throws AvatarException {
+    return new ByteArrayInputStream(buf);
+  }
 
-	public long getSize() {
-		return buf.length;
-	}
+  public long getSize() {
+    return buf.length;
+  }
 
 }

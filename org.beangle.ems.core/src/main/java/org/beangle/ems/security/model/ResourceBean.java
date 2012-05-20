@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Resource;
-import org.beangle.lang.StrUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -34,90 +34,90 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @Cache(region = "beangle.security", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ResourceBean extends LongIdObject implements Resource {
-	private static final long serialVersionUID = -8285208615351119572L;
+  private static final long serialVersionUID = -8285208615351119572L;
 
-	/** 模块名字 */
-	@Size(max = 100)
-	@NotNull
-	@Column(unique = true)
-	private String name;
+  /** 模块名字 */
+  @Size(max = 100)
+  @NotNull
+  @Column(unique = true)
+  private String name;
 
-	/** 模块标题 */
-	@Size(max = 100)
-	@NotNull
-	private String title;
+  /** 模块标题 */
+  @Size(max = 100)
+  @NotNull
+  private String title;
 
-	/** 简单描述 */
-	@Size(max = 100)
-	private String remark;
+  /** 简单描述 */
+  @Size(max = 100)
+  private String remark;
 
-	/** 资源访问范围 */
-	@NotNull
-	@Enumerated(value = EnumType.ORDINAL)
-	private Scope scope = Scope.PRIVATE;
+  /** 资源访问范围 */
+  @NotNull
+  @Enumerated(value = EnumType.ORDINAL)
+  private Scope scope = Scope.PRIVATE;
 
-	/** 模块是否可用 */
-	@NotNull
-	private boolean enabled = true;
+  /** 模块是否可用 */
+  @NotNull
+  private boolean enabled = true;
 
-	/** 是否为入口 */
-	@NotNull
-	private boolean entry = true;
+  /** 是否为入口 */
+  @NotNull
+  private boolean entry = true;
 
-	public String getRemark() {
-		return remark;
-	}
+  public String getRemark() {
+    return remark;
+  }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+  public void setRemark(String remark) {
+    this.remark = remark;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public String getDescription() {
-		return StrUtils.concat(name, "[", title, "]");
-	}
+  public String getDescription() {
+    return Strings.concat(name, "[", title, "]");
+  }
 
-	public Scope getScope() {
-		return scope;
-	}
+  public Scope getScope() {
+    return scope;
+  }
 
-	public void setScope(Scope scope) {
-		this.scope = scope;
-	}
+  public void setScope(Scope scope) {
+    this.scope = scope;
+  }
 
-	public boolean isEntry() {
-		return entry;
-	}
+  public boolean isEntry() {
+    return entry;
+  }
 
-	public void setEntry(boolean entry) {
-		this.entry = entry;
-	}
+  public void setEntry(boolean entry) {
+    this.entry = entry;
+  }
 
-	public String toString() {
-		return new ToStringBuilder(this).append("name", this.name).append("id", this.id)
-				.append("remark", this.remark).toString();
-	}
+  public String toString() {
+    return new ToStringBuilder(this).append("name", this.name).append("id", this.id)
+        .append("remark", this.remark).toString();
+  }
 }

@@ -13,5 +13,5 @@ import java.net.URL;
  */
 public interface StaticFileLoader {
 
-	public URL getFile(String filename);
+  public URL getFile(String filename);
 }

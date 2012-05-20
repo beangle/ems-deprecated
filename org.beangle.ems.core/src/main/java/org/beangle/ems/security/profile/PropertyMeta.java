@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security.profile;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 用户自定义属性
@@ -14,52 +14,52 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface PropertyMeta extends LongIdEntity {
 
-	/**
-	 * 名称
-	 * 
-	 * @return
-	 */
-	public String getName();
+  /**
+   * 名称
+   * 
+   * @return
+   */
+  public String getName();
 
-	/**
-	 * 值类型
-	 * 
-	 * @return
-	 */
-	public String getValueType();
+  /**
+   * 值类型
+   * 
+   * @return
+   */
+  public String getValueType();
 
-	/**
-	 * 主键属性名
-	 * 
-	 * @return
-	 */
-	public String getKeyName();
+  /**
+   * 主键属性名
+   * 
+   * @return
+   */
+  public String getKeyName();
 
-	/**
-	 * 其它属性列表
-	 * 
-	 * @return
-	 */
-	public String getPropertyNames();
+  /**
+   * 其它属性列表
+   * 
+   * @return
+   */
+  public String getPropertyNames();
 
-	/**
-	 * 数据源提供者
-	 * 
-	 * @return
-	 */
-	public String getSource();
+  /**
+   * 数据源提供者
+   * 
+   * @return
+   */
+  public String getSource();
 
-	/**
-	 * 是否为集合类型
-	 * 
-	 * @return
-	 */
-	public boolean isMultiple();
+  /**
+   * 是否为集合类型
+   * 
+   * @return
+   */
+  public boolean isMultiple();
 
-	/**
-	 * 备注
-	 * 
-	 * @return
-	 */
-	public String getRemark();
+  /**
+   * 备注
+   * 
+   * @return
+   */
+  public String getRemark();
 }

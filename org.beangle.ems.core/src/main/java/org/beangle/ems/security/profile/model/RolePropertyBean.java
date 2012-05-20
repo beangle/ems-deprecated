@@ -10,10 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.profile.RoleProfile;
 import org.beangle.ems.security.profile.RoleProperty;
-import org.beangle.ems.security.profile.PropertyMeta;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,55 +26,55 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @Cache(region = "beangle.security", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RolePropertyBean extends LongIdObject implements RoleProperty {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	/**值*/
-	@Size(max=1000)
-	private String value;
+  /** 值 */
+  @Size(max = 1000)
+  private String value;
 
-	/**属性元*/
-	@NotNull
-	@ManyToOne
-	private PropertyMeta meta;
-	
-	/**角色属性配置*/
-	@NotNull
-	@ManyToOne
-	private RoleProfile profile;
+  /** 属性元 */
+  @NotNull
+  @ManyToOne
+  private PropertyMeta meta;
 
-	public RolePropertyBean() {
-		super();
-	}
+  /** 角色属性配置 */
+  @NotNull
+  @ManyToOne
+  private RoleProfile profile;
 
-	public RolePropertyBean(RoleProfileBean profile, PropertyMeta meta, String value) {
-		super();
-		this.profile = profile;
-		this.meta = meta;
-		this.value = value;
-	}
+  public RolePropertyBean() {
+    super();
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public RolePropertyBean(RoleProfileBean profile, PropertyMeta meta, String value) {
+    super();
+    this.profile = profile;
+    this.meta = meta;
+    this.value = value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public PropertyMeta getMeta() {
-		return meta;
-	}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
-	public void setMeta(PropertyMeta meta) {
-		this.meta = meta;
-	}
+  public PropertyMeta getMeta() {
+    return meta;
+  }
 
-	public RoleProfile getProfile() {
-		return profile;
-	}
+  public void setMeta(PropertyMeta meta) {
+    this.meta = meta;
+  }
 
-	public void setProfile(RoleProfile profile) {
-		this.profile = profile;
-	}
+  public RoleProfile getProfile() {
+    return profile;
+  }
+
+  public void setProfile(RoleProfile profile) {
+    this.profile = profile;
+  }
 
 }

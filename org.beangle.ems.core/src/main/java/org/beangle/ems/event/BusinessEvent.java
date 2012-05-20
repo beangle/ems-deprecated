@@ -6,7 +6,7 @@ package org.beangle.ems.event;
 
 import java.util.Date;
 
-import org.beangle.context.event.Event;
+import org.beangle.commons.context.event.Event;
 
 /**
  * 业务事件
@@ -16,50 +16,50 @@ import org.beangle.context.event.Event;
  */
 public class BusinessEvent extends Event {
 
-	private static final long serialVersionUID = -3105001733284410829L;
+  private static final long serialVersionUID = -3105001733284410829L;
 
-	public BusinessEvent(Object source) {
-		super(source);
-	}
+  public BusinessEvent(Object source) {
+    super(source);
+  }
 
-	protected Date issueAt = new Date();
+  protected Date issueAt = new Date();
 
-	protected String resource;
+  protected String resource;
 
-	protected String description;
+  protected String description;
 
-	protected String detail;
+  protected String detail;
 
-	public Date getIssueAt() {
-		return issueAt;
-	}
+  public Date getIssueAt() {
+    return issueAt;
+  }
 
-	public void setIssueAt(Date issueAt) {
-		this.issueAt = issueAt;
-	}
+  public void setIssueAt(Date issueAt) {
+    this.issueAt = issueAt;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getResource() {
-		return resource;
-	}
+  public String getResource() {
+    return resource;
+  }
 
-	public void setResource(String resource) {
-		this.resource = resource;
-	}
+  public void setResource(String resource) {
+    this.resource = resource;
+  }
 
-	public String getDetail() {
-		return detail;
-	}
+  public String getDetail() {
+    return detail;
+  }
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+  public void setDetail(String detail) {
+    this.detail = detail;
+  }
 
 }

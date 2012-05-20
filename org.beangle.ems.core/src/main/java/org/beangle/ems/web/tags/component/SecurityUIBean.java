@@ -6,11 +6,11 @@ package org.beangle.ems.web.tags.component;
 
 import java.io.Writer;
 
+import org.beangle.commons.web.url.UrlRender;
 import org.beangle.ems.security.SecurityUtils;
 import org.beangle.security.access.AuthorityManager;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.struts2.view.component.UIBean;
-import org.beangle.web.url.UrlRender;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
@@ -22,26 +22,26 @@ import com.opensymphony.xwork2.util.ValueStack;
  */
 public abstract class SecurityUIBean extends UIBean {
 
-	private AuthorityManager authorityManager;
+  private AuthorityManager authorityManager;
 
-	private static UrlRender render = new UrlRender(null);
+  private static UrlRender render = new UrlRender(null);
 
-	public SecurityUIBean(ValueStack stack, AuthorityManager authorityManager) {
-		super(stack);
-		this.authorityManager = authorityManager;
-	}
+  public SecurityUIBean(ValueStack stack, AuthorityManager authorityManager) {
+    super(stack);
+    this.authorityManager = authorityManager;
+  }
 
-	public boolean start(Writer writer) {
-		return isAuthorize(getResource());
-	}
+  public boolean start(Writer writer) {
+    return isAuthorize(getResource());
+  }
 
-	protected boolean isAuthorize(String res) {
-		if (null == res) { return false; }
-		int queryIndex = res.indexOf('?');
-		if (-1 != queryIndex) res = res.substring(0, queryIndex);
-		if ('/' != res.charAt(0)) res = render.render(SecurityUtils.getResource(), res);
-		return authorityManager.isAuthorized(SecurityContextHolder.getContext().getAuthentication(), res);
-	}
+  protected boolean isAuthorize(String res) {
+    if (null == res) { return false; }
+    int queryIndex = res.indexOf('?');
+    if (-1 != queryIndex) res = res.substring(0, queryIndex);
+    if ('/' != res.charAt(0)) res = render.render(SecurityUtils.getResource(), res);
+    return authorityManager.isAuthorized(SecurityContextHolder.getContext().getAuthentication(), res);
+  }
 
-	protected abstract String getResource();
+  protected abstract String getResource();
 }

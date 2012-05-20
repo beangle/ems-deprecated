@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 权限
@@ -12,35 +12,35 @@ import org.beangle.dao.pojo.LongIdEntity;
  * @author chaostone 2005-9-26
  */
 public interface Permission extends LongIdEntity, Cloneable {
-	/**
-	 * 系统资源
-	 * 
-	 * @return
-	 */
-	public Resource getResource();
+  /**
+   * 系统资源
+   * 
+   * @return
+   */
+  public Resource getResource();
 
-	/**
-	 * 设置资源
-	 * 
-	 * @param resource
-	 */
-	public void setResource(Resource resource);
+  /**
+   * 设置资源
+   * 
+   * @param resource
+   */
+  public void setResource(Resource resource);
 
-	/**
-	 * 设置授权对象
-	 * 
-	 * @param role
-	 */
-	public void setRole(Role role);
+  /**
+   * 设置授权对象
+   * 
+   * @param role
+   */
+  public void setRole(Role role);
 
-	/**
-	 * 获得授权对象
-	 * 
-	 * @param ao
-	 */
-	public Role getRole();
+  /**
+   * 获得授权对象
+   * 
+   * @param ao
+   */
+  public Role getRole();
 
-	public void merge(Permission other);
+  public void merge(Permission other);
 
-	public Object clone();
+  public Object clone();
 }

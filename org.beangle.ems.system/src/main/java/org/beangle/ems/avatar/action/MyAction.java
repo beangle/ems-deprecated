@@ -18,28 +18,28 @@ import org.beangle.ems.web.action.SecurityActionSupport;
  */
 public class MyAction extends SecurityActionSupport {
 
-	protected AvatarBase avatarBase;
+  protected AvatarBase avatarBase;
 
-	public String index() throws IOException {
-		String userName = getUsername();
-		Avatar avatar = avatarBase.getAvatar(userName);
-		if (null == avatar) {
-			ServletActionContext.getResponse().getWriter().write("without you avatar [" + userName + "]");
-		} else {
-			AvatarUtil.copyTo(avatar, ServletActionContext.getResponse());
-		}
-		return null;
-	}
+  public String index() throws IOException {
+    String userName = getUsername();
+    Avatar avatar = avatarBase.getAvatar(userName);
+    if (null == avatar) {
+      ServletActionContext.getResponse().getWriter().write("without you avatar [" + userName + "]");
+    } else {
+      AvatarUtil.copyTo(avatar, ServletActionContext.getResponse());
+    }
+    return null;
+  }
 
-	public String info() {
-		Avatar avatar = avatarBase.getAvatar(getUsername());
-		put("avatar", avatar);
-		put("user", getUser());
-		return forward();
-	}
+  public String info() {
+    Avatar avatar = avatarBase.getAvatar(getUsername());
+    put("avatar", avatar);
+    put("user", getUser());
+    return forward();
+  }
 
-	public void setAvatarBase(AvatarBase avatarBase) {
-		this.avatarBase = avatarBase;
-	}
+  public void setAvatarBase(AvatarBase avatarBase) {
+    this.avatarBase = avatarBase;
+  }
 
 }

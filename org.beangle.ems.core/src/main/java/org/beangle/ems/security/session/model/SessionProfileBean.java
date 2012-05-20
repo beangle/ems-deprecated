@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Role;
 
 /**
@@ -16,78 +16,78 @@ import org.beangle.ems.security.Role;
  * 
  * @author chaostone
  */
-@Entity(name="org.beangle.ems.security.session.model.SessionProfileBean")
+@Entity(name = "org.beangle.ems.security.session.model.SessionProfileBean")
 public class SessionProfileBean extends LongIdObject {
 
-	private static final long serialVersionUID = 1999239598984221565L;
+  private static final long serialVersionUID = 1999239598984221565L;
 
-	/** 角色 */
-	@NotNull
-	@ManyToOne
-	protected Role role;
+  /** 角色 */
+  @NotNull
+  @ManyToOne
+  protected Role role;
 
-	/** 最大在线人数 */
-	@NotNull
-	protected int capacity;
+  /** 最大在线人数 */
+  @NotNull
+  protected int capacity;
 
-	/** 单用户的同时最大会话数 */
-	@NotNull
-	protected int userMaxSessions = 1;
+  /** 单用户的同时最大会话数 */
+  @NotNull
+  protected int userMaxSessions = 1;
 
-	/** 不操作过期时间(以分为单位) */
-	@NotNull
-	protected int inactiveInterval;
+  /** 不操作过期时间(以分为单位) */
+  @NotNull
+  protected int inactiveInterval;
 
-	public SessionProfileBean() {
-		super();
-	}
+  public SessionProfileBean() {
+    super();
+  }
 
-	public SessionProfileBean(Role role, int max, int inactiveInterval) {
-		super();
-		this.role = role;
-		this.capacity = max;
-		this.inactiveInterval = inactiveInterval;
-	}
-	
-	public Role getRole() {
-		return role;
-	}
+  public SessionProfileBean(Role role, int max, int inactiveInterval) {
+    super();
+    this.role = role;
+    this.capacity = max;
+    this.inactiveInterval = inactiveInterval;
+  }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+  public Role getRole() {
+    return role;
+  }
 
-	public int getCapacity() {
-		return capacity;
-	}
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-	public void setCapacity(int max) {
-		this.capacity = max;
-	}
+  public int getCapacity() {
+    return capacity;
+  }
 
-	public int getInactiveInterval() {
-		return inactiveInterval;
-	}
+  public void setCapacity(int max) {
+    this.capacity = max;
+  }
 
-	public void setInactiveInterval(int inactiveInterval) {
-		this.inactiveInterval = inactiveInterval;
-	}
+  public int getInactiveInterval() {
+    return inactiveInterval;
+  }
 
-	public int getUserMaxSessions() {
-		return userMaxSessions;
-	}
+  public void setInactiveInterval(int inactiveInterval) {
+    this.inactiveInterval = inactiveInterval;
+  }
 
-	public void setUserMaxSessions(int maxSessions) {
-		this.userMaxSessions = maxSessions;
-	}
+  public int getUserMaxSessions() {
+    return userMaxSessions;
+  }
 
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(role.getName());
-		sb.append(":{max=").append(capacity).append(',');
-		sb.append("maxSessions=").append(userMaxSessions).append(',');
-		sb.append("inactiveInterval=").append(inactiveInterval).append('}');
-		return sb.toString();
-	}
+  public void setUserMaxSessions(int maxSessions) {
+    this.userMaxSessions = maxSessions;
+  }
+
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(role.getName());
+    sb.append(":{max=").append(capacity).append(',');
+    sb.append("maxSessions=").append(userMaxSessions).append(',');
+    sb.append("inactiveInterval=").append(inactiveInterval).append('}');
+    return sb.toString();
+  }
 
 }

@@ -6,23 +6,23 @@ package org.beangle.ems.rule.impl;
 
 import java.util.List;
 
-import org.beangle.dao.EntityDao;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleBase;
 
 public class RuleBaseImpl implements RuleBase {
 
-	private EntityDao entityDao;
+  private EntityDao entityDao;
 
-	public List<Rule> getRules() {
-		OqlBuilder<Rule> query = OqlBuilder.from(Rule.class, "rule");
-		query.orderBy("rule.id desc");
-		return entityDao.search(query);
-	}
+  public List<Rule> getRules() {
+    OqlBuilder<Rule> query = OqlBuilder.from(Rule.class, "rule");
+    query.orderBy("rule.id desc");
+    return entityDao.search(query);
+  }
 
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
 
 }

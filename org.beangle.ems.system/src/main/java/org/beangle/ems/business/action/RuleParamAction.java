@@ -17,22 +17,22 @@ import org.beangle.ems.web.action.SecurityEntityActionSupport;
  */
 public class RuleParamAction extends SecurityEntityActionSupport {
 
-	@Override
-	protected void editSetting(Entity<?> entity) {
-		Long ruleId = getLong("ruleParameter.rule.id");
-		Long paramId = getLong("ruleParameter.id");
+  @Override
+  protected void editSetting(Entity<?> entity) {
+    Long ruleId = getLong("ruleParameter.rule.id");
+    Long paramId = getLong("ruleParameter.id");
 
-		OqlBuilder<RuleParameter> builder = OqlBuilder.from(RuleParameter.class, "ruleParam");
-		if (null != ruleId) builder.where(" ruleParam.rule.id=:ruleId", ruleId);
-		if (null != paramId) {
-			builder.where(" ruleParam.id<>:paramId", paramId);
-		}
-		put("ruleParams", entityDao.search(builder));
-	}
+    OqlBuilder<RuleParameter> builder = OqlBuilder.from(RuleParameter.class, "ruleParam");
+    if (null != ruleId) builder.where(" ruleParam.rule.id=:ruleId", ruleId);
+    if (null != paramId) {
+      builder.where(" ruleParam.id<>:paramId", paramId);
+    }
+    put("ruleParams", entityDao.search(builder));
+  }
 
-	@Override
-	protected String getEntityName() {
-		return RuleParameter.class.getName();
-	}
+  @Override
+  protected String getEntityName() {
+    return RuleParameter.class.getName();
+  }
 
 }

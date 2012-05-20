@@ -20,42 +20,42 @@ import org.beangle.web.io.StreamDownloader;
  */
 public class StaticfileAction extends BaseAction {
 
-	private List<StaticFileLoader> loaders = CollectUtils.newArrayList();
+  private List<StaticFileLoader> loaders = CollectUtils.newArrayList();
 
-	private StreamDownloader streamDownloader;
+  private StreamDownloader streamDownloader;
 
-	public String index() throws Exception {
-		String name = get("file");
-		String displayName = get("display");
-		URL url = null;
-		if (StringUtils.isNotEmpty(name)) {
-			for (StaticFileLoader loader : loaders) {
-				url = loader.getFile(name);
-				if (null != url) {
-					break;
-				}
-			}
-			if (null != url) {
-				streamDownloader.download(getRequest(), getResponse(), url, displayName);
-			}
-		}
-		if (null == url) {
-			return "nofound";
-		} else {
-			return null;
-		}
-	}
+  public String index() throws Exception {
+    String name = get("file");
+    String displayName = get("display");
+    URL url = null;
+    if (StringUtils.isNotEmpty(name)) {
+      for (StaticFileLoader loader : loaders) {
+        url = loader.getFile(name);
+        if (null != url) {
+          break;
+        }
+      }
+      if (null != url) {
+        streamDownloader.download(getRequest(), getResponse(), url, displayName);
+      }
+    }
+    if (null == url) {
+      return "nofound";
+    } else {
+      return null;
+    }
+  }
 
-	public List<StaticFileLoader> getLoaders() {
-		return loaders;
-	}
+  public List<StaticFileLoader> getLoaders() {
+    return loaders;
+  }
 
-	public void setLoaders(List<StaticFileLoader> loaders) {
-		this.loaders = loaders;
-	}
+  public void setLoaders(List<StaticFileLoader> loaders) {
+    this.loaders = loaders;
+  }
 
-	public void setStreamDownloader(StreamDownloader streamDownloader) {
-		this.streamDownloader = streamDownloader;
-	}
+  public void setStreamDownloader(StreamDownloader streamDownloader) {
+    this.streamDownloader = streamDownloader;
+  }
 
 }

@@ -13,108 +13,109 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.pojo.LongIdTimeObject;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.orm.pojo.LongIdTimeObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
+
 /**
  * 规则
+ * 
  * @author chaostone
- *
  */
-@Entity(name="org.beangle.ems.rule.Rule")
+@Entity(name = "org.beangle.ems.rule.Rule")
 public class RuleBean extends LongIdTimeObject implements Rule {
 
-	private static final long serialVersionUID = -3648535746761474692L;
+  private static final long serialVersionUID = -3648535746761474692L;
 
-	/** 规则名称 */
-	@NotNull
-	@Size(max=100)
-	@Column(unique=true)
-	private String name;
+  /** 规则名称 */
+  @NotNull
+  @Size(max = 100)
+  @Column(unique = true)
+  private String name;
 
-	/** 适用业务 */
-	@NotNull
-	@Size(max=100)	
-	private String business;
+  /** 适用业务 */
+  @NotNull
+  @Size(max = 100)
+  private String business;
 
-	/** 规则描述 */
-	@NotNull
-	@Size(max=300)
-	private String description;
+  /** 规则描述 */
+  @NotNull
+  @Size(max = 300)
+  private String description;
 
-	/** 规则管理容器 */
-	@NotNull
-	@Size(max=50)
-	private String factory;
+  /** 规则管理容器 */
+  @NotNull
+  @Size(max = 50)
+  private String factory;
 
-	/** 规则服务名 */
-	@NotNull
-	@Size(max=80)
-	private String serviceName;
+  /** 规则服务名 */
+  @NotNull
+  @Size(max = 80)
+  private String serviceName;
 
-	/** 规则参数集合 */
-	@OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval=true)
-	private Set<RuleParameter> params = CollectUtils.newHashSet();
+  /** 规则参数集合 */
+  @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<RuleParameter> params = CollectUtils.newHashSet();
 
-	/** 是否启用 */
-	@NotNull
-	private boolean enabled;
+  /** 是否启用 */
+  @NotNull
+  private boolean enabled;
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getBusiness() {
-		return business;
-	}
+  public String getBusiness() {
+    return business;
+  }
 
-	public void setBusiness(String business) {
-		this.business = business;
-	}
+  public void setBusiness(String business) {
+    this.business = business;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getFactory() {
-		return factory;
-	}
+  public String getFactory() {
+    return factory;
+  }
 
-	public void setFactory(String factory) {
-		this.factory = factory;
-	}
+  public void setFactory(String factory) {
+    this.factory = factory;
+  }
 
-	public String getServiceName() {
-		return serviceName;
-	}
+  public String getServiceName() {
+    return serviceName;
+  }
 
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-	}
+  public void setServiceName(String serviceName) {
+    this.serviceName = serviceName;
+  }
 
-	public Set<RuleParameter> getParams() {
-		return params;
-	}
+  public Set<RuleParameter> getParams() {
+    return params;
+  }
 
-	public void setParams(Set<RuleParameter> params) {
-		this.params = params;
-	}
+  public void setParams(Set<RuleParameter> params) {
+    this.params = params;
+  }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
 }

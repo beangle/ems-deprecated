@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security.profile;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * @author chaostone
@@ -12,9 +12,9 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface Property extends LongIdEntity {
 
-	public PropertyMeta getMeta();
+  public PropertyMeta getMeta();
 
-	public String getValue();
+  public String getValue();
 
-	public void setValue(String value);
+  public void setValue(String value);
 }

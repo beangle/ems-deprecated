@@ -14,25 +14,25 @@ import org.beangle.ems.security.User;
  */
 public class UserStatusEvent extends UserEvent {
 
-	private static final long serialVersionUID = -8120260840834127793L;
-	private boolean enabled;
+  private static final long serialVersionUID = -8120260840834127793L;
+  private boolean enabled;
 
-	public UserStatusEvent(List<User> users, boolean enabled) {
-		super(users);
-		this.enabled = enabled;
-	}
+  public UserStatusEvent(List<User> users, boolean enabled) {
+    super(users);
+    this.enabled = enabled;
+  }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-	@Override
-	public String getDescription() {
-		return (enabled ? "激活" : "禁用") + "了" + getUserNames();
-	}
+  @Override
+  public String getDescription() {
+    return (enabled ? "激活" : "禁用") + "了" + getUserNames();
+  }
 
 }

@@ -19,86 +19,86 @@ import org.hibernate.stat.Statistics;
  */
 public class CacheAction extends BaseAction {
 
-	private SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 
-	public String index() {
-		Statistics statistics = sessionFactory.getStatistics();
-		Date lastUpdate = new Date();
-		Date activation = null;
-		Date deactivation = null;
+  public String index() {
+    Statistics statistics = sessionFactory.getStatistics();
+    Date lastUpdate = new Date();
+    Date activation = null;
+    Date deactivation = null;
 
-		boolean active = statistics.isStatisticsEnabled();
-		List<Long> generalStatistics = Collections.synchronizedList(new ArrayList<Long>(18));
-		if (active) {
-			generalStatistics.add(statistics.getConnectCount());
-			generalStatistics.add(statistics.getFlushCount());
+    boolean active = statistics.isStatisticsEnabled();
+    List<Long> generalStatistics = Collections.synchronizedList(new ArrayList<Long>(18));
+    if (active) {
+      generalStatistics.add(statistics.getConnectCount());
+      generalStatistics.add(statistics.getFlushCount());
 
-			generalStatistics.add(statistics.getPrepareStatementCount());
-			generalStatistics.add(statistics.getCloseStatementCount());
+      generalStatistics.add(statistics.getPrepareStatementCount());
+      generalStatistics.add(statistics.getCloseStatementCount());
 
-			generalStatistics.add(statistics.getSessionCloseCount());
-			generalStatistics.add(statistics.getSessionOpenCount());
+      generalStatistics.add(statistics.getSessionCloseCount());
+      generalStatistics.add(statistics.getSessionOpenCount());
 
-			generalStatistics.add(statistics.getTransactionCount());
-			generalStatistics.add(statistics.getSuccessfulTransactionCount());
-			generalStatistics.add(statistics.getOptimisticFailureCount());
-		}
-		final String action = get("do");
-		final StringBuilder info = new StringBuilder(512);
+      generalStatistics.add(statistics.getTransactionCount());
+      generalStatistics.add(statistics.getSuccessfulTransactionCount());
+      generalStatistics.add(statistics.getOptimisticFailureCount());
+    }
+    final String action = get("do");
+    final StringBuilder info = new StringBuilder(512);
 
-		if ("activate".equals(action) && !statistics.isStatisticsEnabled()) {
-			statistics.setStatisticsEnabled(true);
-			activation = new Date();
-			info.append("Statistics enabled\n");
-		} else if ("deactivate".equals(action) && statistics.isStatisticsEnabled()) {
-			statistics.setStatisticsEnabled(false);
-			deactivation = new Date();
-			info.append("Statistics disabled\n");
-		} else if ("clear".equals(action)) {
-			activation = null;
-			deactivation = null;
-			statistics.clear();
-			generalStatistics.clear();
-			info.append("Statistics cleared\n");
-		}
-		addActionMessage(info.toString());
-		put("active", active);
-		put("lastUpdate", lastUpdate);
-		put("activation", activation);
-		put("deactivation", deactivation);
-		put("generalStatistics", generalStatistics);
-		return forward();
-	}
+    if ("activate".equals(action) && !statistics.isStatisticsEnabled()) {
+      statistics.setStatisticsEnabled(true);
+      activation = new Date();
+      info.append("Statistics enabled\n");
+    } else if ("deactivate".equals(action) && statistics.isStatisticsEnabled()) {
+      statistics.setStatisticsEnabled(false);
+      deactivation = new Date();
+      info.append("Statistics disabled\n");
+    } else if ("clear".equals(action)) {
+      activation = null;
+      deactivation = null;
+      statistics.clear();
+      generalStatistics.clear();
+      info.append("Statistics cleared\n");
+    }
+    addActionMessage(info.toString());
+    put("active", active);
+    put("lastUpdate", lastUpdate);
+    put("activation", activation);
+    put("deactivation", deactivation);
+    put("generalStatistics", generalStatistics);
+    return forward();
+  }
 
-	public String conf() {
-		return forward();
-	}
+  public String conf() {
+    return forward();
+  }
 
-	public String entity() {
-		Statistics statistics = sessionFactory.getStatistics();
-		put("statistics", statistics);
-		return forward();
-	}
+  public String entity() {
+    Statistics statistics = sessionFactory.getStatistics();
+    put("statistics", statistics);
+    return forward();
+  }
 
-	public String query() {
-		Statistics statistics = sessionFactory.getStatistics();
-		put("statistics", statistics);
-		return forward("queryCache");
-	}
+  public String query() {
+    Statistics statistics = sessionFactory.getStatistics();
+    put("statistics", statistics);
+    return forward("queryCache");
+  }
 
-	public String collection() {
-		Statistics statistics = sessionFactory.getStatistics();
-		put("statistics", statistics);
-		return forward();
-	}
+  public String collection() {
+    Statistics statistics = sessionFactory.getStatistics();
+    put("statistics", statistics);
+    return forward();
+  }
 
-	public String cache() {
-		Statistics statistics = sessionFactory.getStatistics();
-		put("statistics", statistics);
-		return forward();
-	}
+  public String cache() {
+    Statistics statistics = sessionFactory.getStatistics();
+    put("statistics", statistics);
+    return forward();
+  }
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 }

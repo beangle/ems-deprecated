@@ -6,8 +6,8 @@ package org.beangle.ems.security;
 
 import java.util.Set;
 
-import org.beangle.dao.pojo.HierarchyEntity;
-import org.beangle.dao.pojo.LongIdTimeEntity;
+import org.beangle.commons.dao.entity.HierarchyEntity;
+import org.beangle.commons.dao.entity.LongIdTimeEntity;
 
 /**
  * 系统角色的基本信息
@@ -16,67 +16,68 @@ import org.beangle.dao.pojo.LongIdTimeEntity;
  */
 public interface Role extends LongIdTimeEntity, HierarchyEntity<Role, Long>, Comparable<Role> {
 
-	/** 匿名角色id */
-	static final long ANONYMOUS_ID = 1;
+  /** 匿名角色id */
+  static final long ANONYMOUS_ID = 1;
 
-	/** 所有用户所在的公共组id */
-	static final long ANYONE_ID = 2;
+  /** 所有用户所在的公共组id */
+  static final long ANYONE_ID = 2;
 
-	/**
-	 * 代码
-	 * 
-	 * @return
-	 */
-	String getCode();
-	/**
-	 * 名称
-	 * 
-	 * @return
-	 */
-	String getName();
+  /**
+   * 代码
+   * 
+   * @return
+   */
+  String getCode();
 
-	/**
-	 * 查询权限
-	 * 
-	 * @return
-	 */
-	Set<Permission> getPermissions();
+  /**
+   * 名称
+   * 
+   * @return
+   */
+  String getName();
 
-	/**
-	 * 关联的系统用户
-	 * 
-	 * @return
-	 */
-	Set<Member> getMembers();
+  /**
+   * 查询权限
+   * 
+   * @return
+   */
+  Set<Permission> getPermissions();
 
-	/**
-	 * Owner
-	 * 
-	 * @return
-	 */
-	User getOwner();
+  /**
+   * 关联的系统用户
+   * 
+   * @return
+   */
+  Set<Member> getMembers();
 
-	/**
-	 * 状态
-	 * 
-	 * @return
-	 */
-	boolean isEnabled();
+  /**
+   * Owner
+   * 
+   * @return
+   */
+  User getOwner();
 
-	/**
-	 * 备注
-	 * 
-	 * @return
-	 */
-	String getRemark();
+  /**
+   * 状态
+   * 
+   * @return
+   */
+  boolean isEnabled();
 
-	/**
-	 * 设置备注
-	 * 
-	 * @param remark
-	 */
-	void setRemark(String remark);
+  /**
+   * 备注
+   * 
+   * @return
+   */
+  String getRemark();
 
-	int getDepth();
+  /**
+   * 设置备注
+   * 
+   * @param remark
+   */
+  void setRemark(String remark);
+
+  int getDepth();
 
 }

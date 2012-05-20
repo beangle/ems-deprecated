@@ -11,10 +11,10 @@ import org.beangle.ems.rule.model.RuleConfig;
 
 public interface RuleExecutorBuilder {
 
-	public RuleExecutor build(Rule rule);
+  public RuleExecutor build(Rule rule);
 
-	public RuleExecutor build(List<Rule> rules, boolean stopWhenFail);
+  public RuleExecutor build(List<Rule> rules, boolean stopWhenFail);
 
-	public RuleExecutor build(RuleConfig ruleConfig);
+  public RuleExecutor build(RuleConfig ruleConfig);
 
 }

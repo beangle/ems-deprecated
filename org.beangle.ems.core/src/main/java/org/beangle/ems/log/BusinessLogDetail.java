@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.log;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 业务日志明细
@@ -14,8 +14,8 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface BusinessLogDetail extends LongIdEntity {
 
-	public String getContent();
+  public String getContent();
 
-	public BusinessLog getLog();
+  public BusinessLog getLog();
 
 }

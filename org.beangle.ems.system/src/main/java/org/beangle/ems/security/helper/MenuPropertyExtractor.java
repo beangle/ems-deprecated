@@ -14,21 +14,21 @@ import org.beangle.util.i18n.TextResource;
  */
 public class MenuPropertyExtractor extends DefaultPropertyExtractor {
 
-	public MenuPropertyExtractor() {
-		super();
-	}
+  public MenuPropertyExtractor() {
+    super();
+  }
 
-	public MenuPropertyExtractor(TextResource textResource) {
-		super(textResource);
-	}
+  public MenuPropertyExtractor(TextResource textResource) {
+    super(textResource);
+  }
 
-	public Object getPropertyValue(Object target, String property) throws Exception {
-		Menu menu = (Menu) target;
-		if ("enabled".equals(property)) {
-			return menu.isEnabled() ? "激活" : "冻结";
-		} else if ("resources".equals(property)) {
-			return getPropertyIn(menu.getResources(), "title");
-		} else return super.getPropertyValue(target, property);
-	}
+  public Object getPropertyValue(Object target, String property) throws Exception {
+    Menu menu = (Menu) target;
+    if ("enabled".equals(property)) {
+      return menu.isEnabled() ? "激活" : "冻结";
+    } else if ("resources".equals(property)) {
+      return getPropertyIn(menu.getResources(), "title");
+    } else return super.getPropertyValue(target, property);
+  }
 
 }

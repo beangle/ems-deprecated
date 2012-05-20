@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.nav.Menu;
 import org.beangle.ems.security.nav.MenuProfile;
@@ -32,57 +32,57 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(region = "beangle.security", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class MenuProfileBean extends LongIdObject implements MenuProfile {
 
-	private static final long serialVersionUID = 9147563981118270960L;
+  private static final long serialVersionUID = 9147563981118270960L;
 
-	/** 菜单配置名称 */
-	@NotNull
-	@Size(max = 50)
-	@Column(unique = true)
-	private String name;
+  /** 菜单配置名称 */
+  @NotNull
+  @Size(max = 50)
+  @Column(unique = true)
+  private String name;
 
-	/**菜单列表*/
-	@OneToMany(mappedBy = "profile")
-	private List<Menu> menus = CollectUtils.newArrayList();
+  /** 菜单列表 */
+  @OneToMany(mappedBy = "profile")
+  private List<Menu> menus = CollectUtils.newArrayList();
 
-	/** 角色 */
-	@NotNull
-	@ManyToOne
-	private Role role;
+  /** 角色 */
+  @NotNull
+  @ManyToOne
+  private Role role;
 
-	/** 是否启用 */
-	@NotNull
-	private boolean enabled;
+  /** 是否启用 */
+  @NotNull
+  private boolean enabled;
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public List<Menu> getMenus() {
-		return menus;
-	}
+  public List<Menu> getMenus() {
+    return menus;
+  }
 
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
-	}
+  public void setMenus(List<Menu> menus) {
+    this.menus = menus;
+  }
 
-	public Role getRole() {
-		return role;
-	}
+  public Role getRole() {
+    return role;
+  }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
 }

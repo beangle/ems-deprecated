@@ -15,44 +15,44 @@ import org.beangle.ems.avatar.AvatarException;
 
 public class FileAvatar extends AbstractAvatar {
 
-	private File file;
+  private File file;
 
-	public FileAvatar(File file) {
-		super();
-		this.file = file;
-		this.setUpdatedAt(new Date(file.lastModified()));
-		setName(file.getName());
-	}
+  public FileAvatar(File file) {
+    super();
+    this.file = file;
+    this.setUpdatedAt(new Date(file.lastModified()));
+    setName(file.getName());
+  }
 
-	public FileAvatar() {
-		super();
-	}
+  public FileAvatar() {
+    super();
+  }
 
-	public long getSize() {
-		return file.length();
-	}
+  public long getSize() {
+    return file.length();
+  }
 
-	public String getType() {
-		if (null == super.getType()) {
-			setType(StringUtils.substringAfterLast(file.getAbsolutePath(), "."));
-		}
-		return super.getType();
-	}
+  public String getType() {
+    if (null == super.getType()) {
+      setType(StringUtils.substringAfterLast(file.getAbsolutePath(), "."));
+    }
+    return super.getType();
+  }
 
-	public InputStream getInputStream() throws AvatarException {
-		try {
-			return new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			throw new AvatarException(e);
-		}
-	}
+  public InputStream getInputStream() throws AvatarException {
+    try {
+      return new FileInputStream(file);
+    } catch (FileNotFoundException e) {
+      throw new AvatarException(e);
+    }
+  }
 
-	public File getFile() {
-		return file;
-	}
+  public File getFile() {
+    return file;
+  }
 
-	public void setFile(File file) {
-		this.file = file;
-	}
+  public void setFile(File file) {
+    this.file = file;
+  }
 
 }

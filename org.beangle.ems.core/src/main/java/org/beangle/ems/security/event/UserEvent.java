@@ -16,24 +16,24 @@ import org.beangle.ems.security.User;
  * @version $Id: UserEvent.java Jul 27, 2011 10:11:20 AM chaostone $
  */
 public class UserEvent extends BusinessEvent {
-	private static final long serialVersionUID = -2213942260473001852L;
+  private static final long serialVersionUID = -2213942260473001852L;
 
-	public UserEvent(List<User> users) {
-		super(users);
-		this.resource = "用户管理";
-	}
+  public UserEvent(List<User> users) {
+    super(users);
+    this.resource = "用户管理";
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<User> getUsers() {
-		return (List<User>) source;
-	}
+  @SuppressWarnings("unchecked")
+  public List<User> getUsers() {
+    return (List<User>) source;
+  }
 
-	public String getUserNames() {
-		StringBuilder sb = new StringBuilder();
-		for (User user : getUsers()) {
-			sb.append(user.getName()).append('(').append(user.getFullname()).append("),");
-		}
-		sb.deleteCharAt(sb.length() - 1);
-		return sb.toString();
-	}
+  public String getUserNames() {
+    StringBuilder sb = new StringBuilder();
+    for (User user : getUsers()) {
+      sb.append(user.getName()).append('(').append(user.getFullname()).append("),");
+    }
+    sb.deleteCharAt(sb.length() - 1);
+    return sb.toString();
+  }
 }

@@ -16,9 +16,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.pojo.HierarchyEntity;
-import org.beangle.dao.pojo.IntegerIdObject;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.entity.HierarchyEntity;
+import org.beangle.commons.orm.pojo.IntegerIdObject;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -33,44 +33,44 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(region = "ems.dictionary", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CodeCategory extends IntegerIdObject implements HierarchyEntity<CodeCategory, Integer> {
 
-	private static final long serialVersionUID = -8865890399079481866L;
+  private static final long serialVersionUID = -8865890399079481866L;
 
-	/** 类别名称 */
-	@NotNull
-	@Size(max = 50)
-	@Column(unique = true)
-	private String name;
+  /** 类别名称 */
+  @NotNull
+  @Size(max = 50)
+  @Column(unique = true)
+  private String name;
 
-	/** 上级类别 */
-	@ManyToOne
-	private CodeCategory parent;
+  /** 上级类别 */
+  @ManyToOne
+  private CodeCategory parent;
 
-	/** 下级类别列表 */
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-	private List<CodeCategory> children = CollectUtils.newArrayList();
+  /** 下级类别列表 */
+  @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+  private List<CodeCategory> children = CollectUtils.newArrayList();
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public CodeCategory getParent() {
-		return parent;
-	}
+  public CodeCategory getParent() {
+    return parent;
+  }
 
-	public void setParent(CodeCategory parent) {
-		this.parent = parent;
-	}
+  public void setParent(CodeCategory parent) {
+    this.parent = parent;
+  }
 
-	public List<CodeCategory> getChildren() {
-		return children;
-	}
+  public List<CodeCategory> getChildren() {
+    return children;
+  }
 
-	public void setChildren(List<CodeCategory> children) {
-		this.children = children;
-	}
+  public void setChildren(List<CodeCategory> children) {
+    this.children = children;
+  }
 
 }

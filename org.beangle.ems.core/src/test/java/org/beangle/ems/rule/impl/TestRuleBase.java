@@ -6,16 +6,16 @@ package org.beangle.ems.rule.impl;
 
 import java.util.List;
 
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleBase;
 
 public class TestRuleBase implements RuleBase {
 
-	List<Rule> rules = CollectUtils.newArrayList();
+  List<Rule> rules = CollectUtils.newArrayList();
 
-	public List<Rule> getRules() {
-		return rules;
-	}
+  public List<Rule> getRules() {
+    return rules;
+  }
 
 }

@@ -17,23 +17,23 @@ import com.opensymphony.xwork2.util.ValueStack;
  */
 public class Guard extends SecurityUIBean {
 
-	private String res;
+  private String res;
 
-	public Guard(ValueStack stack, AuthorityManager authorityManager) {
-		super(stack, authorityManager);
-	}
+  public Guard(ValueStack stack, AuthorityManager authorityManager) {
+    super(stack, authorityManager);
+  }
 
-	public boolean end(Writer writer, String body) {
-		return end(writer, body, true);
-	}
+  public boolean end(Writer writer, String body) {
+    return end(writer, body, true);
+  }
 
-	@Override
-	protected String getResource() {
-		return res;
-	}
+  @Override
+  protected String getResource() {
+    return res;
+  }
 
-	public void setRes(String res) {
-		this.res = res;
-	}
+  public void setRes(String res) {
+    this.res = res;
+  }
 
 }

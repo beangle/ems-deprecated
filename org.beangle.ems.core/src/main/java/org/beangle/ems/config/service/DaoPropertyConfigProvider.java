@@ -7,35 +7,34 @@ package org.beangle.ems.config.service;
 import java.util.List;
 import java.util.Properties;
 
-import org.beangle.context.property.PropertyConfigFactory;
-import org.beangle.dao.Entity;
-import org.beangle.dao.EntityDao;
+import org.beangle.commons.dao.Entity;
+import org.beangle.commons.dao.EntityDao;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
 public class DaoPropertyConfigProvider implements PropertyConfigFactory.Provider {
 
-	private EntityDao entityDao;
+  private EntityDao entityDao;
 
-	public void setEntityDao(EntityDao entityDao) throws ClassNotFoundException {
-		this.entityDao = entityDao;
-	}
+  public void setEntityDao(EntityDao entityDao) throws ClassNotFoundException {
+    this.entityDao = entityDao;
+  }
 
-	public Properties getConfig() {
-		Properties props = new Properties();
-		List<PropertyConfigItemBean> rs = entityDao.getAll(PropertyConfigItemBean.class);
-		for (final PropertyConfigItemBean prop : rs) {
-			Class<?> itemClass = null;
-			try {
-				itemClass = Class.forName(prop.getType());
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			Object value = prop.getValue();
-			if (null != itemClass && Entity.class.isAssignableFrom(itemClass)) {
-				value = entityDao.get(itemClass, Long.valueOf(value.toString()));
-			}
-			props.put(prop.getName(), value);
-		}
-		return props;
-	}
+  public Properties getConfig() {
+    Properties props = new Properties();
+    List<PropertyConfigItemBean> rs = entityDao.getAll(PropertyConfigItemBean.class);
+    for (final PropertyConfigItemBean prop : rs) {
+      Class<?> itemClass = null;
+      try {
+        itemClass = Class.forName(prop.getType());
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+      Object value = prop.getValue();
+      if (null != itemClass && Entity.class.isAssignableFrom(itemClass)) {
+        value = entityDao.get(itemClass, Long.valueOf(value.toString()));
+      }
+      props.put(prop.getName(), value);
+    }
+    return props;
+  }
 }

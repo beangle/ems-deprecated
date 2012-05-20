@@ -6,7 +6,7 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 规则对应参数
@@ -15,28 +15,28 @@ import org.beangle.dao.pojo.LongIdEntity;
  */
 public interface RuleParameter extends LongIdEntity {
 
-	public Set<RuleParameter> getChildren();
+  public Set<RuleParameter> getChildren();
 
-	public void setChildren(Set<RuleParameter> subRuleParams);
+  public void setChildren(Set<RuleParameter> subRuleParams);
 
-	public RuleParameter getParent();
+  public RuleParameter getParent();
 
-	public void setParent(RuleParameter superRuleParameter);
+  public void setParent(RuleParameter superRuleParameter);
 
-	public Rule getRule();
+  public Rule getRule();
 
-	public void setRule(Rule businessRule);
+  public void setRule(Rule businessRule);
 
-	public String getName();
+  public String getName();
 
-	public void setName(String name);
+  public void setName(String name);
 
-	public String getType();
+  public String getType();
 
-	public void setType(String type);
+  public void setType(String type);
 
-	public void setTitle(String title);
+  public void setTitle(String title);
 
-	public String getTitle();
+  public String getTitle();
 
 }

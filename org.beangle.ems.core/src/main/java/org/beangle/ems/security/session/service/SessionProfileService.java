@@ -15,8 +15,8 @@ import org.beangle.ems.security.session.model.SessionProfileBean;
  */
 public interface SessionProfileService {
 
-	public void saveOrUpdate(List<SessionProfileBean> profiles);
+  public void saveOrUpdate(List<SessionProfileBean> profiles);
 
-	public boolean hasProfile(Role role);
+  public boolean hasProfile(Role role);
 
 }

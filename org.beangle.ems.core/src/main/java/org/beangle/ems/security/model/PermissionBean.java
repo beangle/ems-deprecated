@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Permission;
-import org.beangle.ems.security.Role;
 import org.beangle.ems.security.Resource;
+import org.beangle.ems.security.Role;
 
 /**
  * 系统授权实体
@@ -22,53 +22,53 @@ import org.beangle.ems.security.Resource;
 @Entity(name = "org.beangle.ems.security.Permission")
 public class PermissionBean extends LongIdObject implements Permission {
 
-	private static final long serialVersionUID = -8956079356245507990L;
+  private static final long serialVersionUID = -8956079356245507990L;
 
-	/** 角色 */
-	@NotNull
-	@ManyToOne
-	protected Role role;
+  /** 角色 */
+  @NotNull
+  @ManyToOne
+  protected Role role;
 
-	/** 权限实体中的模块 */
-	@NotNull
-	@ManyToOne
-	protected Resource resource;
+  /** 权限实体中的模块 */
+  @NotNull
+  @ManyToOne
+  protected Resource resource;
 
-	public PermissionBean() {
-		super();
-	}
+  public PermissionBean() {
+    super();
+  }
 
-	public PermissionBean(Long id) {
-		super(id);
-	}
+  public PermissionBean(Long id) {
+    super(id);
+  }
 
-	public PermissionBean(Role role, Resource resource) {
-		super();
-		this.role = role;
-		this.resource = resource;
-	}
+  public PermissionBean(Role role, Resource resource) {
+    super();
+    this.role = role;
+    this.resource = resource;
+  }
 
-	public Resource getResource() {
-		return resource;
-	}
+  public Resource getResource() {
+    return resource;
+  }
 
-	public void setResource(Resource resource) {
-		this.resource = (Resource) resource;
-	}
+  public void setResource(Resource resource) {
+    this.resource = (Resource) resource;
+  }
 
-	public Role getRole() {
-		return role;
-	}
+  public Role getRole() {
+    return role;
+  }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-	public Object clone() {
-		return new PermissionBean(role, resource);
-	}
+  public Object clone() {
+    return new PermissionBean(role, resource);
+  }
 
-	public void merge(Permission other) {
-		// TODO Auto-generated method stub
-	}
+  public void merge(Permission other) {
+    // TODO Auto-generated method stub
+  }
 }

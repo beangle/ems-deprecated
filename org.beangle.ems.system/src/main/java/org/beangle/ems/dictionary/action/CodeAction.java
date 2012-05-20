@@ -26,57 +26,56 @@ import org.beangle.struts2.action.BaseAction;
  */
 public class CodeAction extends BaseAction {
 
-	private BaseCodeService baseCodeService;
-	private EntityDao entityDao;
+  private BaseCodeService baseCodeService;
+  private EntityDao entityDao;
 
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
 
-	public String index() {
-		String simpleName = get("type");
-		StringBuilder builder = new StringBuilder();
-		PrintWriter out = null;
-		String format = get("format");
-		if (StringUtils.isNotBlank(simpleName)) {
-			Iterator<CodeMeta> it = entityDao.get(CodeMeta.class, "name", simpleName).iterator();
-			if (it.hasNext()) {
-				try {
-					HttpServletResponse response = getResponse();
-					response.setContentType("text/xml");
-					response.setCharacterEncoding("UTF-8");
-					out = response.getWriter();
-					@SuppressWarnings("rawtypes")
-					Class baseCodeClass = Class.forName(it.next().getClassName());
-					if (BaseCode.class.isAssignableFrom(baseCodeClass)) {
-						@SuppressWarnings("unchecked")
-						List<? extends BaseCode<?>> baseCodes = baseCodeService.getCodes(baseCodeClass);
-						if (StringUtils.isNotEmpty(format)) {
-							for (BaseCode<?> baseCode : baseCodes) {
-								builder.append("<option value='" + baseCode.getId() + "'>"
-										+ baseCode.getName().trim() + "["
-										+ PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");
-							}
-						} else {
-							for (BaseCode<?> baseCode : baseCodes) {
-								builder.append("<option value='" + baseCode.getId() + "'>"
-										+ baseCode.getName() + "</option>");
-							}
-						}
-					}
-					out.write(builder.toString());
-				} catch (ClassNotFoundException e) {
-					out.write("<option value=''>没有该基础代码</option>");
-				} catch (Exception e2) {
-					out.write("<option value=''>" + format + "不符合规范</option>");
-				}
-			}
-		}
-		return null;
-	}
+  public String index() {
+    String simpleName = get("type");
+    StringBuilder builder = new StringBuilder();
+    PrintWriter out = null;
+    String format = get("format");
+    if (StringUtils.isNotBlank(simpleName)) {
+      Iterator<CodeMeta> it = entityDao.get(CodeMeta.class, "name", simpleName).iterator();
+      if (it.hasNext()) {
+        try {
+          HttpServletResponse response = getResponse();
+          response.setContentType("text/xml");
+          response.setCharacterEncoding("UTF-8");
+          out = response.getWriter();
+          @SuppressWarnings("rawtypes")
+          Class baseCodeClass = Class.forName(it.next().getClassName());
+          if (BaseCode.class.isAssignableFrom(baseCodeClass)) {
+            @SuppressWarnings("unchecked")
+            List<? extends BaseCode<?>> baseCodes = baseCodeService.getCodes(baseCodeClass);
+            if (StringUtils.isNotEmpty(format)) {
+              for (BaseCode<?> baseCode : baseCodes) {
+                builder.append("<option value='" + baseCode.getId() + "'>" + baseCode.getName().trim() + "["
+                    + PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");
+              }
+            } else {
+              for (BaseCode<?> baseCode : baseCodes) {
+                builder
+                    .append("<option value='" + baseCode.getId() + "'>" + baseCode.getName() + "</option>");
+              }
+            }
+          }
+          out.write(builder.toString());
+        } catch (ClassNotFoundException e) {
+          out.write("<option value=''>没有该基础代码</option>");
+        } catch (Exception e2) {
+          out.write("<option value=''>" + format + "不符合规范</option>");
+        }
+      }
+    }
+    return null;
+  }
 
-	public void setBaseCodeService(BaseCodeService baseCodeService) {
-		this.baseCodeService = baseCodeService;
-	}
+  public void setBaseCodeService(BaseCodeService baseCodeService) {
+    this.baseCodeService = baseCodeService;
+  }
 
 }

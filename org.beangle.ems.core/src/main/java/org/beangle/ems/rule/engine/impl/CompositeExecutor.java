@@ -6,7 +6,7 @@ package org.beangle.ems.rule.engine.impl;
 
 import java.util.List;
 
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.rule.Context;
 import org.beangle.ems.rule.engine.RuleExecutor;
 
@@ -17,38 +17,38 @@ import org.beangle.ems.rule.engine.RuleExecutor;
  */
 public class CompositeExecutor implements RuleExecutor {
 
-	private List<RuleExecutor> executors = CollectUtils.newArrayList();
+  private List<RuleExecutor> executors = CollectUtils.newArrayList();
 
-	/** 是否在单个规则失败后停止 默认为否 */
-	private boolean stopWhenFail = false;
+  /** 是否在单个规则失败后停止 默认为否 */
+  private boolean stopWhenFail = false;
 
-	public boolean execute(Context context) {
-		boolean result = true;
-		for (final RuleExecutor executor : executors) {
-			result &= executor.execute(context);
-			if (stopWhenFail && !result) { return result; }
-		}
-		return result;
-	}
+  public boolean execute(Context context) {
+    boolean result = true;
+    for (final RuleExecutor executor : executors) {
+      result &= executor.execute(context);
+      if (stopWhenFail && !result) { return result; }
+    }
+    return result;
+  }
 
-	public void add(RuleExecutor executor) {
-		executors.add(executor);
-	}
+  public void add(RuleExecutor executor) {
+    executors.add(executor);
+  }
 
-	public List<RuleExecutor> getExecutors() {
-		return executors;
-	}
+  public List<RuleExecutor> getExecutors() {
+    return executors;
+  }
 
-	public void setExecutors(List<RuleExecutor> executors) {
-		this.executors = executors;
-	}
+  public void setExecutors(List<RuleExecutor> executors) {
+    this.executors = executors;
+  }
 
-	public boolean isStopWhenFail() {
-		return stopWhenFail;
-	}
+  public boolean isStopWhenFail() {
+    return stopWhenFail;
+  }
 
-	public void setStopWhenFail(boolean stopWhenFailure) {
-		this.stopWhenFail = stopWhenFailure;
-	}
+  public void setStopWhenFail(boolean stopWhenFailure) {
+    this.stopWhenFail = stopWhenFailure;
+  }
 
 }

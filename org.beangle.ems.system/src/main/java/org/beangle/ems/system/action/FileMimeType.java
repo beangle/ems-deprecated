@@ -13,31 +13,31 @@ import org.beangle.http.mime.MimeTypeProvider;
 
 public class FileMimeType {
 
-	private MimeTypeProvider mimeTypeProvider;
+  private MimeTypeProvider mimeTypeProvider;
 
-	private Set<String> texts = CollectUtils.newHashSet();
+  private Set<String> texts = CollectUtils.newHashSet();
 
-	public FileMimeType(MimeTypeProvider mimeTypeProvider) {
-		super();
-		texts.add("xml");
-		this.mimeTypeProvider = mimeTypeProvider;
-	}
+  public FileMimeType(MimeTypeProvider mimeTypeProvider) {
+    super();
+    texts.add("xml");
+    this.mimeTypeProvider = mimeTypeProvider;
+  }
 
-	public String getMimeType(File file) {
-		String ext = StringUtils.substringAfterLast(file.getName(), ".");
-		String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
-		return StringUtils.replace(mimeType, "/", "-");
-	}
+  public String getMimeType(File file) {
+    String ext = StringUtils.substringAfterLast(file.getName(), ".");
+    String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
+    return StringUtils.replace(mimeType, "/", "-");
+  }
 
-	public boolean isTextType(File file) {
-		String ext = StringUtils.substringAfterLast(file.getName(), ".");
-		String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
-		boolean text = mimeType.contains("text");
-		if (!text) {
-			return texts.contains(ext);
-		} else {
-			return text;
-		}
-	}
+  public boolean isTextType(File file) {
+    String ext = StringUtils.substringAfterLast(file.getName(), ".");
+    String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
+    boolean text = mimeType.contains("text");
+    if (!text) {
+      return texts.contains(ext);
+    } else {
+      return text;
+    }
+  }
 
 }

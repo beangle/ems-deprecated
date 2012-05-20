@@ -6,35 +6,35 @@ package org.beangle.ems.security.nav;
 
 import java.util.List;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 import org.beangle.ems.security.Role;
 
 public interface MenuProfile extends LongIdEntity {
 
-	public String getName();
+  public String getName();
 
-	public void setName(String name);
+  public void setName(String name);
 
-	public List<Menu> getMenus();
+  public List<Menu> getMenus();
 
-	public void setMenus(List<Menu> menus);
+  public void setMenus(List<Menu> menus);
 
-	public Role getRole();
+  public Role getRole();
 
-	public void setRole(Role role);
+  public void setRole(Role role);
 
-	/**
-	 * 资源状态
-	 * 
-	 * @return
-	 */
-	public boolean isEnabled();
+  /**
+   * 资源状态
+   * 
+   * @return
+   */
+  public boolean isEnabled();
 
-	/**
-	 * 设置资源状态
-	 * 
-	 * @param IsActive
-	 * @return
-	 */
-	public void setEnabled(boolean isEnabled);
+  /**
+   * 设置资源状态
+   * 
+   * @param IsActive
+   * @return
+   */
+  public void setEnabled(boolean isEnabled);
 }

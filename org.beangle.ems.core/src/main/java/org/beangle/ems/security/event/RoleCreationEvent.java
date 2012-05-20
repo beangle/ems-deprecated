@@ -11,15 +11,15 @@ import org.beangle.ems.security.Role;
  * @version $Id: RoleCreationEvent.java Jul 27, 2011 10:30:24 AM chaostone $
  */
 public class RoleCreationEvent extends RoleEvent {
-	private static final long serialVersionUID = -60909204679372326L;
+  private static final long serialVersionUID = -60909204679372326L;
 
-	public RoleCreationEvent(Role role) {
-		super(role);
-	}
+  public RoleCreationEvent(Role role) {
+    super(role);
+  }
 
-	@Override
-	public String getDescription() {
-		return "创建了" + getRole().getName();
-	}
+  @Override
+  public String getDescription() {
+    return "创建了" + getRole().getName();
+  }
 
 }

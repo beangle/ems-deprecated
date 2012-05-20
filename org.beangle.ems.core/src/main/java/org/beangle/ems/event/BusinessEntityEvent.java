@@ -6,7 +6,7 @@ package org.beangle.ems.event;
 
 import java.util.List;
 
-import org.beangle.dao.Entity;
+import org.beangle.commons.dao.Entity;
 
 /**
  * 实体操作相关事件
@@ -17,18 +17,19 @@ import org.beangle.dao.Entity;
 @SuppressWarnings("serial")
 public abstract class BusinessEntityEvent<T extends Entity<?>> extends BusinessEvent {
 
-	private final Class<T> clazz;
+  private final Class<T> clazz;
 
-	public BusinessEntityEvent(Class<T> clazz, List<T> source) {
-		super(source);
-		this.clazz = clazz;
-	}
-	public Class<T> getClazz() {
-		return clazz;
-	}
+  public BusinessEntityEvent(Class<T> clazz, List<T> source) {
+    super(source);
+    this.clazz = clazz;
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<T> getEntities() {
-		return (List<T>) source;
-	}
+  public Class<T> getClazz() {
+    return clazz;
+  }
+
+  @SuppressWarnings("unchecked")
+  public List<T> getEntities() {
+    return (List<T>) source;
+  }
 }

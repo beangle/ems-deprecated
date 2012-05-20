@@ -6,40 +6,40 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.dao.pojo.LongIdTimeEntity;
+import org.beangle.commons.dao.entity.LongIdTimeEntity;
 
 public interface Rule extends LongIdTimeEntity {
 
-	public static final String ELECTBUSINESS = "elect";
+  public static final String ELECTBUSINESS = "elect";
 
-	public static final String AUDITTBUSINESS = "audit";
+  public static final String AUDITTBUSINESS = "audit";
 
-	public Set<RuleParameter> getParams();
+  public Set<RuleParameter> getParams();
 
-	public void setParams(Set<RuleParameter> ruleParams);
+  public void setParams(Set<RuleParameter> ruleParams);
 
-	public boolean isEnabled();
+  public boolean isEnabled();
 
-	public void setEnabled(boolean enabled);
+  public void setEnabled(boolean enabled);
 
-	public String getName();
+  public String getName();
 
-	public void setName(String name);
+  public void setName(String name);
 
-	public String getBusiness();
+  public String getBusiness();
 
-	public void setBusiness(String business);
+  public void setBusiness(String business);
 
-	public String getDescription();
+  public String getDescription();
 
-	public void setDescription(String description);
+  public void setDescription(String description);
 
-	public String getFactory();
+  public String getFactory();
 
-	public void setFactory(String factory);
+  public void setFactory(String factory);
 
-	public String getServiceName();
+  public String getServiceName();
 
-	public void setServiceName(String serviceName);
+  public void setServiceName(String serviceName);
 
 }

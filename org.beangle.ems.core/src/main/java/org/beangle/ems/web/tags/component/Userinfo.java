@@ -6,8 +6,8 @@ package org.beangle.ems.web.tags.component;
 
 import java.io.Writer;
 
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.User;
-import org.beangle.lang.StrUtils;
 import org.beangle.security.access.AuthorityManager;
 
 import com.opensymphony.xwork2.util.ValueStack;
@@ -18,44 +18,44 @@ import com.opensymphony.xwork2.util.ValueStack;
  */
 public class Userinfo extends SecurityUIBean {
 
-	private User user;
+  private User user;
 
-	private String href;
+  private String href;
 
-	public Userinfo(ValueStack stack, AuthorityManager authorityManager) {
-		super(stack, authorityManager);
-	}
+  public Userinfo(ValueStack stack, AuthorityManager authorityManager) {
+    super(stack, authorityManager);
+  }
 
-	public boolean start(Writer writer) {
-		return true;
-	}
+  public boolean start(Writer writer) {
+    return true;
+  }
 
-	@Override
-	protected String getResource() {
-		if (null == href) {
-			this.href = StrUtils.concat("/security/user!dashboard?user.id=", user.getId().toString());
-		}
-		return this.href;
-	}
+  @Override
+  protected String getResource() {
+    if (null == href) {
+      this.href = Strings.concat("/security/user!dashboard?user.id=", user.getId().toString());
+    }
+    return this.href;
+  }
 
-	public boolean isDashboardAuthorized() {
-		return isAuthorize(getResource());
-	}
+  public boolean isDashboardAuthorized() {
+    return isAuthorize(getResource());
+  }
 
-	public String getDashboardUrl() {
-		return render(getResource());
-	}
+  public String getDashboardUrl() {
+    return render(getResource());
+  }
 
-	public User getUser() {
-		return user;
-	}
+  public User getUser() {
+    return user;
+  }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-	public void setHref(String href) {
-		this.href = href;
-	}
+  public void setHref(String href) {
+    this.href = href;
+  }
 
 }

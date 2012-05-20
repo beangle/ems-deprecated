@@ -15,18 +15,18 @@ import org.beangle.ems.rule.RuleBase;
  */
 public interface Engine {
 
-	public void execute(Context context);
+  public void execute(Context context);
 
-	public void setPatternMatcher(PatternMatcher matcher);
+  public void setPatternMatcher(PatternMatcher matcher);
 
-	public PatternMatcher getPatternMatcher();
+  public PatternMatcher getPatternMatcher();
 
-	public RuleBase getRuleBase();
+  public RuleBase getRuleBase();
 
-	public void setRuleBase(RuleBase base);
+  public void setRuleBase(RuleBase base);
 
-	public RuleExecutorBuilder getRuleExecutorBuilder();
+  public RuleExecutorBuilder getRuleExecutorBuilder();
 
-	public void setRuleExecutorBuilder(RuleExecutorBuilder executorBuilder);
+  public void setRuleExecutorBuilder(RuleExecutorBuilder executorBuilder);
 
 }

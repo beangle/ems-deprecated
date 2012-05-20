@@ -33,82 +33,81 @@ import org.beangle.struts2.helper.QueryHelper;
  */
 public class UserDashboardHelper {
 
-	private EntityDao entityDao;
+  private EntityDao entityDao;
 
-	private SessionRegistry sessionRegistry;
+  private SessionRegistry sessionRegistry;
 
-	private AuthorityService authorityService;
+  private AuthorityService authorityService;
 
-	private MenuService menuService;
+  private MenuService menuService;
 
-	private RestrictionService restrictionService;
+  private RestrictionService restrictionService;
 
-	public void buildDashboard(User user) {
-		ContextHelper.put("user", user);
-		populateMenus(user);
-		populateSessioninfoLogs(user);
-		populateOnlineActivities(user);
-		RestrictionHelper helper = new RestrictionHelper(entityDao);
-		helper.setRestrictionService(restrictionService);
-		//FIXME user profile
-		//helper.populateInfo(user);
-	}
+  public void buildDashboard(User user) {
+    ContextHelper.put("user", user);
+    populateMenus(user);
+    populateSessioninfoLogs(user);
+    populateOnlineActivities(user);
+    RestrictionHelper helper = new RestrictionHelper(entityDao);
+    helper.setRestrictionService(restrictionService);
+    // FIXME user profile
+    // helper.populateInfo(user);
+  }
 
-	private void populateOnlineActivities(User user) {
-		Collection<?> onlineActivities = sessionRegistry.getSessioninfos(user.getName(), true);
-		ContextHelper.put("onlineActivities", onlineActivities);
-	}
+  private void populateOnlineActivities(User user) {
+    Collection<?> onlineActivities = sessionRegistry.getSessioninfos(user.getName(), true);
+    ContextHelper.put("onlineActivities", onlineActivities);
+  }
 
-	private void populateSessioninfoLogs(User user) {
-		OqlBuilder<SessioninfoLogBean> onlineQuery = OqlBuilder.from(SessioninfoLogBean.class,
-				"sessioninfoLog");
-		onlineQuery.where("sessioninfoLog.username = :username", user.getName());
-		PageLimit limit = QueryHelper.getPageLimit();
-		limit.setPageSize(5);
-		onlineQuery.orderBy("sessioninfoLog.loginAt desc").limit(limit);
-		ContextHelper.put("sessioninfoLogs", entityDao.search(onlineQuery));
-	}
+  private void populateSessioninfoLogs(User user) {
+    OqlBuilder<SessioninfoLogBean> onlineQuery = OqlBuilder.from(SessioninfoLogBean.class, "sessioninfoLog");
+    onlineQuery.where("sessioninfoLog.username = :username", user.getName());
+    PageLimit limit = QueryHelper.getPageLimit();
+    limit.setPageSize(5);
+    onlineQuery.orderBy("sessioninfoLog.loginAt desc").limit(limit);
+    ContextHelper.put("sessioninfoLogs", entityDao.search(onlineQuery));
+  }
 
-	private void populateMenus(User user) {
-		List<?> menuProfiles = menuService.getProfiles(user);
-		ContextHelper.put("menuProfiles", menuProfiles);
-		Long menuProfileId = Params.getLong("menuProfileId");
-		if (null == menuProfileId && !menuProfiles.isEmpty()) {
-			menuProfileId = ((MenuProfile) (menuProfiles.get(0))).getId();
-		}
-		if (null != menuProfileId) {
-			MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, menuProfileId);
-			List<Menu> menus = menuService.getMenus(menuProfile, user);
-			Set<Resource> resources = CollectUtils.newHashSet(authorityService.getResources(user));
-			Map<Role, List<Menu>> roleMenusMap = CollectUtils.newHashMap();
+  private void populateMenus(User user) {
+    List<?> menuProfiles = menuService.getProfiles(user);
+    ContextHelper.put("menuProfiles", menuProfiles);
+    Long menuProfileId = Params.getLong("menuProfileId");
+    if (null == menuProfileId && !menuProfiles.isEmpty()) {
+      menuProfileId = ((MenuProfile) (menuProfiles.get(0))).getId();
+    }
+    if (null != menuProfileId) {
+      MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, menuProfileId);
+      List<Menu> menus = menuService.getMenus(menuProfile, user);
+      Set<Resource> resources = CollectUtils.newHashSet(authorityService.getResources(user));
+      Map<Role, List<Menu>> roleMenusMap = CollectUtils.newHashMap();
 
-			for (Role role : user.getRoles()) {
-				roleMenusMap.put(role, menuService.getMenus(menuProfile, role, Boolean.TRUE));
-			}
-			ContextHelper.put("menus", menus);
-			ContextHelper.put("roleMenusMap", roleMenusMap);
-			ContextHelper.put("resources", resources);
-		}
-	}
+      for (Role role : user.getRoles()) {
+        roleMenusMap.put(role, menuService.getMenus(menuProfile, role, Boolean.TRUE));
+      }
+      ContextHelper.put("menus", menus);
+      ContextHelper.put("roleMenusMap", roleMenusMap);
+      ContextHelper.put("resources", resources);
+    }
+  }
 
-	public void setMenuService(MenuService menuService) {
-		this.menuService = menuService;
-	}
+  public void setMenuService(MenuService menuService) {
+    this.menuService = menuService;
+  }
 
-	public void setEntityDao(EntityDao entityDao) {
-		this.entityDao = entityDao;
-	}
+  public void setEntityDao(EntityDao entityDao) {
+    this.entityDao = entityDao;
+  }
 
-	public void setSessionRegistry(SessionRegistry sessionRegistry) {
-		this.sessionRegistry = sessionRegistry;
-	}
+  public void setSessionRegistry(SessionRegistry sessionRegistry) {
+    this.sessionRegistry = sessionRegistry;
+  }
 
-	public void setAuthorityService(AuthorityService authorityService) {
-		this.authorityService = authorityService;
-	}
+  public void setAuthorityService(AuthorityService authorityService) {
+    this.authorityService = authorityService;
+  }
 
-	public void setRestrictionService(RestrictionService restrictionService) {
-		this.restrictionService = restrictionService;
-	}
+  public void setRestrictionService(RestrictionService restrictionService) {
+    this.restrictionService = restrictionService;
+  }
 
 }

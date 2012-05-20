@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security.restrict;
 
-import org.beangle.dao.pojo.LongIdEntity;
+import org.beangle.commons.dao.entity.LongIdEntity;
 
 /**
  * 资源访问限制
@@ -12,32 +12,33 @@ import org.beangle.dao.pojo.LongIdEntity;
  * @author chaostone
  */
 public interface Restriction extends LongIdEntity, Cloneable {
-	public static final String ALL = "*";
-	/**
-	 * 限制内容
-	 * 
-	 * @return
-	 */
-	public String getContent();
+  public static final String ALL = "*";
 
-	/**
-	 * 针对实体
-	 * 
-	 * @return
-	 */
-	public RestrictEntity getEntity();
+  /**
+   * 限制内容
+   * 
+   * @return
+   */
+  public String getContent();
 
-	/**
-	 * 备注
-	 * 
-	 * @return
-	 */
-	public String getRemark();
+  /**
+   * 针对实体
+   * 
+   * @return
+   */
+  public RestrictEntity getEntity();
 
-	/**
-	 * 是否有效
-	 * 
-	 * @return
-	 */
-	public boolean isEnabled();
+  /**
+   * 备注
+   * 
+   * @return
+   */
+  public String getRemark();
+
+  /**
+   * 是否有效
+   * 
+   * @return
+   */
+  public boolean isEnabled();
 }

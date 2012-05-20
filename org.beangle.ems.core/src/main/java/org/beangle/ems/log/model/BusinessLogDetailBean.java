@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import org.beangle.dao.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
 
@@ -21,40 +21,40 @@ import org.beangle.ems.log.BusinessLogDetail;
 @Entity(name = "org.beangle.ems.log.BusinessLogDetail")
 public class BusinessLogDetailBean extends LongIdObject implements BusinessLogDetail {
 
-	private static final long serialVersionUID = 8792899149257213752L;
+  private static final long serialVersionUID = 8792899149257213752L;
 
-	/** 操作参数 */
-	@Lob
-	private String content;
+  /** 操作参数 */
+  @Lob
+  private String content;
 
-	/** 操作日志 */
-	@ManyToOne
-	private BusinessLog log;
+  /** 操作日志 */
+  @ManyToOne
+  private BusinessLog log;
 
-	public BusinessLogDetailBean() {
-		super();
-	}
+  public BusinessLogDetailBean() {
+    super();
+  }
 
-	public BusinessLogDetailBean(BusinessLog log, String content) {
-		super();
-		this.content = content;
-		this.log = log;
-	}
+  public BusinessLogDetailBean(BusinessLog log, String content) {
+    super();
+    this.content = content;
+    this.log = log;
+  }
 
-	public String getContent() {
-		return content;
-	}
+  public String getContent() {
+    return content;
+  }
 
-	public void setcontent(String content) {
-		this.content = content;
-	}
+  public void setcontent(String content) {
+    this.content = content;
+  }
 
-	public BusinessLog getLog() {
-		return log;
-	}
+  public BusinessLog getLog() {
+    return log;
+  }
 
-	public void setLog(BusinessLog log) {
-		this.log = log;
-	}
+  public void setLog(BusinessLog log) {
+    this.log = log;
+  }
 
 }

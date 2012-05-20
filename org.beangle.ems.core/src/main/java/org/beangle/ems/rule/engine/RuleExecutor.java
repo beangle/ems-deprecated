@@ -6,7 +6,6 @@ package org.beangle.ems.rule.engine;
 
 import org.beangle.ems.rule.Context;
 
-
 /**
  * 规则执行者
  * 
@@ -14,5 +13,5 @@ import org.beangle.ems.rule.Context;
  */
 public interface RuleExecutor {
 
-	public boolean execute(Context context);
+  public boolean execute(Context context);
 }
