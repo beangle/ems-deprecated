@@ -6,8 +6,8 @@ package org.beangle.ems.dictionary.action;
 
 import java.util.Date;
 
-import org.beangle.dao.metadata.Model;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.metadata.Model;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.dictionary.model.CodeScript;
 import org.beangle.ems.dictionary.service.CodeFixture;
 import org.beangle.ems.dictionary.service.CodeGenerator;

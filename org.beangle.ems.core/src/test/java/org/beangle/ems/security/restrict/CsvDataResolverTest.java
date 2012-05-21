@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.security.model.RoleBean;
 import org.beangle.ems.security.profile.model.PropertyMetaBean;
 import org.beangle.ems.security.service.impl.CsvDataResolver;

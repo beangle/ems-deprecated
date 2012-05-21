@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.security.helper;
 
-import org.beangle.dao.EntityDao;
+import org.beangle.commons.dao.EntityDao;
 import org.beangle.ems.security.restrict.service.RestrictionService;
 
 public class RestrictionHelper {
@@ -44,7 +44,7 @@ public class RestrictionHelper {
   // Map<String, Object> aoFields = CollectUtils.newHashMap();
   // // for (RestrictField field : restriction.getEntity().getFields()) {
   // // String value = restriction.getItem(field);
-  // // if (StringUtils.isNotEmpty(value)) {
+  // // if (Strings.isNotEmpty(value)) {
   // // if (null == field.getSource()) {
   // // aoFields.put(field.getName(), value);
   // // } else {

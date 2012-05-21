@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.action;
+package org.beangle.ems.database.action;
 
 import java.sql.Connection;
 import java.util.Map;
@@ -11,15 +11,15 @@ import javax.sql.DataSource;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.webapp.database.service.DatasourceService;
-import org.beangle.webapp.security.action.SecurityActionSupport;
+import org.beangle.ems.database.service.DatasourceService;
+import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
-public class DatasourceAction extends SecurityActionSupport {
+public class DatasourceAction extends SecurityEntityActionSupport {
 
   private DatasourceService datasourceService;
 
   public String test() {
-    Long datasourceId = getEntityId("datasource");
+    Long datasourceId = getId("datasource");
     DataSource dataSource = datasourceService.getDatasource(datasourceId);
     Map<String, String> driverinfo = CollectUtils.newHashMap();
     Map<String, Object> dbinfo = CollectUtils.newHashMap();

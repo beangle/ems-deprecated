@@ -6,7 +6,7 @@ package org.beangle.ems.portal.action;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.security.auth.AuthenticationDetailsSource;
 import org.beangle.security.auth.AuthenticationManager;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
@@ -36,7 +36,7 @@ public class LoginAction extends BaseAction {
     if (AuthenticationUtils.hasValidAuthentication()) { return "home"; }
     if (!shouldLogin()) { return "failure"; }
     String errorMsg = doLogin();
-    if (StringUtils.isNotEmpty(errorMsg)) {
+    if (Strings.isNotEmpty(errorMsg)) {
       addActionError(getText(errorMsg));
       increaseLoginFailure();
       return "failure";
@@ -48,14 +48,14 @@ public class LoginAction extends BaseAction {
   protected boolean shouldLogin() {
     String username = get("username");
     String password = get("password");
-    if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) { return false; }
+    if (Strings.isBlank(username) || Strings.isBlank(password)) { return false; }
     if (notFailEnough()) { return true; }
     // 校验验证码
     if (null != captchaService) {
       try {
         String sessionId = getRequest().getSession().getId();
         String captchaText = get("captcha");
-        if (StringUtils.isEmpty(captchaText)) {
+        if (Strings.isEmpty(captchaText)) {
           addActionError(getText("security.EmptyCaptcha"));
           return false;
         }
@@ -75,7 +75,7 @@ public class LoginAction extends BaseAction {
   protected String doLogin() {
     String username = get("username");
     String password = get("password");
-    if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) { return "failure"; }
+    if (Strings.isBlank(username) || Strings.isBlank(password)) { return "failure"; }
     username = username.trim();
     HttpServletRequest request = getRequest();
     UsernamePasswordAuthentication auth = new UsernamePasswordAuthentication(username, password);

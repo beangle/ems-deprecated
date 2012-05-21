@@ -6,7 +6,7 @@ package org.beangle.ems.security.action;
 
 import java.util.List;
 
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.restrict.RestrictEntity;
 import org.beangle.ems.security.restrict.model.RestrictionBean;

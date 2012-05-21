@@ -10,12 +10,12 @@ import java.util.List;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.metadata.EntityType;
 import org.beangle.commons.dao.metadata.Model;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.service.UserDataResolver;
 import org.springframework.beans.BeanUtils;
@@ -46,7 +46,7 @@ public class IdentifierDataResolver implements UserDataResolver {
   @SuppressWarnings("unchecked")
   public <T> List<T> unmarshal(PropertyMeta field, String text) {
     if (null == field.getValueType()) {
-      return (List<T>) CollectUtils.newArrayList(StringUtils.split(text, ","));
+      return (List<T>) CollectUtils.newArrayList(Strings.split(text, ","));
     } else {
       Class<?> clazz = null;
       try {
@@ -58,7 +58,7 @@ public class IdentifierDataResolver implements UserDataResolver {
       EntityType myType = Model.getEntityType(clazz);
       OqlBuilder<T> builder = OqlBuilder.from(myType.getEntityName(), "restrictField");
 
-      String[] ids = StringUtils.split(text, ",");
+      String[] ids = Strings.split(text, ",");
       PropertyDescriptor pd = BeanUtils.getPropertyDescriptor(clazz, field.getKeyName());
       Class<?> propertyType = pd.getReadMethod().getReturnType();
       List<Object> realIds = CollectUtils.newArrayList(ids.length);

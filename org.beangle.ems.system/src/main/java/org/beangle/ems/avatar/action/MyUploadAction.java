@@ -6,7 +6,7 @@ package org.beangle.ems.avatar.action;
 
 import java.io.File;
 
-import org.apache.commons.lang.StringUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
 import org.beangle.ems.web.action.SecurityActionSupport;
@@ -31,7 +31,7 @@ public class MyUploadAction extends SecurityActionSupport {
   public String upload() throws Exception {
     File[] files = (File[]) getAll("avatar");
     if (files.length > 0) {
-      String type = StringUtils.substringAfter(get("avatarFileName"), ".");
+      String type = Strings.substringAfter(get("avatarFileName"), ".");
       boolean passed = avatarBase.containType(type);
       if (passed) {
         avatarBase.updateAvatar(getUsername(), files[0], type);

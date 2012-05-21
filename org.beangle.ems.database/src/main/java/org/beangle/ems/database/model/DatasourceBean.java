@@ -2,11 +2,11 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.model;
+package org.beangle.ems.database.model;
 
 import java.util.Set;
 
-import org.beangle.model.pojo.LongIdObject;
+import org.beangle.commons.orm.pojo.LongIdObject;
 
 /**
  * @author chaostone

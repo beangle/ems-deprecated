@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.collection.page.PageLimit;
-import org.beangle.dao.EntityDao;
-import org.beangle.dao.query.builder.OqlBuilder;
-import org.beangle.ems.security.Role;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.collection.page.PageLimit;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.security.Resource;
+import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.nav.Menu;
 import org.beangle.ems.security.nav.MenuProfile;

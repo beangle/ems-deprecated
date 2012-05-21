@@ -2,11 +2,11 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.action;
+package org.beangle.ems.database.action;
 
-import org.beangle.webapp.security.action.SecurityActionSupport;
+import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
-public class ProviderAction extends SecurityActionSupport {
+public class ProviderAction extends SecurityEntityActionSupport {
 
   @Override
   protected String getShortName() {

@@ -6,8 +6,8 @@ package org.beangle.ems.dictionary.service.impl;
 
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.service.CodeFixture;
 import org.beangle.ems.dictionary.service.CodeGenerator;
 
@@ -41,17 +41,17 @@ public class ScriptCodeGenerator implements CodeGenerator {
         String param = iter.next();
         interpreter.set(param, fixture.getParams().get(param));
       }
-      if (StringUtils.isNotEmpty(fixture.getScript())) {
+      if (Strings.isNotEmpty(fixture.getScript())) {
         interpreter.eval(fixture.getScript());
       }
       return gen(fixture);
     } catch (Exception e) {
-      return ExceptionUtils.getFullStackTrace(e);
+      return ExceptionUtils.getStackTrace(e);
     }
   }
 
   public boolean isValidCode(String code) {
-    return (StringUtils.isNotEmpty(code)) && (code.length() <= CodeGenerator.MAX_LENGTH)
+    return (Strings.isNotEmpty(code)) && (code.length() <= CodeGenerator.MAX_LENGTH)
         && !CodeGenerator.MARK.equals(code);
   }
 

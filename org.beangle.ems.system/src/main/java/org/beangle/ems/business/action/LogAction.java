@@ -4,9 +4,9 @@
  */
 package org.beangle.ems.business.action;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.dao.query.QueryBuilder;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.query.QueryBuilder;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
 import org.beangle.struts2.helper.QueryHelper;
@@ -31,7 +31,7 @@ public class LogAction extends SecurityEntityActionSupport {
     QueryHelper.addDateIntervalCondition(builder, "operateAt", "beginDate", "endDate");
     builder.limit(getPageLimit());
     String orderBy = get("orderBy");
-    if (StringUtils.isEmpty(orderBy)) {
+    if (Strings.isEmpty(orderBy)) {
       orderBy = "log.operateAt desc";
     }
     builder.orderBy(orderBy);

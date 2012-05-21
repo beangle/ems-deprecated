@@ -6,10 +6,10 @@ package org.beangle.ems.security.action;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
-import org.beangle.collection.Order;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.Order;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.session.model.SessionProfileBean;
 import org.beangle.ems.security.session.service.SessionProfileService;
@@ -40,7 +40,7 @@ public class MonitorAction extends SecurityActionSupport {
 
   public String index() {
     String orderBy = get("orderBy");
-    if (StringUtils.isEmpty(orderBy)) {
+    if (Strings.isEmpty(orderBy)) {
       orderBy = "sessioninfo.loginAt desc";
     }
     OqlBuilder<SessioninfoBean> builder = OqlBuilder.from(SessioninfoBean.class, "sessioninfo");
@@ -93,7 +93,7 @@ public class MonitorAction extends SecurityActionSupport {
     OqlBuilder<AccessLog> builder = OqlBuilder.from(AccessLog.class, "accessLog");
     populateConditions(builder);
     String orderBy = get("orderBy");
-    if (StringUtils.isEmpty(orderBy)) {
+    if (Strings.isEmpty(orderBy)) {
       orderBy = "accessLog.endAt-accessLog.beginAt desc";
     }
     builder.orderBy(orderBy).limit(getPageLimit());

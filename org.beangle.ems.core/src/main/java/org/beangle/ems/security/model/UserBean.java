@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.util.EntityUtils;
 import org.beangle.commons.orm.pojo.LongIdTimeObject;

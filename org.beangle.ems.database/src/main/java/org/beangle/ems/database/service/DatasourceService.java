@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.service;
+package org.beangle.ems.database.service;
 
 import java.util.List;
 import java.util.Map;
@@ -11,10 +11,10 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.model.persist.impl.BaseServiceImpl;
-import org.beangle.model.query.builder.OqlBuilder;
-import org.beangle.webapp.database.model.DatasourceBean;
-import org.beangle.webapp.database.model.DatasourcePropertyBean;
+import org.beangle.commons.dao.impl.BaseServiceImpl;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.ems.database.model.DatasourceBean;
+import org.beangle.ems.database.model.DatasourcePropertyBean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class DatasourceService extends BaseServiceImpl {

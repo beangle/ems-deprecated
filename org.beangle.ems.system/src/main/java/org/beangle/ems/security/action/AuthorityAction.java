@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.ems.security.Permission;
-import org.beangle.ems.security.Role;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.Member;
+import org.beangle.ems.security.Permission;
 import org.beangle.ems.security.Resource;
+import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.nav.Menu;
 import org.beangle.ems.security.nav.MenuProfile;
 import org.beangle.ems.security.nav.service.MenuService;
 import org.beangle.ems.security.service.CacheableAuthorityManager;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.lang.Strings;
 import org.beangle.security.core.authority.GrantedAuthorityBean;
 import org.beangle.struts2.convention.route.Action;
 

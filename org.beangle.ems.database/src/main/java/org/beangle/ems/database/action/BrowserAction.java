@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.action;
+package org.beangle.ems.database.action;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -11,13 +11,11 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.db.jdbc.dialect.Dialect;
-import org.beangle.db.jdbc.meta.MetadataLoader;
-import org.beangle.db.jdbc.meta.Table;
-import org.beangle.webapp.database.model.DatasourceBean;
-import org.beangle.webapp.security.action.SecurityActionSupport;
+import org.beangle.ems.database.model.DatasourceBean;
+import org.beangle.ems.web.action.SecurityActionSupport;
+import org.hibernate.dialect.Dialect;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -47,23 +45,26 @@ public class BrowserAction extends SecurityActionSupport {
     while (rs.next()) {
       schemas.add(rs.getString(1));
     }
-    MetadataLoader loader = new MetadataLoader((Dialect) Class.forName(dsbean.getProvider().getDialect())
-        .newInstance(), meta);
-    Set<Table> tables = CollectUtils.newHashSet();
-    if (!schemas.isEmpty()) {
-      String schema = get("schema");
-      if (StringUtils.isNotEmpty(schema)) {
-        queryConext.setSchema(schema);
-      }
-      if (StringUtils.isEmpty(schema)) {
-        schema = queryConext.getSchema();
-        if (StringUtils.isEmpty(schema)) {
-          schema = schemas.get(0);
-        }
-      }
-      put("schema", schema);
-      tables = loader.loadTables(null, schema, false);
-    }
+    Set tables = CollectUtils.newHashSet();
+
+    // FIXME 
+    // MetadataLoader loader = new MetadataLoader((Dialect)
+    // Class.forName(dsbean.getProvider().getDialect())
+    // .newInstance(), meta);
+    // if (!schemas.isEmpty()) {
+    // String schema = get("schema");
+    // if (StringUtils.isNotEmpty(schema)) {
+    // queryConext.setSchema(schema);
+    // }
+    // if (StringUtils.isEmpty(schema)) {
+    // schema = queryConext.getSchema();
+    // if (StringUtils.isEmpty(schema)) {
+    // schema = schemas.get(0);
+    // }
+    // }
+    // put("schema", schema);
+    // tables = loader.loadTables(null, schema, false);
+    // }
     put("schemas", schemas);
     put("tables", tables);
   }

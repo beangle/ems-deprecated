@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.collection.page.PageLimit;
@@ -19,6 +18,7 @@ import org.beangle.commons.collection.page.Pages;
 import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.context.property.PropertyConfigEvent;
 import org.beangle.commons.context.property.PropertyConfigListener;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.model.FileAvatar;
 import org.slf4j.Logger;
@@ -45,9 +45,9 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
     String[] names = file.list();
     List<String> fileNames = CollectUtils.newArrayList();
     for (int i = 0; i < names.length; i++) {
-      String name = StringUtils.substringBefore(names[i], ".");
-      String ext = StringUtils.substringAfter(names[i], ".");
-      if (StringUtils.isNotBlank(name) && containType(ext)) {
+      String name = Strings.substringBefore(names[i], ".");
+      String ext = Strings.substringAfter(names[i], ".");
+      if (Strings.isNotBlank(name) && containType(ext)) {
         fileNames.add(name);
       }
     }
@@ -69,7 +69,7 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
   }
 
   public Avatar getAvatar(String name) {
-    if (StringUtils.contains(name, '.')) {
+    if (Strings.contains(name, '.')) {
       File file = new File(avatarDir + name);
       if (file.exists()) { return new FileAvatar(file); }
     } else {

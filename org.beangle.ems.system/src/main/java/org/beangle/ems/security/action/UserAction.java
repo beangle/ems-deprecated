@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.collection.Order;
-import org.beangle.dao.Entity;
-import org.beangle.dao.Operation;
-import org.beangle.dao.query.builder.Condition;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.collection.Order;
+import org.beangle.commons.dao.Entity;
+import org.beangle.commons.dao.Operation;
+import org.beangle.commons.dao.query.builder.Condition;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.Member;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
@@ -27,7 +28,6 @@ import org.beangle.ems.security.service.UserService;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
-import org.beangle.transfer.exporter.PropertyExtractor;
 
 /**
  * 用户管理响应处理类
@@ -85,7 +85,7 @@ public class UserAction extends SecurityEntityActionSupport {
       queryRole = true;
     }
     String roleName = get("roleName");
-    if (StringUtils.isNotEmpty(roleName)) {
+    if (Strings.isNotEmpty(roleName)) {
       if (queryRole) {
         sb.append(" and ");
       }
@@ -126,7 +126,7 @@ public class UserAction extends SecurityEntityActionSupport {
     String errorMsg = "";
     // 检验用户合法性
     errorMsg = checkUser(user);
-    if (StringUtils.isNotEmpty(errorMsg)) { return forward(new Action("edit"), errorMsg); }
+    if (Strings.isNotEmpty(errorMsg)) { return forward(new Action("edit"), errorMsg); }
     processPassword(user);
     if (!user.isPersisted()) {
       User creator = userService.get(getUserId());
@@ -243,7 +243,7 @@ public class UserAction extends SecurityEntityActionSupport {
     int successCnt;
     User manager = userService.get(getUserId());
     String msg = "security.info.freeze.success";
-    if (StringUtils.isNotEmpty(isActivate) && "false".equals(isActivate)) {
+    if (Strings.isNotEmpty(isActivate) && "false".equals(isActivate)) {
       successCnt = userService.updateState(manager, userIds, false);
     } else {
       msg = "security.info.activate.success";
@@ -260,7 +260,7 @@ public class UserAction extends SecurityEntityActionSupport {
 
   public String info() throws Exception {
     String name = get("name");
-    if (StringUtils.isNotBlank(name)) {
+    if (Strings.isNotBlank(name)) {
       User user = userService.get(name);
       if (null != user) {
         put("user", user);
@@ -275,7 +275,7 @@ public class UserAction extends SecurityEntityActionSupport {
 
   protected void processPassword(User user) {
     String password = get("password");
-    if (StringUtils.isNotBlank(password)) {
+    if (Strings.isNotBlank(password)) {
       user.setPassword(EncryptUtil.encode(password));
     } else if (!user.isPersisted()) {
       password = User.DEFAULT_PASSWORD;

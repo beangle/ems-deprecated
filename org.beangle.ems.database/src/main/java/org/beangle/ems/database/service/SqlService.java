@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.service;
+package org.beangle.ems.database.service;
 
 import org.beangle.commons.collection.page.PageLimit;
 import org.hibernate.dialect.Dialect;

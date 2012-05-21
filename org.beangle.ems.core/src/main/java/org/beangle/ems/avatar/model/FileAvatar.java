@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.AvatarException;
 
 public class FileAvatar extends AbstractAvatar {
@@ -34,7 +34,7 @@ public class FileAvatar extends AbstractAvatar {
 
   public String getType() {
     if (null == super.getType()) {
-      setType(StringUtils.substringAfterLast(file.getAbsolutePath(), "."));
+      setType(Strings.substringAfterLast(file.getAbsolutePath(), "."));
     }
     return super.getType();
   }

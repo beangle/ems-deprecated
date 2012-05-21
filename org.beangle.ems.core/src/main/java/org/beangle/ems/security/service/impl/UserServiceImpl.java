@@ -11,11 +11,11 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.Member;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
@@ -57,7 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
   }
 
   public User get(String loginName) {
-    if (StringUtils.isEmpty(loginName)) return null;
+    if (Strings.isEmpty(loginName)) return null;
     OqlBuilder<User> entityQuery = OqlBuilder.from(User.class, "user");
     entityQuery.where("user.name=:name", loginName);
     List<User> users = entityDao.search(entityQuery);

@@ -4,8 +4,8 @@
  */
 package org.beangle.ems.security.action;
 
-import org.beangle.context.inject.AbstractBindModule;
-import org.beangle.context.inject.Scope;
+import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.avatar.action.BoardAction;
 import org.beangle.ems.avatar.action.MyUploadAction;
 import org.beangle.ems.security.helper.UserDashboardHelper;

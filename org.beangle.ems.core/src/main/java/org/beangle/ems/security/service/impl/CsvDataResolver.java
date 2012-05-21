@@ -12,9 +12,9 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.bean.converters.Converter;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.profile.PropertyMeta;
 import org.beangle.ems.security.service.UserDataProvider;
 import org.beangle.ems.security.service.UserDataResolver;
@@ -35,7 +35,7 @@ public class CsvDataResolver implements UserDataResolver, UserDataProvider {
       properties.add(property.getKeyName());
     }
     if (null != property.getPropertyNames()) {
-      String[] names = StringUtils.split(property.getPropertyNames(), ",");
+      String[] names = Strings.split(property.getPropertyNames(), ",");
       properties.addAll(Arrays.asList(names));
     }
     StringBuilder sb = new StringBuilder();
@@ -72,16 +72,16 @@ public class CsvDataResolver implements UserDataResolver, UserDataProvider {
 
   @SuppressWarnings("unchecked")
   public <T> List<T> unmarshal(PropertyMeta property, String source) {
-    if (StringUtils.isEmpty(source)) { return Collections.emptyList(); }
+    if (Strings.isEmpty(source)) { return Collections.emptyList(); }
     List<String> properties = CollectUtils.newArrayList();
     if (null != property.getKeyName()) {
       properties.add(property.getKeyName());
     }
     if (null != property.getPropertyNames()) {
-      String[] names = StringUtils.split(property.getPropertyNames(), ",");
+      String[] names = Strings.split(property.getPropertyNames(), ",");
       properties.addAll(Arrays.asList(names));
     }
-    String[] datas = StringUtils.split(source, ",");
+    String[] datas = Strings.split(source, ",");
     try {
       Class<?> type = null;
       type = Class.forName(property.getValueType());
@@ -97,13 +97,13 @@ public class CsvDataResolver implements UserDataResolver, UserDataProvider {
         int startIndex = 0;
         String[] names = new String[] { property.getKeyName() };
         if (-1 != datas[0].indexOf(';')) {
-          names = StringUtils.split(datas[0], ";");
+          names = Strings.split(datas[0], ";");
           startIndex = 1;
         }
         properties.addAll(Arrays.asList(names));
         for (int i = startIndex; i < datas.length; i++) {
           Object obj = type.newInstance();
-          String[] dataItems = StringUtils.split(datas[i], ";");
+          String[] dataItems = Strings.split(datas[i], ";");
           for (int j = 0; j < properties.size(); j++) {
             BeanUtils.setProperty(obj, properties.get(j), dataItems[j]);
           }

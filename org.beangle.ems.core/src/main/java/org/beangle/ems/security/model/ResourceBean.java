@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Resource;

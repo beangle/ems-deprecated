@@ -2,11 +2,11 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.webapp.database.action;
+package org.beangle.ems.database.action;
 
 import javax.sql.DataSource;
 
-import org.beangle.webapp.database.model.DatasourceBean;
+import org.beangle.ems.database.model.DatasourceBean;
 
 public class QueryContext {
 

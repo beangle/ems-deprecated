@@ -7,13 +7,12 @@ package org.beangle.ems.dictionary.action;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.Entity;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.Entity;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.model.CodeCategory;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
-import org.beangle.lang.Strings;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -55,7 +54,7 @@ public class CodeMetaAction extends SecurityEntityActionSupport {
       }
     }
     CodeCategory newCategory = populateEntity(CodeCategory.class, "newCodeCategory");
-    if (StringUtils.isNotBlank(newCategory.getName())) {
+    if (Strings.isNotBlank(newCategory.getName())) {
       if (names.contains(newCategory.getName())) {
         duplicatedNames.add(newCategory.getName());
       } else {

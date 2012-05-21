@@ -7,9 +7,9 @@ package org.beangle.ems.system.action;
 import java.io.File;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.http.mime.MimeTypeProvider;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.http.mime.MimeTypeProvider;
+import org.beangle.commons.lang.Strings;
 
 public class FileMimeType {
 
@@ -24,13 +24,13 @@ public class FileMimeType {
   }
 
   public String getMimeType(File file) {
-    String ext = StringUtils.substringAfterLast(file.getName(), ".");
+    String ext = Strings.substringAfterLast(file.getName(), ".");
     String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
-    return StringUtils.replace(mimeType, "/", "-");
+    return Strings.replace(mimeType, "/", "-");
   }
 
   public boolean isTextType(File file) {
-    String ext = StringUtils.substringAfterLast(file.getName(), ".");
+    String ext = Strings.substringAfterLast(file.getName(), ".");
     String mimeType = mimeTypeProvider.getMimeType(ext, "application/x-msdownload");
     boolean text = mimeType.contains("text");
     if (!text) {

@@ -7,8 +7,8 @@ package org.beangle.ems.security.action;
 import java.util.List;
 import java.util.Map;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.security.Member;
 import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.nav.Menu;

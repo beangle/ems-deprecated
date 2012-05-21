@@ -7,12 +7,13 @@ package org.beangle.ems.security.action;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.collection.Order;
-import org.beangle.collection.page.PageLimit;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.collection.Order;
+import org.beangle.commons.collection.page.PageLimit;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.SecurityUtils;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.helper.UserDashboardHelper;
@@ -99,7 +100,7 @@ public class MyAction extends SecurityActionSupport {
   public String sendPassword() {
     String name = get("name");
     String email = get("mail");
-    if (StringUtils.isEmpty(name) || StringUtils.isEmpty(email)) {
+    if (Strings.isEmpty(name) || Strings.isEmpty(email)) {
       addActionError("error.parameters.needed");
       return (ERROR);
     }

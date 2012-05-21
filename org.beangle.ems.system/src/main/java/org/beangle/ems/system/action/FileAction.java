@@ -11,12 +11,12 @@ import java.io.LineNumberReader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.http.mime.MimeTypeProvider;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.http.mime.MimeTypeProvider;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.web.io.StreamDownloader;
 import org.beangle.struts2.action.BaseAction;
-import org.beangle.web.io.StreamDownloader;
 
 public class FileAction extends BaseAction {
 
@@ -48,7 +48,7 @@ public class FileAction extends BaseAction {
   public String download() throws IOException {
     String path = get("path");
     FileMimeType fileMimeType = new FileMimeType(mimeTypeProvider);
-    if (StringUtils.isNotBlank(path)) {
+    if (Strings.isNotBlank(path)) {
       File file = new File(path);
       if (!file.isFile()) { return null; }
       boolean download = getBool("download");
@@ -88,7 +88,7 @@ public class FileAction extends BaseAction {
 
   private String getPath() {
     String path = get("path");
-    if (StringUtils.isEmpty(path)) {
+    if (Strings.isEmpty(path)) {
       path = getRequest().getSession().getServletContext().getRealPath("");
     }
     String sRet = path;// .replace('\\', '/');

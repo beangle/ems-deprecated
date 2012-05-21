@@ -8,8 +8,8 @@ import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
-import org.beangle.dao.query.builder.OqlBuilder;
-import org.beangle.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.util.HierarchyEntityUtils;
 import org.beangle.ems.security.SecurityUtils;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.nav.MenuProfile;

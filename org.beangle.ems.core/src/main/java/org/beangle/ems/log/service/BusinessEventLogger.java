@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.log.service;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.beangle.commons.context.event.Event;
 import org.beangle.commons.context.event.EventListener;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
@@ -18,7 +18,7 @@ import org.beangle.security.web.auth.WebAuthenticationDetails;
 
 /**
  * @author chaostone
- * @version $Id: BusinessEventLogger.java Jun 29, 2011 9:28:33 AM chaostone $
+ * @version $Id: BusinessEventLogger.java Jun 29, 2011 9:28:33 A M chaostone $
  */
 public class BusinessEventLogger extends BaseServiceImpl implements EventListener<BusinessEvent> {
 

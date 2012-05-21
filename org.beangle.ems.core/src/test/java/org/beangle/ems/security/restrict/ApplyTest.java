@@ -6,9 +6,9 @@ package org.beangle.ems.security.restrict;
 
 import java.util.Map;
 
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.query.Query;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.query.Query;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.model.RoleBean;

@@ -4,8 +4,8 @@
  */
 package org.beangle.ems.dev;
 
-import org.beangle.context.inject.AbstractBindModule;
-import org.beangle.context.inject.Scope;
+import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.dev.hibernate.action.CacheAction;
 import org.beangle.ems.dev.spring.action.SpringAction;
 import org.beangle.ems.dev.struts2.action.ConfigBrowserAction;

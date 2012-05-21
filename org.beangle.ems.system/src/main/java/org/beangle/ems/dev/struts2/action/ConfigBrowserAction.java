@@ -20,7 +20,6 @@ import org.apache.struts2.StrutsConstants;
 import org.apache.struts2.components.UrlRenderer;
 import org.apache.struts2.dispatcher.mapper.ActionMapper;
 import org.apache.struts2.dispatcher.multipart.MultiPartRequest;
-import org.apache.struts2.util.ClassLoaderUtils;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.velocity.VelocityManager;
 import org.beangle.ems.dev.struts2.helper.S2ConfigurationHelper;
@@ -227,7 +226,7 @@ public class ConfigBrowserAction extends BaseAction {
 
   private Class<?> getClassInstance(String clazz) {
     try {
-      return ClassLoaderUtils.loadClass(clazz, ActionContext.getContext().getClass());
+      return ClassLoaderUtil.loadClass(clazz, ActionContext.getContext().getClass());
     } catch (Exception e) {
       logger.error("Class '" + clazz + "' not found...", e);
     }

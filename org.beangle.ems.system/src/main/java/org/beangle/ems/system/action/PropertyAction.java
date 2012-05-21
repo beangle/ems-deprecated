@@ -7,11 +7,11 @@ package org.beangle.ems.system.action;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.context.property.PropertyConfigFactory;
-import org.beangle.dao.EntityDao;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.context.property.PropertyConfigFactory;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 import org.beangle.struts2.action.BaseAction;
 
@@ -47,7 +47,7 @@ public class PropertyAction extends BaseAction {
     }
     String msg = "info.save.success";
     PropertyConfigItemBean newConfig = populate(PropertyConfigItemBean.class, "configNew");
-    if (StringUtils.isNotBlank(newConfig.getName()) && StringUtils.isNotBlank(newConfig.getValue())
+    if (Strings.isNotBlank(newConfig.getName()) && Strings.isNotBlank(newConfig.getValue())
         && !names.contains(newConfig.getName())) {
       entityDao.saveOrUpdate(newConfig);
     }

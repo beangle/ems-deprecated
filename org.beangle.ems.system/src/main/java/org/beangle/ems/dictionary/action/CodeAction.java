@@ -11,8 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
-import org.beangle.dao.EntityDao;
+import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.model.BaseCode;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
@@ -38,7 +38,7 @@ public class CodeAction extends BaseAction {
     StringBuilder builder = new StringBuilder();
     PrintWriter out = null;
     String format = get("format");
-    if (StringUtils.isNotBlank(simpleName)) {
+    if (Strings.isNotBlank(simpleName)) {
       Iterator<CodeMeta> it = entityDao.get(CodeMeta.class, "name", simpleName).iterator();
       if (it.hasNext()) {
         try {
@@ -51,7 +51,7 @@ public class CodeAction extends BaseAction {
           if (BaseCode.class.isAssignableFrom(baseCodeClass)) {
             @SuppressWarnings("unchecked")
             List<? extends BaseCode<?>> baseCodes = baseCodeService.getCodes(baseCodeClass);
-            if (StringUtils.isNotEmpty(format)) {
+            if (Strings.isNotEmpty(format)) {
               for (BaseCode<?> baseCode : baseCodes) {
                 builder.append("<option value='" + baseCode.getId() + "'>" + baseCode.getName().trim() + "["
                     + PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");

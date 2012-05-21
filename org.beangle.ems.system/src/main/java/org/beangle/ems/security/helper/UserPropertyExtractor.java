@@ -6,9 +6,9 @@ package org.beangle.ems.security.helper;
 
 import java.util.Collection;
 
+import org.beangle.commons.i18n.TextResource;
+import org.beangle.commons.transfer.exporter.DefaultPropertyExtractor;
 import org.beangle.ems.security.User;
-import org.beangle.transfer.exporter.DefaultPropertyExtractor;
-import org.beangle.util.i18n.TextResource;
 
 public class UserPropertyExtractor extends DefaultPropertyExtractor {
 

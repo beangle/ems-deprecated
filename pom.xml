@@ -14,7 +14,7 @@
   <modules>
     <module>org.beangle.ems.core</module>
     <module>org.beangle.ems.system</module>
-    <!--<module>org.beangle.ems.database</module>-->
+    <module>org.beangle.ems.database</module>
     <module>org.beangle.ems.demo</module>
   </modules>
 
@@ -47,6 +47,11 @@
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
       <version>${commonupload.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

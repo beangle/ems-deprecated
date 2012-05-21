@@ -7,7 +7,7 @@ package org.beangle.ems.security;
 import java.beans.Introspector;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.beangle.ems.security.model.RoleBean;
 import org.testng.annotations.Test;
 

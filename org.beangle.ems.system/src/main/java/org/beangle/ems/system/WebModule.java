@@ -4,8 +4,8 @@
  */
 package org.beangle.ems.system;
 
-import org.beangle.context.inject.AbstractBindModule;
-import org.beangle.context.inject.Scope;
+import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.business.action.LogAction;
 import org.beangle.ems.business.action.RuleAction;
 import org.beangle.ems.business.action.RuleParamAction;

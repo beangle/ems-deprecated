@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.bean.comparators.PropertyComparator;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.bean.comparators.PropertyComparator;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.User;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.web.session.model.SessioninfoLogBean;
@@ -46,11 +46,11 @@ public class SessioninfoLogAction extends SecurityActionSupport {
     String etime = get("endTime");
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     Date sdate = null, edate = null;
-    if (StringUtils.isNotBlank(stime)) {
+    if (Strings.isNotBlank(stime)) {
       try {
         sdate = df.parse(stime);
         // 截至日期增加一天
-        if (StringUtils.isNotBlank(etime)) {
+        if (Strings.isNotBlank(etime)) {
           edate = df.parse(etime);
           Calendar gc = new GregorianCalendar();
           gc.setTime(edate);
@@ -87,7 +87,7 @@ public class SessioninfoLogAction extends SecurityActionSupport {
     populateConditions(query);
     addTimeCondition(query);
     String roleName = get("roleName");
-    if (StringUtils.isNotEmpty(roleName)) {
+    if (Strings.isNotEmpty(roleName)) {
       query.where("exists(select u.id from " + User.class.getName() + " u join u.roles as gm "
           + "where u.name=sessioninfoLog.username and gm.role.name like :roleName )", "%" + roleName + "%");
     }

@@ -9,11 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.dao.query.builder.Condition;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.Permission;
 import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.Role;
@@ -85,8 +85,8 @@ public class RestrictionServiceImpl extends BaseServiceImpl implements Restricti
   private List<?> getPropertyValues(PropertyMeta field) {
     if (null == field.getSource()) return Collections.emptyList();
     String source = field.getSource();
-    String prefix = StringUtils.substringBefore(source, ":");
-    source = StringUtils.substringAfter(source, ":");
+    String prefix = Strings.substringBefore(source, ":");
+    source = Strings.substringAfter(source, ":");
     UserDataProvider provider = providers.get(prefix);
     if (null != provider) {
       return provider.getData(field, source);
@@ -133,12 +133,12 @@ public class RestrictionServiceImpl extends BaseServiceImpl implements Restricti
     int index = 0;
     for (final Restriction restriction : restrictions) {
       // 处理限制对应的模式
-      if (StringUtils.isEmpty(restriction.getContent())) {
+      if (Strings.isEmpty(restriction.getContent())) {
         continue;
       }
       String patternContent = restriction.getContent();
-      patternContent = StringUtils.replace(patternContent, "{alias}", query.getAlias());
-      String[] contents = StringUtils.split(StringUtils.replace(patternContent, " and ", "$"), "$");
+      patternContent = Strings.replace(patternContent, "{alias}", query.getAlias());
+      String[] contents = Strings.split(Strings.replace(patternContent, " and ", "$"), "$");
 
       StringBuilder singleConBuf = new StringBuilder("(");
       for (int i = 0; i < contents.length; i++) {
@@ -149,11 +149,11 @@ public class RestrictionServiceImpl extends BaseServiceImpl implements Restricti
           UserProperty up = profile.getProperty(paramName);
           PropertyMeta prop = up.getMeta();
           String value = null == up ? null : up.getValue();
-          if (StringUtils.isNotEmpty(value)) {
+          if (Strings.isNotEmpty(value)) {
             if (value.equals(Restriction.ALL)) {
               content = "";
             } else {
-              content = StringUtils.replace(content, ":" + prop.getName(), ":" + prop.getName() + index);
+              content = Strings.replace(content, ":" + prop.getName(), ":" + prop.getName() + index);
               paramValues.add(unmarshal(value, prop));
             }
           } else {

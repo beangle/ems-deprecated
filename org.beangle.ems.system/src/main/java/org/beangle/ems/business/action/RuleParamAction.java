@@ -4,8 +4,8 @@
  */
 package org.beangle.ems.business.action;
 
-import org.beangle.dao.Entity;
-import org.beangle.dao.query.builder.OqlBuilder;
+import org.beangle.commons.dao.Entity;
+import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.rule.RuleParameter;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
 

@@ -6,7 +6,7 @@ package org.beangle.ems.business.action;
 
 import java.util.Date;
 
-import org.beangle.dao.Entity;
+import org.beangle.commons.dao.Entity;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
 import org.beangle.struts2.convention.route.Action;

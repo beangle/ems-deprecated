@@ -7,11 +7,11 @@ package org.beangle.ems.system.action;
 import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.web.io.StreamDownloader;
 import org.beangle.ems.io.StaticFileLoader;
 import org.beangle.struts2.action.BaseAction;
-import org.beangle.web.io.StreamDownloader;
 
 /**
  * 静态资源下载
@@ -28,7 +28,7 @@ public class StaticfileAction extends BaseAction {
     String name = get("file");
     String displayName = get("display");
     URL url = null;
-    if (StringUtils.isNotEmpty(name)) {
+    if (Strings.isNotEmpty(name)) {
       for (StaticFileLoader loader : loaders) {
         url = loader.getFile(name);
         if (null != url) {

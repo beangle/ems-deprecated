@@ -9,14 +9,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.util.EntityUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.model.CodeScript;
 import org.beangle.ems.dictionary.service.CodeFixture;
 
@@ -70,11 +70,11 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
     }
     int seqLength = -1;
     // 替换自动代码生成中的seq[x]
-    if (StringUtils.contains(script, SEQ)) {
-      seqLength = NumberUtils.toInt(StringUtils.substringBetween(script, SEQ + "[", "]"));
+    if (Strings.contains(script, SEQ)) {
+      seqLength = NumberUtils.toInt(Strings.substringBetween(script, SEQ + "[", "]"));
 
-      script = StringUtils.replace(script, SEQ + "[" + StringUtils.substringBetween(script, SEQ + "[", "]")
-          + "]", SEQ);
+      script = Strings.replace(script, SEQ + "[" + Strings.substringBetween(script, SEQ + "[", "]") + "]",
+          SEQ);
     }
     fixture.setScript(script);
     String code = super.gen(fixture);
@@ -85,7 +85,7 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
         builder.select("select substr(entity." + codeScript.getAttr() + "," + (code.indexOf(SEQ) + 1) + ","
             + seqLength + ")");
         builder.where(" entity." + codeScript.getAttr() + " like :codeExample",
-            StringUtils.replace(code, SEQ, "%"));
+            Strings.replace(code, SEQ, "%"));
         builder.where("length(entity." + codeScript.getAttr() + ")="
             + (code.length() - SEQ.length() + seqLength));
         seqs = (List<String>) entityDao.search(builder);
@@ -106,9 +106,9 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
         newSeqNo++;
         String seqNo = String.valueOf(newSeqNo);
         if (0 != seqLength) {
-          seqNo = StringUtils.repeat("0", seqLength - seqNo.length()) + newSeqNo;
+          seqNo = Strings.repeat("0", seqLength - seqNo.length()) + newSeqNo;
         }
-        code = StringUtils.replace(code, SEQ, seqNo);
+        code = Strings.replace(code, SEQ, seqNo);
       }
     }
     return code;
@@ -124,13 +124,13 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
           String param = (String) iter.next();
           interpreter.set(param, fixture.getParams().get(param));
         }
-        if (StringUtils.isNotEmpty(fixture.getScript())) {
+        if (Strings.isNotEmpty(fixture.getScript())) {
           interpreter.eval(fixture.getScript());
         }
       }
       return gen(new CodeFixture(entity, codeScript.getScript()));
     } catch (Exception e) {
-      return ExceptionUtils.getFullStackTrace(e);
+      return ExceptionUtils.getStackTrace(e);
     }
   }
 

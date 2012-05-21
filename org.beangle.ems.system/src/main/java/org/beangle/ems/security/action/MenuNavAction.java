@@ -10,16 +10,15 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.lang.StringUtils;
-import org.beangle.collection.CollectUtils;
-import org.beangle.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.User;
 import org.beangle.ems.security.nav.Menu;
 import org.beangle.ems.security.nav.MenuProfile;
 import org.beangle.ems.security.nav.service.MenuService;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.lang.Strings;
 
 /**
  * 菜单浏览导航器
@@ -57,7 +56,7 @@ public class MenuNavAction extends SecurityActionSupport {
       public boolean evaluate(Object object) {
         Menu amenu = (Menu) object;
         if (null != family && !family.contains(amenu)) return false;
-        if (StringUtils.isNotEmpty(name)) {
+        if (Strings.isNotEmpty(name)) {
           if (!amenu.getChildren().isEmpty()) return false;
           StringBuilder searchTarget = new StringBuilder(Strings.concat(amenu.getName(), amenu.getTitle(),
               amenu.getRemark()));
@@ -68,7 +67,7 @@ public class MenuNavAction extends SecurityActionSupport {
         } else return true;
       }
     });
-    if (StringUtils.isNotEmpty(name)) {
+    if (Strings.isNotEmpty(name)) {
       HierarchyEntityUtils.addParent(menus, givenMenu);
       Collections.sort(menus);
     }

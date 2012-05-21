@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.commons.util.archiver.ZipUtils;
 import org.beangle.ems.avatar.Avatar;
 import org.slf4j.Logger;
@@ -80,11 +80,11 @@ public abstract class AbstractAvatarBase implements AvatarBase {
           count += updateFile(file);
           file.delete();
         } else {
-          String type = StringUtils.substringAfter(fileName, ".");
+          String type = Strings.substringAfter(fileName, ".");
           boolean passed = containType(type);
           if (passed) {
             logger.debug("updating avatar by {}", file.getName());
-            updateAvatar(StringUtils.substringBefore(fileName, "."), file, type);
+            updateAvatar(Strings.substringBefore(fileName, "."), file, type);
             count++;
           }
           file.delete();

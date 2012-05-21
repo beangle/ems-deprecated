@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang.StringUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Role;
 import org.beangle.ems.security.User;
@@ -128,7 +128,7 @@ public class RestrictionBean extends LongIdObject implements Restriction {
   }
 
   private static String evictComma(String str) {
-    if (StringUtils.isEmpty(str)) return str;
+    if (Strings.isEmpty(str)) return str;
     else {
       if (str.startsWith(",") && str.endsWith(",")) return str.substring(1, str.length() - 1);
       else if (str.startsWith(",")) {
