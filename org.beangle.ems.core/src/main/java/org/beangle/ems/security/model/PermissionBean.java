@@ -4,10 +4,14 @@
  */
 package org.beangle.ems.security.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.beangle.commons.dao.entity.TemporalActiveEntity;
 import org.beangle.commons.orm.pojo.LongIdObject;
 import org.beangle.ems.security.Permission;
 import org.beangle.ems.security.Resource;
@@ -20,7 +24,7 @@ import org.beangle.ems.security.Role;
  * @author dell,chaostone 2005-9-26
  */
 @Entity(name = "org.beangle.ems.security.Permission")
-public class PermissionBean extends LongIdObject implements Permission {
+public class PermissionBean extends LongIdObject implements Permission, TemporalActiveEntity {
 
   private static final long serialVersionUID = -8956079356245507990L;
 
@@ -34,6 +38,16 @@ public class PermissionBean extends LongIdObject implements Permission {
   @ManyToOne
   protected Resource resource;
 
+  @Size(max = 100)
+  /** 授权的操作 */
+  protected String actions;
+
+  /** 生效时间 */
+  protected Date effectiveAt;
+
+  /** 失效时间 */
+  protected Date invalidAt;
+
   public PermissionBean() {
     super();
   }
@@ -42,10 +56,11 @@ public class PermissionBean extends LongIdObject implements Permission {
     super(id);
   }
 
-  public PermissionBean(Role role, Resource resource) {
+  public PermissionBean(Role role, Resource resource, String actions) {
     super();
     this.role = role;
     this.resource = resource;
+    this.actions = actions;
   }
 
   public Resource getResource() {
@@ -65,7 +80,31 @@ public class PermissionBean extends LongIdObject implements Permission {
   }
 
   public Object clone() {
-    return new PermissionBean(role, resource);
+    return new PermissionBean(role, resource, actions);
+  }
+
+  public String getActions() {
+    return actions;
+  }
+
+  public void setActions(String actions) {
+    this.actions = actions;
+  }
+
+  public Date getEffectiveAt() {
+    return effectiveAt;
+  }
+
+  public void setEffectiveAt(Date effectiveAt) {
+    this.effectiveAt = effectiveAt;
+  }
+
+  public Date getInvalidAt() {
+    return invalidAt;
+  }
+
+  public void setInvalidAt(Date invalidAt) {
+    this.invalidAt = invalidAt;
   }
 
   public void merge(Permission other) {

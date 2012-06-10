@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.Validate;
 import org.beangle.commons.bean.Initializing;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
+import org.beangle.commons.lang.Assert;
 import org.beangle.commons.web.util.RequestUtils;
 import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.SecurityUtils;
@@ -119,7 +119,7 @@ public class CacheableAuthorityManager extends BaseServiceImpl implements Author
   }
 
   public void init() throws Exception {
-    Validate.notNull(authorityService, "authorityService cannot be null");
+    Assert.notNull(authorityService, "authorityService cannot be null");
   }
 
   public void setAuthorityService(AuthorityService authorityService) {

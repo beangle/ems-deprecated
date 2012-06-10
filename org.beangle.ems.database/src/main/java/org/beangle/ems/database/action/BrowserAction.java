@@ -11,11 +11,9 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.database.model.DatasourceBean;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.hibernate.dialect.Dialect;
 
 import com.opensymphony.xwork2.ActionContext;
 

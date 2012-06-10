@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import org.beangle.commons.lang.Numbers;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.EntityDao;
@@ -71,7 +71,7 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
     int seqLength = -1;
     // 替换自动代码生成中的seq[x]
     if (Strings.contains(script, SEQ)) {
-      seqLength = NumberUtils.toInt(Strings.substringBetween(script, SEQ + "[", "]"));
+      seqLength = Numbers.toInt(Strings.substringBetween(script, SEQ + "[", "]"));
 
       script = Strings.replace(script, SEQ + "[" + Strings.substringBetween(script, SEQ + "[", "]") + "]",
           SEQ);
@@ -97,10 +97,10 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
         int newSeqNo = 0;
         for (Iterator<String> iter = seqs.iterator(); iter.hasNext();) {
           String seqNo = iter.next();
-          if (NumberUtils.toInt(seqNo) - newSeqNo >= 2) {
+          if (Numbers.toInt(seqNo) - newSeqNo >= 2) {
             break;
           } else {
-            newSeqNo = NumberUtils.toInt(seqNo);
+            newSeqNo = Numbers.toInt(seqNo);
           }
         }
         newSeqNo++;

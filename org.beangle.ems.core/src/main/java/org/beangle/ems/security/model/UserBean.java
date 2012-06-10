@@ -67,7 +67,7 @@ public class UserBean extends LongIdTimeObject implements User {
    * 账户生效日期
    */
   @NotNull
-  protected Date effectAt;
+  protected Date effectiveAt;
 
   /**
    * 账户失效日期
@@ -190,12 +190,12 @@ public class UserBean extends LongIdTimeObject implements User {
     this.enabled = enabled;
   }
 
-  public Date getEffectAt() {
-    return effectAt;
+  public Date getEffectiveAt() {
+    return effectiveAt;
   }
 
-  public void setEffectAt(Date effectAt) {
-    this.effectAt = effectAt;
+  public void setEffectiveAt(Date effectAt) {
+    this.effectiveAt = effectAt;
   }
 
   public Date getInvalidAt() {

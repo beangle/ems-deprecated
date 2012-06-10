@@ -34,6 +34,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-view</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-core</artifactId>
       <version>${project.version}</version>

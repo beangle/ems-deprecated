@@ -156,14 +156,14 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
    * 
    * @return 生效时间
    */
-  public Date getEffectAt() {
+  public Date getEffectiveAt() {
     return effectAt;
   }
 
   /**
    * 设置生效时间
    * 
-   * @param effectAt
+   * @param effectiveAt
    *          生效时间
    */
   public void setEffectAt(Date effectAt) {
