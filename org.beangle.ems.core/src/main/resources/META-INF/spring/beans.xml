@@ -5,6 +5,7 @@
 
 	<bean name="ems.baseservice.module" class="org.beangle.ems.BaseServiceModule" />
 
+<!--
 	<bean id="captchaService"
 		class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
 		<property name="captchaEngine">
@@ -12,7 +13,7 @@
 		</property>
 		<property name="minGuarantedStorageDelayInSeconds" value="600" />
 	</bean>
-
+-->
 	<bean name="mimeTypeProvider" autowire="byName"
 		class="org.beangle.commons.http.mime.MimeTypeProvider">
 		<property name="resource">

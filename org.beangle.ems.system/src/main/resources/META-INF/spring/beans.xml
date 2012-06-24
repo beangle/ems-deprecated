@@ -4,16 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean class="org.beangle.ems.system.web.DefaultModule" />
-	<bean class="org.beangle.ems.security.web.DefaultModule"></bean>
-	<bean class="org.beangle.ems.dev.DefaultModule"></bean>
+	<bean class="org.beangle.ems.security.web.DefaultModule"/>
+	<bean class="org.beangle.ems.dev.DefaultModule"/>
 	
-	<bean name="staticfile.download" scope="prototype"
-		class="org.beangle.ems.system.action.StaticfileAction" autowire="byName">
-		<property name="loaders">
-			<list>
-				<ref bean="classpathDocLoader"></ref>
-			</list>
-		</property>
-	</bean>
-
 </beans>

@@ -12,11 +12,13 @@ import org.beangle.ems.business.web.action.RuleParamAction;
 import org.beangle.ems.dictionary.web.action.CodeAction;
 import org.beangle.ems.dictionary.web.action.CodeMetaAction;
 import org.beangle.ems.dictionary.web.action.CodeScriptAction;
+import org.beangle.ems.io.ClasspathDocLoader;
 import org.beangle.ems.portal.web.action.HomeAction;
 import org.beangle.ems.portal.web.action.LoginAction;
 import org.beangle.ems.system.web.action.FileAction;
 import org.beangle.ems.system.web.action.InfoAction;
 import org.beangle.ems.system.web.action.PropertyAction;
+import org.beangle.ems.system.web.action.StaticfileAction;
 import org.beangle.ems.web.action.LogoutAction;
 
 public final class DefaultModule extends AbstractBindModule {
@@ -31,6 +33,14 @@ public final class DefaultModule extends AbstractBindModule {
     bind(LogAction.class, RuleAction.class, RuleParamAction.class).in(Scope.PROTOTYPE);
 
     bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class).in(Scope.PROTOTYPE);
+    
+    bind(StaticfileAction.class).property("loaders", list(ClasspathDocLoader.class)).in(Scope.PROTOTYPE);
+    
+//    bind(StaticfileAction.class).property("loaders", map("dd",ClasspathDocLoader.class,"dd",1L)).in(Scope.PROTOTYPE);
+  }
+
+  Object map(Object... args) {
+    return null;
   }
 
 }
