@@ -7,10 +7,10 @@ package org.beangle.ems.config.service;
 import java.util.List;
 import java.util.Properties;
 
+import org.beangle.commons.context.property.PropertyConfigFactory;
 import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
-import org.beangle.commons.context.property.PropertyConfigFactory;
 
 public class DaoPropertyConfigProvider implements PropertyConfigFactory.Provider {
 

@@ -9,21 +9,7 @@ import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.avatar.web.action.BoardAction;
 import org.beangle.ems.avatar.web.action.MyUploadAction;
 import org.beangle.ems.security.helper.UserDashboardHelper;
-import org.beangle.ems.security.web.action.AuthorityAction;
-import org.beangle.ems.security.web.action.CaptchaAction;
-import org.beangle.ems.security.web.action.IndexAction;
-import org.beangle.ems.security.web.action.MenuAction;
-import org.beangle.ems.security.web.action.MenuNavAction;
-import org.beangle.ems.security.web.action.MenuProfileAction;
-import org.beangle.ems.security.web.action.MonitorAction;
-import org.beangle.ems.security.web.action.MyAction;
-import org.beangle.ems.security.web.action.PasswordAction;
-import org.beangle.ems.security.web.action.ProfileAction;
-import org.beangle.ems.security.web.action.ResourceAction;
-import org.beangle.ems.security.web.action.RestrictionAction;
-import org.beangle.ems.security.web.action.RoleAction;
-import org.beangle.ems.security.web.action.SessioninfoLogAction;
-import org.beangle.ems.security.web.action.UserAction;
+import org.beangle.ems.security.web.action.*;
 
 public final class DefaultModule extends AbstractBindModule {
 

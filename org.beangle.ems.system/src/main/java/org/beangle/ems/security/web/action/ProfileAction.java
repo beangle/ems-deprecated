@@ -14,7 +14,7 @@ import org.beangle.ems.web.action.SecurityActionSupport;
  */
 
 public class ProfileAction extends SecurityActionSupport {
-  protected UserDataResolver idDataResolver;
+  protected UserDataResolver identifierDataResolver;
 
   public String tip() {
     return forward();
@@ -41,6 +41,10 @@ public class ProfileAction extends SecurityActionSupport {
     // FIXME
     // helper.populateInfo(helper.getHolder());
     return forward();
+  }
+
+  public void setIdentifierDataResolver(UserDataResolver identifierDataResolver) {
+    this.identifierDataResolver = identifierDataResolver;
   }
 
   // public String save() {
@@ -210,9 +214,5 @@ public class ProfileAction extends SecurityActionSupport {
   // }
   // return restriction;
   // }
-
-  public void setIdDataResolver(UserDataResolver idDataResolver) {
-    this.idDataResolver = idDataResolver;
-  }
 
 }

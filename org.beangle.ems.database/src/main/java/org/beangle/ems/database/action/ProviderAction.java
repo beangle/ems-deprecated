@@ -13,4 +13,9 @@ public class ProviderAction extends SecurityEntityActionSupport {
     return "provider";
   }
 
+  @Override
+  protected String getEntityName() {
+    return "org.beangle.webapp.database.model.DatasourceProviderBean";
+  }
+
 }

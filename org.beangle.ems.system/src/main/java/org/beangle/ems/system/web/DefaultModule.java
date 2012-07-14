@@ -36,11 +36,5 @@ public final class DefaultModule extends AbstractBindModule {
     
     bind(StaticfileAction.class).property("loaders", list(ClasspathDocLoader.class)).in(Scope.PROTOTYPE);
     
-//    bind(StaticfileAction.class).property("loaders", map("dd",ClasspathDocLoader.class,"dd",1L)).in(Scope.PROTOTYPE);
   }
-
-  Object map(Object... args) {
-    return null;
-  }
-
 }

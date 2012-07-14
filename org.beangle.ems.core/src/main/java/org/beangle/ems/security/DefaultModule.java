@@ -6,6 +6,7 @@ package org.beangle.ems.security;
 
 import org.beangle.commons.context.inject.AbstractBindModule;
 import org.beangle.ems.security.nav.service.MenuServiceImpl;
+import org.beangle.ems.security.restrict.service.RestrictionServiceImpl;
 import org.beangle.ems.security.service.CacheableAuthorityManager;
 import org.beangle.ems.security.service.DaoUserDetailServiceImpl;
 import org.beangle.ems.security.service.impl.AuthorityServiceImpl;
@@ -15,7 +16,6 @@ import org.beangle.ems.security.service.impl.OqlDataProvider;
 import org.beangle.ems.security.service.impl.RoleServiceImpl;
 import org.beangle.ems.security.service.impl.UserServiceImpl;
 import org.beangle.ems.security.session.service.SessionProfileServiceImpl;
-import org.beangle.security.core.session.impl.DbSessionRegistry;
 
 /**
  * 权限缺省服务配置
@@ -23,7 +23,7 @@ import org.beangle.security.core.session.impl.DbSessionRegistry;
  * @author chaostone
  * @version $Id: DefaultModule.java Jun 18, 2011 10:21:05 AM chaostone $
  */
-public class ServiceModule extends AbstractBindModule {
+public class DefaultModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
@@ -35,8 +35,11 @@ public class ServiceModule extends AbstractBindModule {
     bind("authorityManager", CacheableAuthorityManager.class);
     bind(SessionProfileServiceImpl.class).shortName();
 
-    bind("sessionRegistry", DbSessionRegistry.class);
     bind(IdentifierDataResolver.class, CsvDataResolver.class, OqlDataProvider.class).shortName();
+
+    bind("restrictionService", RestrictionServiceImpl.class).property("providers",
+        map(entry("csv", CsvDataResolver.class), entry("oql", OqlDataProvider.class))).property(
+        "dataResolver",IdentifierDataResolver.class);
   }
 
 }

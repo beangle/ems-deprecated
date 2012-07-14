@@ -60,6 +60,11 @@ public class DatasourceAction extends SecurityEntityActionSupport {
   }
 
   @Override
+  protected String getEntityName() {
+    return "org.beangle.webapp.database.model.DatasourceBean";
+  }
+
+  @Override
   protected String getShortName() {
     return "datasource";
   }

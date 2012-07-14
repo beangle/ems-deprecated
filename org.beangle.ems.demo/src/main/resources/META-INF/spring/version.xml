@@ -11,4 +11,5 @@
 		<property name="vendor" value="Beangle Software"/>
 	</bean>
 	
+	<bean id="beangle.ems.wiki" class="org.beangle.ems.wiki.DefaultModule"/>
 </beans>
