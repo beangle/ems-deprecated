@@ -7,8 +7,8 @@ package org.beangle.ems.web.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.SessionMap;
+import org.beangle.security.SecurityUtils;
 import org.beangle.security.core.Authentication;
-import org.beangle.security.core.context.AuthenticationUtils;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.security.web.auth.logout.LogoutHandlerStack;
 import org.beangle.struts2.action.BaseAction;
@@ -22,7 +22,7 @@ public class LogoutAction extends BaseAction {
   public String index() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String result = "success";
-    if (AuthenticationUtils.isValid(auth)) {
+    if (SecurityUtils.isValid(auth)) {
       if (null != handlerStack) handlerStack.logout(getRequest(), getResponse(), auth);
       ((SessionMap<?, ?>) ActionContext.getContext().getSession()).invalidate();
       String targetUrl = determineTargetUrl(getRequest());

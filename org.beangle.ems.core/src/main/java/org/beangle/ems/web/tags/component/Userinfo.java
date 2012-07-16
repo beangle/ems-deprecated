@@ -7,8 +7,8 @@ package org.beangle.ems.web.tags.component;
 import java.io.Writer;
 
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.security.User;
 import org.beangle.security.access.AuthorityManager;
+import org.beangle.security.blueprint.User;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
@@ -33,7 +33,7 @@ public class Userinfo extends SecurityUIBean {
   @Override
   protected String getResource() {
     if (null == href) {
-      this.href = Strings.concat("/security/user!dashboard?user.id=", user.getId().toString());
+      this.href = Strings.concat("/security/user!dashboard?user.id=",user.getId().toString());
     }
     return this.href;
   }
@@ -45,6 +45,7 @@ public class Userinfo extends SecurityUIBean {
   public String getDashboardUrl() {
     return render(getResource());
   }
+
 
   public User getUser() {
     return user;

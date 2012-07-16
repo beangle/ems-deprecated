@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.util.ValidEntityKeyPredicate;
-import org.beangle.ems.security.User;
-import org.beangle.ems.security.service.UserService;
+import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.service.UserService;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
 public class PasswordAction extends SecurityEntityActionSupport {

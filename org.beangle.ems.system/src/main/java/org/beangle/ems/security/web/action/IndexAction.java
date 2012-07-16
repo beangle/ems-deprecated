@@ -9,12 +9,12 @@ import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.ems.security.Member;
-import org.beangle.ems.security.Resource;
-import org.beangle.ems.security.nav.Menu;
-import org.beangle.ems.security.nav.MenuProfile;
-import org.beangle.ems.security.profile.PropertyMeta;
-import org.beangle.ems.security.restrict.Restriction;
+import org.beangle.security.blueprint.Member;
+import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.nav.Menu;
+import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.profile.PropertyMeta;
+import org.beangle.security.blueprint.restrict.Restriction;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
 public class IndexAction extends SecurityActionSupport {

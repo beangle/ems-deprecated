@@ -5,7 +5,7 @@
 package org.beangle.ems.security.helper;
 
 import org.beangle.commons.dao.EntityDao;
-import org.beangle.ems.security.restrict.service.RestrictionService;
+import org.beangle.security.blueprint.restrict.service.RestrictionService;
 
 public class RestrictionHelper {
 

@@ -14,15 +14,15 @@ import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
-import org.beangle.ems.security.Role;
-import org.beangle.ems.security.User;
 import org.beangle.ems.security.helper.RolePropertyExtractor;
-import org.beangle.ems.security.model.RoleBean;
-import org.beangle.ems.security.profile.RoleProfile;
-import org.beangle.ems.security.service.AuthorityService;
-import org.beangle.ems.security.service.RoleService;
-import org.beangle.ems.security.service.UserService;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.model.RoleBean;
+import org.beangle.security.blueprint.profile.RoleProfile;
+import org.beangle.security.blueprint.service.AuthorityService;
+import org.beangle.security.blueprint.service.RoleService;
+import org.beangle.security.blueprint.service.UserService;
 
 /**
  * 角色信息维护响应类

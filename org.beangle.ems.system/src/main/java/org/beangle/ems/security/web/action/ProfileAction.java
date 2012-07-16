@@ -5,8 +5,8 @@
 package org.beangle.ems.security.web.action;
 
 import org.beangle.ems.security.helper.RestrictionHelper;
-import org.beangle.ems.security.service.UserDataResolver;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.profile.service.UserDataResolver;
 
 /**
  * @author chaostone

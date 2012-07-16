@@ -8,7 +8,7 @@ import java.util.Collection;
 
 import org.beangle.commons.i18n.TextResource;
 import org.beangle.commons.transfer.exporter.DefaultPropertyExtractor;
-import org.beangle.ems.security.User;
+import org.beangle.security.blueprint.User;
 
 public class UserPropertyExtractor extends DefaultPropertyExtractor {
 

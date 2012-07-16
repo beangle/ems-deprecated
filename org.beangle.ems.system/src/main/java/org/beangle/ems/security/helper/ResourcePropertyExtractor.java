@@ -6,7 +6,7 @@ package org.beangle.ems.security.helper;
 
 import org.beangle.commons.i18n.TextResource;
 import org.beangle.commons.transfer.exporter.DefaultPropertyExtractor;
-import org.beangle.ems.security.Resource;
+import org.beangle.security.blueprint.Resource;
 
 /**
  * @author chaostone

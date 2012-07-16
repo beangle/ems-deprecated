@@ -7,7 +7,7 @@ package org.beangle.ems.web.tags.component;
 import java.io.Writer;
 
 import org.beangle.commons.web.url.UrlRender;
-import org.beangle.ems.security.SecurityUtils;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.access.AuthorityManager;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.struts2.view.component.UIBean;

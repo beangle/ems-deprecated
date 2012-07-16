@@ -6,7 +6,7 @@ package org.beangle.ems.security.helper;
 
 import org.beangle.commons.i18n.TextResource;
 import org.beangle.commons.transfer.exporter.DefaultPropertyExtractor;
-import org.beangle.ems.security.nav.Menu;
+import org.beangle.security.blueprint.nav.Menu;
 
 /**
  * @author chaostone

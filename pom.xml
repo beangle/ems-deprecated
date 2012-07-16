@@ -49,6 +49,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-blueprint</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
       <version>${commonupload.version}</version>

@@ -11,7 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
-import org.beangle.ems.security.User;
+import org.beangle.security.blueprint.User;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
 /**

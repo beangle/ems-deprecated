@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.util.HierarchyEntityUtils;
-import org.beangle.ems.security.SecurityUtils;
-import org.beangle.ems.security.User;
-import org.beangle.ems.security.nav.MenuProfile;
-import org.beangle.ems.security.nav.service.MenuService;
+import org.beangle.security.blueprint.SecurityUtils;
+import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.nav.service.MenuService;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
 /**

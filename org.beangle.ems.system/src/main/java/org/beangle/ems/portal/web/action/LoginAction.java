@@ -7,12 +7,12 @@ package org.beangle.ems.portal.web.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.beangle.commons.lang.Strings;
+import org.beangle.security.SecurityUtils;
 import org.beangle.security.auth.AuthenticationDetailsSource;
 import org.beangle.security.auth.AuthenticationManager;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
 import org.beangle.security.core.Authentication;
 import org.beangle.security.core.AuthenticationException;
-import org.beangle.security.core.context.AuthenticationUtils;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.struts2.action.BaseAction;
@@ -33,7 +33,7 @@ public class LoginAction extends BaseAction {
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
 
   public String index() {
-    if (AuthenticationUtils.hasValidAuthentication()) { return "home"; }
+    if (SecurityUtils.hasValidAuthentication()) { return "home"; }
     if (!shouldLogin()) { return "failure"; }
     String errorMsg = doLogin();
     if (Strings.isNotEmpty(errorMsg)) {

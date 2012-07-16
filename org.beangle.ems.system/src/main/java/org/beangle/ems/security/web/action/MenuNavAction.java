@@ -13,11 +13,11 @@ import org.apache.commons.collections.Predicate;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.util.HierarchyEntityUtils;
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.security.Resource;
-import org.beangle.ems.security.User;
-import org.beangle.ems.security.nav.Menu;
-import org.beangle.ems.security.nav.MenuProfile;
-import org.beangle.ems.security.nav.service.MenuService;
+import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.nav.Menu;
+import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.nav.service.MenuService;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
 /**

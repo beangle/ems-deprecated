@@ -13,13 +13,13 @@ import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.dao.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
-import org.beangle.ems.security.Permission;
-import org.beangle.ems.security.Resource;
 import org.beangle.ems.security.helper.MenuPropertyExtractor;
-import org.beangle.ems.security.nav.Menu;
-import org.beangle.ems.security.nav.MenuProfile;
-import org.beangle.ems.security.nav.service.MenuService;
 import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.security.blueprint.Permission;
+import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.nav.Menu;
+import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.nav.service.MenuService;
 
 /**
  * 系统模块(菜单)管理响应类
