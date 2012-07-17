@@ -22,7 +22,7 @@ public class DefaultModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
-    bind(FileSystemAvatarBase.class);
+    bind(FileSystemAvatarBase.class).lazy();
     bind(DaoPropertyConfigProvider.class, ClasspathDocLoader.class).shortName();
     bind("streamDownloader", SplitStreamDownloader.class);
     bind("baseCodeService", BaseCodeServiceImpl.class);
@@ -40,7 +40,7 @@ public class DefaultModule extends AbstractBindModule {
             .property("users", "classpath*:system.properties"));
 
     bind(DefaultPropertyConfigFactory.class).property("providers",
-        list(UrlPropertyConfigProvider.class, DaoPropertyConfigProvider.class));
+        list(UrlPropertyConfigProvider.class, DaoPropertyConfigProvider.class)).lazy();
 
   }
 
