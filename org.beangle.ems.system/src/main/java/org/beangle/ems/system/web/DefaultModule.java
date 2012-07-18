@@ -34,7 +34,7 @@ public final class DefaultModule extends AbstractBindModule {
 
     bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class).in(Scope.PROTOTYPE);
     
-    bind(StaticfileAction.class).property("loaders", list(ClasspathDocLoader.class)).in(Scope.PROTOTYPE);
+    bind(StaticfileAction.class).property("loaders", listref(ClasspathDocLoader.class)).in(Scope.PROTOTYPE);
     
   }
 }

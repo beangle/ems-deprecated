@@ -23,7 +23,7 @@ public class DefaultModule extends AbstractBindModule {
   @Override
   protected void doBinding() {
     bind(FileSystemAvatarBase.class).lazy();
-    bind(DaoPropertyConfigProvider.class, ClasspathDocLoader.class).shortName();
+    bind(ClasspathDocLoader.class).shortName();
     bind("streamDownloader", SplitStreamDownloader.class);
     bind("baseCodeService", BaseCodeServiceImpl.class);
     bind(SeqCodeGenerator.class);
@@ -31,7 +31,7 @@ public class DefaultModule extends AbstractBindModule {
 
     // rule bean
     bind(DefaultRuleExecutorBuilder.class, RuleBaseImpl.class);
-    
+
     // properties config bean
     bind(UrlPropertyConfigProvider.class).property(
         "resources",
@@ -40,7 +40,7 @@ public class DefaultModule extends AbstractBindModule {
             .property("users", "classpath*:system.properties"));
 
     bind(DefaultPropertyConfigFactory.class).property("providers",
-        list(UrlPropertyConfigProvider.class, DaoPropertyConfigProvider.class)).lazy();
+        listref(UrlPropertyConfigProvider.class, DaoPropertyConfigProvider.class)).lazy();
 
   }
 
