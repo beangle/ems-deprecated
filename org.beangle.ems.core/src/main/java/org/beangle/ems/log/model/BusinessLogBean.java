@@ -8,11 +8,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
 import org.hibernate.annotations.Cascade;
@@ -63,7 +64,7 @@ public class BusinessLogBean extends LongIdObject implements BusinessLog {
 
   /** 操作明细 */
   @Cascade(CascadeType.ALL)
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private BusinessLogDetail detail;
 
   public String getAgent() {

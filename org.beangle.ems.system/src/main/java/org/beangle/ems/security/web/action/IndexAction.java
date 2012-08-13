@@ -9,13 +9,13 @@ import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Member;
-import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.data.DataField;
+import org.beangle.security.blueprint.data.model.DataPermissionBean;
+import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
-import org.beangle.security.blueprint.profile.PropertyMeta;
-import org.beangle.security.blueprint.restrict.Restriction;
-import org.beangle.ems.web.action.SecurityActionSupport;
 
 public class IndexAction extends SecurityActionSupport {
 
@@ -33,13 +33,13 @@ public class IndexAction extends SecurityActionSupport {
     put("menuStats", menuStats);
 
     // stat resource
-    OqlBuilder<Resource> resourceQuery = OqlBuilder.from(Resource.class, "resource");
+    OqlBuilder<FuncResource> resourceQuery = OqlBuilder.from(FuncResource.class, "resource");
     resourceQuery.select("resource.enabled,count(*)").groupBy("enabled");
     put("resourceStat", entityDao.search(resourceQuery));
 
-    // stat pattern and restriction
-    put("restrictionStat", entityDao.search(OqlBuilder.from(Restriction.class, "pattern").select("count(*)")));
-    put("propertyMetaStat", entityDao.search(OqlBuilder.from(PropertyMeta.class, "param").select("count(*)")));
+    // stat dataPermission and restriction
+    put("dataPermissionStat", entityDao.search(OqlBuilder.from(DataPermissionBean.class, "p").select("count(*)")));
+    put("propertyMetaStat", entityDao.search(OqlBuilder.from(DataField.class, "param").select("count(*)")));
     return forward();
   }
 

@@ -10,17 +10,17 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanPredicate;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.functors.EqualPredicate;
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.commons.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.entity.Entity;
+import org.beangle.commons.entity.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.RolePropertyExtractor;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.data.RoleProfile;
+import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.model.RoleBean;
-import org.beangle.security.blueprint.profile.RoleProfile;
-import org.beangle.security.blueprint.service.AuthorityService;
 import org.beangle.security.blueprint.service.RoleService;
 import org.beangle.security.blueprint.service.UserService;
 
@@ -29,7 +29,7 @@ import org.beangle.security.blueprint.service.UserService;
  * 
  * @author chaostone 2005-9-29
  */
-public class RoleAction extends SecurityEntityActionSupport {
+public class RoleAction extends SecurityActionSupport {
 
   private RoleService roleService;
 
@@ -119,8 +119,8 @@ public class RoleAction extends SecurityEntityActionSupport {
     return redirect("search", "info.remove.success");
   }
 
-  public void setAuthorityService(AuthorityService authorityService) {
-    this.authorityService = authorityService;
+  public void setAuthorityService(FuncPermissionService authorityService) {
+    this.permissionService = authorityService;
   }
 
   public void setUserService(UserService userService) {

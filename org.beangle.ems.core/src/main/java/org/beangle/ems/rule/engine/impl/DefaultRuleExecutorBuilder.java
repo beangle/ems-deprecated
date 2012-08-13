@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.dao.metadata.Model;
+import org.beangle.commons.entity.metadata.Model;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.engine.RuleExecutor;
 import org.beangle.ems.rule.engine.RuleExecutorBuilder;

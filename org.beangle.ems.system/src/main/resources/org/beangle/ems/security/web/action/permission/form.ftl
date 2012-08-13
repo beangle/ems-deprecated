@@ -9,9 +9,9 @@
 		return(getCheckBoxValue(document.getElementsByName("menuId")));
 	}
 	function save(){
-		document.authorityForm.action="${b.url('!save')}";
+		document.permissionForm.action="${b.url('!save')}";
 		if(confirm("${b.text("alert.authoritySave",ao.name)}")){
-			document.authorityForm.submit();
+			document.permissionForm.submit();
 		}
 	}
 	function checkResource(ele){
@@ -40,7 +40,7 @@
 	bar.addItem("${b.text("action.collapse")}","collapseAllRowsFor(1);",'${b.theme.iconurl('tree/minus.png')}');
 	bar.addItem("${b.text("action.save")}",save,'save.png');
 [/@]
-[@b.form name="authorityForm" action="!edit"]
+[@b.form name="permissionForm" action="!edit"]
 <table width="100%" class="searchTable" id="meunAuthorityTable">
 	<tr>
 		<td>

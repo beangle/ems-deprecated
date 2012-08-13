@@ -13,14 +13,14 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.page.PageLimit;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.data.service.DataPermissionService;
+import org.beangle.security.blueprint.function.FuncResource;
+import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
-import org.beangle.security.blueprint.restrict.service.RestrictionService;
-import org.beangle.security.blueprint.service.AuthorityService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.web.session.model.SessioninfoLogBean;
 import org.beangle.struts2.helper.ContextHelper;
@@ -37,21 +37,19 @@ public class UserDashboardHelper {
 
   private SessionRegistry sessionRegistry;
 
-  private AuthorityService authorityService;
+  private FuncPermissionService permissionService;
 
   private MenuService menuService;
 
-  private RestrictionService restrictionService;
+  private DataPermissionService dataPermissionService;
 
   public void buildDashboard(User user) {
     ContextHelper.put("user", user);
     populateMenus(user);
     populateSessioninfoLogs(user);
     populateOnlineActivities(user);
-    RestrictionHelper helper = new RestrictionHelper(entityDao);
-    helper.setRestrictionService(restrictionService);
-    // FIXME user profile
-    // helper.populateInfo(user);
+    new DataPermissionHelper(entityDao, dataPermissionService).populateInfo(dataPermissionService
+        .getUserProfiles(user.getId(), null));
   }
 
   private void populateOnlineActivities(User user) {
@@ -78,7 +76,7 @@ public class UserDashboardHelper {
     if (null != menuProfileId) {
       MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, menuProfileId);
       List<Menu> menus = menuService.getMenus(menuProfile, user);
-      Set<Resource> resources = CollectUtils.newHashSet(authorityService.getResources(user));
+      Set<FuncResource> resources = CollectUtils.newHashSet(permissionService.getResources(user));
       Map<Role, List<Menu>> roleMenusMap = CollectUtils.newHashMap();
 
       for (Role role : user.getRoles()) {
@@ -102,12 +100,12 @@ public class UserDashboardHelper {
     this.sessionRegistry = sessionRegistry;
   }
 
-  public void setAuthorityService(AuthorityService authorityService) {
-    this.authorityService = authorityService;
+  public void setPermissionService(FuncPermissionService permissionService) {
+    this.permissionService = permissionService;
   }
 
-  public void setRestrictionService(RestrictionService restrictionService) {
-    this.restrictionService = restrictionService;
+  public void setDataPermissionService(DataPermissionService dataPermissionService) {
+    this.dataPermissionService = dataPermissionService;
   }
 
 }

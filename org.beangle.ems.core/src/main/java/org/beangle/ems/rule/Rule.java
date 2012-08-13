@@ -6,13 +6,9 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.commons.dao.entity.LongIdTimeEntity;
+import org.beangle.commons.entity.pojo.LongIdTimeEntity;
 
 public interface Rule extends LongIdTimeEntity {
-
-  public static final String ELECTBUSINESS = "elect";
-
-  public static final String AUDITTBUSINESS = "audit";
 
   public Set<RuleParameter> getParams();
 

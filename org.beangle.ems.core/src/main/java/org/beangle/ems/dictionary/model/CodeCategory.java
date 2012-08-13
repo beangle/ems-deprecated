@@ -7,18 +7,13 @@ package org.beangle.ems.dictionary.model;
 
 import java.util.List;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.dao.entity.HierarchyEntity;
-import org.beangle.commons.orm.pojo.IntegerIdObject;
+import org.beangle.commons.entity.pojo.HierarchyEntity;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -42,7 +37,7 @@ public class CodeCategory extends IntegerIdObject implements HierarchyEntity<Cod
   private String name;
 
   /** 上级类别 */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private CodeCategory parent;
 
   /** 下级类别列表 */

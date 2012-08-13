@@ -16,12 +16,18 @@ public final class DefaultModule extends AbstractBindModule {
   @Override
   protected void doBinding() {
     // security
-    bind(SessioninfoLogAction.class, AuthorityAction.class, RoleAction.class, IndexAction.class,
+    bind(SessioninfoLogAction.class, PermissionAction.class, RoleAction.class, IndexAction.class,
         MenuAction.class, MenuNavAction.class, MenuProfileAction.class, MonitorAction.class, MyAction.class,
-        PasswordAction.class, ResourceAction.class, UserAction.class, CaptchaAction.class,
-        ProfileAction.class, RestrictionAction.class).in(Scope.PROTOTYPE);
+        PasswordAction.class, ResourceAction.class, UserAction.class, CaptchaAction.class)
+        .in(Scope.PROTOTYPE);
 
     bind(UserDashboardHelper.class).shortName();
+
+    // data security
+    bind(org.beangle.ems.security.web.action.data.FieldAction.class,
+        org.beangle.ems.security.web.action.data.ResourceAction.class,
+        org.beangle.ems.security.web.action.data.PermissionAction.class,
+        org.beangle.ems.security.web.action.data.UserProfileAction.class).in(Scope.PROTOTYPE);
 
     // avatar
     bind(BoardAction.class, org.beangle.ems.avatar.web.action.MyAction.class, MyUploadAction.class,

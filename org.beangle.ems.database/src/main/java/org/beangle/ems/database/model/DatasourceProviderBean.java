@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.database.model;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 
 public class DatasourceProviderBean extends LongIdObject {
 

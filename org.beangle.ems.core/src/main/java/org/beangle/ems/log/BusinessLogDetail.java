@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.log;
 
-import org.beangle.commons.dao.entity.LongIdEntity;
+import org.beangle.commons.entity.pojo.LongIdEntity;
 
 /**
  * 业务日志明细

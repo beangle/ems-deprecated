@@ -4,9 +4,9 @@
  */
 package org.beangle.ems.database.action;
 
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 
-public class ProviderAction extends SecurityEntityActionSupport {
+public class ProviderAction extends SecurityActionSupport {
 
   @Override
   protected String getShortName() {

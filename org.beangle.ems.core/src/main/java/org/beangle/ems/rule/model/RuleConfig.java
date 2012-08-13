@@ -8,12 +8,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.orm.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.pojo.LongIdTimeObject;
 import org.beangle.ems.rule.Rule;
 
 /**
@@ -28,7 +29,7 @@ public class RuleConfig extends LongIdTimeObject {
 
   /** 业务规则 */
   @NotNull
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Rule rule;
 
   /** 是否启用 */

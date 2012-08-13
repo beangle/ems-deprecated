@@ -8,7 +8,7 @@ import org.beangle.commons.dao.query.QueryBuilder;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.log.BusinessLog;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.struts2.helper.QueryHelper;
 
 /**
@@ -17,7 +17,7 @@ import org.beangle.struts2.helper.QueryHelper;
  * @author chaostone
  * @version $Id: LogAction.java Jun 27, 2011 7:34:59 PM chaostone $
  */
-public class LogAction extends SecurityEntityActionSupport {
+public class LogAction extends SecurityActionSupport {
 
   @Override
   protected String getEntityName() {

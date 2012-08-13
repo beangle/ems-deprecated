@@ -28,7 +28,7 @@
 		[@b.col width="10%" property="dynamic" title="动态组"]${role.dynamic?string("是","否")}[/@]
 		[@b.col width="10%" property="enabled" title="common.status"][@enableInfo role.enabled/][/@]
 		[@b.col width="10%" property="updatedAt" title="common.updatedAt"]${role.updatedAt?string("yyyy-MM-dd")}[/@]
-		[@b.col title="设置权限" width="10%"][@b.a target="_blank" href="authority!edit?role.id=${role.id}"]<img style="border:0px" src="${b.theme.iconurl('actions/config.png')}"/>设置权限[/@][/@]
+		[@b.col title="设置权限" width="10%"][@b.a target="_blank" href="permission!edit?role.id=${role.id}"]<img style="border:0px" src="${b.theme.iconurl('actions/config.png')}"/>设置权限[/@][/@]
 		</tr>
 	[/@]
 [/@]

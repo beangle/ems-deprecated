@@ -4,15 +4,16 @@
  */
 package org.beangle.ems.security.web.action;
 
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.entity.Entity;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.ResourcePropertyExtractor;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Permission;
 import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.function.FuncResource;
+import org.beangle.security.blueprint.function.service.internal.CacheableAuthorityManager;
 import org.beangle.security.blueprint.nav.Menu;
-import org.beangle.security.blueprint.service.internal.CacheableAuthorityManager;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -20,7 +21,7 @@ import org.beangle.struts2.convention.route.Action;
  * 
  * @author chaostone 2005-10-9
  */
-public class ResourceAction extends SecurityEntityActionSupport {
+public class ResourceAction extends SecurityActionSupport {
 
   private CacheableAuthorityManager authorityManager;
 
@@ -35,7 +36,7 @@ public class ResourceAction extends SecurityEntityActionSupport {
     if (null == enabled) {
       enabled = Boolean.FALSE;
     }
-    authorityService.updateState(resourceIds, enabled.booleanValue());
+    permissionService.updateState(resourceIds, enabled.booleanValue());
     authorityManager.refreshCache();
     return redirect("search", "info.save.success");
   }
@@ -83,7 +84,11 @@ public class ResourceAction extends SecurityEntityActionSupport {
 
   @Override
   protected String getEntityName() {
-    return Resource.class.getName();
+    return FuncResource.class.getName();
   }
 
+  @Override
+  protected String getShortName() {
+    return "resource";
+  }
 }

@@ -5,7 +5,7 @@
 package org.beangle.ems.dictionary.service.impl;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.beangle.commons.dao.Entity;
+import org.beangle.commons.entity.Entity;
 import org.beangle.commons.transfer.AbstractTransferListener;
 import org.beangle.commons.transfer.TransferResult;
 import org.beangle.ems.dictionary.service.CodeFixture;

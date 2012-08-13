@@ -9,12 +9,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.commons.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.entity.util.HierarchyEntityUtils;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
-import org.beangle.ems.web.action.SecurityActionSupport;
 
 /**
  * 加载用户登陆信息

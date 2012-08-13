@@ -14,10 +14,10 @@ import org.beangle.commons.collection.page.PageLimit;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Objects;
 import org.beangle.commons.lang.Strings;
-import org.beangle.security.blueprint.SecurityUtils;
-import org.beangle.security.blueprint.User;
 import org.beangle.ems.security.helper.UserDashboardHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.SecurityUtils;
+import org.beangle.security.blueprint.User;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.web.session.model.SessioninfoLogBean;
@@ -28,10 +28,6 @@ import org.beangle.security.web.session.model.SessioninfoLogBean;
  * @author chaostone
  */
 public class MyAction extends SecurityActionSupport {
-
-  // private MailSender mailSender;
-  //
-  // private SimpleMailMessage message;
 
   private SessionRegistry sessionRegistry;
 
@@ -118,7 +114,7 @@ public class MyAction extends SecurityActionSupport {
       String password = RandomStringUtils.randomNumeric(6);
       user.setRemark(password);
       user.setPassword(EncryptUtil.encode(password));
-      String title = getText("user.password.sendmail.title");
+      //String title = getText("user.password.sendmail.title");
 
       List<Object> values = CollectUtils.newArrayList();
       values.add(longinName);

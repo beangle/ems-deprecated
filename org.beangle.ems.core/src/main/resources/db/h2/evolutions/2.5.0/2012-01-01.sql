@@ -45,23 +45,10 @@ drop table se_categories;
 update se_groups  set parent_id =null where id=parent_id;
 update se_groups  a set a.code = (select b.code from se_groups b where b.id=a.parent_id)||'.'||a.code where exists(select b.code from se_groups b where b.id=a.parent_id)
 
---rename sys_ to ems_
-alter table sys_business_logs rename to ems_business_logs;
-alter table sys_code_categories rename to ems_code_categories;
-alter table sys_code_metas rename to ems_code_metas;
-alter table sys_code_scripts rename to ems_code_scripts;
-alter table sys_entity_metas rename to ems_entity_metas;
-alter table sys_property_config_items rename to ems_property_config_items;
-alter table sys_property_configs rename to ems_property_configs;
-alter table sys_property_metas rename to ems_property_metas;
-alter table sys_rule_config_params rename to ems_rule_config_params;
-alter table sys_rule_configs rename to ems_rule_configs;
-alter table sys_rule_parameters rename to ems_rule_parameters;
-alter table sys_rules rename to ems_rules;
-drop table sys_parameters
+drop table sys_parameters;
 
-alter table ems_business_logs alter column resource rename to resrc;
-alter table ems_business_logs alter column operater rename to operator;
+alter table sys_business_logs alter column resource rename to resrc;
+alter table sys_business_logs alter column operater rename to operator;
 
 alter table se_resources alter column need_params rename to entry;
 alter table se_groups add column dynamic boolean;

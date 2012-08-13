@@ -2,18 +2,18 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.security.web.action;
+package org.beangle.ems.security.web.action.data;
 
-import org.beangle.ems.security.helper.RestrictionHelper;
+import org.beangle.ems.security.helper.DataPermissionHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.profile.service.UserDataResolver;
+import org.beangle.security.blueprint.data.service.UserDataResolver;
 
 /**
  * @author chaostone
  * @version $Id: ProfileAction.java Apr 13, 2012 10:01:12 PM chaostone $
  */
 
-public class ProfileAction extends SecurityActionSupport {
+public class UserProfileAction extends SecurityActionSupport {
   protected UserDataResolver identifierDataResolver;
 
   public String tip() {
@@ -36,10 +36,8 @@ public class ProfileAction extends SecurityActionSupport {
    * 查看限制资源界面
    */
   public String info() {
-    RestrictionHelper helper = new RestrictionHelper(entityDao);
-    helper.setRestrictionService(restrictionService);
-    // FIXME
-    // helper.populateInfo(helper.getHolder());
+    DataPermissionHelper helper = new DataPermissionHelper(entityDao, dataPermissionService);
+    helper.populateInfo(dataPermissionService.getUserProfiles(getId("user"), null));
     return forward();
   }
 

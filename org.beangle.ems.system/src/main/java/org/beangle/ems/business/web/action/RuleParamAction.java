@@ -4,10 +4,10 @@
  */
 package org.beangle.ems.business.web.action;
 
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.entity.Entity;
 import org.beangle.ems.rule.RuleParameter;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 
 /**
  * 规则参数管理
@@ -15,7 +15,7 @@ import org.beangle.ems.web.action.SecurityEntityActionSupport;
  * @author chaostone
  * @version $Id: RuleParamAction.java Jun 27, 2011 7:41:33 PM chaostone $
  */
-public class RuleParamAction extends SecurityEntityActionSupport {
+public class RuleParamAction extends SecurityActionSupport {
 
   @Override
   protected void editSetting(Entity<?> entity) {

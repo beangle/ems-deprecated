@@ -5,11 +5,12 @@
 package org.beangle.ems.rule.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.rule.RuleParameter;
 
 /**
@@ -24,12 +25,12 @@ public class RuleConfigParam extends LongIdObject {
 
   /** 标准-规则 */
   @NotNull
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private RuleConfig config;
 
   /** 规则参数 */
   @NotNull
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private RuleParameter param;
 
   /** 参数值 */

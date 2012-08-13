@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.orm.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.pojo.LongIdTimeObject;
 
 /**
  * 系统编码规则

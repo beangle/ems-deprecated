@@ -5,10 +5,11 @@
 package org.beangle.ems.log.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
 
@@ -28,7 +29,7 @@ public class BusinessLogDetailBean extends LongIdObject implements BusinessLogDe
   private String content;
 
   /** 操作日志 */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private BusinessLog log;
 
   public BusinessLogDetailBean() {

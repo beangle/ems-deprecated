@@ -6,7 +6,7 @@ package org.beangle.ems.database.model;
 
 import java.util.Set;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 
 /**
  * @author chaostone

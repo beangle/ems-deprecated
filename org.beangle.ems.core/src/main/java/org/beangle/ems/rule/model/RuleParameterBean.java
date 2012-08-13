@@ -8,13 +8,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
 
@@ -29,7 +30,7 @@ public class RuleParameterBean extends LongIdObject implements RuleParameter {
   private static final long serialVersionUID = -5534831174352027516L;
 
   /** 业务规则 */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Rule rule;
 
   /** 参数名称 */
@@ -53,7 +54,7 @@ public class RuleParameterBean extends LongIdObject implements RuleParameter {
   private String description;
 
   /** 上级参数 */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private RuleParameter parent;
 
   /** 所有的子参数 */

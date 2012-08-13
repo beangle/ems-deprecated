@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.commons.dao.util.HierarchyEntityUtils;
+import org.beangle.commons.entity.Entity;
+import org.beangle.commons.entity.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.MenuPropertyExtractor;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
-import org.beangle.security.blueprint.Permission;
-import org.beangle.security.blueprint.Resource;
+import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.function.FuncPermission;
+import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
@@ -26,7 +26,7 @@ import org.beangle.security.blueprint.nav.service.MenuService;
  * 
  * @author 鄂州蚊子 2008-8-4
  */
-public class MenuAction extends SecurityEntityActionSupport {
+public class MenuAction extends SecurityActionSupport {
 
   private MenuService menuService;
 
@@ -38,7 +38,7 @@ public class MenuAction extends SecurityEntityActionSupport {
     put("profiles", entityDao.getAll(MenuProfile.class));
     Menu menu = (Menu) entity;
     List<Menu> folders = CollectUtils.newArrayList();
-    OqlBuilder<Resource> builder = OqlBuilder.from(Resource.class, "r");
+    OqlBuilder<FuncResource> builder = OqlBuilder.from(FuncResource.class, "r");
     if (null != menu.getProfile() && null != menu.getProfile().getId()) {
       MenuProfile profile = entityDao.get(MenuProfile.class, menu.getProfile().getId());
       // 查找可以作为父节点的菜单
@@ -49,8 +49,8 @@ public class MenuAction extends SecurityEntityActionSupport {
       if (null != menu.getParent() && !folders.contains(menu.getParent())) folders.add(menu.getParent());
       folders.removeAll(HierarchyEntityUtils.getFamily(menu));
     }
-    List<Resource> resurces = entityDao.search(builder);
-    Set<Resource> existResources = menu.getResources();
+    List<FuncResource> resurces = entityDao.search(builder);
+    Set<FuncResource> existResources = menu.getResources();
     if (null != resurces) {
       resurces.removeAll(existResources);
     }
@@ -76,7 +76,7 @@ public class MenuAction extends SecurityEntityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     Menu menu = (Menu) entity;
     try {
-      List<Resource> resources = entityDao.get(Resource.class, getAll("resourceId", Long.class));
+      List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Long.class));
       menu.getResources().clear();
       menu.getResources().addAll(resources);
       Long newParentId = getLong("parent.id");
@@ -140,7 +140,7 @@ public class MenuAction extends SecurityEntityActionSupport {
     Menu menu = (Menu) getModel(getEntityName(), entityId);
     put(getShortName(), menu);
     if (!menu.getResources().isEmpty()) {
-      OqlBuilder<Permission> roleQuery = OqlBuilder.from(Permission.class, "auth");
+      OqlBuilder<FuncPermission> roleQuery = OqlBuilder.from(FuncPermission.class, "auth");
       roleQuery.where("auth.resource in(:resources)", menu.getResources()).select("distinct auth.role");
       put("roles", entityDao.search(roleQuery));
     }
@@ -148,7 +148,7 @@ public class MenuAction extends SecurityEntityActionSupport {
   }
 
   public String xml() {
-    put("resources", entityDao.getAll(Resource.class));
+    put("resources", entityDao.getAll(FuncResource.class));
     put("menuProfiles", entityDao.getAll(MenuProfile.class));
     return forward();
   }

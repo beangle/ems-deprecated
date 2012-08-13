@@ -13,14 +13,15 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Member;
-import org.beangle.security.blueprint.Permission;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.function.FuncPermission;
+import org.beangle.security.blueprint.function.FuncResource;
+import org.beangle.security.blueprint.function.service.internal.CacheableAuthorityManager;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
-import org.beangle.security.blueprint.service.internal.CacheableAuthorityManager;
 import org.beangle.security.core.authority.GrantedAuthorityBean;
 import org.beangle.struts2.convention.route.Action;
 
@@ -29,7 +30,7 @@ import org.beangle.struts2.convention.route.Action;
  * 
  * @author chaostone 2005-10-9
  */
-public class AuthorityAction extends SecurityActionSupport {
+public class PermissionAction extends SecurityActionSupport {
 
   private CacheableAuthorityManager authorityManager;
 
@@ -63,13 +64,13 @@ public class AuthorityAction extends SecurityActionSupport {
     }
     List<Menu> menus = CollectUtils.newArrayList();
     if (null != menuProfile) {
-      Collection<Resource> resources = null;
+      Collection<FuncResource> resources = null;
       if (isAdmin()) {
         menus = menuProfile.getMenus();
-        resources = entityDao.getAll(Resource.class);
+        resources = entityDao.getAll(FuncResource.class);
       } else {
         menus = menuService.getMenus(menuProfile, user);
-        resources = authorityService.getResources(user);
+        resources = permissionService.getResources(user);
       }
       put("resources", CollectUtils.newHashSet(resources));
       boolean displayFreezen = getBool("displayFreezen");
@@ -82,13 +83,13 @@ public class AuthorityAction extends SecurityActionSupport {
         }
         menus.removeAll(freezed);
       }
-      Set<Resource> aoResources = CollectUtils.newHashSet();
+      Set<FuncResource> aoResources = CollectUtils.newHashSet();
       Map<String, Long> aoResourceAuthorityMap = CollectUtils.newHashMap();
-      List<Permission> authorities = authorityService.getPermissions(ao);
+      List<FuncPermission> permissions = permissionService.getPermissions(ao);
       Collection<Menu> aoMenus = menuService.getMenus(menuProfile, (Role) ao, null);
-      for (final Permission authority : authorities) {
-        aoResources.add(authority.getResource());
-        aoResourceAuthorityMap.put(authority.getResource().getId().toString(), authority.getId());
+      for (final FuncPermission permission : permissions) {
+        aoResources.add(permission.getResource());
+        aoResourceAuthorityMap.put(permission.getResource().getId().toString(), permission.getId());
       }
       put("aoMenus", CollectUtils.newHashSet(aoMenus));
       put("aoResources", aoResources);
@@ -111,9 +112,9 @@ public class AuthorityAction extends SecurityActionSupport {
    * 保存模块级权限
    */
   public String save() {
-    Role mao = entityDao.get(Role.class, getLong("role.id"));
+    Role role = entityDao.get(Role.class, getLong("role.id"));
     MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getLong("menuProfileId"));
-    Set<Resource> newResources = CollectUtils.newHashSet(entityDao.get(Resource.class,
+    Set<FuncResource> newResources = CollectUtils.newHashSet(entityDao.get(FuncResource.class,
         Strings.splitToLong(get("resourceId"))));
 
     // 管理员拥有的菜单权限和系统资源
@@ -129,15 +130,14 @@ public class AuthorityAction extends SecurityActionSupport {
       mngResources.addAll(m.getResources());
     }
     newResources.retainAll(mngResources);
-    authorityService.authorize(mao, newResources);
-    authorityManager.refreshRolePermissions(new GrantedAuthorityBean(mao.getId()));
+    permissionService.authorize(role, newResources);
+    authorityManager.refreshRolePermissions(new GrantedAuthorityBean(role.getId()));
 
     Action redirect = Action.to(this).method("edit");
-    redirect.param("role.id", mao.getId()).param("menuProfileId", menuProfile.getId());
+    redirect.param("role.id", role.getId()).param("menuProfileId", menuProfile.getId());
     String displayFreezen = get("displayFreezen");
-    if (null != displayFreezen) {
-      redirect.param("displayFreezen", displayFreezen);
-    }
+    if (null != displayFreezen) redirect.param("displayFreezen", displayFreezen);
+
     return redirect(redirect, "info.save.success");
   }
 

@@ -4,13 +4,13 @@
  */
 package org.beangle.ems.security.web.action;
 
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.entity.Entity;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.nav.MenuProfile;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
-public class MenuProfileAction extends SecurityEntityActionSupport {
+public class MenuProfileAction extends SecurityActionSupport {
 
   protected void editSetting(Entity<?> entity) {
     OqlBuilder<Role> builder = OqlBuilder.from(Role.class, "g");

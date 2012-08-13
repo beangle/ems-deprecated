@@ -12,9 +12,9 @@ import javax.sql.DataSource;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.ems.database.service.DatasourceService;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 
-public class DatasourceAction extends SecurityEntityActionSupport {
+public class DatasourceAction extends SecurityActionSupport {
 
   private DatasourceService datasourceService;
 

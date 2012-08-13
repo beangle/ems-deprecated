@@ -5,11 +5,12 @@
 	
 	<bean id="systemVersion" class="org.beangle.commons.util.meta.SystemVersionBean">
 		<property name="name" value="Beangle Demo"/>
-		<property name="version" value="2.0.2-SNAPSHOT"/>
-		<property name="majorVersion" value="2"/>
+		<property name="version" value="3.0.0-SNAPSHOT"/>
+		<property name="majorVersion" value="3"/>
 		<property name="minorVersion" value="0"/>
 		<property name="vendor" value="Beangle Software"/>
 	</bean>
 	
 	<bean id="beangle.ems.wiki" class="org.beangle.ems.wiki.DefaultModule"/>
+	
 </beans>

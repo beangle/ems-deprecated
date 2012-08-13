@@ -6,7 +6,7 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.commons.dao.entity.LongIdEntity;
+import org.beangle.commons.entity.pojo.LongIdEntity;
 
 /**
  * 规则对应参数

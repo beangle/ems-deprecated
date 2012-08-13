@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.orm.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.pojo.LongIdTimeObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
 

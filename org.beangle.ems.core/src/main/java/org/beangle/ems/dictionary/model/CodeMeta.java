@@ -7,11 +7,12 @@ package org.beangle.ems.dictionary.model;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.orm.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.LongIdObject;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -48,7 +49,7 @@ public class CodeMeta extends LongIdObject {
 
   /** 所在分类 */
   @NotNull
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private CodeCategory category;
 
   /**

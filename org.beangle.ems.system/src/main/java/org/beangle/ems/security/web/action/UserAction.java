@@ -12,20 +12,20 @@ import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.Order;
-import org.beangle.commons.dao.Entity;
 import org.beangle.commons.dao.Operation;
 import org.beangle.commons.dao.query.builder.Condition;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
+import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
+import org.beangle.ems.security.helper.UserDashboardHelper;
+import org.beangle.ems.security.helper.UserPropertyExtractor;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
-import org.beangle.ems.security.helper.UserDashboardHelper;
-import org.beangle.ems.security.helper.UserPropertyExtractor;
 import org.beangle.security.blueprint.model.MemberBean;
 import org.beangle.security.blueprint.service.UserService;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
 
@@ -34,7 +34,7 @@ import org.beangle.struts2.convention.route.Action;
  * 
  * @author chaostone 2005-9-29
  */
-public class UserAction extends SecurityEntityActionSupport {
+public class UserAction extends SecurityActionSupport {
 
   private UserService userService;
 

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName">
-			<value>java:comp/env/jdbc/beangle</value>
-		</property>
-	</bean>
-	
-	<!-- Database Properties -->
 	<bean id="hibernateConfig">
 		<property name="properties">
 			<props merge="true">
-				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto"></prop>
 			</props>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/beangle</value>
 		</property>
 	</bean>
 </beans>

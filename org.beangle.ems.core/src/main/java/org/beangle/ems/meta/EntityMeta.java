@@ -4,7 +4,7 @@
  */
 package org.beangle.ems.meta;
 
-import org.beangle.commons.dao.entity.LongIdEntity;
+import org.beangle.commons.entity.pojo.LongIdEntity;
 
 /**
  * 实体元信息

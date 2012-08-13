@@ -86,7 +86,7 @@ div .portlet-content{margin:2px;}
 </div>
 <div id="rspace">
 
-[#include "../user/panels/restriction_portlet.ftl"/]
+[#include "../user/panels/profile_portlet.ftl"/]
 [#include "../user/panels/session_portlet.ftl"/]
 </div>
 </div>

@@ -7,12 +7,12 @@ package org.beangle.ems.security.web.action;
 import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.dao.util.ValidEntityKeyPredicate;
+import org.beangle.commons.entity.util.ValidEntityKeyPredicate;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.service.UserService;
-import org.beangle.ems.web.action.SecurityEntityActionSupport;
 
-public class PasswordAction extends SecurityEntityActionSupport {
+public class PasswordAction extends SecurityActionSupport {
 
   private UserService userService;
 
