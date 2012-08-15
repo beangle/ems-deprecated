@@ -48,6 +48,7 @@ public class EvolutionAction extends BaseAction {
     } else {
       put("resources", resources);
     }
+    put("databaseName",databaseName);
     return forward();
   }
 
@@ -63,6 +64,7 @@ public class EvolutionAction extends BaseAction {
     } finally {
       if (null != is) is.close();
     }
+    put("databaseName",databaseName);
     put("resource", resource);
     return forward();
   }
@@ -103,6 +105,7 @@ public class EvolutionAction extends BaseAction {
     }
     put("sqls", sqls);
     put("results", results);
+    put("databaseName",databaseName);
     return forward("results");
   }
 

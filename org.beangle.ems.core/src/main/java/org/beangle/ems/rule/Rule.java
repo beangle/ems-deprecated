@@ -8,6 +8,11 @@ import java.util.Set;
 
 import org.beangle.commons.entity.pojo.LongIdTimeEntity;
 
+/**
+ * Rule represent a business constraint
+ * 
+ * @author chaostone
+ */
 public interface Rule extends LongIdTimeEntity {
 
   public Set<RuleParameter> getParams();

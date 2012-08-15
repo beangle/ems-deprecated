@@ -4,6 +4,7 @@
  */
 package org.beangle.ems.rule.model;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.rule.RuleParameter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 规则参数配置
@@ -19,6 +22,8 @@ import org.beangle.ems.rule.RuleParameter;
  * @author chaostone
  */
 @Entity(name = "org.beangle.ems.rule.model.RuleConfigParam")
+@Cacheable
+@Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleConfigParam extends LongIdObject {
 
   private static final long serialVersionUID = 8711866530914907008L;

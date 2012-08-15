@@ -6,6 +6,7 @@ package org.beangle.ems.rule.model;
 
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,8 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 规则参数
@@ -25,6 +28,8 @@ import org.beangle.ems.rule.RuleParameter;
  * @author chaostone
  */
 @Entity(name = "org.beangle.ems.rule.RuleParameter")
+@Cacheable
+@Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleParameterBean extends LongIdObject implements RuleParameter {
 
   private static final long serialVersionUID = -5534831174352027516L;
@@ -59,6 +64,7 @@ public class RuleParameterBean extends LongIdObject implements RuleParameter {
 
   /** 所有的子参数 */
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+  @Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<RuleParameter> children = CollectUtils.newHashSet();
 
   public Rule getRule() {

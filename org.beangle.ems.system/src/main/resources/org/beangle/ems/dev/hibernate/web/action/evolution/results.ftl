@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.css href="code.css"/]
-<h2>欢迎使用数据库升级程序</h2>
+<h2>欢迎使用${databaseName}数据库升级程序</h2>
 <table width="100%">
 	<tr>
 	  <td>
