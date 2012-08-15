@@ -15,6 +15,10 @@ import org.beangle.commons.entity.pojo.LongIdEntity;
  */
 public interface RuleParameter extends LongIdEntity {
 
+  /**
+   * 
+   * @return
+   */
   public Set<RuleParameter> getChildren();
 
   public void setChildren(Set<RuleParameter> subRuleParams);
@@ -23,6 +27,10 @@ public interface RuleParameter extends LongIdEntity {
 
   public void setParent(RuleParameter superRuleParameter);
 
+  /**
+   * 
+   * @return
+   */
   public Rule getRule();
 
   public void setRule(Rule businessRule);
