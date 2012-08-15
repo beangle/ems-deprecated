@@ -9,6 +9,7 @@ import java.util.Map;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.util.ValidEntityKeyPredicate;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.service.UserService;
 
@@ -23,6 +24,7 @@ public class PasswordAction extends SecurityActionSupport {
    */
   public String edit() {
     put("user", getEntity());
+    put("settings",new Settings(getConfig()));
     return forward();
   }
 

@@ -2,9 +2,9 @@
 [@b.head/]
 <script type="text/javascript" src="${base}/static/scripts/md5.js"></script>
 [@b.form action="!save" title="我的账户" theme="list"]
-	[@b.password label="user.oldPassword" name="oldPassword"  value="" required="true" maxlength="40" /]
-	[@b.password label="user.newPassword" name="password" required="true"  /]
-	[@b.password label="user.repeatPassword" name="repeatedPassword" required="true" /]
+	[@b.password label="user.oldPassword" name="oldPassword"  style="width:100px" value="" required="true" maxlength="40" showStrength="false" /]
+	[@b.password label="user.newPassword" name="password" required="true"  style="width:100px" maxlength=settings.maxPwdLength?string/]
+	[@b.password label="user.repeatPassword" name="repeatedPassword" required="true" style="width:100px" showStrength="false"/]
 	[@b.email label="common.email" name="mail" value="${user.mail}" /]
 	[@b.formfoot]
 		<input type="hidden" name="user.id" value="${user.id}"/>

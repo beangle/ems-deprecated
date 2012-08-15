@@ -17,6 +17,7 @@ import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.helper.UserDashboardHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.SecurityUtils;
+import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.security.core.session.SessionRegistry;
@@ -71,6 +72,7 @@ public class MyAction extends SecurityActionSupport {
    */
   public String edit() {
     put("user", entityDao.get(User.class, getUserId()));
+    put("settings",new Settings(getConfig()));
     return forward();
   }
 

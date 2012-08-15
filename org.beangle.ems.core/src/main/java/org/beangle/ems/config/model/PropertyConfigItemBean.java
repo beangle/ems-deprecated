@@ -27,17 +27,17 @@ public class PropertyConfigItemBean extends LongIdObject {
 
   /** 值 */
   @NotNull
-  @Size(max = 500)
+  @Size(max = 1000)
   private String value;
 
   /** 描述 */
   @NotNull
-  @Size(max = 500)
+  @Size(max = 1000)
   private String description;
 
   /** 类型 */
   @NotNull
-  @Size(max = 500)
+  @Size(max = 200)
   private String type;
 
   public String getDescription() {

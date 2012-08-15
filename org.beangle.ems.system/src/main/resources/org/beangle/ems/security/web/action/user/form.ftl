@@ -13,7 +13,7 @@
 		[@b.textfield name="user.name" value="${user.name!}" style="width:200px;" required="true" maxlength="30"/]
 		[@b.radios name="user.enabled" value=user.enabled items="1:action.activate,0:action.freeze"/]
 		[@b.textfield name="user.fullname" value="${user.fullname!}" style="width:200px;" required="true" maxlength="50" /]
-		[@b.password label="user.password" name="password" value=""/]
+		[@b.password label="user.password" name="password" value="" maxlength=settings.maxPwdLength?string /]
 		[@b.email name="user.mail" value="${user.mail!}" style="width:300px;" required="true" maxlength="50"/]
 		[#if isadmin|| isme]
 		[@b.startend label="user.effective-invalid" name="user.effectiveAt,user.invalidAt" required="true,false" start=user.effectiveAt end=user.invalidAt format="datetime" disabled="disabled"/]

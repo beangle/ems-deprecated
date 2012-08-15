@@ -23,6 +23,7 @@ import org.beangle.ems.security.helper.UserPropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.MemberBean;
 import org.beangle.security.blueprint.service.UserService;
@@ -193,6 +194,7 @@ public class UserAction extends SecurityActionSupport {
     put("curMemberMap", curMemberMap);
     put("isadmin", userService.isRoot(user));
     put("isme", getUserId().equals(user.getId()));
+    put("settings",new Settings(getConfig()));
   }
 
   /**
