@@ -2,7 +2,6 @@
 [@b.head/]
 <link href="${base}/static/themes/${b.theme.ui}/menu.css" rel="stylesheet" type="text/css" />
 [#include "menuMacros.ftl"/]
-
 <div id="menu_area">
 	<div>
 		<div style="float:left;height:25px;vertical-align:middle;">页面导航:[@b.a href="!index?name=${(Parameters['name']!)?url('utf-8')}"]全部[/@]

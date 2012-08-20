@@ -1,0 +1,11 @@
+action.backHome=返回
+action.logout=退出
+action.myAccount=修改密码
+
+security.Disabled=账户已被禁用
+security.EmptyCaptcha=请输入验证码
+security.WrongCaptcha=验证码不正确
+security.OvermaxSession=超过人数上限
+security.UsernameNotFound=账户不存在
+security.Locked=账户被禁用
+security.BadCredentials=密码错误

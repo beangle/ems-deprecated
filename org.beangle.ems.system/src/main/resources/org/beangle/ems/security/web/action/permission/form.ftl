@@ -36,8 +36,8 @@
 <td valign="top">
 [@b.toolbar]
 	bar.setTitle('角色-->菜单和资源权限');
-	bar.addItem("${b.text("action.spread")}","displayAllRowsFor(1);",'${b.theme.iconurl('tree/plus.png')}');
-	bar.addItem("${b.text("action.collapse")}","collapseAllRowsFor(1);",'${b.theme.iconurl('tree/minus.png')}');
+	bar.addItem("${b.text("action.spread")}","displayAllRowsFor(1);",'tree-folder');
+	bar.addItem("${b.text("action.collapse")}","collapseAllRowsFor(1);",'tree-folder-open');
 	bar.addItem("${b.text("action.save")}",save,'save.png');
 [/@]
 [@b.form name="permissionForm" action="!edit"]
@@ -66,8 +66,8 @@
 	<tr class="gridhead">
 	<th width="6%"><input type="checkbox" onclick="treeToggleAll(this,checkResource)"/></th>
 	<th width="34%">${b.text("common.name")}</th>
-	<th width="13%">${b.text("common.id")}</th>
-	<th width="40%">可用资源</th>
+	<th width="10%">${b.text("common.id")}</th>
+	<th width="44%">可用资源</th>
 	<th width="6%">${b.text("common.status")}</th>
 	</tr>
 	[#macro i18nTitle(entity)][#if locale.language?index_of("en")!=-1][#if entity.engTitle!?trim==""]${entity.title!}[#else]${entity.engTitle!}[/#if][#else][#if entity.title!?trim!=""]${entity.title!}[#else]${entity.engTitle!}[/#if][/#if][/#macro]
@@ -78,11 +78,11 @@
 			<input type="checkbox" id="checkbox_${menu_index}" onclick="treeToggle(this,checkResource)"  name="menuId" [#if (aoMenus??)&&(aoMenus?seq_contains(menu))]checked="checked"[/#if] value="${menu.id}">
 		</td>
 		<td>
-		<div class="tier${menu.depth}">
+		<div class="tree-tier${menu.depth}">
 			[#if menu.children?size==0]
-			<a href="#" class="doc"></a>[#rt]
+			<a href="#" class="tree-item"></a>[#rt]
 			[#else]
-			<a href="#" class="folder_open" id="${menu.code}_folder" onclick="toggleRows(this);"></a>[#rt]
+			<a href="#" class="tree-folder-open" id="${menu.code}_folder" onclick="toggleRows(this);"></a>[#rt]
 			[/#if]
 			 [@i18nTitle menu/]
 		</div>

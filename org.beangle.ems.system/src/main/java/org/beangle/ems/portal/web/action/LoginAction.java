@@ -33,6 +33,7 @@ public class LoginAction extends BaseAction {
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
 
   public String index() {
+    put("locale",getLocale());
     if (SecurityUtils.hasValidAuthentication()) { return "home"; }
     if (!shouldLogin()) { return "failure"; }
     String errorMsg = doLogin();

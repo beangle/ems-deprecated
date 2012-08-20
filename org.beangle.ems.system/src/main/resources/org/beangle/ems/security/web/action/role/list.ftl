@@ -14,21 +14,13 @@
 	[@b.row]
 		<tr id="${role.code}">
 		[@b.boxcol width="5%"/]
-		[@b.col property="name" width="35%" title="common.name"]
-			<div class="tier${role.depth}" align="left">
-			[#if (role.children?size==0)]
-				<a href="#" class="doc"/>
-			[#else]
-				<a href="#" class="folder_open" id="${role.code}_folder" onclick="toggleRows(this)" >   </a>
-			[/#if]
-				[@b.a href="!info?id=${role.id}"]${role.code} ${role.name}[/@]
-			</div>
+		[@b.treecol property="name" width="35%" title="common.name"][@b.a href="!info?id=${role.id}"]${role.code} ${role.name}[/@]
 		[/@]
 		[@b.col width="20%" property="owner.name" title="common.creator"]${(role.owner.name)!} ${(role.owner.fullname)!}[/@]
 		[@b.col width="10%" property="dynamic" title="动态组"]${role.dynamic?string("是","否")}[/@]
 		[@b.col width="10%" property="enabled" title="common.status"][@enableInfo role.enabled/][/@]
 		[@b.col width="10%" property="updatedAt" title="common.updatedAt"]${role.updatedAt?string("yyyy-MM-dd")}[/@]
-		[@b.col title="设置权限" width="10%"][@b.a target="_blank" href="permission!edit?role.id=${role.id}"]<img style="border:0px" src="${b.theme.iconurl('actions/config.png')}"/>设置权限[/@][/@]
+		[@b.col title="设置权限" width="10%"][@b.a target="_blank" href="permission!edit?role.id=${role.id}"]<span class="icon-action action-config"></span>设置权限[/@][/@]
 		</tr>
 	[/@]
 [/@]

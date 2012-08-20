@@ -17,7 +17,7 @@ bar.addBack("${b.text("action.back")}");
 	 <td class="content">${role.updatedAt?string("yyyy-MM-dd")}</td>
 	</tr>
 	<tr>
-	<td class="title" >是否动态组:</td>
+	<td class="title" >是否动态角色:</td>
 	<td  class="content">${role.dynamic?string("是","否")}</td>
 	<td class="title" >&nbsp;${b.text("common.status")}:</td>
 	<td class="content">
