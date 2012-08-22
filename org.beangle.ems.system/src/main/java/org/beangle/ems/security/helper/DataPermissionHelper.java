@@ -12,8 +12,13 @@ import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.lang.Strings;
 import org.beangle.security.blueprint.data.Profile;
 import org.beangle.security.blueprint.data.Property;
+import org.beangle.security.blueprint.data.RoleProfile;
 import org.beangle.security.blueprint.data.UserProfile;
+import org.beangle.security.blueprint.data.model.RoleProfileBean;
+import org.beangle.security.blueprint.data.model.UserProfileBean;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
+import org.beangle.security.blueprint.model.RoleBean;
+import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.struts2.helper.ContextHelper;
 
 public class DataPermissionHelper {
@@ -21,6 +26,25 @@ public class DataPermissionHelper {
   final EntityDao entityDao;
 
   final DataPermissionService dataPermissionService;
+
+  public static String getProfileEntity(String type) {
+    if (type.equals("user")) return UserProfile.class.getName();
+    else return RoleProfile.class.getName();
+  }
+
+  public static Profile newProfile(String type, Long holderId) {
+    Profile profile = null;
+    if (type.equals("user")) {
+      UserProfileBean up = new UserProfileBean();
+      up.setUser(new UserBean(holderId));
+      profile = up;
+    } else {
+      RoleProfileBean rp = new RoleProfileBean();
+      rp.setRole(new RoleBean(holderId));
+      profile = rp;
+    }
+    return profile;
+  }
 
   public DataPermissionHelper(EntityDao entityDao, DataPermissionService dataPermissionService) {
     super();
@@ -31,7 +55,7 @@ public class DataPermissionHelper {
   /**
    * 查看限制资源界面
    */
-  public void populateInfo( List<UserProfile> profiles) {
+  public void populateInfo(List<? extends Profile> profiles) {
     Map<String, Map<String, Object>> fieldMaps = CollectUtils.newHashMap();
     for (Profile profile : profiles) {
       Map<String, Object> aoFields = CollectUtils.newHashMap();
@@ -40,9 +64,11 @@ public class DataPermissionHelper {
         if (Strings.isNotEmpty(value)) {
           if (null == property.getField().getSource()) {
             aoFields.put(property.getField().getName(), value);
+          } else if (value.equals("*")) {
+            aoFields.put(property.getField().getName(), "不限");
           } else {
             aoFields.put(property.getField().getName(),
-                dataPermissionService.getPropertyValue(property.getField().getName(), profile));
+                dataPermissionService.getPropertyValue(property.getField(), profile));
           }
         }
       }

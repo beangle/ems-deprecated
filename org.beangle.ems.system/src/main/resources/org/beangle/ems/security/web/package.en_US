@@ -1,3 +1,7 @@
+entity.menu=Menu
+entity.funcResource=Function Resource 
+entity.dataPermission=Data Permission
+
 user.oldPassword=Old Password
 user.repeatPassword=Repeat Password
 user.password.sendmail.body=login name \:{0};password\:{1}
@@ -34,7 +38,6 @@ info.role=Role infomation
 info.role.canBeChoosed=role list
 info.role.count=role count
 error.notUnique=The name must be uniquely!
-ui.userInfo=user infomation
 info.user.canBeChoosed=user list
 info.user.count=user count
 alert.authoritySave={0}'s module authority will be setted according to choosed,continue?
@@ -49,6 +52,8 @@ security.fromRole=From Role
 security.resource.info=Resource detail infomation
 security.restrictionPattern.info=RestrictionPattern detail infomation
 ui.roleIndex=System Role Management
+ui.dataPermission.info=Data Permission Policy
+
 security.toRole=To Role
 security.user.modifyPassword=modifyPassword
 ui.roleIndex=System User Management

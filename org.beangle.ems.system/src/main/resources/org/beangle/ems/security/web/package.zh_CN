@@ -1,3 +1,7 @@
+entity.menu=菜单
+entity.funcResource=功能资源
+entity.dataPermission=数据权限
+
 action.2ndManage=二级管理
 action.changePassword=修改密码
 action.revokeRoleManage=取消角色管理权力
@@ -56,10 +60,9 @@ ui.roleIndex=系统角色管理
 ui.roleInfo=角色信息
 ui.userIndex=系统用户管理
 ui.userInfo=用户基本信息
-user.info=User Info
+ui.dataPermission.info=数据权限策略
 
 user.manage=用户管理
-user.mngRoles=Manage Role
 user.newPassword=新密码
 user.oldPassword=旧密码
 user.passwordExpiredAt=密码过期时间

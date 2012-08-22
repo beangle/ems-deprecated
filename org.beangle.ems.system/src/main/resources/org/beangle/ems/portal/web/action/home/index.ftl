@@ -21,7 +21,7 @@
 	[/@]
 </div>
 [#if profile??]
-[@b.div id="main" href="/security/menu-nav?profile.id=${profile.id}"/]
+[@b.div id="main" href="/security/nav/index?profile.id=${profile.id}"/]
 [#else]
 	没有相应的菜单配置，无法显示菜单。
 [/#if]

@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.grid items=resources var="resource"]
+[@b.grid items=dataTypes var="dataType"]
 	[@b.gridbar ]
 		bar.addItem("${b.text("action.new")}",action.add());
 		bar.addItem("${b.text("action.edit")}",action.edit());
@@ -9,8 +9,9 @@
 	[@b.row]
 		[@b.boxcol width="5%"/]
 		[@b.col property="name" title="名称" width="20%"/]
-		[@b.col property="title" title="标题" width="30%"/]
-		[@b.col property="remark" title="描述"  width="45%"/]
+		[@b.col property="typeName" title="类型" width="35%"/]
+		[@b.col property="keyName" title="关键字"  width="10%"/]
+		[@b.col property="properties" title="其他属性" width="30%"/]
 	[/@]
 [/@]
 [@b.foot/]

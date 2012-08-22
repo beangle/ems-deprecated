@@ -4,59 +4,70 @@
  */
 package org.beangle.ems.web.action;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.NoParameters;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.web.util.RequestUtils;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.data.DataPermission;
+import org.beangle.security.blueprint.data.ProfileField;
 import org.beangle.security.blueprint.data.UserProfile;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
 import org.beangle.security.blueprint.function.service.FuncPermissionService;
+import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.struts2.action.EntityActionSupport;
 
 public abstract class SecurityActionSupport extends EntityActionSupport implements NoParameters {
 
-  protected FuncPermissionService permissionService;
+  protected FuncPermissionService funcPermissionService;
 
   protected DataPermissionService dataPermissionService;
 
   protected Resource getResource() {
     String resourceName = SecurityUtils.getResource();
     if (null == resourceName) {
-      resourceName = permissionService.extractResource(RequestUtils
-          .getServletPath(ServletActionContext.getRequest()));
+      resourceName = funcPermissionService.extractResource(RequestUtils.getServletPath(ServletActionContext
+          .getRequest()));
     }
-    return permissionService.getResource(resourceName);
+    return funcPermissionService.getResource(resourceName);
   }
 
   protected boolean isAdmin() {
-    return permissionService.getUserService().isRoot(getUserId());
+    return funcPermissionService.getUserService().isRoot(getUserId());
   }
 
-  protected Object getUserPropertyValue(String name) {
-    UserProfile profile = getUserProfile();
-    if (null == profile) return null;
-    else return dataPermissionService.getPropertyValue(name, profile);
+  @SuppressWarnings({ "unchecked" })
+  protected <T> List<T> getUserPropertyValues(String name) {
+    ProfileField field = dataPermissionService.getProfileField(name);
+    UserBean user = new UserBean(getUserId());
+    List<UserProfile> profiles = dataPermissionService.getUserProfiles(user);
+    Set<T> results = CollectUtils.newHashSet();
+    for (UserProfile profile : profiles) {
+      Object prop = dataPermissionService.getPropertyValue(field, profile);
+      if (prop instanceof Collection<?>) {
+        results.addAll((Collection<T>) prop);
+      } else {
+        results.add((T) prop);
+      }
+    }
+    return CollectUtils.newArrayList(results);
   }
 
-  protected UserProfile getUserProfile() {
-    List<UserProfile> profiles = dataPermissionService.getUserProfiles(getUserId(), null);
-    return profiles.isEmpty() ? null : profiles.get(0);
-  }
-
-  protected DataPermission getDataPermission(String data) {
+  protected DataPermission getDataPermission(String dataResource) {
     Resource resource = getResource();
-    return dataPermissionService.getPermission(getUserId(), data,
+    return dataPermissionService.getPermission(getUserId(), dataResource,
         (null == resource ? null : resource.getName()));
   }
 
-  protected void applyPermission(OqlBuilder<?> query) {
-    dataPermissionService.apply(query, getDataPermission(query.getEntityClass().getName()), getUserProfile());
+  protected void applyPermission(OqlBuilder<?> query, UserProfile profile) {
+    dataPermissionService.apply(query, getDataPermission(query.getEntityClass().getName()), profile);
   }
 
   protected Long getUserId() {
@@ -71,8 +82,8 @@ public abstract class SecurityActionSupport extends EntityActionSupport implemen
     return Strings.concat(SecurityUtils.getUsername(), "(", SecurityUtils.getFullname(), ")");
   }
 
-  public void setPermissionService(FuncPermissionService permissionService) {
-    this.permissionService = permissionService;
+  public void setFuncPermissionService(FuncPermissionService permissionService) {
+    this.funcPermissionService = permissionService;
   }
 
   public void setDataPermissionService(DataPermissionService dataPermissionService) {

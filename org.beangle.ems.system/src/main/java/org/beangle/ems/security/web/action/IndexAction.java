@@ -11,7 +11,7 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Member;
-import org.beangle.security.blueprint.data.DataField;
+import org.beangle.security.blueprint.data.ProfileField;
 import org.beangle.security.blueprint.data.model.DataPermissionBean;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
@@ -39,14 +39,14 @@ public class IndexAction extends SecurityActionSupport {
 
     // stat dataPermission and restriction
     put("dataPermissionStat", entityDao.search(OqlBuilder.from(DataPermissionBean.class, "p").select("count(*)")));
-    put("propertyMetaStat", entityDao.search(OqlBuilder.from(DataField.class, "param").select("count(*)")));
+    put("propertyMetaStat", entityDao.search(OqlBuilder.from(ProfileField.class, "param").select("count(*)")));
     return forward();
   }
 
   private void populateUserStat() {
     OqlBuilder<Member> userQuery = OqlBuilder.from(Member.class, "gm");
     userQuery.select("gm.role.code,gm.role.name,gm.user.enabled,count(*)").groupBy(
-        "gm.role.name,gm.user.enabled");
+        "gm.role.code,gm.role.name,gm.user.enabled");
     List<?> datas = entityDao.search(userQuery);
     Map<String, Map<Object, Object>> rs = CollectUtils.newHashMap();
     for (Object data : datas) {

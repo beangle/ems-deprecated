@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.security.web.action;
+package org.beangle.ems.security.web.action.session;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ import org.beangle.security.web.session.model.SessioninfoLogBean;
  * 
  * @author chaostone
  */
-public class SessioninfoLogAction extends SecurityActionSupport {
+public class LogAction extends SecurityActionSupport {
 
   /**
    * 显示用户某时间段的登陆记录

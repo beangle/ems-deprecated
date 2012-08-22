@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.security.web.action;
+package org.beangle.ems.security.web.action.nav;
 
 import java.util.Collection;
 import java.util.List;

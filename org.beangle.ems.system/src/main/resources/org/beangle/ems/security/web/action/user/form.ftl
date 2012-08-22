@@ -9,7 +9,7 @@
 [@b.tabs]
 [@b.form name="userForm" action="!save" class="listform" theme="list"]
 	<input type="hidden" name="user.id" value="${user.id!}" />
-	[@b.tab label="user.info"]
+	[@b.tab label="ui.userInfo"]
 		[@b.textfield name="user.name" value="${user.name!}" style="width:200px;" required="true" maxlength="30"/]
 		[@b.radios name="user.enabled" value=user.enabled items="1:action.activate,0:action.freeze"/]
 		[@b.textfield name="user.fullname" value="${user.fullname!}" style="width:200px;" required="true" maxlength="50" /]
@@ -29,15 +29,15 @@
 			[@b.row]
 				<tr [#if role??]id="${role.code}"[/#if]>
 				[@b.col title="common.index" width="5%"]${role_index+1}[/@]
-				[@b.treecol title="entity.role" property="name"]<span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>${role.code} ${role.name}</span>[/@]
+				[@b.treecol title="entity.role" property="name"]<span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>${role.code} ${role.name}[#if role.dynamic] (动态角色)[/#if]</span>[/@]
 				[@b.col title="member.member" width="10%"]
-				<input type="checkbox" name="member${role.id}" onchange="changeMember(${role.id},this)" ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
+				<input type="checkbox" name="member${role.id}" onchange="changeMember(${role.id},this)" [#if role.dynamic]disabled="disabled"[/#if] ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
 				[/@]
 				[@b.col title="member.granter" width="10%"]
-				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).granter)?default(false)][#else]<input type="checkbox" name="granter${role.id}" [#if !curMemberMap.get(role).manager]disabled="disabled"[/#if] ${(memberMap.get(role).granter)?default(false)?string('checked="checked"','')}/>[/#if]
+				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).granter)?default(false)][#else]<input type="checkbox" name="granter${role.id}" [#if !curMemberMap.get(role).manager || role.dynamic]disabled="disabled"[/#if] ${(memberMap.get(role).granter)?default(false)?string('checked="checked"','')}/>[/#if]
 				[/@]
 				[@b.col title="member.manager" width="10%"]
-				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).manager)?default(false)][#else]<input type="checkbox" name="manager${role.id}" [#if !curMemberMap.get(role).manager]disabled="disabled"[/#if] ${(memberMap.get(role).manager)?default(false)?string('checked="checked"','')}/>[/#if]
+				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).manager)?default(false)][#else]<input type="checkbox" name="manager${role.id}" [#if !curMemberMap.get(role).manager || role.dynamic]disabled="disabled"[/#if]${(memberMap.get(role).manager)?default(false)?string('checked="checked"','')}/>[/#if]
 				[/@]
 				[@b.col title="common.updatedAt" width="20%"]${(memberMap.get(role).updatedAt?string("yyyy-MM-dd HH:mm"))!}[/@]
 				</tr>
@@ -46,7 +46,7 @@
 	[/@]
 [/@]
 	[#if user.id??]
-	[@b.tab label="全局数据权限" href="restriction!info?forEdit=1&restrictionType=user&restriction.holder.id=${user.id}" /]
+	[@b.tab label="全局数据权限" href="/security/data/profile!info?forEdit=1&holder.id=${user.id}&type=user" /]
 	[/#if]
 [/@]
 <script  type="text/javascript">

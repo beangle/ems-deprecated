@@ -70,7 +70,7 @@ public class PermissionAction extends SecurityActionSupport {
         resources = entityDao.getAll(FuncResource.class);
       } else {
         menus = menuService.getMenus(menuProfile, user);
-        resources = permissionService.getResources(user);
+        resources = funcPermissionService.getResources(user);
       }
       put("resources", CollectUtils.newHashSet(resources));
       boolean displayFreezen = getBool("displayFreezen");
@@ -85,7 +85,7 @@ public class PermissionAction extends SecurityActionSupport {
       }
       Set<FuncResource> aoResources = CollectUtils.newHashSet();
       Map<String, Long> aoResourceAuthorityMap = CollectUtils.newHashMap();
-      List<FuncPermission> permissions = permissionService.getPermissions(ao);
+      List<FuncPermission> permissions = funcPermissionService.getPermissions(ao);
       Collection<Menu> aoMenus = menuService.getMenus(menuProfile, (Role) ao, null);
       for (final FuncPermission permission : permissions) {
         aoResources.add(permission.getResource());
@@ -130,7 +130,7 @@ public class PermissionAction extends SecurityActionSupport {
       mngResources.addAll(m.getResources());
     }
     newResources.retainAll(mngResources);
-    permissionService.authorize(role, newResources);
+    funcPermissionService.authorize(role, newResources);
     authorityManager.refreshRolePermissions(new GrantedAuthorityBean(role.getId()));
 
     Action redirect = Action.to(this).method("edit");

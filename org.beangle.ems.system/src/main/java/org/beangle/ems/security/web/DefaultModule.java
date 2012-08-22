@@ -16,10 +16,15 @@ public final class DefaultModule extends AbstractBindModule {
   @Override
   protected void doBinding() {
     // security
-    bind(SessioninfoLogAction.class, PermissionAction.class, RoleAction.class, IndexAction.class,
-        MenuAction.class, MenuNavAction.class, MenuProfileAction.class, MonitorAction.class, MyAction.class,
-        PasswordAction.class, ResourceAction.class, UserAction.class, CaptchaAction.class)
-        .in(Scope.PROTOTYPE);
+    bind(PermissionAction.class, RoleAction.class, IndexAction.class, MyAction.class, PasswordAction.class,
+        ResourceAction.class, UserAction.class, CaptchaAction.class).in(Scope.PROTOTYPE);
+
+    bind(org.beangle.ems.security.web.action.session.LogAction.class,
+        org.beangle.ems.security.web.action.session.MonitorAction.class).in(Scope.PROTOTYPE);
+
+    bind(org.beangle.ems.security.web.action.nav.MenuAction.class,
+        org.beangle.ems.security.web.action.nav.IndexAction.class,
+        org.beangle.ems.security.web.action.nav.ProfileAction.class).in(Scope.PROTOTYPE);
 
     bind(UserDashboardHelper.class).shortName();
 
@@ -27,12 +32,12 @@ public final class DefaultModule extends AbstractBindModule {
     bind(org.beangle.ems.security.web.action.data.FieldAction.class,
         org.beangle.ems.security.web.action.data.ResourceAction.class,
         org.beangle.ems.security.web.action.data.PermissionAction.class,
-        org.beangle.ems.security.web.action.data.UserProfileAction.class).in(Scope.PROTOTYPE);
+        org.beangle.ems.security.web.action.data.ProfileAction.class,
+        org.beangle.ems.security.web.action.data.TypeAction.class).in(Scope.PROTOTYPE);
 
     // avatar
     bind(BoardAction.class, org.beangle.ems.avatar.web.action.MyAction.class, MyUploadAction.class,
         org.beangle.ems.avatar.web.action.UserAction.class).in(Scope.PROTOTYPE);
 
   }
-
 }

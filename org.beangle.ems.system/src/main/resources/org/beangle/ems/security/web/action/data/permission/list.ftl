@@ -1,5 +1,4 @@
 [#ftl/]
-[@b.toolbar title="限制模式"/]
 [@b.grid  items=permissions var="permission" sortable="false"]
 	[@b.gridbar]
 		bar.addItem("${b.text("action.new")}",action.add());
@@ -8,12 +7,12 @@
 	[/@]
 	[@b.row]
 		[@b.boxcol width="5%"/]
-		[@b.col width="10%" property="role.name" title="角色" /]
-		[@b.col width="10%" property="resource.title" title="业务数据" /]
-		[@b.col width="15%" property="funcResource.title" title="系统功能" /]
-		[@b.col width="40%" property="filters" title="资源过滤器" /]
+		[@b.col width="10%" property="resource.title" title="dataPermission.resource" /]
+		[@b.col width="10%" property="role.name" title="entity.role" /]
+		[@b.col width="15%" property="funcResource.title" title="entity.funcResource" /]
+		[@b.col width="40%" property="filters" title="dataPermission.filters" /]
 		[@b.col width="10%" property="restrictions" title="其他约束" /]
-		[@b.col width="10%" property="remark" title="说明" /]
+		[@b.col width="10%" property="remark" title="common.remark" /]
 	[/@]
 [/@]
 	

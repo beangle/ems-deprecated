@@ -12,7 +12,6 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.ems.database.model.DatasourceBean;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -36,14 +35,14 @@ public class BrowserAction extends SecurityActionSupport {
   private void loadObjects() throws Exception {
     QueryContext queryConext = getQueryContext();
     DataSource datasource = queryConext.getDataSource();
-    DatasourceBean dsbean = queryConext.getDatasourceBean();
+    //DatasourceBean dsbean = queryConext.getDatasourceBean();
     DatabaseMetaData meta = datasource.getConnection().getMetaData();
     List<String> schemas = CollectUtils.newArrayList();
     ResultSet rs = meta.getSchemas();
     while (rs.next()) {
       schemas.add(rs.getString(1));
     }
-    Set tables = CollectUtils.newHashSet();
+    Set<?> tables = CollectUtils.newHashSet();
 
     // FIXME 
     // MetadataLoader loader = new MetadataLoader((Dialect)

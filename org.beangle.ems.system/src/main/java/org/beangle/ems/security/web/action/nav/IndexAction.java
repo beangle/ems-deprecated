@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.security.web.action;
+package org.beangle.ems.security.web.action.nav;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +26,7 @@ import org.beangle.security.blueprint.nav.service.MenuService;
  * @author chaostone
  * @version $Id: MenuNavAction.java Jun 24, 2011 8:25:47 PM chaostone $
  */
-public class MenuNavAction extends SecurityActionSupport {
+public class IndexAction extends SecurityActionSupport {
 
   private MenuService menuService;
 

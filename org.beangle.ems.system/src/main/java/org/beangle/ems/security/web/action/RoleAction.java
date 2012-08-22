@@ -120,7 +120,7 @@ public class RoleAction extends SecurityActionSupport {
   }
 
   public void setAuthorityService(FuncPermissionService authorityService) {
-    this.permissionService = authorityService;
+    this.funcPermissionService = authorityService;
   }
 
   public void setUserService(UserService userService) {

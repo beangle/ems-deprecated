@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.security.web.action;
+package org.beangle.ems.security.web.action.session;
 
 import java.util.List;
 
@@ -33,8 +33,11 @@ public class MonitorAction extends SecurityActionSupport {
   public String profiles() {
     List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
     put("profiles", profiles);
-    put("roles",
-        entityDao.search(OqlBuilder.from(Role.class, "g").where("g.parent is null").orderBy("g.code")));
+    List<Role> roles = entityDao.search(OqlBuilder.from(Role.class, "g").where("g.parent is null")
+        .orderBy("g.code"));
+    for (SessionProfileBean profile : profiles)
+      roles.remove(profile.getRole());
+    put("roles", roles);
     return forward();
   }
 
@@ -56,8 +59,8 @@ public class MonitorAction extends SecurityActionSupport {
    * 保存设置
    */
   public String saveProfile() {
-    List<SessionProfileBean> categories = entityDao.getAll(SessionProfileBean.class);
-    for (final SessionProfileBean profile : categories) {
+    List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
+    for (final SessionProfileBean profile : profiles) {
       Long roleId = profile.getRole().getId();
       Integer max = getInteger("max_" + roleId);
       Integer maxSessions = getInteger("maxSessions_" + roleId);
@@ -68,7 +71,19 @@ public class MonitorAction extends SecurityActionSupport {
         profile.setInactiveInterval(inactiveInterval);
       }
     }
-    categoryProfileService.saveOrUpdate(categories);
+    Long roleId = getLong("roleId_new");
+    Integer max = getInteger("max_new");
+    Integer maxSessions = getInteger("maxSessions_new");
+    Integer inactiveInterval = getInteger("inactiveInterval_new");
+    if (null != max && null != maxSessions && null != inactiveInterval) {
+      SessionProfileBean newProfile = new SessionProfileBean();
+      newProfile.setRole(entityDao.get(Role.class, roleId));
+      newProfile.setCapacity(max);
+      newProfile.setUserMaxSessions(maxSessions);
+      newProfile.setInactiveInterval(inactiveInterval);
+      profiles.add(newProfile);
+    }
+    categoryProfileService.saveOrUpdate(profiles);
     return redirect("profiles", "info.save.success");
   }
 

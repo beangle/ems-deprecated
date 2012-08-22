@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	bg.ui.load("tabletree");
 </script>
-[#include "../status.ftl"/]
+[#include "../../status.ftl"/]
 [@b.grid  items=menus var="menu" sortable="false"]
 [@b.gridbar title="菜单列表"]
 	action.addParam('menu.profile.id',"${Parameters['menu.profile.id']!}");
@@ -19,7 +19,7 @@
 	bar.addItem("${b.text("action.export")}",action.exportData("code:代码,title:common.title,name:common.name,entry:入口,resources:使用资源,enabled:common.status,remark:common.remark",null,"&fileName=菜单信息"));
 	bar.addItem("${b.text("action.delete")}",action.remove());
 	bar.addItem("打印","preview()","print.png");
-	bar.addItem("菜单配置","redirectTo('${b.url('menu-profile!search')}')");
+	bar.addItem("菜单配置","redirectTo('${b.url('profile!search')}')");
 [/@]
 	[@b.row]
 		<tr [#if menu??] title="入口及备注:${menu.entry!} ${(menu.remark?html)!}" id="${menu.code}"[/#if]>

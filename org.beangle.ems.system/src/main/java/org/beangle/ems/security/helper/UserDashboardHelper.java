@@ -49,7 +49,7 @@ public class UserDashboardHelper {
     populateSessioninfoLogs(user);
     populateOnlineActivities(user);
     new DataPermissionHelper(entityDao, dataPermissionService).populateInfo(dataPermissionService
-        .getUserProfiles(user.getId(), null));
+        .getUserProfiles(user));
   }
 
   private void populateOnlineActivities(User user) {
