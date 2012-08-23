@@ -37,11 +37,6 @@
 		</init-param>
 	</filter>
 
-<servlet>
-    <servlet-name>DruidStatView</servlet-name>
-    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-</servlet>
-	
 	<filter-mapping>
 		<filter-name>characterEncoding</filter-name>
 		<url-pattern>*.action</url-pattern>
@@ -69,12 +64,6 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>/struts/*</url-pattern>
 	</filter-mapping>
-
-<servlet-mapping>
-    <servlet-name>DruidStatView</servlet-name>
-    <url-pattern>/druid/*</url-pattern>
-</servlet-mapping>
-
 
 	<listener>
 		<listener-class>org.beangle.security.web.session.HttpSessionEventPublisher</listener-class>

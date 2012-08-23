@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-<script type="text/javascript" src="${base}/static/scripts/md5.js"></script>
+<script type="text/javascript" src="${base}/static/scripts/common/md5.js"></script>
 [@b.form action="!save" theme="list" title="ui.changePasswordIndex"]
 	[@b.password label="user.newPassword" name="password" required="true" maxlength=settings.maxPwdLength?string showStrength="true"/]
 	[@b.password label="user.repeatPassword" name="repeatedPassword" required="true" /]

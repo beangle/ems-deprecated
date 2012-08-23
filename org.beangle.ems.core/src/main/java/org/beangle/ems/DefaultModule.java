@@ -40,7 +40,7 @@ public class DefaultModule extends AbstractBindModule {
             .property("users", "classpath*:system.properties"));
 
     bind(DefaultPropertyConfigFactory.class).property("providers",
-        listref(UrlPropertyConfigProvider.class, DaoPropertyConfigProvider.class)).lazy();
+        list(ref(UrlPropertyConfigProvider.class), DaoPropertyConfigProvider.class)).lazy();
 
   }
 

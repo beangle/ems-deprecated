@@ -12,10 +12,13 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.util.meta.SystemVersion;
 import org.beangle.struts2.action.BaseAction;
 
 public class InfoAction extends BaseAction {
 
+  SystemVersion systemVersion;
+  
   public String index() {
     Map<String, Object> clientProps = CollectUtils.newHashMap();
     clientProps.put("client.ip", getRemoteAddr());
@@ -77,4 +80,13 @@ public class InfoAction extends BaseAction {
     put("extraProps", extraProps);
     return forward();
   }
+
+  public SystemVersion getSystemVersion() {
+    return systemVersion;
+  }
+
+  public void setSystemVersion(SystemVersion systemVersion) {
+    this.systemVersion = systemVersion;
+  }
+  
 }

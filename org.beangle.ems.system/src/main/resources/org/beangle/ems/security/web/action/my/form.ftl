@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-<script type="text/javascript" src="${base}/static/scripts/md5.js"></script>
+<script type="text/javascript" src="${base}/static/scripts/common/md5.js"></script>
 [@b.form action="!save" title="我的账户" theme="list"]
 	[@b.password label="user.oldPassword" name="oldPassword"  style="width:100px" value="" required="true" maxlength="40"  /]
 	[@b.password label="user.newPassword" name="password" required="true"  style="width:100px" maxlength=settings.maxPwdLength?string showStrength="true"/]

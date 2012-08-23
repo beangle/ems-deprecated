@@ -21,3 +21,21 @@ create sequence seq_se_data_fields;
 
 alter table  se_user_properties alter column meta_id rename to field_id;
 alter table  se_role_properties alter column meta_id rename to field_id;
+
+
+alter table se_session_stats drop column server_name;
+
+update se_resources set name='/security/menu' where name='/security/nav/menu';
+update se_menus set entry='/security/menu' where entry='/security/nav/menu';
+
+update se_resources set name='/security/menu-profile' where name='/security/nav/profile';
+update se_menus set entry='/security/menu-profile' where entry='/security/nav/profile';
+
+update se_resources set name='/security/menu-nav' where name='/security/nav/index';
+update se_menus set entry='/security/menu-nav' where entry='/security/nav/index';
+
+update se_resources set name='/security/monitor' where name='/security/session/monitor';
+update se_menus set entry='/security/monitor' where entry='/security/session/monitor';
+
+update se_resources set name='/security/sessioninfo-log' where name='/security/session/log';
+update se_menus set entry='/security/sessioninfo-log' where entry='/security/session/log';
