@@ -17,11 +17,8 @@
 		timeToLiveSeconds="1000" timeToIdleSeconds="120"
 		name="org.hibernate.cache.StandardQueryCache"></cache>
 		
-	<cache eternal="false" overflowToDisk="false" maxElementsInMemory="1000"
+	<cache eternal="false" overflowToDisk="false" maxElementsInMemory="10000"
 		timeToLiveSeconds="1000" timeToIdleSeconds="500"
-		name="beangle.security"></cache>
+		name="beangle"></cache>
 		
-	<cache eternal="false" overflowToDisk="false" maxElementsInMemory="1000"
-		timeToLiveSeconds="1000" timeToIdleSeconds="500"
-		name="ems.dictionary"></cache>
 </ehcache>

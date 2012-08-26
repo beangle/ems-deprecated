@@ -1,5 +1,5 @@
 [#ftl]
-[@b.head title="Login"/]
+[@b.head title="Login" loadui=false/]
 <script type="text/javascript">
 	if(this.parent!=this){ this.top.location="${b.url('login')}"; }
 </script>

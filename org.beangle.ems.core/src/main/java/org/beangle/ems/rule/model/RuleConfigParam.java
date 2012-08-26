@@ -23,7 +23,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.rule.model.RuleConfigParam")
 @Cacheable
-@Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleConfigParam extends LongIdObject {
 
   private static final long serialVersionUID = 8711866530914907008L;

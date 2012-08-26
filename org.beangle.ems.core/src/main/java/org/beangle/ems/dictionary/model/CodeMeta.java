@@ -26,7 +26,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.dictionary.model.CodeMeta")
 @Cacheable
-@Cache(region = "ems.dictionary", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(region = "beangle", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CodeMeta extends LongIdObject {
 
   private static final long serialVersionUID = -2272793754309992189L;

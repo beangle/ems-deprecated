@@ -25,17 +25,29 @@ alter table  se_role_properties alter column meta_id rename to field_id;
 
 alter table se_session_stats drop column server_name;
 
-update se_resources set name='/security/menu' where name='/security/nav/menu';
-update se_menus set entry='/security/menu' where entry='/security/nav/menu';
+update se_func_resources  set name='/security/nav/menu' where name='/security/menu' ;
+update se_menus set entry='/security/nav/menu' where entry='/security/menu';
 
-update se_resources set name='/security/menu-profile' where name='/security/nav/profile';
-update se_menus set entry='/security/menu-profile' where entry='/security/nav/profile';
+update se_func_resources set name='/security/nav/profile' where  name='/security/menu-profile';
+update se_menus set entry='/security/nav/profile' where entry='/security/menu-profile' ;
 
-update se_resources set name='/security/menu-nav' where name='/security/nav/index';
-update se_menus set entry='/security/menu-nav' where entry='/security/nav/index';
+update se_func_resources set  name='/security/nav/index' where name='/security/menu-nav' ;
+update se_menus set  entry='/security/nav/index' where entry='/security/menu-nav' ;
 
-update se_resources set name='/security/monitor' where name='/security/session/monitor';
-update se_menus set entry='/security/monitor' where entry='/security/session/monitor';
+update se_func_resources set name='/security/session/monitor' where name='/security/monitor' ;
+update se_menus set  entry='/security/session/monitor' where entry='/security/monitor';
 
-update se_resources set name='/security/sessioninfo-log' where name='/security/session/log';
-update se_menus set entry='/security/sessioninfo-log' where entry='/security/session/log';
+update se_func_resources set  name='/security/session/log' where name='/security/sessioninfo-log' ;
+update se_menus set  entry='/security/session/log' where  entry='/security/sessioninfo-log';
+
+
+update se_func_resources set name='/security/permission' where  name='/security/authority' ;
+update se_menus set entry='/security/permission' where  entry='/security/authority';
+
+update se_func_resources set name='/security/role' where  name='/security/group' ;
+update se_menus set entry='/security/role' where  entry='/security/group';
+
+update se_func_resources set name='/security/data/profile' where  name='/security/restriction' ;
+update se_menus set entry='/security/data/profile' where  entry='/security/restriction';
+
+

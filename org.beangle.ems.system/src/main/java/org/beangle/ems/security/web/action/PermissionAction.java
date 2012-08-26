@@ -98,6 +98,7 @@ public class PermissionAction extends SecurityActionSupport {
     put("menus", menus);
     put("menuProfile", menuProfile);
     put("ao", ao);
+    put("locale", getLocale());
     return forward();
   }
 

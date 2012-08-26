@@ -28,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.rule.Rule")
 @Cacheable
-@Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleBean extends LongIdTimeObject implements Rule {
 
   private static final long serialVersionUID = -3648535746761474692L;
@@ -61,7 +61,7 @@ public class RuleBean extends LongIdTimeObject implements Rule {
 
   /** 规则参数集合 */
   @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
-  @Cache(region = "ems.core", usage = CacheConcurrencyStrategy.READ_WRITE)
+  @Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<RuleParameter> params = CollectUtils.newHashSet();
 
   /** 是否启用 */

@@ -65,9 +65,9 @@
 	<tbody>
 	<tr class="gridhead">
 	<th width="6%"><input type="checkbox" onclick="treeToggleAll(this,checkResource)"/></th>
-	<th width="34%">${b.text("common.name")}</th>
+	<th width="28%">${b.text("common.name")}</th>
 	<th width="10%">${b.text("common.id")}</th>
-	<th width="44%">可用资源</th>
+	<th width="50%">可用资源</th>
 	<th width="6%">${b.text("common.status")}</th>
 	</tr>
 	[#macro i18nTitle(entity)][#if locale.language?index_of("en")!=-1][#if entity.engTitle!?trim==""]${entity.title!}[#else]${entity.engTitle!}[/#if][#else][#if entity.title!?trim!=""]${entity.title!}[#else]${entity.engTitle!}[/#if][/#if][/#macro]
@@ -94,7 +94,7 @@
 				<input type="checkbox" name="resourceId" id="checkbox_${menu_index}_${resource_index}" [#if aoResources?seq_contains(resource)]checked="checked"[/#if] value="${resource.id}">[#rt]
 				${resource.title}
 				[/#if]
-				[#if resource_index%2==1]<br/>[/#if]
+				[#if resource_index%3==1]<br/>[/#if]
 			[/#list]
 		</td>
 		<td align="center">[@shortEnableInfo menu.enabled/]</td>
@@ -103,9 +103,6 @@
 	</tbody>
 </table>
 [/@]
-	</td>
-	<td id="dataRealmTD" style="width:300px" valign="top" >
-	 [@b.div  href="restriction!tip" id="restictionFrame" style="position:fixed !important;"/]
 	</td>
 	</tr>
 </table>

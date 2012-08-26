@@ -100,12 +100,6 @@ public class UserAction extends SecurityActionSupport {
       roleCondition.params(params);
       userQuery.where(roleCondition);
     }
-
-    Long categoryId = getLong("categoryId");
-    if (null != categoryId) {
-      userQuery.join("user.categories", "category");
-      userQuery.where("category.id=:categoryId", categoryId);
-    }
     populateConditions(userQuery);
     userQuery.orderBy(get(Order.ORDER_STR)).limit(getPageLimit());
     return userQuery;

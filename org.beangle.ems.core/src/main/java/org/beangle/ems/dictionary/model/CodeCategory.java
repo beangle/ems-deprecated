@@ -25,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.dictionary.model.CodeCategory")
 @Cacheable
-@Cache(region = "ems.dictionary", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(region = "beangle", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CodeCategory extends IntegerIdObject implements HierarchyEntity<CodeCategory, Integer> {
 
   private static final long serialVersionUID = -8865890399079481866L;
