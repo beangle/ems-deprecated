@@ -5,7 +5,7 @@
 	[@b.textfield name="rule.serviceName" required="true"  label="服务名" value=rule.serviceName!/]
 	[@b.textfield name="rule.factory" required="true" label="管理容器" value=rule.factory!/]
 	[@b.textarea name="rule.description" cols="40" label="说明" maxlength="100" value=rule.description!/]
-	[@b.radios label="是否启用" name="rule.enabled" checked="${rule.enabled?string('1','0')}"/]
+	[@b.radios label="是否启用" name="rule.enabled" value="${rule.enabled?string('1','0')}"/]
 	[@b.formfoot]
 		<input type="hidden" name="rule.id" value="${rule.id!}"/>
 		[@b.submit value="action.submit"/]

@@ -9,8 +9,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Throwables;
 import org.beangle.ems.database.service.DatasourceService;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
@@ -44,7 +44,7 @@ public class DatasourceAction extends SecurityActionSupport {
         rs.close();
       }
     } catch (Exception e) {
-      put("exceptionStack", ExceptionUtils.getFullStackTrace(e));
+      put("exceptionStack", Throwables.getStackTrace(e));
     } finally {
       try {
         if (con != null) con.close();

@@ -29,15 +29,25 @@
 			[@b.row]
 				<tr [#if role??]id="${role.code}"[/#if]>
 				[@b.col title="common.index" width="5%"]${role_index+1}[/@]
-				[@b.treecol title="entity.role" property="name"]<span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>${role.code} ${role.name}[#if role.dynamic] (动态角色)[/#if]</span>[/@]
+				[@b.treecol title="entity.role" property="name"]
+					<span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>
+					${role.code} ${role.name}[#if role.dynamic] (动态)[/#if] [#if !role.enabled] (禁用)[/#if]
+					</span>
+				[/@]
 				[@b.col title="member.member" width="10%"]
-				<input type="checkbox" name="member${role.id}" onchange="changeMember(${role.id},this)" [#if role.dynamic]disabled="disabled"[/#if] ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
+					[#assign displayMember=(role.enabled && !role.dynamic)]
+					<input type="checkbox" [#if !displayMember]style="display:none"[/#if] name="member${role.id}" onchange="changeMember(${role.id},this)" ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
+					[#if !displayMember && (memberMap.get(role).member)!false]&radic;[/#if]
 				[/@]
 				[@b.col title="member.granter" width="10%"]
-				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).granter)?default(false)][#else]<input type="checkbox" name="granter${role.id}" [#if !curMemberMap.get(role).manager || role.dynamic]disabled="disabled"[/#if] ${(memberMap.get(role).granter)?default(false)?string('checked="checked"','')}/>[/#if]
+					[#assign displayGranter=(role.enabled && !role.dynamic && curMemberMap.get(role).manager)/]
+					<input type="checkbox" name="granter${role.id}" [#if !displayGranter]style="display:none"[/#if] ${(memberMap.get(role).granter)?default(false)?string('checked="checked"','')}/>
+					[#if !displayGranter && (memberMap.get(role).granter)!false]&radic;[/#if]
 				[/@]
 				[@b.col title="member.manager" width="10%"]
-				[#if !curMemberMap.get(role).manager && !(memberMap.get(role).manager)?default(false)][#else]<input type="checkbox" name="manager${role.id}" [#if !curMemberMap.get(role).manager || role.dynamic]disabled="disabled"[/#if]${(memberMap.get(role).manager)?default(false)?string('checked="checked"','')}/>[/#if]
+					[#assign displayManager=(role.enabled && !role.dynamic && curMemberMap.get(role).manager)/]
+					<input type="checkbox" name="manager${role.id}" [#if !displayManager]style="display:none"[/#if] ${(memberMap.get(role).manager)?default(false)?string('checked="checked"','')}/>
+					[#if !displayManager && (memberMap.get(role).manager)!false]&radic;[/#if]
 				[/@]
 				[@b.col title="common.updatedAt" width="20%"]${(memberMap.get(role).updatedAt?string("yyyy-MM-dd HH:mm"))!}[/@]
 				</tr>

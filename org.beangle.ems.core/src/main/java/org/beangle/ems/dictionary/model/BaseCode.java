@@ -63,7 +63,7 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
    * 生效时间
    */
   @NotNull
-  protected Date effectAt;
+  protected Date effectiveAt;
 
   /**
    * 失效时间
@@ -157,17 +157,16 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
    * @return 生效时间
    */
   public Date getEffectiveAt() {
-    return effectAt;
+    return effectiveAt;
   }
 
   /**
    * 设置生效时间
    * 
-   * @param effectiveAt
-   *          生效时间
+   * @param effectiveAt 生效时间
    */
-  public void setEffectAt(Date effectAt) {
-    this.effectAt = effectAt;
+  public void setEffectiveAt(Date effectiveAt) {
+    this.effectiveAt = effectiveAt;
   }
 
   /**

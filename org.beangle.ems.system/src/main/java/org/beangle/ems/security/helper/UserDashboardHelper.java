@@ -27,6 +27,8 @@ import org.beangle.struts2.helper.ContextHelper;
 import org.beangle.struts2.helper.Params;
 import org.beangle.struts2.helper.QueryHelper;
 
+import com.opensymphony.xwork2.ActionContext;
+
 /**
  * @author chaostone
  * @version $Id: DashboardHelper.java Nov 3, 2010 5:19:42 PM chaostone $

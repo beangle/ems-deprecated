@@ -8,7 +8,7 @@
 	[@b.gridbar]
 		bar.addItem("${b.text("action.new")}",action.add());
 		bar.addItem("${b.text("action.modify")}",action.edit());
-		bar.addItem("${b.text("action.delete")}",action.remove());
+		bar.addItem("${b.text("action.delete")}",action.remove("删除时，会级联删除对应的所有子角色，确认删除?"));
 		bar.addItem("${b.text("action.export")}",action.exportData("name:${b.text("common.name")},remark:${b.text("common.remark")},owner.name:${b.text("common.creator")},createdAt:${b.text("common.createdAt")},updatedAt:${b.text("common.updatedAt")},users:${b.text("role.users")}",null,"&fileName=角色"));
 	[/@]
 	[@b.row]

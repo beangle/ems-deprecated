@@ -6,6 +6,7 @@ package org.beangle.ems.security.web.action;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.beanutils.BeanPredicate;
 import org.apache.commons.collections.CollectionUtils;
@@ -85,8 +86,8 @@ public class RoleAction extends SecurityActionSupport {
 
   protected String saveAndForward(Entity<?> entity) {
     RoleBean role = (RoleBean) entity;
-    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) { return redirect("edit",
-        "error.notUnique"); }
+    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) return redirect("edit",
+        "error.notUnique");
     if (!role.isPersisted()) {
       User creator = userService.get(getUserId());
       role.setCode("tmp");
@@ -100,10 +101,15 @@ public class RoleAction extends SecurityActionSupport {
     Long newParentId = getLong("parent.id");
     int indexno = getInteger("indexno");
     Role parent = null;
-    if (null != newParentId) {
-      parent = entityDao.get(Role.class, newParentId);
-    }
+    if (null != newParentId) parent = entityDao.get(Role.class, newParentId);
+
     roleService.moveRole(role, parent, indexno);
+    if (!role.isEnabled()) {
+      Set<Role> family = HierarchyEntityUtils.getFamily((Role) role);
+      for (Role one : family)
+        ((RoleBean) one).setEnabled(false);
+      entityDao.saveOrUpdate(family);
+    }
     return redirect("search", "info.save.success");
   }
 

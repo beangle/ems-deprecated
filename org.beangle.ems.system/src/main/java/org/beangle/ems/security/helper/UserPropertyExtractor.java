@@ -27,7 +27,7 @@ public class UserPropertyExtractor extends DefaultPropertyExtractor {
       if (enabled) return getText("action.activate");
       else return getText("action.freeze");
     }
-    if ("roles".equals(property)) {
+    if ("members".equals(property)) {
       return getPropertyIn(user.getMembers(), "role.name");
     } else {
       return super.getPropertyValue(target, property);

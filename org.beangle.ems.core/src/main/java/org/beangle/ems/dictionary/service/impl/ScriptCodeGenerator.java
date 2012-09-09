@@ -6,8 +6,8 @@ package org.beangle.ems.dictionary.service.impl;
 
 import java.util.Iterator;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.lang.Throwables;
 import org.beangle.ems.dictionary.service.CodeFixture;
 import org.beangle.ems.dictionary.service.CodeGenerator;
 
@@ -46,7 +46,7 @@ public class ScriptCodeGenerator implements CodeGenerator {
       }
       return gen(fixture);
     } catch (Exception e) {
-      return ExceptionUtils.getStackTrace(e);
+      return Throwables.getStackTrace(e);
     }
   }
 

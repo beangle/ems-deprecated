@@ -27,7 +27,7 @@
 	<td class="title" >${b.text("common.creator")}:</td>
 	<td class="content">${(user.creator.name)!}  </td>
 	<td class="title" >${b.text("user.members")}:</td>
-	<td  class="content">[#list user.members! as m]${m.role.name}([#if m.member]成员[/#if][#if m.manager] 管理[/#if][#if m.granter] 授权[/#if])[/#list]</td>
+	<td  class="content">[#list user.members! as m]${m.role.name}([#if m.member]${b.text('member.member')}[/#if][#if m.manager] ${b.text('member.manager')}[/#if][#if m.granter] ${b.text('member.granter')}[/#if])[/#list]</td>
 	</tr>
 	<tr>
 	<td class="title" >${b.text("common.remark")}:</td>

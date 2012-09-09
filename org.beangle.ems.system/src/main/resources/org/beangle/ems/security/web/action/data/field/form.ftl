@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="修改业务数据纬度信息"]bar.addBack("${b.text("action.back")}");[/@]
-[@b.form action="!save" title="数据限制参数" theme="list"]
+[@b.form action="!save" theme="list"]
 	[@b.textfield label="common.name" name="field.name" value="${field.name!}" required="true" maxlength="50"/]
 	[@b.textfield label="标题" name="field.title" value="${field.title!}" required="true" maxlength="50"/]
 	[@b.select items=types name="field.type.id" value=field.type! required="true" label="类型" style="width:100px"/]

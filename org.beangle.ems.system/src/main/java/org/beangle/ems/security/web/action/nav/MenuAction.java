@@ -51,9 +51,8 @@ public class MenuAction extends SecurityActionSupport {
     }
     List<FuncResource> resurces = entityDao.search(builder);
     Set<FuncResource> existResources = menu.getResources();
-    if (null != resurces) {
-      resurces.removeAll(existResources);
-    }
+    if (null != resurces) resurces.removeAll(existResources);
+
     put("parents", folders);
     put("resources", resurces);
   }
@@ -87,6 +86,12 @@ public class MenuAction extends SecurityActionSupport {
       }
       menuService.move(menu, parent, indexno);
       entityDao.saveOrUpdate(menu);
+      if (!menu.isEnabled()) {
+        Set<Menu> family = HierarchyEntityUtils.getFamily(menu);
+        for (Menu one : family)
+          one.setEnabled(false);
+        entityDao.saveOrUpdate(family);
+      }
     } catch (Exception e) {
       e.printStackTrace();
       return forward(ERROR);
@@ -102,14 +107,21 @@ public class MenuAction extends SecurityActionSupport {
   public String activate() {
     Long[] menuIds = getIds(getShortName());
     Boolean enabled = getBoolean("isActivate");
-    if (null == enabled) {
-      enabled = Boolean.TRUE;
-    }
+    if (null == enabled) enabled = Boolean.TRUE;
+
+    Set<Menu> updated = CollectUtils.newHashSet();
     List<Menu> menus = entityDao.get(Menu.class, menuIds);
     for (Menu menu : menus) {
-      menu.setEnabled(enabled);
+      if (enabled) {
+        updated.addAll(HierarchyEntityUtils.getPath(menu));
+      } else {
+        updated.addAll(HierarchyEntityUtils.getFamily(menu));
+      }
     }
-    entityDao.saveOrUpdate(menus);
+    for (Menu menu : updated)
+      menu.setEnabled(enabled);
+    entityDao.saveOrUpdate(updated);
+    
     return redirect("search", "info.save.success");
   }
 
@@ -124,7 +136,7 @@ public class MenuAction extends SecurityActionSupport {
     query.orderBy("menu.code asc");
     put("menus", entityDao.search(query));
 
-    query.cleanOrders();
+    query.clearOrders();
     query.select("max(length(menu.code)/2)");
     List<?> rs = entityDao.search(query);
     put("depth", rs.get(0));

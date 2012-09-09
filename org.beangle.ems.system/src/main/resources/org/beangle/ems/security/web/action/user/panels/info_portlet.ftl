@@ -6,10 +6,10 @@
 	<div class="portlet-content">
 	  <table class="infoTable">
 	   <tr>
-		 <td class="title" >&nbsp;${b.text("common.name")}:</td>
-		 <td class="content"> ${user.name!}</td>
-		 <td class="title" >&nbsp;${b.text("user.fullname")}:</td>
-		 <td class="content">${(user.fullname)!}  </td>
+		 <td class="title" width="20%">&nbsp;${b.text("common.name")}:</td>
+		 <td class="content" width="30%"> ${user.name!}</td>
+		 <td class="title" width="20%" >&nbsp;${b.text("user.fullname")}:</td>
+		 <td class="content" width="30%">${(user.fullname)!}  </td>
 	   </tr>
 	   <tr>
 		 <td class="title" >&nbsp;${b.text("common.email")}:</td>

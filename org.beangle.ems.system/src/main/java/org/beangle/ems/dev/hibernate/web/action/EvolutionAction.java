@@ -14,8 +14,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.Strings;
 import org.beangle.struts2.action.BaseAction;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -37,7 +37,7 @@ public class EvolutionAction extends BaseAction {
     String version = get("version");
     if (null != version && !version.endsWith("/")) version += "/";
     if (null != version && !version.startsWith("/")) version = "/" + version;
-    if (StringUtils.isNotBlank(version)) {
+    if (Strings.isNotBlank(version)) {
       List<Resource> results = CollectUtils.newArrayList();
       for (Resource resource : resources) {
         if (resource.getURI().toString().contains(version)) {
@@ -90,11 +90,11 @@ public class EvolutionAction extends BaseAction {
       }
       sql = sb.toString();
     }
-    String[] statements = StringUtils.split(sql, ";");
+    String[] statements = Strings.split(sql, ";");
     List<String> sqls=CollectUtils.newArrayList();
     Map<String, String> results = CollectUtils.newHashMap();
     for (String statement : statements) {
-      if (StringUtils.isBlank(statement)) continue;
+      if (Strings.isBlank(statement)) continue;
       try {
         sqls.add(statement);
         jdbcTemplate.execute(statement);

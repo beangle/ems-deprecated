@@ -35,7 +35,6 @@ public class MyAction extends SecurityActionSupport {
   private UserDashboardHelper userDashboardHelper;
 
   public String index() {
-    put("locale",getLocale());
     userDashboardHelper.buildDashboard(entityDao.get(User.class, getUserId()));
     return forward();
   }

@@ -51,3 +51,5 @@ update se_func_resources set name='/security/data/profile' where  name='/securit
 update se_menus set entry='/security/data/profile' where  entry='/security/restriction';
 
 
+alter table se_session_stats drop column user_max_sessions ;
+alter table se_session_stats drop column INACTIVE_INTERVAL;

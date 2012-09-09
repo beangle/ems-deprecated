@@ -20,6 +20,7 @@ import org.beangle.security.blueprint.data.DataPermission;
 import org.beangle.security.blueprint.data.ProfileField;
 import org.beangle.security.blueprint.data.UserProfile;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
+import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.struts2.action.EntityActionSupport;
@@ -30,7 +31,7 @@ public abstract class SecurityActionSupport extends EntityActionSupport implemen
 
   protected DataPermissionService dataPermissionService;
 
-  protected Resource getResource() {
+  protected FuncResource getResource() {
     String resourceName = SecurityUtils.getResource();
     if (null == resourceName) {
       resourceName = funcPermissionService.extractResource(RequestUtils.getServletPath(ServletActionContext

@@ -12,12 +12,12 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.collection.page.PageLimit;
 import org.beangle.commons.collection.page.SinglePage;
+import org.beangle.commons.lang.Strings;
+import org.beangle.commons.lang.Throwables;
 import org.beangle.ems.database.service.SqlService;
 import org.beangle.ems.web.action.SecurityActionSupport;
 
@@ -42,7 +42,7 @@ public class QueryAction extends SecurityActionSupport {
   protected Collection<?> getExportDatas() {
     processSql();
     String newSql = sql;
-    if (StringUtils.isEmpty(newSql)) { return Collections.emptyList(); }
+    if (Strings.isEmpty(newSql)) { return Collections.emptyList(); }
     boolean thisPage = getBool("thisPage");
     if (thisPage) {
       PageLimit limit = getPageLimit();
@@ -58,10 +58,10 @@ public class QueryAction extends SecurityActionSupport {
     processSql();
     List<QueryResult> results = CollectUtils.newArrayList();
     put("results", results);
-    if (StringUtils.isEmpty(sql)) { return forward("result"); }
+    if (Strings.isEmpty(sql)) { return forward("result"); }
     boolean isBatch = getBool("isBatch");
     if (isBatch) {
-      String[] sqls = StringUtils.split(sql, ";");
+      String[] sqls = Strings.split(sql, ";");
       for (String one : sqls) {
         results.add(query(one.trim()));
       }
@@ -89,7 +89,7 @@ public class QueryAction extends SecurityActionSupport {
         result.setUpdateCount(updateCount);
       }
     } catch (Exception e) {
-      result.setMsg(ExceptionUtils.getStackTrace(e));
+      result.setMsg(Throwables.getStackTrace(e));
     }
     @SuppressWarnings("unchecked")
     List<String> history = (List<String>) ActionContext.getContext().getSession().get("sql_history");
