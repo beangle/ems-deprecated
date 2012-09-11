@@ -28,7 +28,7 @@ public class BaseCodeServiceImpl extends BaseServiceImpl implements BaseCodeServ
 
   public <T extends BaseCode<?>> List<T> getCodes(Class<T> codeClass) {
     OqlBuilder<T> builder = OqlBuilder.from(codeClass, "basecode").where(
-        "basecode.effectAt <= :now and (basecode.invalidAt is null or basecode.invalidAt >= :now)",
+        "basecode.effectiveAt <= :now and (basecode.invalidAt is null or basecode.invalidAt >= :now)",
         new java.util.Date());
     builder.orderBy("basecode.code");
     return entityDao.search(builder);
