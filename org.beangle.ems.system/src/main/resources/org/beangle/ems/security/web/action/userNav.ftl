@@ -2,5 +2,4 @@
 [@b.navmenu title="权限管理"]
 	[@ems.guard res="/security/user"][@b.navitem title="entity.user" href="/security/user" /][/@]
 	[@ems.guard res="/security/role"][@b.navitem title="entity.role" href="/security/role" /][/@]
-	[@b.navitem title="我的账户" href="/security/my?nav=true" /]
 [/@]

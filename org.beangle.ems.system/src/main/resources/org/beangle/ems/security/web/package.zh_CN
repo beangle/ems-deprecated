@@ -1,6 +1,6 @@
 entity.menu=菜单
 entity.funcResource=功能资源
-entity.dataPermission=数据权限
+entity.dataPermission=数据限制策略
 
 action.2ndManage=二级管理
 action.changePassword=修改密码
