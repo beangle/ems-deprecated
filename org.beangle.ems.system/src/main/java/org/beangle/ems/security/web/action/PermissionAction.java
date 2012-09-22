@@ -5,8 +5,8 @@
 package org.beangle.ems.security.web.action;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
@@ -43,7 +43,7 @@ public class PermissionAction extends SecurityActionSupport {
    */
   public String edit() {
     Long roleId = getId("role");
-    Role ao = entityDao.get(Role.class, roleId);
+    Role role = entityDao.get(Role.class, roleId);
     User user = entityDao.get(User.class, getUserId());
     put("manager", user);
     List<Role> mngRoles = CollectUtils.newArrayList();
@@ -55,10 +55,10 @@ public class PermissionAction extends SecurityActionSupport {
       }
     }
     put("mngRoles", mngRoles);
-    List<MenuProfile> menuProfiles = menuService.getProfiles(ao);
+    List<MenuProfile> menuProfiles = menuService.getProfiles(role);
     put("menuProfiles", menuProfiles);
 
-    MenuProfile menuProfile = menuService.getProfile(ao, getLong("menuProfileId"));
+    MenuProfile menuProfile = menuService.getProfile(role, getLong("menuProfileId"));
     if (null == menuProfile && !menuProfiles.isEmpty()) {
       menuProfile = menuProfiles.get(0);
     }
@@ -77,27 +77,43 @@ public class PermissionAction extends SecurityActionSupport {
       if (!displayFreezen) {
         List<Menu> freezed = CollectUtils.newArrayList();
         for (Menu menu : menus) {
-          if (!menu.isEnabled()) {
-            freezed.add(menu);
-          }
+          if (!menu.isEnabled()) freezed.add(menu);
         }
         menus.removeAll(freezed);
       }
-      Set<FuncResource> aoResources = CollectUtils.newHashSet();
-      Map<String, Long> aoResourceAuthorityMap = CollectUtils.newHashMap();
-      List<FuncPermission> permissions = funcPermissionService.getPermissions(ao);
-      Collection<Menu> aoMenus = menuService.getMenus(menuProfile, (Role) ao, null);
+      Set<FuncResource> roleResources = CollectUtils.newHashSet();
+      List<FuncPermission> permissions = funcPermissionService.getPermissions(role);
+      Collection<Menu> roleMenus = menuService.getMenus(menuProfile, role, null);
       for (final FuncPermission permission : permissions) {
-        aoResources.add(permission.getResource());
-        aoResourceAuthorityMap.put(permission.getResource().getId().toString(), permission.getId());
+        roleResources.add(permission.getResource());
       }
-      put("aoMenus", CollectUtils.newHashSet(aoMenus));
-      put("aoResources", aoResources);
-      put("aoResourceAuthorityMap", aoResourceAuthorityMap);
+      put("roleMenus", CollectUtils.newHashSet(roleMenus));
+      put("roleResources", roleResources);
+      
+      Set<Role> parents=CollectUtils.newHashSet();
+      Set<FuncResource> parentResources = CollectUtils.newHashSet();
+      Set<Menu> parentMenus=CollectUtils.newHashSet();
+      Role parent=role.getParent();
+      while(null!=parent && !parents.contains(parent)){
+        List<FuncPermission> parentPermissions = funcPermissionService.getPermissions(parent);
+        parentMenus.addAll(menuService.getMenus(menuProfile, parent, null));
+        for (final FuncPermission permission : parentPermissions) {
+          parentResources.add(permission.getResource());
+        }
+        parents.add(parent);
+        parent=parent.getParent();
+      }
+      put("parentMenus",parentMenus);
+      put("parentResources",parentResources);
+    }else{
+      put("roleMenus", Collections.emptySet());
+      put("roleResources",Collections.emptySet());
+      put("parentMenus", Collections.emptySet());
+      put("parentResources",Collections.emptySet());
     }
     put("menus", menus);
     put("menuProfile", menuProfile);
-    put("ao", ao);
+    put("role", role);
     return forward();
   }
 

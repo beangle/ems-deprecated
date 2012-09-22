@@ -10,25 +10,22 @@
 	}
 	function save(){
 		document.permissionForm.action="${b.url('!save')}";
-		if(confirm("${b.text("alert.authoritySave",ao.name)}")){
+		if(confirm("${b.text("alert.authoritySave",role.name)}")){
 			document.permissionForm.submit();
 		}
 	}
+	/**选中或取消资源*/
 	function checkResource(ele){
-		menuDivId=ele.id;
-		var tempTarget ;
-		tempTarget = document.getElementById(menuDivId);
-		if(tempTarget!=null||tempTarget!='undefined'){
-			var stats = tempTarget.checked;
-			var num=0;
-			var tempId = menuDivId+'_'+num;
-			while(tempTarget!=null){
-				num++;
-				tempTarget.checked = stats;
-				tempTarget = document.getElementById(tempId);
-				tempId = menuDivId+'_'+num;
-			}
-		}
+		menuBoxId=ele.id;
+		var stats = ele.checked;
+		var num=0;
+		var resourceBox;
+		do{
+			resourceBox = document.getElementById(menuBoxId+'_'+num);
+			if(null==resourceBox) break;
+			if(!resourceBox.disabled) resourceBox.checked = stats;
+			num++;
+		}while(resourceBox!=null);
 	}
 </script>
 <table width="90%" align="center">
@@ -45,8 +42,8 @@
 	<tr>
 		<td>
 		角色:<select name="role.id" onchange="this.form.submit()" style="width:250px">
-			 [#list mngRoles?sort_by("code")! as role]
-			  <option value="${role.id}" [#if role.id=ao.id]selected="selected"[/#if]>${role.code} ${role.name}</option>
+			 [#list mngRoles?sort_by("code")! as r]
+			  <option value="${r.id}" [#if r.id=role.id]selected="selected"[/#if]>${r.code} ${r.name}</option>
 			 [/#list]
 		</select>
 		</td>
@@ -75,7 +72,7 @@
 
 	<tr class="grayStyle [#if !menu.enabled]ui-disabled[/#if]" id="${menu.code}">
 		<td	class="gridselect">
-			<input type="checkbox" id="checkbox_${menu_index}" onclick="treeToggle(this,checkResource)"  name="menuId" [#if (aoMenus??)&&(aoMenus?seq_contains(menu))]checked="checked"[/#if] value="${menu.id}">
+			<input type="checkbox" id="checkbox_${menu_index}" onclick="treeToggle(this,checkResource)"  name="menuId" [#if parentMenus?seq_contains(menu)]checked="checked" disabled="disabled"[#else][#if (roleMenus?seq_contains(menu))]checked="checked"[/#if][/#if] value="${menu.id}">
 		</td>
 		<td>
 		<div class="tree-tier${menu.depth}">
@@ -91,7 +88,7 @@
 		<td>
 			[#list menu.resources as resource]
 				[#if resources?seq_contains(resource)]
-				<input type="checkbox" name="resourceId" id="checkbox_${menu_index}_${resource_index}" [#if aoResources?seq_contains(resource)]checked="checked"[/#if] value="${resource.id}">[#rt]
+				<input type="checkbox" name="resourceId" id="checkbox_${menu_index}_${resource_index}" [#if parentResources?seq_contains(resource)]checked="checked" disabled="disabled"[#else][#if roleResources?seq_contains(resource)]checked="checked"[/#if][/#if] value="${resource.id}">[#rt]
 				${resource.title}
 				[/#if]
 				[#if resource_index%3==1]<br/>[/#if]
