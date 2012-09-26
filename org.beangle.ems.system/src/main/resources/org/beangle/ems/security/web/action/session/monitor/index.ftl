@@ -12,7 +12,7 @@
 [#assign refreshInterval=Parameters['interval']!"10"/]
 [@b.grid items=sessioninfos var="sessioninfo" refresh="${refreshInterval}"]
 	[@b.gridbar]
-	bar.addItem("过期",action.multi('invalidate','确定过期选择的会话吗?'),'edit-delete.png');
+	bar.addItem("过期",action.multi('invalidate','确定过期选择的会话吗?'),'action-edit-delete');
 	[/@]
 	[@b.row]
 		[@b.boxcol/]

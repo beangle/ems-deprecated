@@ -18,7 +18,7 @@ import org.beangle.struts2.action.BaseAction;
 public class InfoAction extends BaseAction {
 
   SystemVersion systemVersion;
-  
+   
   public String index() {
     Map<String, Object> clientProps = CollectUtils.newHashMap();
     clientProps.put("client.ip", getRemoteAddr());

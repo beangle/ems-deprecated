@@ -50,8 +50,7 @@ public class RoleAction extends SecurityActionSupport {
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");
     if (!isAdmin()) {
       query.join("role.members", "gm");
-      // 列举所有成员
-      query.where("gm.user.id=:me", getUserId());
+      query.where("gm.user.id=:me and gm.manager=true", getUserId());
     }
     List<Role> roles = entityDao.search(query);
     Role role = (Role) entity;
@@ -64,6 +63,14 @@ public class RoleAction extends SecurityActionSupport {
     OqlBuilder<RoleProfile> builder = OqlBuilder.from(RoleProfile.class, "gp");
     builder.where("gp.role.id=:roleId", getId("role"));
     put("profiles", entityDao.search(builder));
+    return forward();
+  }
+
+  @Override
+  public String search() {
+    List<Role> roles = entityDao.search(getQueryBuilder());
+    put(getShortName() + "s", roles);
+    put("editableRoles", roleService.editable(entityDao.get(User.class, getUserId()), roles));
     return forward();
   }
 

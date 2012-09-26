@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title="entity.dataProfileField"]bar.addBack("${b.text("action.back")}");[/@]
+[@b.toolbar title="entity.profileField"]bar.addBack("${b.text("action.back")}");[/@]
 [@b.form action="!save" theme="list"]
 	[@b.textfield label="common.name" name="field.name" value="${field.name!}" required="true" maxlength="50"/]
 	[@b.textfield label="标题" name="field.title" value="${field.title!}" required="true" maxlength="50"/]
