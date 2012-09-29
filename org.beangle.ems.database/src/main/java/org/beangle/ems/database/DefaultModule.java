@@ -1,7 +1,6 @@
 package org.beangle.ems.database;
 
 import org.beangle.commons.context.inject.AbstractBindModule;
-import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.database.action.BrowserAction;
 import org.beangle.ems.database.action.DatasourceAction;
 import org.beangle.ems.database.action.IndexAction;
@@ -18,7 +17,7 @@ public class DefaultModule extends AbstractBindModule {
     bind(H2Dialect.class, SqlService.class, DatasourceService.class);
 
     bind(QueryAction.class, DatasourceAction.class, ProviderAction.class, BrowserAction.class,
-        IndexAction.class).in(Scope.PROTOTYPE);
+        IndexAction.class);
   }
 
 }

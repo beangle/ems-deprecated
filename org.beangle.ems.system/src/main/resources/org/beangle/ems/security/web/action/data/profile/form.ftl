@@ -23,7 +23,7 @@
 		[#if field.multiple && field.type.keyName?exists]
 			[@b.grid items=mngFields[field.name] var="value"]
 				[@b.row]
-					[@b.boxcol width="10%" property=field.type.keyName boxname=field.name checked=(aoFields[field.name]?seq_contains(value))!false /]
+					[@b.boxcol property=field.type.keyName boxname=field.name checked=(aoFields[field.name]?seq_contains(value))!false /]
 					[#if field.type.properties??]
 					[#list field.type.properties?split(",") as pName][@b.col title=pName]${value[pName]!}[/@][/#list]
 					[#else]

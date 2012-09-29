@@ -16,7 +16,7 @@ import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.model.BaseCode;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 /**
  * 基础代码管理
@@ -24,7 +24,7 @@ import org.beangle.struts2.action.BaseAction;
  * @author chaostone
  * @version $Id: CodeAction.java Jun 29, 2011 5:19:26 PM chaostone $
  */
-public class CodeAction extends BaseAction {
+public class CodeAction extends ActionSupport {
 
   private BaseCodeService baseCodeService;
   private EntityDao entityDao;

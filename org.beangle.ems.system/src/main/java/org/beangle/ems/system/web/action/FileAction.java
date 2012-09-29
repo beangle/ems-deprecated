@@ -16,9 +16,9 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.http.mime.MimeTypeProvider;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.web.io.StreamDownloader;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
-public class FileAction extends BaseAction {
+public class FileAction extends ActionSupport {
 
   private MimeTypeProvider mimeTypeProvider;
 

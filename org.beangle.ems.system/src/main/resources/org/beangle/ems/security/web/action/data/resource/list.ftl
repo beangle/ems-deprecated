@@ -7,7 +7,7 @@
 		bar.addItem("${b.text("action.delete")}",action.remove());
 	[/@]
 	[@b.row]
-		[@b.boxcol width="5%"/]
+		[@b.boxcol/]
 		[@b.col property="title" title="标题" width="20%"/]
 		[@b.col property="name" title="名称" width="40%"/]
 		[@b.col property="remark" title="描述"  width="35%"/]

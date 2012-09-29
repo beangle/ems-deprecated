@@ -11,11 +11,11 @@ import org.beangle.security.Securities;
 import org.beangle.security.core.Authentication;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.security.web.auth.logout.LogoutHandlerStack;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 import com.opensymphony.xwork2.ActionContext;
 
-public class LogoutAction extends BaseAction {
+public class LogoutAction extends ActionSupport {
 
   private LogoutHandlerStack handlerStack;
 

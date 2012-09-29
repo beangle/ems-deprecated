@@ -72,7 +72,7 @@ public class MyAction extends SecurityActionSupport {
    */
   public String edit() {
     put("user", entityDao.get(User.class, getUserId()));
-    put("settings",new Settings(getConfig()));
+    put("settings", new Settings(getConfig()));
     return forward();
   }
 
@@ -99,7 +99,7 @@ public class MyAction extends SecurityActionSupport {
     String name = get("name");
     String email = get("mail");
     if (Strings.isEmpty(name) || Strings.isEmpty(email)) {
-      addActionError("error.parameters.needed");
+      addError("error.parameters.needed");
       return (ERROR);
     }
     List<User> userList = entityDao.get(User.class, "name", name);
@@ -116,7 +116,7 @@ public class MyAction extends SecurityActionSupport {
       String password = RandomStringUtils.randomNumeric(6);
       user.setRemark(password);
       user.setPassword(EncryptUtil.encode(password));
-      //String title = getText("user.password.sendmail.title");
+      // String title = getText("user.password.sendmail.title");
 
       List<Object> values = CollectUtils.newArrayList();
       values.add(longinName);

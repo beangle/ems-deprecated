@@ -5,7 +5,6 @@
 package org.beangle.ems.dev;
 
 import org.beangle.commons.context.inject.AbstractBindModule;
-import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.dev.hibernate.web.action.CacheAction;
 import org.beangle.ems.dev.hibernate.web.action.EvolutionAction;
 import org.beangle.ems.dev.spring.web.action.SpringAction;
@@ -15,9 +14,9 @@ public final class DefaultModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
-    bind(SpringAction.class, ConfigBrowserAction.class, CacheAction.class).in(Scope.PROTOTYPE);
+    bind(SpringAction.class, ConfigBrowserAction.class, CacheAction.class);
     
-    bind(EvolutionAction.class).in(Scope.PROTOTYPE);
+    bind(EvolutionAction.class);
   }
 
 }

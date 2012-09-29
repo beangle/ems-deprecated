@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.util.meta.SystemVersion;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
-public class InfoAction extends BaseAction {
+public class InfoAction extends ActionSupport {
 
   SystemVersion systemVersion;
    

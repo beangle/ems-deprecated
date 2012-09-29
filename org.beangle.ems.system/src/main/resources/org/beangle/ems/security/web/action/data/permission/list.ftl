@@ -6,7 +6,7 @@
 		bar.addItem("${b.text("action.delete")}",action.remove());
 	[/@]
 	[@b.row]
-		[@b.boxcol width="5%"/]
+		[@b.boxcol/]
 		[@b.col width="10%" property="resource.title" title="dataPermission.resource" /]
 		[@b.col width="10%" property="role.name" title="entity.role" /]
 		[@b.col width="15%" property="funcResource.title" title="entity.funcResource" /]

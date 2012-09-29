@@ -115,7 +115,7 @@ public class UserAction extends SecurityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     User user = (User) entity;
     if (entityDao.duplicate(User.class, user.getId(), "name", user.getName())) {
-      addFlashMessageNow("security.error.usernameNotAvaliable", user.getName());
+      addMessage("security.error.usernameNotAvaliable", user.getName());
       return forward(new Action(this, "edit"));
     }
     String errorMsg = "";

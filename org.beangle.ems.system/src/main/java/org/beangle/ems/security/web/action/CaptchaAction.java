@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
 
@@ -20,7 +20,7 @@ import com.octo.captcha.service.image.ImageCaptchaService;
  * 
  * @author chaostone
  */
-public class CaptchaAction extends BaseAction {
+public class CaptchaAction extends ActionSupport {
 
   private ByteArrayInputStream inputStream;
 

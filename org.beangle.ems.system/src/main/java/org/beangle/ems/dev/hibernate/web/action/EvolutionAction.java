@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import org.apache.commons.io.IOUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.lang.Strings;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,7 +26,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * 
  * @author chaostone
  */
-public class EvolutionAction extends BaseAction {
+public class EvolutionAction extends ActionSupport {
 
   JdbcTemplate jdbcTemplate;
   String databaseName;

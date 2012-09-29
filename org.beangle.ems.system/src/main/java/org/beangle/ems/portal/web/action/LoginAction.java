@@ -15,12 +15,12 @@ import org.beangle.security.core.Authentication;
 import org.beangle.security.core.AuthenticationException;
 import org.beangle.security.core.context.SecurityContextHolder;
 import org.beangle.security.core.session.SessionRegistry;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
 
-public class LoginAction extends BaseAction {
+public class LoginAction extends ActionSupport {
 
   private CaptchaService captchaService;
 
@@ -37,7 +37,7 @@ public class LoginAction extends BaseAction {
     if (!shouldLogin()) { return "failure"; }
     String errorMsg = doLogin();
     if (Strings.isNotEmpty(errorMsg)) {
-      addActionError(getText(errorMsg));
+      addError(getText(errorMsg));
       increaseLoginFailure();
       return "failure";
     }
@@ -56,16 +56,16 @@ public class LoginAction extends BaseAction {
         String sessionId = getRequest().getSession().getId();
         String captchaText = get("captcha");
         if (Strings.isEmpty(captchaText)) {
-          addActionError(getText("security.EmptyCaptcha"));
+          addError(getText("security.EmptyCaptcha"));
           return false;
         }
         Boolean valid = captchaService.validateResponseForID(sessionId, captchaText);
         if (Boolean.FALSE.equals(valid)) {
-          addActionError(getText("security.WrongCaptcha"));
+          addError(getText("security.WrongCaptcha"));
           return false;
         }
       } catch (CaptchaServiceException e) {
-        addActionError(getText("security.WrongCaptcha"));
+        addError(getText("security.WrongCaptcha"));
         return false;
       }
     }

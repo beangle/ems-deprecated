@@ -23,7 +23,7 @@
 [/@]
 	[@b.row]
 		<tr [#if menu??] title="入口及备注:${menu.entry!} ${(menu.remark?html)!}" id="${menu.code}"[/#if]>
-		[@b.boxcol width="5%" /]
+		[@b.boxcol/]
 		[@b.treecol title="common.title" width="30%"][@b.a href="!info?menu.id=${menu.id}"]${menu.code} ${menu.title}[/@][/@]
 		[@b.col property="name" title="common.name" width="15%"/]
 		[@b.col width="40%" title="使用资源"][#list menu.resources as re]${re.title?html}[#if re_has_next],[/#if][/#list][/@]

@@ -5,7 +5,6 @@
 package org.beangle.ems.system.web;
 
 import org.beangle.commons.context.inject.AbstractBindModule;
-import org.beangle.commons.context.inject.Scope;
 import org.beangle.ems.business.web.action.LogAction;
 import org.beangle.ems.business.web.action.RuleAction;
 import org.beangle.ems.business.web.action.RuleParamAction;
@@ -26,15 +25,15 @@ public final class DefaultModule extends AbstractBindModule {
   @Override
   protected void doBinding() {
     // property
-    bind(FileAction.class, InfoAction.class, PropertyAction.class).in(Scope.PROTOTYPE);
+    bind(FileAction.class, InfoAction.class, PropertyAction.class);
     // home
-    bind(LoginAction.class, LogoutAction.class, HomeAction.class).in(Scope.PROTOTYPE);
+    bind(LoginAction.class, LogoutAction.class, HomeAction.class);
 
-    bind(LogAction.class, RuleAction.class, RuleParamAction.class).in(Scope.PROTOTYPE);
+    bind(LogAction.class, RuleAction.class, RuleParamAction.class);
 
-    bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class).in(Scope.PROTOTYPE);
-    
-    bind(StaticfileAction.class).property("loaders", listref(ClasspathDocLoader.class)).in(Scope.PROTOTYPE);
-    
+    bind(CodeAction.class, CodeMetaAction.class, CodeScriptAction.class);
+
+    bind(StaticfileAction.class).property("loaders", listref(ClasspathDocLoader.class));
+
   }
 }

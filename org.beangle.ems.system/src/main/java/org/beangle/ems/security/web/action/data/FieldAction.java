@@ -40,7 +40,7 @@ public class FieldAction extends EntityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     ProfileField field = (ProfileField) entity;
     if (entityDao.duplicate(ProfileField.class, field.getId(), "name", field.getName())) {
-      addFlashErrorNow("名称重复");
+      addError("名称重复");
       return forward(new Action(this, "edit"));
     }
     try {
@@ -48,7 +48,7 @@ public class FieldAction extends EntityActionSupport {
       dataPermissionService.getFieldValues(field, 1L);
     } catch (Exception e) {
       e.printStackTrace();
-      addFlashErrorNow("不能按照给定描述提取数据");
+      addError("不能按照给定描述提取数据");
       return forward(new Action(this, "edit"));
     }
 

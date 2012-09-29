@@ -16,7 +16,7 @@
 	function activateUser(isActivate){return action.multi("activate","确定提交?","isActivate="+isActivate);}
 	[/@]
 	[@b.row]
-		[@b.boxcol width="5%"/]
+		[@b.boxcol/]
 		[@b.col property="name" width="15%"]&nbsp;[@b.a href="!dashboard?user.id=${user.id}" target="_blank"]${user.name}[/@][/@]
 		[@b.col property="fullname" width="10%"/]
 		[@b.col title="user.members" width="20%"][#list user.members as m][#if m.member]${m.role.name} [/#if][/#list][/@]

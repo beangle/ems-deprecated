@@ -63,7 +63,7 @@ public class CodeMetaAction extends SecurityActionSupport {
       }
     }
     if (duplicatedNames.size() > 0) {
-      addFlashErrorNow("dictionary.error.duplicateCategoryName", Strings.join(duplicatedNames, ","));
+      addError("dictionary.error.duplicateCategoryName", Strings.join(duplicatedNames, ","));
       return forward(new Action(this, "categories"));
     } else {
       entityDao.save(updated);
@@ -92,15 +92,15 @@ public class CodeMetaAction extends SecurityActionSupport {
     boolean error = false;
     if (entityDao.duplicate(CodeMeta.class, meta.getId(), "name", meta.getName())) {
       error = true;
-      addFlashErrorNow("基础代码名称不能重复");
+      addError("基础代码名称不能重复");
     }
     if (entityDao.duplicate(CodeMeta.class, meta.getId(), "title", meta.getTitle())) {
       error = true;
-      addFlashErrorNow("基础代码标题不能重复");
+      addError("基础代码标题不能重复");
     }
     if (entityDao.duplicate(CodeMeta.class, meta.getId(), "className", meta.getClassName())) {
       error = true;
-      addFlashErrorNow("基础代码实体类不能重复");
+      addError("基础代码实体类不能重复");
     }
 
     if (!error) {

@@ -26,14 +26,14 @@ public class TypeAction extends EntityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     DataType type = (DataType) entity;
     if (entityDao.duplicate(DataType.class, type.getId(), "name", type.getName())) {
-      addFlashErrorNow("名称重复");
+      addError("名称重复");
       return forward(new Action(this, "edit"));
     }
 
     try {
       Class.forName(type.getTypeName());
     } catch (ClassNotFoundException e) {
-      addFlashErrorNow("不能加载声明的类型");
+      addError("不能加载声明的类型");
       return forward(new Action(this, "edit"));
     }
 

@@ -11,14 +11,14 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.web.io.StreamDownloader;
 import org.beangle.ems.io.StaticFileLoader;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 /**
  * 静态资源下载
  * 
  * @author chaostone
  */
-public class StaticfileAction extends BaseAction {
+public class StaticfileAction extends ActionSupport {
 
   private List<StaticFileLoader> loaders = CollectUtils.newArrayList();
 

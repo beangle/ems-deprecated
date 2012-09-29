@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
 
@@ -17,7 +17,7 @@ import org.hibernate.stat.Statistics;
  * @author chaostone
  * @version $Id: HibernateAction.java Nov 6, 2011 8:54:18 PM chaostone $
  */
-public class CacheAction extends BaseAction {
+public class CacheAction extends ActionSupport {
 
   private SessionFactory sessionFactory;
 
@@ -56,7 +56,7 @@ public class CacheAction extends BaseAction {
       deactivation=(Date)getSession().get("hibernate.stat.deactivation");
     }
     
-    addActionMessage(info.toString());
+    addMessage(info.toString());
     boolean active = statistics.isStatisticsEnabled();
     if (active) {
       generalStatistics.add(statistics.getConnectCount());

@@ -33,9 +33,7 @@ public class LogAction extends SecurityActionSupport {
     OqlBuilder<SessioninfoLogBean> query = OqlBuilder.from(SessioninfoLogBean.class, "sessioninfoLog");
     addConditions(query);
     String orderBy = get("orderBy");
-    if (null == orderBy) {
-      orderBy = "sessioninfoLog.loginAt desc";
-    }
+    if (null == orderBy) orderBy = "sessioninfoLog.loginAt desc";
     query.limit(getPageLimit()).orderBy(orderBy);
     put("sessioninfoLogs", entityDao.search(query));
     return forward();

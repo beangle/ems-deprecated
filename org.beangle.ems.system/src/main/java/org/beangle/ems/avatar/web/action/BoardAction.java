@@ -59,7 +59,7 @@ public class BoardAction extends SecurityActionSupport {
       if (passed) {
         avatarBase.updateAvatar(userName, files[0], type);
       } else {
-        addActionError("不支持的文件类型");
+        addError("不支持的文件类型");
         return forward("info");
       }
     }

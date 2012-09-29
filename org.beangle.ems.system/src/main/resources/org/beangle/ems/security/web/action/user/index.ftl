@@ -11,7 +11,7 @@
 	[/@]
 	</td>
 	<td class="index_content">
-	[@b.div id="userlist" href="user!search?user.enabled=1" /]
+	[@b.div id="userlist" href="!search?user.enabled=1" /]
 	</td>
 </tr>
 </table>

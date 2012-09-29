@@ -41,7 +41,7 @@ public class PermissionAction extends EntityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     DataPermissionBean pattern = (DataPermissionBean) entity;
     if (entityDao.duplicate(DataPermissionBean.class, pattern.getId(), "remark", pattern.getRemark())) {
-      addFlashErrorNow("限制模式描述重复");
+      addError("限制模式描述重复");
       return forward(new Action(this, "editPattern"));
     } else {
       entityDao.saveOrUpdate(pattern);

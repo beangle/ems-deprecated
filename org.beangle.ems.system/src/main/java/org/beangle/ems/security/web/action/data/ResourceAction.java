@@ -45,7 +45,7 @@ public class ResourceAction extends EntityActionSupport {
     DataResourceBean resource = (DataResourceBean) entity;
     if (null != resource.getName()) {
       if (entityDao.duplicate(DataResourceBean.class, resource.getId(), "name", resource.getName())) {
-        addFlashErrorNow("名称重复");
+        addError("名称重复");
         return forward(new Action(this, "edit"));
       }
       Map<String, DataField> fields = CollectUtils.newHashMap();

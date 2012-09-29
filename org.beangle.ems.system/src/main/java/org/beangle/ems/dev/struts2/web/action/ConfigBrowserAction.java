@@ -23,7 +23,7 @@ import org.apache.struts2.dispatcher.multipart.MultiPartRequest;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.velocity.VelocityManager;
 import org.beangle.ems.dev.struts2.web.helper.S2ConfigurationHelper;
-import org.beangle.struts2.action.BaseAction;
+import org.beangle.struts2.action.ActionSupport;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionProxyFactory;
@@ -43,14 +43,14 @@ import com.opensymphony.xwork2.validator.Validator;
  * @author chaostone
  * @version $Id: Struts2Action.java Dec 24, 2011 4:12:37 PM chaostone $
  */
-public class ConfigBrowserAction extends BaseAction {
+public class ConfigBrowserAction extends ActionSupport {
 
   protected S2ConfigurationHelper configHelper;
 
   public String index() {
     Set<String> namespaces = configHelper.getNamespaces();
     if (namespaces.size() == 0) {
-      addActionError("There are no namespaces in this configuration");
+      addError("There are no namespaces in this configuration");
       return ERROR;
     }
     String namespace = get("namespace");
@@ -82,7 +82,7 @@ public class ConfigBrowserAction extends BaseAction {
       put("properties", configHelper.getReflectionProvider().getPropertyDescriptors(clazz));
     } catch (Exception e) {
       logger.error("Unable to get properties for action " + actionName, e);
-      addActionError("Unable to retrieve action properties: " + e.toString());
+      addError("Unable to retrieve action properties: " + e.toString());
     }
     String extension = null;
     for (String key : configHelper.getContainer().getInstanceNames(String.class)) {
@@ -254,7 +254,7 @@ public class ConfigBrowserAction extends BaseAction {
         beanInfoFrom = Introspector.getBeanInfo(validator.getClass(), Object.class);
       } catch (IntrospectionException e) {
         logger.error("An error occurred", e);
-        addActionError("An error occurred while introspecting a validator of type "
+        addError("An error occurred while introspecting a validator of type "
             + validator.getClass().getName());
         return ERROR;
       }
@@ -271,15 +271,15 @@ public class ConfigBrowserAction extends BaseAction {
           try {
             value = configHelper.getReflectionProvider().getValue(name, context, validator);
           } catch (ReflectionException e) {
-            addActionError("Caught exception while getting property value for '" + name
-                + "' on validator of type " + validator.getClass().getName());
+            addError("Caught exception while getting property value for '" + name + "' on validator of type "
+                + validator.getClass().getName());
           }
         }
         properties.add(new PropertyInfo(name, pd.getPropertyType(), value));
       }
     } catch (Exception e) {
       logger.warn("Unable to retrieve properties.", e);
-      addActionError("Unable to retrieve properties: " + e.toString());
+      addError("Unable to retrieve properties: " + e.toString());
     }
     return forward();
   }
