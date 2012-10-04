@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	if(this.parent!=this){ this.top.location="${b.url('login')}"; }
 </script>
-[#if ((Session['loginFailureCount'])?default(0)>1)][#assign needCaptcha=true][#else][#assign needCaptcha=false][/#if]
+[#if (Session?? && (Session['loginFailureCount'])?default(0)>1)][#assign needCaptcha=true][#else][#assign needCaptcha=false][/#if]
 <div style="text-align:center;margin-top:150px;border:4px">权限系统</div>
 <div >
 	[@b.form name="loginForm" action="login" target="_top"]

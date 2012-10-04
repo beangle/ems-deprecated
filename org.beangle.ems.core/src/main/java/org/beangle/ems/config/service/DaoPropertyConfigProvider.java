@@ -9,11 +9,11 @@ import java.util.Properties;
 
 import javax.persistence.Entity;
 
-import org.beangle.commons.context.property.PropertyConfigFactory;
+import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
-public class DaoPropertyConfigProvider implements PropertyConfigFactory.Provider {
+public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
 
   private EntityDao entityDao;
 

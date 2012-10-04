@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.context.property.PropertyConfigFactory;
+import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
@@ -17,7 +17,7 @@ import org.beangle.struts2.action.ActionSupport;
 
 public class PropertyAction extends ActionSupport {
 
-  private PropertyConfigFactory configFactory;
+  private PropertyConfig propertyConfig;
 
   private EntityDao entityDao;
 
@@ -30,11 +30,11 @@ public class PropertyAction extends ActionSupport {
     builder.orderBy("config.name");
     List<PropertyConfigItemBean> configs = entityDao.search(builder);
     put("propertyConfigs", configs);
-    Set<String> staticNames = configFactory.getConfig().getNames();
+    Set<String> staticNames = propertyConfig.getNames();
     for (PropertyConfigItemBean config : configs) {
       staticNames.remove(config.getName());
     }
-    put("config", configFactory.getConfig());
+    put("config", propertyConfig);
     put("staticNames", staticNames);
     return forward();
   }
@@ -51,7 +51,7 @@ public class PropertyAction extends ActionSupport {
         && !names.contains(newConfig.getName())) {
       entityDao.saveOrUpdate(newConfig);
     }
-    configFactory.reload();
+    propertyConfig.reload();
     return redirect("dynaInfo", msg);
   }
 
@@ -63,7 +63,7 @@ public class PropertyAction extends ActionSupport {
       names.add(config.getName());
     }
     entityDao.saveOrUpdate(configs);
-    configFactory.reload();
+    propertyConfig.reload();
     return redirect("dynaInfo", "info.save.success");
   }
 
@@ -77,11 +77,11 @@ public class PropertyAction extends ActionSupport {
     OqlBuilder<PropertyConfigItemBean> builder = OqlBuilder.from(PropertyConfigItemBean.class, "config");
     builder.orderBy("config.name");
     List<PropertyConfigItemBean> configs = entityDao.search(builder);
-    Set<String> staticNames = configFactory.getConfig().getNames();
+    Set<String> staticNames = propertyConfig.getNames();
     for (PropertyConfigItemBean config : configs) {
       staticNames.remove(config.getName());
     }
-    put("config", configFactory.getConfig());
+    put("config", propertyConfig);
     put("staticNames", staticNames);
     return forward();
   }
@@ -91,7 +91,7 @@ public class PropertyAction extends ActionSupport {
     builder.orderBy("config.name");
     List<PropertyConfigItemBean> configs = entityDao.search(builder);
     put("propertyConfigs", configs);
-    put("config", configFactory.getConfig());
+    put("config", propertyConfig);
     return forward();
   }
 
@@ -99,8 +99,8 @@ public class PropertyAction extends ActionSupport {
     return "form";
   }
 
-  public void setConfigFactory(PropertyConfigFactory configFactory) {
-    this.configFactory = configFactory;
+  public void setPropertyConfig(PropertyConfig propertyConfig) {
+    this.propertyConfig = propertyConfig;
   }
 
 }

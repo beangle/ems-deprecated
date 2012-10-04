@@ -7,38 +7,31 @@ package org.beangle.ems.web.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.SessionMap;
-import org.beangle.security.Securities;
-import org.beangle.security.core.Authentication;
-import org.beangle.security.core.context.SecurityContextHolder;
-import org.beangle.security.web.auth.logout.LogoutHandlerStack;
+import org.beangle.security.web.auth.AuthenticationService;
 import org.beangle.struts2.action.ActionSupport;
 
 import com.opensymphony.xwork2.ActionContext;
 
 public class LogoutAction extends ActionSupport {
 
-  private LogoutHandlerStack handlerStack;
+  private AuthenticationService authenticationService;
 
   public String index() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String result = "success";
-    if (Securities.isValid(auth)) {
-      if (null != handlerStack) handlerStack.logout(getRequest(), getResponse(), auth);
-//      ((SessionMap<?, ?>) ActionContext.getContext().getSession()).invalidate();
-      String targetUrl = determineTargetUrl(getRequest());
-      if (null != targetUrl) result = "redirect:" + targetUrl;
-    }else{
-      ((SessionMap<?, ?>) ActionContext.getContext().getSession()).clear();
-    }
+    String result = determineTarget(getRequest());
+    boolean success = authenticationService.logout(getRequest(), getResponse());
+    if (!success) ((SessionMap<?, ?>) ActionContext.getContext().getSession()).clear();
     return result;
   }
 
-  protected String determineTargetUrl(HttpServletRequest request) {
-    return get("logoutSuccessUrl");
+  protected String determineTarget(HttpServletRequest request) {
+    String target = get("logoutSuccessUrl");
+    if (null == target) target = "success";
+    else target = "redirect:" + target;
+    return target;
   }
 
-  public void setHandlerStack(LogoutHandlerStack handlerStack) {
-    this.handlerStack = handlerStack;
+  public void setAuthenticationService(AuthenticationService authenticationService) {
+    this.authenticationService = authenticationService;
   }
 
 }

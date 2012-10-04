@@ -4,17 +4,11 @@
  */
 package org.beangle.ems.portal.web.action;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.beangle.commons.lang.Strings;
 import org.beangle.security.Securities;
-import org.beangle.security.auth.AuthenticationDetailsSource;
-import org.beangle.security.auth.AuthenticationManager;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
-import org.beangle.security.core.Authentication;
 import org.beangle.security.core.AuthenticationException;
-import org.beangle.security.core.context.SecurityContextHolder;
-import org.beangle.security.core.session.SessionRegistry;
+import org.beangle.security.web.auth.AuthenticationService;
 import org.beangle.struts2.action.ActionSupport;
 
 import com.octo.captcha.service.CaptchaService;
@@ -24,13 +18,9 @@ public class LoginAction extends ActionSupport {
 
   private CaptchaService captchaService;
 
-  private AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource;
-
-  private AuthenticationManager authenticationManager;
-
-  private SessionRegistry sessionRegistry;
-
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
+
+  private AuthenticationService authenticationService;
 
   public String index() {
     if (Securities.hasValidAuthentication()) { return "home"; }
@@ -77,14 +67,9 @@ public class LoginAction extends ActionSupport {
     String password = get("password");
     if (Strings.isBlank(username) || Strings.isBlank(password)) { return "failure"; }
     username = username.trim();
-    HttpServletRequest request = getRequest();
     UsernamePasswordAuthentication auth = new UsernamePasswordAuthentication(username, password);
-    auth.setDetails(authenticationDetailsSource.buildDetails(request));
-    Authentication authRequest = auth;
     try {
-      authRequest = authenticationManager.authenticate(authRequest);
-      sessionRegistry.register(authRequest, request.getSession().getId());
-      SecurityContextHolder.getContext().setAuthentication(authRequest);
+      authenticationService.login(getRequest(), auth);
     } catch (AuthenticationException e) {
       return e.getMessage();
     }
@@ -93,18 +78,14 @@ public class LoginAction extends ActionSupport {
 
   private boolean notFailEnough() {
     Integer loginFailureCount = (Integer) getSession().get(LOGIN_FAILURE_COUNT);
-    if (null == loginFailureCount) {
-      loginFailureCount = Integer.valueOf(0);
-    }
+    if (null == loginFailureCount) loginFailureCount = Integer.valueOf(0);
     if (loginFailureCount.intValue() <= 1) { return true; }
     return false;
   }
 
   private void increaseLoginFailure() {
     Integer loginFailureCount = (Integer) getSession().get(LOGIN_FAILURE_COUNT);
-    if (null == loginFailureCount) {
-      loginFailureCount = Integer.valueOf(0);
-    }
+    if (null == loginFailureCount) loginFailureCount = Integer.valueOf(0);
     loginFailureCount++;
     getSession().put(LOGIN_FAILURE_COUNT, loginFailureCount);
   }
@@ -117,16 +98,8 @@ public class LoginAction extends ActionSupport {
     this.captchaService = captchaService;
   }
 
-  public void setAuthenticationDetailsSource(
-      AuthenticationDetailsSource<HttpServletRequest, Object> authenticationDetailsSource) {
-    this.authenticationDetailsSource = authenticationDetailsSource;
+  public void setAuthenticationService(AuthenticationService authenticationService) {
+    this.authenticationService = authenticationService;
   }
 
-  public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-    this.authenticationManager = authenticationManager;
-  }
-
-  public void setSessionRegistry(SessionRegistry sessionRegistry) {
-    this.sessionRegistry = sessionRegistry;
-  }
 }

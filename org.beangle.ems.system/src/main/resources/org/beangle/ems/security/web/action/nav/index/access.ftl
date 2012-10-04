@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-<link href="${base}/static/themes/${b.theme.ui}/menu.css" rel="stylesheet" type="text/css" />
+<link href="${base}/static/themes/${b.theme.name}/menu.css" rel="stylesheet" type="text/css" />
 [#include "menuMacros.ftl"/]
 <div id="menu_area">
 	<div>

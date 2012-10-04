@@ -105,7 +105,7 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
 
   public void setPropertyConfig(PropertyConfig config) {
     if (null != config) {
-      config.addConfigListener(this);
+      config.addListener(this);
       setAvatarDir(config.get(String.class, "fileSystemAvatarBase.avatarDir"));
     }
   }
