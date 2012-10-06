@@ -24,7 +24,7 @@
 		[#if needCaptcha && recapchaConfig??]
 		<tr>
 			<td><label for="captcha"><strong>验证码:</strong></label></td>
-			<td>[@b.recaptcha publickey=recapchaConfig.publickey theming="white"/]</td>
+			<td>[@b.recaptcha publickey=recapchaConfig.publickey theming="onlyimage"/]</td>
 		</tr>
 		[/#if]
 		<tr>
