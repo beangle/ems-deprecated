@@ -11,21 +11,20 @@
 		<tr><td colspan="3">[@b.messages/]</td></tr>
 		<tr>
 			<td><label for="username"><strong>用户名:</strong></label></td>
-			<td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" value="${(Parameters['username']!)?html}" style="width:150px;background-color:#B0B0B0"/></td>
+			<td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" value="${(Parameters['username']!)?html}" style="width:300px;background-color:#B0B0B0"/></td>
 			<td rowspan="3" valign="top">
 			[@b.submit name="submitBtn" tabindex="6" style="height:35pt;width:38pt;" value="登录" onsubmit="checkLogin"][/@]
 			</td>
 		</tr>
 		<tr>
 			<td><label for="password"><strong>密码:</strong></label></td>
-			<td><input id="password" name="password"  tabindex="2" type="password" style="width:150px;background-color:#B0B0B0"/>
+			<td><input id="password" name="password"  tabindex="2" type="password" style="width:300px;background-color:#B0B0B0"/>
 			<input name="encodedPassword" type="hidden" value=""/></td>
 		</tr>
-		[#if needCaptcha]
+		[#if needCaptcha && recapchaConfig??]
 		<tr>
 			<td><label for="captcha"><strong>验证码:</strong></label></td>
-			<td align="right"><input id="captcha" name="captcha"  tabindex="3" type="text" style="width:85px;background-color:#B0B0B0"/>
-			<img src="${b.url('/security/captcha')}" title="验证码,点击更换一张" onclick="changeCaptcha(this)" alt="验证码" width="60" height="25" style="vertical-align:top;"/></td>
+			<td>[@b.recaptcha publickey=recapchaConfig.publickey theming="white"/]</td>
 		</tr>
 		[/#if]
 		<tr>
@@ -53,7 +52,7 @@
 			alert("密码不能为空");return false;
 		}
 		[#if needCaptcha]
-		if(!form['captcha'].value){
+		if(!form['recaptcha_response_field'].value){
 			alert("验证码不能为空");return false;
 		}
 		[/#if]

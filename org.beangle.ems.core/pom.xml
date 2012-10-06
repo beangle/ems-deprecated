@@ -10,7 +10,7 @@
   <packaging>jar</packaging>
   <name>Beangle Ems Core</name>
   <dependencies>
-    <!--captcha dependency-->
+    <!--captcha dependency
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
@@ -21,6 +21,7 @@
       <artifactId>imaging</artifactId>
       <version>01012005</version>
     </dependency>
+    -->
     <dependency>
       <groupId>org.beanshell</groupId>
       <artifactId>bsh</artifactId>

@@ -41,7 +41,6 @@ public class DefaultModule extends AbstractBindModule {
 
     bind(PropertyConfigBean.class).property("providers",
         list(ref(UrlPropertyConfigProvider.class), DaoPropertyConfigProvider.class)).lazy();
-
   }
 
 }

@@ -19,15 +19,5 @@
 			<result name="failure" type="freemarker">/login.ftl</result>
 		</action>
 	</package>
-
-	<package name="org.beangle.ems.security.web.action" extends="beangle" namespace="/security">
-		<action name="captcha" class="org.beangle.ems.security.web.action.CaptchaAction" method="index">
-			<result  type="stream" name="success">
-				<param name="contentType">image/jpeg</param>  
-				<param name="inputName">inputStream</param>
-				<param name="allowCaching">false</param>  
-			</result>
-		</action>
-	</package>
 	
 </struts>

@@ -16,7 +16,7 @@ public final class DefaultModule extends AbstractBindModule {
   protected void doBinding() {
     // security
     bind(PermissionAction.class, RoleAction.class, IndexAction.class, MyAction.class, PasswordAction.class,
-        ResourceAction.class, UserAction.class, CaptchaAction.class);
+        ResourceAction.class, UserAction.class);
 
     bind(org.beangle.ems.security.web.action.session.LogAction.class,
         org.beangle.ems.security.web.action.session.MonitorAction.class);

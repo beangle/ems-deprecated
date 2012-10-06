@@ -5,18 +5,17 @@
 package org.beangle.ems.portal.web.action;
 
 import org.beangle.commons.lang.Strings;
+import org.beangle.ems.portal.web.helper.RecapchaConfig;
 import org.beangle.security.Securities;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
 import org.beangle.security.core.AuthenticationException;
 import org.beangle.security.web.auth.AuthenticationService;
 import org.beangle.struts2.action.ActionSupport;
-
-import com.octo.captcha.service.CaptchaService;
-import com.octo.captcha.service.CaptchaServiceException;
+import org.beangle.struts2.view.util.RecaptchaUtils;
 
 public class LoginAction extends ActionSupport {
 
-  private CaptchaService captchaService;
+  private RecapchaConfig recapchaConfig;
 
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
 
@@ -40,26 +39,15 @@ public class LoginAction extends ActionSupport {
     String password = get("password");
     if (Strings.isBlank(username) || Strings.isBlank(password)) { return false; }
     if (notFailEnough()) { return true; }
-    // 校验验证码
-    if (null != captchaService) {
-      try {
-        String sessionId = getRequest().getSession().getId();
-        String captchaText = get("captcha");
-        if (Strings.isEmpty(captchaText)) {
-          addError(getText("security.EmptyCaptcha"));
-          return false;
-        }
-        Boolean valid = captchaService.validateResponseForID(sessionId, captchaText);
-        if (Boolean.FALSE.equals(valid)) {
-          addError(getText("security.WrongCaptcha"));
-          return false;
-        }
-      } catch (CaptchaServiceException e) {
-        addError(getText("security.WrongCaptcha"));
-        return false;
-      }
+
+    if (null != recapchaConfig && null != recapchaConfig.getPrivatekey()) {
+      boolean valid = RecaptchaUtils.isValid(getRemoteAddr(), recapchaConfig.getPrivatekey(),
+          get("recaptcha_challenge_field"), get("recaptcha_response_field"));
+      if (!valid) addError("security.WrongCaptcha");
+      return valid;
+    } else {
+      return true;
     }
-    return true;
   }
 
   protected String doLogin() {
@@ -94,8 +82,12 @@ public class LoginAction extends ActionSupport {
     getSession().remove(LOGIN_FAILURE_COUNT);
   }
 
-  public void setCaptchaService(CaptchaService captchaService) {
-    this.captchaService = captchaService;
+  public void setRecapchaConfig(RecapchaConfig recapchaConfig) {
+    this.recapchaConfig = recapchaConfig;
+  }
+
+  public RecapchaConfig getRecapchaConfig() {
+    return recapchaConfig;
   }
 
   public void setAuthenticationService(AuthenticationService authenticationService) {
