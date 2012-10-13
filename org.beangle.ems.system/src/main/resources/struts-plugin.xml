@@ -15,7 +15,7 @@
 
 	<package name="org.beangle.ems.portal.web.action" extends="beangle">
 		<action name="login" class="org.beangle.ems.portal.web.action.LoginAction" method="index">
-			<result name="home" type="redirectAction">home!index</result>
+			<result name="home" type="redirectAction">home</result>
 			<result name="failure" type="freemarker">/login.ftl</result>
 		</action>
 	</package>

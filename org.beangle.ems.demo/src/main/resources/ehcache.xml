@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="ehcache.xsd"
-    updateCheck="false" monitoring="autodetect"
+    updateCheck="false" monitoring="off"
     dynamicConfig="true">
 	
 	<diskStore path="java.io.tmpdir"/>
@@ -20,5 +20,4 @@
 	<cache eternal="false" overflowToDisk="false" maxElementsInMemory="10000"
 		timeToLiveSeconds="1000" timeToIdleSeconds="500"
 		name="beangle"></cache>
-		
 </ehcache>
