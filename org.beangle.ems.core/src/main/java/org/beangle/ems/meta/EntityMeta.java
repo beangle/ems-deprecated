@@ -20,40 +20,40 @@ public interface EntityMeta extends LongIdEntity {
    * 
    * @return 实体名称
    */
-  public String getName();
+  String getName();
 
   /**
    * 设置实体名称
    * 
    * @param name 实体名称
    */
-  public void setName(String name);
+  void setName(String name);
 
   /**
    * 获得实体说明
    * 
    * @return 实体说明
    */
-  public String getComments();
+  String getComments();
 
   /**
    * 设置实体说明
    * 
    * @param comments 实体说明
    */
-  public void setComments(String comments);
+  void setComments(String comments);
 
   /**
    * 获得实体备注
    * 
    * @return 实体备注
    */
-  public String getRemark();
+  String getRemark();
 
   /**
    * 设置实体备注
    * 
    * @param remark 实体备注
    */
-  public void setRemark(String remark);
+  void setRemark(String remark);
 }

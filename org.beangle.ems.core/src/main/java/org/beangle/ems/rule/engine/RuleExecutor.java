@@ -13,5 +13,5 @@ import org.beangle.ems.rule.Context;
  */
 public interface RuleExecutor {
 
-  public boolean execute(Context context);
+  boolean execute(Context context);
 }

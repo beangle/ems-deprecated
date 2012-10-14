@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface RuleBase {
 
-  public List<Rule> getRules();
+  List<Rule> getRules();
 }

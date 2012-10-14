@@ -14,13 +14,13 @@ import java.util.Date;
  */
 public interface Avatar {
 
-  public String getName();
+  String getName();
 
-  public String getType();
+  String getType();
 
-  public long getSize();
+  long getSize();
 
-  public Date getUpdatedAt();
+  Date getUpdatedAt();
 
-  public InputStream getInputStream() throws AvatarException;
+  InputStream getInputStream() throws AvatarException;
 }

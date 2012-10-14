@@ -13,28 +13,28 @@ package org.beangle.ems.dictionary.service;
 
 public interface CodeGenerator {
 
-  public static final int MAX_LENGTH = 50;
+  static final int MAX_LENGTH = 50;
 
-  public static final String MARK = "******";
+  static final String MARK = "******";
 
   /**
    * 根据实体类的信息,生成一个代码
    * 
    * @param fixture
    */
-  public String gen(CodeFixture fixture);
+  String gen(CodeFixture fixture);
 
   /**
    * 测试脚本
    * 
    * @param fixture
    */
-  public String test(CodeFixture fixture);
+  String test(CodeFixture fixture);
 
   /**
    * 判断是否是合法编码
    * 
    * @param code
    */
-  public boolean isValidCode(String code);
+  boolean isValidCode(String code);
 }

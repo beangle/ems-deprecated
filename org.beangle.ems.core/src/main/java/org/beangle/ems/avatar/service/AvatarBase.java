@@ -18,21 +18,21 @@ import org.beangle.ems.avatar.Avatar;
  */
 public interface AvatarBase {
 
-  public String getDescription();
+  String getDescription();
 
-  public Page<String> getAvatarNames(PageLimit pageLimit);
+  Page<String> getAvatarNames(PageLimit pageLimit);
 
-  public Avatar getAvatar(String name);
+  Avatar getAvatar(String name);
 
-  public Avatar getDefaultAvatar();
+  Avatar getDefaultAvatar();
 
-  public Set<String> getTypes();
+  Set<String> getTypes();
 
   boolean containType(String type);
 
-  public boolean isReadOnly();
+  boolean isReadOnly();
 
-  public boolean updateAvatar(String name, File file, String type);
+  boolean updateAvatar(String name, File file, String type);
 
-  public int updateAvatarBatch(File zipFile);
+  int updateAvatarBatch(File zipFile);
 }

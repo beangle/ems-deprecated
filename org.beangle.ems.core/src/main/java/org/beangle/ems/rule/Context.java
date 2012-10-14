@@ -16,13 +16,13 @@ import org.beangle.commons.i18n.Message;
  */
 public interface Context {
 
-  public Map<String, Object> getParams();
+  Map<String, Object> getParams();
 
-  public List<Message> getMessages();
+  List<Message> getMessages();
 
-  public void addMessage(Message message);
+  void addMessage(Message message);
 
-  public List<Message> getErrors();
+  List<Message> getErrors();
 
-  public void addError(Message message);
+  void addError(Message message);
 }

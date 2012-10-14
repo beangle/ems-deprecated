@@ -15,32 +15,32 @@ import org.beangle.commons.entity.pojo.LongIdTimeEntity;
  */
 public interface Rule extends LongIdTimeEntity {
 
-  public Set<RuleParameter> getParams();
+  Set<RuleParameter> getParams();
 
-  public void setParams(Set<RuleParameter> ruleParams);
+  void setParams(Set<RuleParameter> ruleParams);
 
-  public boolean isEnabled();
+  boolean isEnabled();
 
-  public void setEnabled(boolean enabled);
+  void setEnabled(boolean enabled);
 
-  public String getName();
+  String getName();
 
-  public void setName(String name);
+  void setName(String name);
 
-  public String getBusiness();
+  String getBusiness();
 
-  public void setBusiness(String business);
+  void setBusiness(String business);
 
-  public String getDescription();
+  String getDescription();
 
-  public void setDescription(String description);
+  void setDescription(String description);
 
-  public String getFactory();
+  String getFactory();
 
-  public void setFactory(String factory);
+  void setFactory(String factory);
 
-  public String getServiceName();
+  String getServiceName();
 
-  public void setServiceName(String serviceName);
+  void setServiceName(String serviceName);
 
 }

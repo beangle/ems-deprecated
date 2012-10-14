@@ -18,31 +18,31 @@ public interface RuleParameter extends LongIdEntity {
   /**
    * 
    */
-  public Set<RuleParameter> getChildren();
+  Set<RuleParameter> getChildren();
 
-  public void setChildren(Set<RuleParameter> subRuleParams);
+  void setChildren(Set<RuleParameter> subRuleParams);
 
-  public RuleParameter getParent();
+  RuleParameter getParent();
 
-  public void setParent(RuleParameter superRuleParameter);
+  void setParent(RuleParameter superRuleParameter);
 
   /**
    * 
    */
-  public Rule getRule();
+  Rule getRule();
 
-  public void setRule(Rule businessRule);
+  void setRule(Rule businessRule);
 
-  public String getName();
+  String getName();
 
-  public void setName(String name);
+  void setName(String name);
 
-  public String getType();
+  String getType();
 
-  public void setType(String type);
+  void setType(String type);
 
-  public void setTitle(String title);
+  void setTitle(String title);
 
-  public String getTitle();
+  String getTitle();
 
 }

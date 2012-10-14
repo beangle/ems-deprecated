@@ -14,8 +14,8 @@ import org.beangle.commons.entity.pojo.LongIdEntity;
  */
 public interface BusinessLogDetail extends LongIdEntity {
 
-  public String getContent();
+  String getContent();
 
-  public BusinessLog getLog();
+  BusinessLog getLog();
 
 }

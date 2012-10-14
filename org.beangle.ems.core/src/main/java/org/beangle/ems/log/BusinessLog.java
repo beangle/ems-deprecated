@@ -18,50 +18,42 @@ public interface BusinessLog extends LongIdEntity {
 
   /**
    * 操作人员
-   * 
    */
-  public String getOperator();
+  String getOperator();
 
   /**
    * 操作内容
-   * 
    */
-  public String getOperation();
+  String getOperation();
 
   /**
    * 操作资源
-   * 
    */
-  public String getResource();
+  String getResource();
 
   /**
    * 操作时间
-   * 
    */
-  public Date getOperateAt();
+  Date getOperateAt();
 
   /**
    * 操作地址
-   * 
    */
-  public String getIp();
+  String getIp();
 
   /**
    * 操作的系统入口
-   * 
    */
-  public String getEntry();
+  String getEntry();
 
   /**
    * 客户端代理
-   * 
    */
-  public String getAgent();
+  String getAgent();
 
   /**
    * 详细内容
-   * 
    */
-  public BusinessLogDetail getDetail();
+  BusinessLogDetail getDetail();
 
 }

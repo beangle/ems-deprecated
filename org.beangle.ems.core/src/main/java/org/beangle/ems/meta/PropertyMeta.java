@@ -18,54 +18,54 @@ public interface PropertyMeta extends LongIdEntity {
    * 
    * @return 实体元信息
    */
-  public EntityMeta getMeta();
+  EntityMeta getMeta();
 
   /**
    * 设置实体元信息
    * 
    * @param meta 实体元信息
    */
-  public void setMeta(EntityMeta meta);
+  void setMeta(EntityMeta meta);
 
   /**
    * 获得属性名
    * 
    * @return 属性名
    */
-  public String getName();
+  String getName();
 
   /**
    * 设置属性名
    * 
    * @param name 属性名
    */
-  public void setName(String name);
+  void setName(String name);
 
   /**
    * 获得属性类型
    * 
    * @return 属性类型
    */
-  public String getType();
+  String getType();
 
   /**
    * 设置属性类型
    * 
    * @param type 属性类型
    */
-  public void setType(String type);
+  void setType(String type);
 
   /**
    * 获得备注
    * 
    * @return 备注
    */
-  public String getComments();
+  String getComments();
 
   /**
    * 设置备注
    * 
    * @param comments 备注
    */
-  public void setComments(String comments);
+  void setComments(String comments);
 }
