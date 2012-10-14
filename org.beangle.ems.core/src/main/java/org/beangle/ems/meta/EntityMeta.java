@@ -11,7 +11,6 @@ import org.beangle.commons.entity.pojo.LongIdEntity;
  * </p>
  * 记录实体信息的元信息描述。
  * 
- * @composed 1 has * PropertyMeta
  * @author chaostone
  * @since 2.3.0
  */
@@ -40,7 +39,7 @@ public interface EntityMeta extends LongIdEntity {
   /**
    * 设置实体说明
    * 
-   * @param comment 实体说明
+   * @param comments 实体说明
    */
   public void setComments(String comments);
 

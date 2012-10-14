@@ -65,7 +65,7 @@ public interface PropertyMeta extends LongIdEntity {
   /**
    * 设置备注
    * 
-   * @param comment 备注
+   * @param comments 备注
    */
   public void setComments(String comments);
 }

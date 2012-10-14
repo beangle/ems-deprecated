@@ -20,8 +20,7 @@ public interface CodeGenerator {
   /**
    * 根据实体类的信息,生成一个代码
    * 
-   * @param entity
-   * @return
+   * @param fixture
    */
   public String gen(CodeFixture fixture);
 
@@ -29,8 +28,6 @@ public interface CodeGenerator {
    * 测试脚本
    * 
    * @param fixture
-   * @param script
-   * @return
    */
   public String test(CodeFixture fixture);
 
@@ -38,7 +35,6 @@ public interface CodeGenerator {
    * 判断是否是合法编码
    * 
    * @param code
-   * @return
    */
   public boolean isValidCode(String code);
 }

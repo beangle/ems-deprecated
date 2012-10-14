@@ -44,7 +44,6 @@ public class UserAction extends SecurityActionSupport {
   /**
    * 只显示头像
    * 
-   * @return
    * @throws IOException
    */
   public String index() throws IOException {

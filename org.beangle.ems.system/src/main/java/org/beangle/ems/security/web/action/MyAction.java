@@ -68,7 +68,6 @@ public class MyAction extends SecurityActionSupport {
   /**
    * 用户修改自己的密码
    * 
-   * @return
    */
   public String edit() {
     put("user", entityDao.get(User.class, getUserId()));
@@ -79,7 +78,6 @@ public class MyAction extends SecurityActionSupport {
   /**
    * 用户更新自己的密码和邮箱
    * 
-   * @return
    */
   public String save() {
     Long userId = getUserId();

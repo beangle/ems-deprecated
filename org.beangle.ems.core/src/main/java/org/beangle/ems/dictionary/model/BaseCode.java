@@ -84,7 +84,6 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
   /**
    * 查询基础代码是否具有扩展属性，一般供子类使用。
    * 
-   * @return
    */
   public boolean hasExtPros() {
     Field[] fields = getClass().getDeclaredFields();

@@ -18,7 +18,6 @@ public interface BaseCodeService {
    * 
    * @param type
    * @param codeId
-   * @return
    */
   public <T extends BaseCode<?>> T getCode(Class<T> type, Long codeId);
 
@@ -27,7 +26,6 @@ public interface BaseCodeService {
    * 
    * @param type
    * @param code
-   * @return
    */
   public <T extends BaseCode<?>> T getCode(Class<T> type, String code);
 
@@ -35,7 +33,6 @@ public interface BaseCodeService {
    * 返回现有的有效使用的代码
    * 
    * @param type
-   * @return
    */
   public <T extends BaseCode<?>> List<T> getCodes(Class<T> type);
 
@@ -44,7 +41,6 @@ public interface BaseCodeService {
    * 
    * @param type
    * @param ids
-   * @return
    */
   public <T extends BaseCode<?>> List<T> getCodes(Class<T> type, Long... ids);
 
@@ -52,7 +48,6 @@ public interface BaseCodeService {
    * 查找指定名称基础代码
    * 
    * @param name
-   * @return
    */
   public Class<? extends BaseCode<?>> getCodeType(String name);
 

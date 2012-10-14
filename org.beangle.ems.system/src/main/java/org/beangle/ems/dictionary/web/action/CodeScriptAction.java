@@ -27,12 +27,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 主页面
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String index() {
     return forward();
@@ -51,12 +45,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 编辑
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String edit() {
     Long codeScriptId = getLong("codeScriptId");
@@ -72,12 +60,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 查看
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String info() {
     Long codeScriptId = getLong("codeScriptId");
@@ -88,12 +70,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 保存
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String save() {
     Long codeScriptId = getLong("codeScript.id");
@@ -112,12 +88,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 保存
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String test() {
     CodeFixture codeFixture = new CodeFixture(Params.sub("codeFixture"));
@@ -131,12 +101,6 @@ public class CodeScriptAction extends SecurityActionSupport {
 
   /**
    * 删除
-   * 
-   * @param mapping
-   * @param form
-   * @param request
-   * @param response
-   * @return @
    */
   public String remove() {
     Long codeScriptId = getLong("codeScriptId");

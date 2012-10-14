@@ -17,7 +17,6 @@ public interface RuleParameter extends LongIdEntity {
 
   /**
    * 
-   * @return
    */
   public Set<RuleParameter> getChildren();
 
@@ -29,7 +28,6 @@ public interface RuleParameter extends LongIdEntity {
 
   /**
    * 
-   * @return
    */
   public Rule getRule();
 

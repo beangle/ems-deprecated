@@ -102,7 +102,6 @@ public class MenuAction extends SecurityActionSupport {
   /**
    * 禁用或激活一个或多个模块
    * 
-   * @return
    */
   public String activate() {
     Long[] menuIds = getIds(getShortName());
@@ -128,7 +127,6 @@ public class MenuAction extends SecurityActionSupport {
   /**
    * 打印预览功能列表
    * 
-   * @return
    */
   public String preview() {
     OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");

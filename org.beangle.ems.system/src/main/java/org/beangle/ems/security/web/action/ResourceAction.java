@@ -28,7 +28,6 @@ public class ResourceAction extends SecurityActionSupport {
   /**
    * 禁用或激活一个或多个模块
    * 
-   * @return
    */
   public String activate() {
     Long[] resourceIds = getIds("resource");

@@ -194,7 +194,6 @@ public class UserAction extends SecurityActionSupport {
   /**
    * 删除一个或多个用户
    * 
-   * @return
    */
   public String remove() {
     Long[] userIds = getIds("user");
@@ -231,7 +230,6 @@ public class UserAction extends SecurityActionSupport {
   /**
    * 禁用或激活一个或多个用户
    * 
-   * @return
    */
   public String activate() {
     Long[] userIds = getIds("user");

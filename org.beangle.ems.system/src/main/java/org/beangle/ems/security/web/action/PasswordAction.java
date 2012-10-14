@@ -20,7 +20,6 @@ public class PasswordAction extends SecurityActionSupport {
   /**
    * 显示修改用户帐户界面
    * 
-   * @return
    */
   public String edit() {
     put("user", getEntity());
@@ -31,7 +30,6 @@ public class PasswordAction extends SecurityActionSupport {
   /**
    * 更新其他用户帐户
    * 
-   * @return
    */
   public String save() {
     Long userId = getLong("user.id");
@@ -58,7 +56,6 @@ public class PasswordAction extends SecurityActionSupport {
    * 更新指定帐户的密码和邮箱
    * 
    * @param userId
-   * @return
    */
   private String updateAccount(Long userId) {
     String email = get("mail");

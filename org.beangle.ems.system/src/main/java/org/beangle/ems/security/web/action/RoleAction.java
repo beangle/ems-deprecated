@@ -123,7 +123,6 @@ public class RoleAction extends SecurityActionSupport {
   /**
    * 删除一个或多个角色
    * 
-   * @return
    */
   public String remove() {
     Long[] roleIds = getIds(getShortName());

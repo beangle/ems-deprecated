@@ -38,8 +38,6 @@ public class PermissionAction extends SecurityActionSupport {
 
   /**
    * 根据菜单配置来分配权限
-   * 
-   * @author 鄂州蚊子
    */
   public String edit() {
     Long roleId = getId("role");

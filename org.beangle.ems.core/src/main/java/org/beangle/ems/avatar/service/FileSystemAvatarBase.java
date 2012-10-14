@@ -60,7 +60,6 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
    * 
    * @param name
    * @param type
-   * @return
    */
   public String getAbsoluteAvatarPath(String name, String type) {
     StringBuilder sb = new StringBuilder(avatarDir);

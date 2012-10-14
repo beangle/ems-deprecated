@@ -19,7 +19,6 @@ public interface PatternMatcher {
    * 
    * @param base
    * @param context
-   * @return
    */
   public Agenda buildAgenda(RuleBase base, Context context);
 }
