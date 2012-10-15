@@ -11,6 +11,18 @@
   <name>Beangle Ems Parent</name>
   <version>3.0.0-SNAPSHOT</version>
 
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/beangle/ems/issues</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/beangle/ems.git</connection>
+    <developerConnection>scm:git:git@github.com:beangle/ems.git</developerConnection>
+    <url>https://github.com/beangle/ems</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <modules>
     <module>org.beangle.ems.core</module>
     <module>org.beangle.ems.system</module>
@@ -20,38 +32,39 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
+    <beangle.library.version>3.0.0<beangle.library.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.beangle.commons</groupId>
       <artifactId>beangle-commons-core</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.struts2</groupId>
       <artifactId>beangle-struts2-convention</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.struts2</groupId>
       <artifactId>beangle-struts2-view</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-core</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-web</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-blueprint</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>
