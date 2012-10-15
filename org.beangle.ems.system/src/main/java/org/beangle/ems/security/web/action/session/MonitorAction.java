@@ -16,7 +16,7 @@ import org.beangle.security.blueprint.session.model.SessionProfileBean;
 import org.beangle.security.blueprint.session.service.SessionProfileService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.core.session.category.SessionStat;
-import org.beangle.security.core.session.impl.AccessLog;
+import org.beangle.security.web.access.log.AccessLog;
 import org.beangle.security.web.session.model.SessioninfoBean;
 
 /**
@@ -108,9 +108,7 @@ public class MonitorAction extends SecurityActionSupport {
     OqlBuilder<AccessLog> builder = OqlBuilder.from(AccessLog.class, "accessLog");
     populateConditions(builder);
     String orderBy = get("orderBy");
-    if (Strings.isEmpty(orderBy)) {
-      orderBy = "accessLog.endAt-accessLog.beginAt desc";
-    }
+    if (Strings.isEmpty(orderBy)) orderBy = "accessLog.endAt-accessLog.beginAt desc";
     builder.orderBy(orderBy).limit(getPageLimit());
     put("accessLogs", entityDao.search(builder));
     return forward();
