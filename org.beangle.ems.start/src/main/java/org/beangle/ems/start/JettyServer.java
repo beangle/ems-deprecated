@@ -2,7 +2,7 @@
  * Licensed under GNU  LESSER General Public License, Version 3.
  * http://www.gnu.org/licenses
  */
-package org.beangle.ems.demo;
+package org.beangle.ems.start;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.FilterMapping;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-public class StartBeangle {
+public class JettyServer {
 
   public static void main(String[] args) throws Exception {
     WebAppContext ctx = new WebAppContext();

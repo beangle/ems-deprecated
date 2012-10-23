@@ -6,9 +6,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.beangle.ems</groupId>
-  <artifactId>beangle-ems-demo</artifactId>
-  <packaging>war</packaging>
-  <name>Beangle Ems Demo</name>
+  <artifactId>beangle-ems-start</artifactId>
+  <packaging>jar</packaging>
+  <name>Beangle Ems Start</name>
 
   <dependencies>
     <dependency>
@@ -42,7 +42,8 @@
       <version>0.3.0-1.0.2b4</version>
     </dependency>
   </dependencies>
-  <build>
+  
+  <!--<build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -54,4 +55,5 @@
       </plugin>
     </plugins>
   </build>
+  -->
 </project>

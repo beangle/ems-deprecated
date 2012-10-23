@@ -27,7 +27,7 @@
     <module>org.beangle.ems.core</module>
     <module>org.beangle.ems.system</module>
     <module>org.beangle.ems.database</module>
-    <module>org.beangle.ems.demo</module>
+    <module>org.beangle.ems.start</module>
   </modules>
 
   <properties>
