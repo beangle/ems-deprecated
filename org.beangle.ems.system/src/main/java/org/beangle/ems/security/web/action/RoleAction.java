@@ -36,27 +36,22 @@ public class RoleAction extends SecurityActionSupport {
 
   private UserService userService;
 
-  /**
-   * 对组可管理意为<br>
-   * 1 建立下级组
-   * 2 移动下级组顺序
-   * 不能改变组的1）动态属性、2）权限和3）直接成员，4）删除组，5）重命名，这些将看作组同部分一起看待的。
-   * 只要拥有上级组的管理权限，才能变更这些，这些称之为写权限。
-   * 成员关系可以等价于读权限
-   * 授权关系可以等价于读权限传播
-   * 拥有某组的管理权限，不意味拥有下级组的管理权限。新建组情况自动授予该组的其他管理者管理权限。
-   */
-  protected void editSetting(Entity<?> entity) {
+  public String edit() {
+    Role role = (Role) getEntity();
+    if (role.isPersisted()) {
+      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) { return redirect("search",
+          "不能修改该组,你没有" + role.getParent().getName() + "的管理权限"); }
+    }
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");
     if (!isAdmin()) {
       query.join("role.members", "gm");
       query.where("gm.user.id=:me and gm.manager=true", getUserId());
     }
-    List<Role> roles = entityDao.search(query);
-    Role role = (Role) entity;
-    roles.removeAll(HierarchyEntityUtils.getFamily(role));
-    CollectionUtils.filter(roles, new BeanPredicate("dynamic", new EqualPredicate(Boolean.FALSE)));
-    put("parents", roles);
+    List<Role> parents = entityDao.search(query);
+    parents.removeAll(HierarchyEntityUtils.getFamily(role));
+    CollectionUtils.filter(parents, new BeanPredicate("dynamic", new EqualPredicate(Boolean.FALSE)));
+    put("parents", parents);
+    return forward();
   }
 
   public String profile() {
@@ -70,7 +65,6 @@ public class RoleAction extends SecurityActionSupport {
   public String search() {
     List<Role> roles = entityDao.search(getQueryBuilder());
     put(getShortName() + "s", roles);
-    put("editableRoles", roleService.editable(entityDao.get(User.class, getUserId()), roles));
     return forward();
   }
 
@@ -122,7 +116,6 @@ public class RoleAction extends SecurityActionSupport {
 
   /**
    * 删除一个或多个角色
-   * 
    */
   public String remove() {
     Long[] roleIds = getIds(getShortName());

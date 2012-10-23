@@ -4,6 +4,7 @@
  */
 package org.beangle.ems.log;
 
+import org.beangle.commons.entity.annotation.LogEntity;
 import org.beangle.commons.entity.pojo.LongIdEntity;
 
 /**
@@ -12,6 +13,7 @@ import org.beangle.commons.entity.pojo.LongIdEntity;
  * @author chaostone
  * @version $Id: BusinessLogDetail.java Aug 1, 2011 3:20:46 PM chaostone $
  */
+@LogEntity
 public interface BusinessLogDetail extends LongIdEntity {
 
   String getContent();

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.beangle.commons.entity.annotation.LogEntity;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
@@ -26,6 +27,7 @@ import org.hibernate.annotations.CascadeType;
  * @version $Id: BusinessLogBean.java Jun 27, 2011 7:09:58 PM chaostone $
  */
 @Entity(name = "org.beangle.ems.log.BusinessLog")
+@LogEntity
 public class BusinessLogBean extends LongIdObject implements BusinessLog {
   private static final long serialVersionUID = 4059776203680197111L;
 

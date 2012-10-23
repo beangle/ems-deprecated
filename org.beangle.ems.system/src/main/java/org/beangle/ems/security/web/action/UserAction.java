@@ -72,7 +72,7 @@ public class UserAction extends SecurityActionSupport {
     List<Object> params = CollectUtils.newArrayList();
     boolean queryRole = false;
     if (!isAdmin()) {
-      List<Member> members = userService.getMembers(manager, Member.Ship.GRANTER);
+      List<Member> members = userService.getMembers(manager, Member.Ship.MANAGER);
       List<Role> mngRoles = CollectUtils.newArrayList();
       for (Member m : members) {
         mngRoles.add(m.getRole());
@@ -80,16 +80,14 @@ public class UserAction extends SecurityActionSupport {
       if (mngRoles.isEmpty()) {
         sb.append("1=0");
       } else {
-        sb.append("m.role in(:roles) ");
+        sb.append("m.role in(:roles) and m.member=true");
         params.add(mngRoles);
       }
       queryRole = true;
     }
     String roleName = get("roleName");
     if (Strings.isNotEmpty(roleName)) {
-      if (queryRole) {
-        sb.append(" and ");
-      }
+      if (queryRole) sb.append(" and ");
       sb.append("m.role.name like :roleName ");
       params.add("%" + roleName + "%");
       queryRole = true;
@@ -188,12 +186,11 @@ public class UserAction extends SecurityActionSupport {
     put("curMemberMap", curMemberMap);
     put("isadmin", userService.isRoot(user));
     put("isme", getUserId().equals(user.getId()));
-    put("settings",new Settings(getConfig()));
+    put("settings", new Settings(getConfig()));
   }
 
   /**
    * 删除一个或多个用户
-   * 
    */
   public String remove() {
     Long[] userIds = getIds("user");
@@ -229,7 +226,6 @@ public class UserAction extends SecurityActionSupport {
 
   /**
    * 禁用或激活一个或多个用户
-   * 
    */
   public String activate() {
     Long[] userIds = getIds("user");

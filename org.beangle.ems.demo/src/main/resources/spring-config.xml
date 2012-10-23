@@ -7,10 +7,15 @@
 			</props>
 		</property>
 	</bean>
-	
+	<bean id="dataSource">
+		<property name="url" value="jdbc:h2:tcp://localhost/~/eams/core/platform/eams-platform-doc/src/main/db/eams"/>
+	</bean>
+	<!--
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>java:comp/env/jdbc/beangle</value>
 		</property>
 	</bean>
+	-->
+	
 </beans>

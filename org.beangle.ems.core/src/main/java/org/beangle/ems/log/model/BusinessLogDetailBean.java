@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.beangle.commons.entity.annotation.LogEntity;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
@@ -20,6 +21,7 @@ import org.beangle.ems.log.BusinessLogDetail;
  * @version $Id: BusinessLogDetailBean.java Aug 1, 2011 3:16:29 PM chaostone $
  */
 @Entity(name = "org.beangle.ems.log.BusinessLogDetail")
+@LogEntity
 public class BusinessLogDetailBean extends LongIdObject implements BusinessLogDetail {
 
   private static final long serialVersionUID = 8792899149257213752L;
