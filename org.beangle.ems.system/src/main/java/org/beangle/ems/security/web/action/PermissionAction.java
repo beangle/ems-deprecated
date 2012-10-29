@@ -7,8 +7,10 @@ package org.beangle.ems.security.web.action;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.beangle.commons.bean.comparators.PropertyComparator;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
@@ -67,8 +69,20 @@ public class PermissionAction extends SecurityActionSupport {
         menus = menuProfile.getMenus();
         resources = entityDao.getAll(FuncResource.class);
       } else {
-        menus = menuService.getMenus(menuProfile, user);
-        resources = funcPermissionService.getResources(user);
+        resources = CollectUtils.newHashSet();
+        Map<String, Object> params = CollectUtils.newHashMap();
+        String hql = "select distinct fp.resource from " + FuncPermission.class.getName()
+            + " fp where fp.role.id = :roleId";
+        Set<Menu> menuSet=CollectUtils.newHashSet();
+        for(Member m:user.getMembers()){
+          if(!m.isGranter())continue;
+          menuSet.addAll(menuService.getMenus(menuProfile, m.getRole(), true));
+          params.put("roleId", m.getRole().getId());
+          List<FuncResource> roleResources = entityDao.searchHQLQuery(hql, params);
+          resources.addAll(roleResources);
+        }
+        menus = CollectUtils.newArrayList(menuSet);
+        Collections.sort(menus,new PropertyComparator("code"));
       }
       put("resources", CollectUtils.newHashSet(resources));
       boolean displayFreezen = getBool("displayFreezen");
