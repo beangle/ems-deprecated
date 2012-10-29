@@ -82,7 +82,7 @@ public class PermissionAction extends SecurityActionSupport {
           resources.addAll(roleResources);
         }
         menus = CollectUtils.newArrayList(menuSet);
-        Collections.sort(menus,new PropertyComparator("code"));
+        Collections.sort(menus,new PropertyComparator<Menu>("code"));
       }
       put("resources", CollectUtils.newHashSet(resources));
       boolean displayFreezen = getBool("displayFreezen");
