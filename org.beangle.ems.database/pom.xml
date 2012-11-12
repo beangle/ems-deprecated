@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.beangle.ems</groupId>
     <artifactId>beangle-ems-parent</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.beangle.ems</groupId>
@@ -13,7 +13,7 @@
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-system</artifactId>
-      <version>3.0.1</version>
+      <version>3.0.2-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
