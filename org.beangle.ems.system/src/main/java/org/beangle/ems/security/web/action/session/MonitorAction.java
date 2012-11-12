@@ -4,19 +4,25 @@
  */
 package org.beangle.ems.security.web.action.session;
 
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
+import org.beangle.commons.bean.comparators.PropertyComparator;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.Order;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.web.access.AccessMonitor;
+import org.beangle.commons.web.access.AccessRequest;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.session.model.SessionProfileBean;
 import org.beangle.security.blueprint.session.service.SessionProfileService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.core.session.category.SessionStat;
-import org.beangle.security.web.access.log.AccessLog;
 import org.beangle.security.web.session.model.SessioninfoBean;
 
 /**
@@ -29,6 +35,8 @@ public class MonitorAction extends SecurityActionSupport {
   private SessionRegistry sessionRegistry;
 
   private SessionProfileService categoryProfileService;
+
+  private AccessMonitor accessMonitor;
 
   public String profiles() {
     List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
@@ -104,13 +112,17 @@ public class MonitorAction extends SecurityActionSupport {
   /**
    * 访问记录
    */
-  public String accesslogs() {
-    OqlBuilder<AccessLog> builder = OqlBuilder.from(AccessLog.class, "accessLog");
-    populateConditions(builder);
+  public String requests() {
     String orderBy = get("orderBy");
-    if (Strings.isEmpty(orderBy)) orderBy = "accessLog.endAt-accessLog.beginAt desc";
-    builder.orderBy(orderBy).limit(getPageLimit());
-    put("accessLogs", entityDao.search(builder));
+    if (Strings.isEmpty(orderBy)) orderBy = "beginAt";
+    List<AccessRequest> requests = accessMonitor.getRequests();
+    Collections.sort(requests, new PropertyComparator(orderBy));
+    Map<String, Date> beginAts = CollectUtils.newHashMap();
+    for (AccessRequest r : requests) {
+      beginAts.put(r.getSessionid(), new Date(r.getBeginAt()));
+    }
+    put("beginAts", beginAts);
+    put("requests", requests);
     return forward();
   }
 
@@ -120,6 +132,10 @@ public class MonitorAction extends SecurityActionSupport {
 
   public void setCategoryProfileService(SessionProfileService categoryProfileService) {
     this.categoryProfileService = categoryProfileService;
+  }
+
+  public void setAccessMonitor(AccessMonitor accessMonitor) {
+    this.accessMonitor = accessMonitor;
   }
 
 }

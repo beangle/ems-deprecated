@@ -7,15 +7,16 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="dataSource">
+	
+	<!--<bean id="dataSource">
 		<property name="url" value="jdbc:h2:tcp://localhost/~/beangle/db/beangle"/>
 	</bean>
-	<!--
+	-->
+	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>java:comp/env/jdbc/beangle</value>
 		</property>
 	</bean>
-	-->
 	
 </beans>

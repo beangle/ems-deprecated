@@ -18,7 +18,7 @@
 		<select name="resource.scope" style="width:95%" onchange="bg.form.submit(this.form)">
 		<option value="">...</option>
 		[#list scopes?keys as i]
-		<option value="${i}" [#if (Parameters['resource.scope']!"")="${i}"]selected="selected"[/#if]>[@resourceScope i/]</option>
+		<option value="${i}" [#if (Parameters['resource.scope']!"")="${i}"]selected="selected"[/#if]>${scopes[i?string]}</option>
 		[/#list]
 		</select>
 	[/@]
@@ -37,7 +37,7 @@
 		</select>
 	[/@]
 	[@b.row]
-		[@b.boxcol/]
+		[@b.boxcol type="radio"/]
 		[@b.col  width="30%" property="name" align="left" style="padding-left:10px"title="common.name"/]
 		[@b.col  width="20%" property="title" title="common.title" ][@b.a href="resource!info?resource.id=${resource.id}"]${(resource.title)!}[/@][/@]
 		[@b.col  width="10%" property="entry" title="菜单入口"][#if resource.entry][@b.a target="_blank" href=resource.name]打开[/@][#else]否[/#if][/@]

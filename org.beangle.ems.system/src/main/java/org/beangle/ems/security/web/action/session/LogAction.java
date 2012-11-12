@@ -100,7 +100,7 @@ public class LogAction extends SecurityActionSupport {
     addConditions(query);
     query.select("hour(sessioninfoLog.loginAt),count(*)").groupBy("hour(sessioninfoLog.loginAt)");
     List rs = entityDao.search(query);
-    Collections.sort(rs, new PropertyComparator<Object[]>("[0]"));
+    Collections.sort(rs, new PropertyComparator("[0]"));
     put("logonStats", rs);
     return forward();
   }

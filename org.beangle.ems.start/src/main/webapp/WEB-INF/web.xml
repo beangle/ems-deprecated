@@ -16,6 +16,11 @@
         <filter-class>org.beangle.commons.web.filter.CharacterEncodingFilter</filter-class>
     </filter>
     
+    <filter>
+        <filter-name>accessMonitorFilter</filter-name>
+        <filter-class>org.beangle.commons.web.spring.DelegatingFilterProxy</filter-class>
+    </filter>
+    
     <!--首先打开hibernate Session-->
     <filter>
         <filter-name>OpenSessionInViewFilter</filter-name>
@@ -29,6 +34,11 @@
 
     <filter-mapping>
         <filter-name>characterEncoding</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>accessMonitorFilter</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
     

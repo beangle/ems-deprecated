@@ -5,7 +5,7 @@
 package org.beangle.ems;
 
 import org.beangle.commons.context.inject.AbstractBindModule;
-import org.beangle.commons.context.property.PropertyConfigBean;
+import org.beangle.commons.context.property.MultiProviderPropertyConfig;
 import org.beangle.commons.context.property.UrlPropertyConfigProvider;
 import org.beangle.commons.context.spring.SpringResources;
 import org.beangle.commons.web.io.SplitStreamDownloader;
@@ -39,7 +39,7 @@ public class DefaultModule extends AbstractBindModule {
             .property("locations", "classpath*:META-INF/system.properties")
             .property("users", "classpath*:system.properties"));
 
-    bind(PropertyConfigBean.class).property("providers",
+    bind(MultiProviderPropertyConfig.class).property("providers",
         list(ref(UrlPropertyConfigProvider.class), DaoPropertyConfigProvider.class));
   }
 
