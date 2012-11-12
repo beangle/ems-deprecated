@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.NoParameters;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
@@ -25,7 +24,7 @@ import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.struts2.action.EntityActionSupport;
 
-public abstract class SecurityActionSupport extends EntityActionSupport implements NoParameters {
+public abstract class SecurityActionSupport extends EntityActionSupport {
 
   protected FuncPermissionService funcPermissionService;
 

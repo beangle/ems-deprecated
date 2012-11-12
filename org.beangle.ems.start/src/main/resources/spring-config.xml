@@ -8,15 +8,26 @@
 		</property>
 	</bean>
 	
-	<!--<bean id="dataSource">
-		<property name="url" value="jdbc:h2:tcp://localhost/~/beangle/db/beangle"/>
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="jdbcUrl" value="jdbc:h2:tcp://localhost/~/beangle/db/beangle"/>
+		<property name="username" value="sa"/>
+		<property name="password" value=""/>
+		<property name="idleConnectionTestPeriod" value="60"/>
+		<property name="idleMaxAge" value="240"/>
+		<property name="maxConnectionsPerPartition" value="30"/>
+		<property name="minConnectionsPerPartition" value="10"/>
+		<property name="partitionCount" value="3"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="statementsCacheSize" value="100"/>
+		<property name="releaseHelperThreads" value="3"/>
 	</bean>
-	-->
 	
+	<!--
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>java:comp/env/jdbc/beangle</value>
 		</property>
 	</bean>
-	
+	-->
 </beans>
