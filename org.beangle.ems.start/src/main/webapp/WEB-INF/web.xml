@@ -89,11 +89,12 @@
         <location>/404.html</location>
     </error-page>
 
-    <!--数据源配置-->
+    <!--数据源配置
     <resource-ref>
         <res-ref-name>jdbc/beangle</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    -->
 </web-app>

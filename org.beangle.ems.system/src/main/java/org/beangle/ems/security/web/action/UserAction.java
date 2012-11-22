@@ -1,7 +1,22 @@
-/* Copyright c 2005-2012.
- * Licensed under GNU  LESSER General Public License, Version 3.
- * http://www.gnu.org/licenses
+/*
+ * Beangle, Agile Java/Scala Development Scaffold and Toolkit
+ *
+ * Copyright (c) 2005-2012, Beangle Software.
+ *
+ * Beangle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Beangle is distributed in the hope that it will be useful.
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.beangle.ems.security.web.action;
 
 import java.util.Collection;
@@ -26,6 +41,7 @@ import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.MemberBean;
+import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.security.blueprint.service.UserService;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
@@ -111,7 +127,7 @@ public class UserAction extends SecurityActionSupport {
    * 保存用户信息
    */
   protected String saveAndForward(Entity<?> entity) {
-    User user = (User) entity;
+    UserBean user = (UserBean) entity;
     if (entityDao.duplicate(User.class, user.getId(), "name", user.getName())) {
       addMessage("security.error.usernameNotAvaliable", user.getName());
       return forward(new Action(this, "edit"));
@@ -263,7 +279,7 @@ public class UserAction extends SecurityActionSupport {
     }
   }
 
-  protected void processPassword(User user) {
+  protected void processPassword(UserBean user) {
     String password = get("password");
     if (Strings.isNotBlank(password)) {
       user.setPassword(EncryptUtil.encode(password));

@@ -32,7 +32,7 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <beangle.library.version>3.0.1</beangle.library.version>
+    <beangle.library.version>3.0.2-SNAPSHOT</beangle.library.version>
   </properties>
 
   <dependencies>
@@ -82,4 +82,26 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.9.0</version>
+        <configuration>
+          <strictCheck>true</strictCheck>
+          <includes>
+            <include>src/**/java/**</include>
+          </includes>
+          <excludes>
+            <exclude>src/**/package-info.java</exclude>
+          </excludes>
+          <mapping>
+            <java>SLASHSTAR_STYLE</java>
+          </mapping>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

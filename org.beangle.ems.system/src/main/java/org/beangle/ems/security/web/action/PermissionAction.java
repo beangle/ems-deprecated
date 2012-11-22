@@ -1,7 +1,22 @@
-/* Copyright c 2005-2012.
- * Licensed under GNU  LESSER General Public License, Version 3.
- * http://www.gnu.org/licenses
+/*
+ * Beangle, Agile Java/Scala Development Scaffold and Toolkit
+ *
+ * Copyright (c) 2005-2012, Beangle Software.
+ *
+ * Beangle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Beangle is distributed in the hope that it will be useful.
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.beangle.ems.security.web.action;
 
 import java.util.Collection;
@@ -73,16 +88,16 @@ public class PermissionAction extends SecurityActionSupport {
         Map<String, Object> params = CollectUtils.newHashMap();
         String hql = "select distinct fp.resource from " + FuncPermission.class.getName()
             + " fp where fp.role.id = :roleId";
-        Set<Menu> menuSet=CollectUtils.newHashSet();
-        for(Member m:user.getMembers()){
-          if(!m.isGranter())continue;
+        Set<Menu> menuSet = CollectUtils.newHashSet();
+        for (Member m : user.getMembers()) {
+          if (!m.isGranter()) continue;
           menuSet.addAll(menuService.getMenus(menuProfile, m.getRole(), true));
           params.put("roleId", m.getRole().getId());
           List<FuncResource> roleResources = entityDao.searchHQLQuery(hql, params);
           resources.addAll(roleResources);
         }
         menus = CollectUtils.newArrayList(menuSet);
-        Collections.sort(menus,new PropertyComparator("code"));
+        Collections.sort(menus, new PropertyComparator("code"));
       }
       put("resources", CollectUtils.newHashSet(resources));
       boolean displayFreezen = getBool("displayFreezen");
@@ -101,27 +116,27 @@ public class PermissionAction extends SecurityActionSupport {
       }
       put("roleMenus", CollectUtils.newHashSet(roleMenus));
       put("roleResources", roleResources);
-      
-      Set<Role> parents=CollectUtils.newHashSet();
+
+      Set<Role> parents = CollectUtils.newHashSet();
       Set<FuncResource> parentResources = CollectUtils.newHashSet();
-      Set<Menu> parentMenus=CollectUtils.newHashSet();
-      Role parent=role.getParent();
-      while(null!=parent && !parents.contains(parent)){
+      Set<Menu> parentMenus = CollectUtils.newHashSet();
+      Role parent = role.getParent();
+      while (null != parent && !parents.contains(parent)) {
         List<FuncPermission> parentPermissions = funcPermissionService.getPermissions(parent);
         parentMenus.addAll(menuService.getMenus(menuProfile, parent, null));
         for (final FuncPermission permission : parentPermissions) {
           parentResources.add(permission.getResource());
         }
         parents.add(parent);
-        parent=parent.getParent();
+        parent = parent.getParent();
       }
-      put("parentMenus",parentMenus);
-      put("parentResources",parentResources);
-    }else{
+      put("parentMenus", parentMenus);
+      put("parentResources", parentResources);
+    } else {
       put("roleMenus", Collections.emptySet());
-      put("roleResources",Collections.emptySet());
+      put("roleResources", Collections.emptySet());
       put("parentMenus", Collections.emptySet());
-      put("parentResources",Collections.emptySet());
+      put("parentResources", Collections.emptySet());
     }
     put("menus", menus);
     put("menuProfile", menuProfile);

@@ -1,24 +1,40 @@
-/* Copyright c 2005-2012.
- * Licensed under GNU  LESSER General Public License, Version 3.
- * http://www.gnu.org/licenses
+/*
+ * Beangle, Agile Java/Scala Development Scaffold and Toolkit
+ *
+ * Copyright (c) 2005-2012, Beangle Software.
+ *
+ * Beangle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Beangle is distributed in the hope that it will be useful.
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.beangle.ems.system.web.action;
 
 import java.lang.management.ManagementFactory;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.lang.SystemInfo;
 import org.beangle.commons.util.meta.SystemVersion;
 import org.beangle.struts2.action.ActionSupport;
 
 public class InfoAction extends ActionSupport {
 
   SystemVersion systemVersion;
-   
+
   public String index() {
     Map<String, Object> clientProps = CollectUtils.newHashMap();
     clientProps.put("client.ip", getRemoteAddr());
@@ -55,29 +71,24 @@ public class InfoAction extends ActionSupport {
     return forward();
   }
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public String properties() {
-    Properties props = System.getProperties();
-    Map<String, Object> javaProps = CollectUtils.newHashMap();
-    Map<String, Object> osProps = CollectUtils.newHashMap();
-    Map<String, Object> userProps = CollectUtils.newHashMap();
-    Map<String, Object> extraProps = CollectUtils.newHashMap();
-    for (Object property : props.keySet()) {
-      String key = (String) property;
-      Object value = props.get(key);
-      if (key.startsWith("java.")) {
-        javaProps.put(key, value);
-      } else if (key.startsWith("os.")) {
-        osProps.put(key, value);
-      } else if (key.startsWith("user.")) {
-        userProps.put(key, value);
-      } else {
-        extraProps.put(key, value);
-      }
+    put("host", SystemInfo.getHost());
+    put("os", SystemInfo.getOs());
+    put("user", SystemInfo.getUser());
+
+    put("java", SystemInfo.getJava());
+    put("javaSpec", SystemInfo.getJavaSpec());
+    put("jvm", SystemInfo.getJvm());
+    put("jvmSpec", SystemInfo.getJvmSpec());
+    put("javaRuntime", SystemInfo.getJavaRuntime());
+
+    Map<String, String> extra = new HashMap(System.getProperties());
+    for (String k : SystemInfo.getUsedproperties()) {
+      extra.remove(k);
     }
-    put("javaProps", javaProps);
-    put("osProps", osProps);
-    put("userProps", userProps);
-    put("extraProps", extraProps);
+    put("extra", extra);
+    put("env", System.getenv());
     return forward();
   }
 
@@ -88,5 +99,5 @@ public class InfoAction extends ActionSupport {
   public void setSystemVersion(SystemVersion systemVersion) {
     this.systemVersion = systemVersion;
   }
-  
+
 }

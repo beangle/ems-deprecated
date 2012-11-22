@@ -1,7 +1,22 @@
-/* Copyright c 2005-2012.
- * Licensed under GNU  LESSER General Public License, Version 3.
- * http://www.gnu.org/licenses
+/*
+ * Beangle, Agile Java/Scala Development Scaffold and Toolkit
+ *
+ * Copyright (c) 2005-2012, Beangle Software.
+ *
+ * Beangle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Beangle is distributed in the hope that it will be useful.
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.beangle.ems.dev.hibernate.web.action;
 
 import java.util.ArrayList;
@@ -41,7 +56,7 @@ public class CacheAction extends ActionSupport {
       statistics.setStatisticsEnabled(false);
       deactivation = new Date();
       getSession().put("hibernate.stat.deactivation", deactivation);
-      activation=(Date)getSession().get("hibernate.stat.activation");
+      activation = (Date) getSession().get("hibernate.stat.activation");
       info.append("Statistics disabled\n");
     } else if ("clear".equals(action)) {
       activation = null;
@@ -51,11 +66,11 @@ public class CacheAction extends ActionSupport {
       getSession().remove("hibernate.stat.deactivation");
       generalStatistics.clear();
       info.append("Statistics cleared\n");
-    }else{
-      activation=(Date)getSession().get("hibernate.stat.activation");
-      deactivation=(Date)getSession().get("hibernate.stat.deactivation");
+    } else {
+      activation = (Date) getSession().get("hibernate.stat.activation");
+      deactivation = (Date) getSession().get("hibernate.stat.deactivation");
     }
-    
+
     addMessage(info.toString());
     boolean active = statistics.isStatisticsEnabled();
     if (active) {
@@ -74,11 +89,11 @@ public class CacheAction extends ActionSupport {
     }
     put("active", active);
     put("lastUpdate", lastUpdate);
-    if(null!=activation){
-      if(null!=deactivation){
-        put("duration",deactivation.getTime()-activation.getTime());
-      }else{
-        put("duration",lastUpdate.getTime()-activation.getTime());
+    if (null != activation) {
+      if (null != deactivation) {
+        put("duration", deactivation.getTime() - activation.getTime());
+      } else {
+        put("duration", lastUpdate.getTime() - activation.getTime());
       }
     }
     put("activation", activation);

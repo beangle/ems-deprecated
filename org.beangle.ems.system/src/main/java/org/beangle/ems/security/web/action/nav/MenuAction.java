@@ -1,7 +1,22 @@
-/* Copyright c 2005-2012.
- * Licensed under GNU  LESSER General Public License, Version 3.
- * http://www.gnu.org/licenses
+/*
+ * Beangle, Agile Java/Scala Development Scaffold and Toolkit
+ *
+ * Copyright (c) 2005-2012, Beangle Software.
+ *
+ * Beangle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Beangle is distributed in the hope that it will be useful.
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.beangle.ems.security.web.action.nav;
 
 import java.util.Collection;
@@ -19,6 +34,7 @@ import org.beangle.security.blueprint.function.FuncPermission;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.nav.model.MenuBean;
 import org.beangle.security.blueprint.nav.service.MenuService;
 
 /**
@@ -81,15 +97,14 @@ public class MenuAction extends SecurityActionSupport {
       Long newParentId = getLong("parent.id");
       int indexno = getInteger("indexno");
       Menu parent = null;
-      if (null != newParentId) {
-        parent = entityDao.get(Menu.class, newParentId);
-      }
+      if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);
+
       menuService.move(menu, parent, indexno);
       entityDao.saveOrUpdate(menu);
       if (!menu.isEnabled()) {
         Set<Menu> family = HierarchyEntityUtils.getFamily(menu);
         for (Menu one : family)
-          one.setEnabled(false);
+          ((MenuBean) one).setEnabled(false);
         entityDao.saveOrUpdate(family);
       }
     } catch (Exception e) {
@@ -101,7 +116,6 @@ public class MenuAction extends SecurityActionSupport {
 
   /**
    * 禁用或激活一个或多个模块
-   * 
    */
   public String activate() {
     Long[] menuIds = getIds(getShortName());
@@ -118,15 +132,14 @@ public class MenuAction extends SecurityActionSupport {
       }
     }
     for (Menu menu : updated)
-      menu.setEnabled(enabled);
+      ((MenuBean) menu).setEnabled(enabled);
     entityDao.saveOrUpdate(updated);
-    
+
     return redirect("search", "info.save.success");
   }
 
   /**
    * 打印预览功能列表
-   * 
    */
   public String preview() {
     OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
