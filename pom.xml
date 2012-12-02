@@ -2,14 +2,14 @@
   <parent>
     <groupId>org.beangle</groupId>
     <artifactId>beangle-parent</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.beangle.ems</groupId>
   <artifactId>beangle-ems-parent</artifactId>
   <packaging>pom</packaging>
   <name>Beangle Ems Parent</name>
-  <version>3.0.2-SNAPSHOT</version>
+  <version>3.1.0-SNAPSHOT</version>
 
   <issueManagement>
     <system>github</system>
@@ -32,7 +32,7 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <beangle.library.version>3.0.2-SNAPSHOT</beangle.library.version>
+    <beangle.library.version>3.1.0-SNAPSHOT</beangle.library.version>
   </properties>
 
   <dependencies>

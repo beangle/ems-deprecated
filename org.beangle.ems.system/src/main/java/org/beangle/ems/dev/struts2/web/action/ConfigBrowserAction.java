@@ -37,10 +37,10 @@ import org.apache.struts2.dispatcher.mapper.ActionMapper;
 import org.apache.struts2.dispatcher.multipart.MultiPartRequest;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.velocity.VelocityManager;
+import org.beangle.commons.lang.ClassLoaders;
 import org.beangle.ems.dev.struts2.web.helper.S2ConfigurationHelper;
 import org.beangle.struts2.action.ActionSupport;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionProxyFactory;
 import com.opensymphony.xwork2.ObjectFactory;
 import com.opensymphony.xwork2.TextProvider;
@@ -49,7 +49,6 @@ import com.opensymphony.xwork2.conversion.ObjectTypeDeterminer;
 import com.opensymphony.xwork2.conversion.impl.XWorkConverter;
 import com.opensymphony.xwork2.inject.Container;
 import com.opensymphony.xwork2.inject.Inject;
-import com.opensymphony.xwork2.util.ClassLoaderUtil;
 import com.opensymphony.xwork2.util.reflection.ReflectionContextFactory;
 import com.opensymphony.xwork2.util.reflection.ReflectionException;
 import com.opensymphony.xwork2.validator.Validator;
@@ -146,8 +145,9 @@ public class ConfigBrowserAction extends ActionSupport {
             chosenName, constName, true));
       }
       for (String name : names) {
-        if (!"default".equals(name)) bindings.add(new Binding(type.getName(), getInstanceClassName(container,
-            type, name), name, constName, name.equals(chosenName)));
+        if (!"default".equals(name))
+          bindings.add(new Binding(type.getName(), getInstanceClassName(container, type, name), name,
+              constName, name.equals(chosenName)));
       }
     }
   }
@@ -174,7 +174,7 @@ public class ConfigBrowserAction extends ActionSupport {
 
   public String jars() throws IOException {
     put("jarPoms", configHelper.getJarProperties());
-    put("pluginsLoaded", ClassLoaderUtil.getResources("struts-plugin.xml", ConfigBrowserAction.class, false));
+    put("pluginsLoaded", ClassLoaders.getResources("struts-plugin.xml", ConfigBrowserAction.class));
     return forward();
   }
 
@@ -241,7 +241,7 @@ public class ConfigBrowserAction extends ActionSupport {
 
   private Class<?> getClassInstance(String clazz) {
     try {
-      return ClassLoaderUtil.loadClass(clazz, ActionContext.getContext().getClass());
+      return ClassLoaders.loadClass(clazz);
     } catch (Exception e) {
       logger.error("Class '" + clazz + "' not found...", e);
     }
@@ -253,8 +253,8 @@ public class ConfigBrowserAction extends ActionSupport {
     Class<?> clazz = getClassInstance(get("clazz"));
     @SuppressWarnings("rawtypes")
     List<Validator> validators = Collections.emptyList();
-    if (clazz != null) validators = configHelper.getActionValidatorManager().getValidators(clazz,
-        get("context"));
+    if (clazz != null)
+      validators = configHelper.getActionValidatorManager().getValidators(clazz, get("context"));
 
     Set<PropertyInfo> properties = new TreeSet<PropertyInfo>();
     put("properties", properties);

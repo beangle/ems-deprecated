@@ -21,6 +21,7 @@ package org.beangle.ems.dev.hibernate.web.action;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,8 +29,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.io.IOUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.io.IOs;
 import org.beangle.commons.lang.Strings;
 import org.beangle.struts2.action.ActionSupport;
 import org.springframework.core.io.Resource;
@@ -73,7 +74,7 @@ public class EvolutionAction extends ActionSupport {
     InputStream is = null;
     try {
       is = resource.getURL().openStream();
-      put("sqllines", IOUtils.readLines(is));
+      put("sqllines", IOs.readLines(new InputStreamReader(is)));
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
@@ -94,7 +95,7 @@ public class EvolutionAction extends ActionSupport {
       try {
         is = resource.getURL().openStream();
         put("resource", resource);
-        List<String> sqllines = IOUtils.readLines(is);
+        List<String> sqllines = IOs.readLines(is);
         for (String line : sqllines) {
           sb.append(line).append("\n");
         }

@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.beangle.ems.meta.EntityMeta;
 import org.beangle.ems.meta.PropertyMeta;
 
@@ -33,7 +33,7 @@ import org.beangle.ems.meta.PropertyMeta;
  * 属性元数据实现
  */
 @Entity(name = "org.beangle.ems.meta.PropertyMeta")
-public class PropertyMetaBean extends LongIdObject implements PropertyMeta {
+public class PropertyMetaBean extends IntegerIdObject implements PropertyMeta {
   private static final long serialVersionUID = 8581246709461219082L;
 
   /** 所属元数据 */
@@ -56,7 +56,7 @@ public class PropertyMetaBean extends LongIdObject implements PropertyMeta {
   public PropertyMetaBean() {
   }
 
-  public PropertyMetaBean(Long id) {
+  public PropertyMetaBean(Integer id) {
     this.id = id;
   }
 

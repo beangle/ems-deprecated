@@ -21,14 +21,15 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.commons.entity.pojo.LongIdTimeEntity;
+import org.beangle.commons.entity.Entity;
+import org.beangle.commons.entity.TimeEntity;
 
 /**
  * Rule represent a business constraint
  * 
  * @author chaostone
  */
-public interface Rule extends LongIdTimeEntity {
+public interface Rule extends Entity<Integer>, TimeEntity {
 
   Set<RuleParameter> getParams();
 

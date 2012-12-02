@@ -84,7 +84,7 @@ public class UserDashboardHelper {
   private void populateMenus(User user) {
     List<?> menuProfiles = menuService.getProfiles(user);
     ContextHelper.put("menuProfiles", menuProfiles);
-    Long menuProfileId = Params.getLong("menuProfileId");
+    Integer menuProfileId = Params.getInteger("menuProfileId");
     if (null == menuProfileId && !menuProfiles.isEmpty()) {
       menuProfileId = ((MenuProfile) (menuProfiles.get(0))).getId();
     }

@@ -11,29 +11,29 @@
     width: 1020px;
 }
 #lspace{
-	float:left;
-	width: 240px;
-	padding: 2px;
+  float:left;
+  width: 240px;
+  padding: 2px;
 }
 #mspace{
-	float:left;
-	width: 420px;
-	padding: 2px;
+  float:left;
+  width: 420px;
+  padding: 2px;
 }
 #rspace{
-	float:right;
-	width: 340px;
-	padding: 2px;
+  float:right;
+  width: 340px;
+  padding: 2px;
 }
 #portrait{
-	height:80px;
+  height:80px;
 }
 #portrait ul, ol {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 #portrait img {
-	float: left;
+  float: left;
     border: 1px solid #CCCCCC;
     padding: 2px;
     height: 60px;
@@ -65,18 +65,18 @@ div .portlet-content{margin:2px;}
 </style>
 <div id="user-profile">
 <div id="lspace">
-	<div id="portrait">
-		<div id="portrait-img" ><img  title="${user.fullname}" alt="${user.fullname}" src="${b.url('/avatar/user?user.name=${user.name}')}"/></div>
-		<div id="olnks">
-			<em>${user.fullname}</em>
-			<ul>
-				<li>[@b.a href="/security/password!edit?user.id=${user.id}" target="user-info"]修改密码[/@]</li>
-				[@ems.guard res="/avatar/board"]<li>[@b.a href="/avatar/board!info?user.name=${user.name}"]更换头像[/@]</li>[/@]
-			</ul>
-		</div>
-	</div>
-	[#include "../user/panels/online_portlet.ftl"/]
-	[#include "../user/panels/role_portlet.ftl"/]
+  <div id="portrait">
+    <div id="portrait-img" ><img  title="${user.fullname}" alt="${user.fullname}" src="${b.url('/avatar/user?user.name=${user.name}')}"/></div>
+    <div id="olnks">
+      <em>${user.fullname}</em>
+      <ul>
+        <li>[@b.a href="/security/password!edit?user.id=${user.id}" target="user-info"]修改密码[/@]</li>
+        [@ems.guard res="/avatar/board"]<li>[@b.a href="/avatar/board!info?user.name=${user.name}"]更换头像[/@]</li>[/@]
+      </ul>
+    </div>
+  </div>
+  [#include "../user/panels/online_portlet.ftl"/]
+  [#include "../user/panels/role_portlet.ftl"/]
 </div>
 <div id="mspace">
 [@b.div id="user-info"]
@@ -91,18 +91,18 @@ div .portlet-content{margin:2px;}
 </div>
 <script type="text/javascript">
    function _wi_tm(moudleId){
-	   var id= document.getElementById(moudleId);
-	   if(id.className=="module collapsed"){
-		 id.className="module expanded";
-	   }else{
-		 id.className="module collapsed";
-	   }
+     var id= document.getElementById(moudleId);
+     if(id.className=="module collapsed"){
+     id.className="module expanded";
+     }else{
+     id.className="module collapsed";
+     }
    }
    $(function() {
-		$(".ui-icon").click(function() {
-			$(this).toggleClass("ui-icon-minusthick");
-			$(this).parents(".column div").find(".portlet-content").toggle();
-		});
-	});
+    $(".ui-icon").click(function() {
+      $(this).toggleClass("ui-icon-minusthick");
+      $(this).parents(".column div").find(".portlet-content").toggle();
+    });
+  });
   </script>
 [@b.foot/]

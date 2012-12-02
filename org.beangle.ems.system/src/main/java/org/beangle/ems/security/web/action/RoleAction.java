@@ -103,8 +103,8 @@ public class RoleAction extends SecurityActionSupport {
 
   protected String saveAndForward(Entity<?> entity) {
     RoleBean role = (RoleBean) entity;
-    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) return redirect("edit",
-        "error.notUnique");
+    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName()))
+      return redirect("edit", "error.notUnique");
     if (!role.isPersisted()) {
       User creator = userService.get(getUserId());
       role.setCode("tmp");

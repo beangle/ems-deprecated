@@ -38,7 +38,7 @@ public class IndexAction extends SecurityActionSupport {
     populateUserStat();
     // state menus
     List<MenuProfile> menuProfiles = entityDao.getAll(MenuProfile.class);
-    Map<Long, List<?>> menuStats = CollectUtils.newHashMap();
+    Map<Integer, List<?>> menuStats = CollectUtils.newHashMap();
     for (MenuProfile profile : menuProfiles) {
       OqlBuilder<Menu> menuQuery = OqlBuilder.from(Menu.class, "menu");
       menuQuery.where("menu.profile=:profile", profile).select("menu.enabled,count(*)").groupBy("enabled");

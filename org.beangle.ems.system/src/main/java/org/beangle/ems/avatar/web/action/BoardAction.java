@@ -26,8 +26,8 @@ import org.beangle.commons.lang.Strings;
 import org.beangle.commons.util.archiver.ZipUtils;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
-import org.beangle.security.blueprint.User;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.User;
 import org.beangle.struts2.convention.route.Action;
 
 /**

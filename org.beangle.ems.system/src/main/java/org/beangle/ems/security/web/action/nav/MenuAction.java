@@ -51,8 +51,8 @@ public class MenuAction extends SecurityActionSupport {
   }
 
   protected void editSetting(Entity<?> entity) {
-    put("profiles", entityDao.getAll(MenuProfile.class));
     Menu menu = (Menu) entity;
+    put("profiles", entityDao.getAll(MenuProfile.class));
     List<Menu> folders = CollectUtils.newArrayList();
     OqlBuilder<FuncResource> builder = OqlBuilder.from(FuncResource.class, "r");
     if (null != menu.getProfile() && null != menu.getProfile().getId()) {
@@ -91,10 +91,10 @@ public class MenuAction extends SecurityActionSupport {
   protected String saveAndForward(Entity<?> entity) {
     Menu menu = (Menu) entity;
     try {
-      List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Long.class));
+      List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Integer.class));
       menu.getResources().clear();
       menu.getResources().addAll(resources);
-      Long newParentId = getLong("parent.id");
+      Integer newParentId = getInteger("parent.id");
       int indexno = getInteger("indexno");
       Menu parent = null;
       if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);

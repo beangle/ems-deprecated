@@ -12,24 +12,24 @@ bar.addClose("${b.text("action.close")}");
 [/@]
 
 <div id="column1" class="column" >
-	[#include "../user/panels/online_portlet.ftl"/]
-	[#include "../user/panels/session_portlet.ftl"/]
+  [#include "../user/panels/online_portlet.ftl"/]
+  [#include "../user/panels/session_portlet.ftl"/]
 </div>
 
 <script type="text/javascript">
-	function _wi_tm(moudleId){
-	   var id= document.getElementById(moudleId);
-	   if(id.className=="module collapsed"){
-		 id.className="module expanded";
-	   }else{
-		 id.className="module collapsed";
-	   }
+  function _wi_tm(moudleId){
+     var id= document.getElementById(moudleId);
+     if(id.className=="module collapsed"){
+     id.className="module expanded";
+     }else{
+     id.className="module collapsed";
+     }
    }
    $(function() {
-		$(".column div div .ui-icon").click(function() {
-			$(this).toggleClass("ui-icon-minusthick");
-			$(this).parents(".column div").find(".portlet-content").toggle();
-		});
-	});
+    $(".column div div .ui-icon").click(function() {
+      $(this).toggleClass("ui-icon-minusthick");
+      $(this).parents(".column div").find(".portlet-content").toggle();
+    });
+  });
   </script>
 [@b.foot/]

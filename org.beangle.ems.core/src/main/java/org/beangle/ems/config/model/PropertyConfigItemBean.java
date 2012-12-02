@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 
 /**
  * 系统配置项
@@ -31,7 +31,7 @@ import org.beangle.commons.entity.pojo.LongIdObject;
  * @author chaostone
  */
 @Entity(name = "org.beangle.ems.config.model.PropertyConfigItemBean")
-public class PropertyConfigItemBean extends LongIdObject {
+public class PropertyConfigItemBean extends IntegerIdObject {
 
   private static final long serialVersionUID = 1L;
 

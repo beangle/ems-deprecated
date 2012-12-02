@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.collection.page.PageLimit;
@@ -32,6 +31,7 @@ import org.beangle.commons.collection.page.Pages;
 import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.context.property.PropertyConfigEvent;
 import org.beangle.commons.context.property.PropertyConfigListener;
+import org.beangle.commons.io.Files;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.model.FileAvatar;
@@ -129,7 +129,7 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
 
   public boolean updateAvatar(String name, File avatar, String type) {
     try {
-      FileUtils.copyFile(avatar, new File(getAbsoluteAvatarPath(name, type)));
+      Files.copyFile(avatar, new File(getAbsoluteAvatarPath(name, type)));
     } catch (IOException e) {
       logger.error("copy avator error", e);
       return false;

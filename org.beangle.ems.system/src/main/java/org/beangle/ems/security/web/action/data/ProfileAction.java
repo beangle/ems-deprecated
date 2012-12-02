@@ -30,6 +30,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Operation;
+import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.helper.DataPermissionHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
@@ -129,7 +130,7 @@ public class ProfileAction extends SecurityActionSupport {
     }
 
     if (profile.getProperties().isEmpty()) {
-      if (profile.isPersisted()) entityDao.remove(profile);
+      if (((Entity<?>) profile).isPersisted()) entityDao.remove(profile);
       return redirect("info", "info.save.success");
     } else {
       if (profile instanceof RoleProfileBean) {
@@ -186,7 +187,7 @@ public class ProfileAction extends SecurityActionSupport {
 
   private Set<ProfileField> getIgnoreFields(List<UserProfile> profiles) {
     Set<ProfileField> ignores = CollectUtils.newHashSet();
-    for (Profile profile : profiles) {
+    for (UserProfile profile : profiles) {
       for (Property property : profile.getProperties()) {
         String value = property.getValue();
         if ("*".equals(value)) ignores.add(property.getField());
@@ -197,7 +198,7 @@ public class ProfileAction extends SecurityActionSupport {
 
   private List<Object> getMyProfileValues(List<UserProfile> Profiles, ProfileField field) {
     List<Object> values = CollectUtils.newArrayList();
-    for (Profile profile : Profiles) {
+    for (UserProfile profile : Profiles) {
       Property property = profile.getProperty(field);
       if (null != property) {
         String value = property.getValue();
@@ -222,7 +223,7 @@ public class ProfileAction extends SecurityActionSupport {
     } else {
       profile = (Profile) entityDao.get(entityName, profileId);
     }
-    populate(Params.sub("profile"), profile, entityName);
+    populate(Params.sub("profile"), (Entity<?>) profile, entityName);
     return profile;
   }
 

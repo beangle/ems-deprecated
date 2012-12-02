@@ -19,11 +19,10 @@
 
 package org.beangle.ems.dev.hibernate.web.action;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.struts2.action.ActionSupport;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
@@ -42,7 +41,7 @@ public class CacheAction extends ActionSupport {
     Date activation = null;
     Date deactivation = null;
 
-    List<Long> generalStatistics = Collections.synchronizedList(new ArrayList<Long>(18));
+    List<Long> generalStatistics = CollectUtils.newArrayList(18);
     final String action = get("do");
     final StringBuilder info = new StringBuilder(512);
 

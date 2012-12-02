@@ -19,7 +19,7 @@
 
 package org.beangle.ems.meta;
 
-import org.beangle.commons.entity.pojo.LongIdEntity;
+import org.beangle.commons.entity.Entity;
 
 /**
  * 实体元信息
@@ -29,7 +29,7 @@ import org.beangle.commons.entity.pojo.LongIdEntity;
  * @author chaostone
  * @since 2.3.0
  */
-public interface EntityMeta extends LongIdEntity {
+public interface EntityMeta extends Entity<Integer> {
   /**
    * 获得实体名称
    * 

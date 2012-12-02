@@ -23,14 +23,14 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.beangle.ems.meta.EntityMeta;
 
 /**
  * 实体元信息
  */
 @Entity(name = "org.beangle.ems.meta.EntityMeta")
-public class EntityMetaBean extends LongIdObject implements EntityMeta {
+public class EntityMetaBean extends IntegerIdObject implements EntityMeta {
   private static final long serialVersionUID = 7143049317022571097L;
 
   /** 实体名称 */
@@ -47,7 +47,7 @@ public class EntityMetaBean extends LongIdObject implements EntityMeta {
 
   }
 
-  public EntityMetaBean(Long id) {
+  public EntityMetaBean(Integer id) {
     this.id = id;
   }
 

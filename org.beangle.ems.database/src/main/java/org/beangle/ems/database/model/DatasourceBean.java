@@ -21,12 +21,12 @@ package org.beangle.ems.database.model;
 
 import java.util.Set;
 
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 
 /**
  * @author chaostone
  */
-public class DatasourceBean extends LongIdObject {
+public class DatasourceBean extends IntegerIdObject {
 
   private static final long serialVersionUID = -6769975441732211022L;
 

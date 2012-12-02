@@ -55,7 +55,7 @@ public class DataPermissionHelper {
       profile = up;
     } else {
       RoleProfileBean rp = new RoleProfileBean();
-      rp.setRole(new RoleBean(holderId));
+      rp.setRole(new RoleBean(holderId.intValue()));
       profile = rp;
     }
     return profile;

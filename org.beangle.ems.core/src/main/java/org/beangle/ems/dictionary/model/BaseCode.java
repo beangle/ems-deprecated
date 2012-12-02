@@ -30,8 +30,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.beangle.commons.entity.pojo.TemporalActiveEntity;
-import org.beangle.commons.entity.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.TemporalEntity;
+import org.beangle.commons.entity.pojo.NumberIdObject;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -44,12 +44,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @author chaostone
  * @version $Id: BaseCode.java May 4, 2011 7:28:27 PM chaostone $
  */
-@SuppressWarnings("rawtypes")
 @MappedSuperclass
 @Cacheable
 @Cache(region = "beangle", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject implements Comparable<T>,
-    TemporalActiveEntity {
+public abstract class BaseCode<T extends Number> extends NumberIdObject<T> implements Comparable<Object>,
+    TemporalEntity {
 
   private static final long serialVersionUID = 5728157880502841506L;
 
@@ -85,15 +84,33 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
    */
   protected Date invalidAt;
 
+  /** 创建时间 */
+  protected Date createdAt;
+
+  /** 最后修改时间 */
+  protected Date updatedAt;
+
   public BaseCode() {
   }
 
-  public BaseCode(Long id) {
+  public BaseCode(T id) {
     this.id = id;
   }
 
-  public void genIdFromCode() {
-    setId(Long.valueOf(getCode()));
+  public Date getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
   /**
@@ -201,8 +218,8 @@ public abstract class BaseCode<T extends BaseCode> extends LongIdTimeObject impl
     this.invalidAt = invalidAt;
   }
 
-  public int compareTo(T arg0) {
-    T other = (T) arg0;
+  public int compareTo(Object arg0) {
+    BaseCode<?> other = (BaseCode<?>) arg0;
     return this.getCode().compareTo(other.getCode());
   }
 

@@ -8,12 +8,12 @@
 [#if menu.entry??]
 [@b.a href="${(menu.entry)!}" target="main"][@i18nNameTitle menu/][/@]
 [#else]
-	[@b.a href="/security/menu-nav?menu.id=${menu.id}" target="main"][@i18nNameTitle menu/][/@]
-	<ul style="padding-left: 20px;">
-	[#list menu.children as child]
-		[#if menus?seq_contains(child)][@displayMenu child/][/#if]
-	[/#list]
-	</ul>
+  [@b.a href="/security/menu-nav?menu.id=${menu.id}" target="main"][@i18nNameTitle menu/][/@]
+  <ul style="padding-left: 20px;">
+  [#list menu.children as child]
+    [#if menus?seq_contains(child)][@displayMenu child/][/#if]
+  [/#list]
+  </ul>
 [/#if]
 </li>
 [/#macro]

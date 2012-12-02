@@ -83,7 +83,7 @@ public class MonitorAction extends SecurityActionSupport {
   public String saveProfile() {
     List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
     for (final SessionProfileBean profile : profiles) {
-      Long roleId = profile.getRole().getId();
+      Integer roleId = profile.getRole().getId();
       Integer max = getInteger("max_" + roleId);
       Integer maxSessions = getInteger("maxSessions_" + roleId);
       Integer inactiveInterval = getInteger("inactiveInterval_" + roleId);
@@ -110,7 +110,7 @@ public class MonitorAction extends SecurityActionSupport {
   }
 
   public String invalidate() {
-    String[] sessionIds = getIds(String.class, "sessioninfo");
+    String[] sessionIds = getIds("sessioninfo", String.class);
     String mySessionId = ServletActionContext.getRequest().getSession().getId();
     boolean killed = getBool("kill");
     int success = 0;

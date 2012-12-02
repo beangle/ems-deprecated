@@ -26,7 +26,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.entity.pojo.LongIdObject;
+import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.beangle.ems.rule.RuleParameter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -39,7 +39,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity(name = "org.beangle.ems.rule.model.RuleConfigParam")
 @Cacheable
 @Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
-public class RuleConfigParam extends LongIdObject {
+public class RuleConfigParam extends IntegerIdObject {
 
   private static final long serialVersionUID = 8711866530914907008L;
 

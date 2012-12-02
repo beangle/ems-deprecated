@@ -8,11 +8,11 @@
 <br>
 [#else]
 [@b.grid items=staticNames var="name"]
-	[@b.row]
-	 [@b.col title="序号" width="10%"]${name_index+1}[/@]
-	 [@b.col title="参数名称" width="20%"]${name}[/@]
-	 [@b.col title="参数值" width="25%"]${config.get(name)}[/@]
-	[/@]
+  [@b.row]
+   [@b.col title="序号" width="10%"]${name_index+1}[/@]
+   [@b.col title="参数名称" width="20%"]${name}[/@]
+   [@b.col title="参数值" width="25%"]${config.get(name)}[/@]
+  [/@]
 [/@]
 [/#if]
 

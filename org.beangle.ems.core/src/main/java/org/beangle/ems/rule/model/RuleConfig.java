@@ -30,7 +30,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.entity.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.beangle.ems.rule.Rule;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -43,7 +43,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity(name = "org.beangle.ems.rule.model.RuleConfig")
 @Cacheable
 @Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
-public class RuleConfig extends LongIdTimeObject {
+public class RuleConfig extends NumberIdTimeObject<Integer> {
 
   private static final long serialVersionUID = -5404097831423072886L;
 

@@ -21,18 +21,15 @@ package org.beangle.ems.rule;
 
 import java.util.Set;
 
-import org.beangle.commons.entity.pojo.LongIdEntity;
+import org.beangle.commons.entity.Entity;
 
 /**
  * 规则对应参数
  * 
  * @author chaostone
  */
-public interface RuleParameter extends LongIdEntity {
+public interface RuleParameter extends Entity<Integer> {
 
-  /**
-   * 
-   */
   Set<RuleParameter> getChildren();
 
   void setChildren(Set<RuleParameter> subRuleParams);

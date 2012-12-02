@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.entity.pojo.LongIdTimeObject;
+import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 
 /**
  * 系统编码规则
@@ -32,7 +32,7 @@ import org.beangle.commons.entity.pojo.LongIdTimeObject;
  * @version $Id: CodeScript.java May 5, 2011 3:56:23 PM chaostone $
  */
 @Entity(name = "org.beangle.ems.dictionary.model.CodeScript")
-public class CodeScript extends LongIdTimeObject {
+public class CodeScript extends NumberIdTimeObject<Integer> {
 
   private static final long serialVersionUID = -2771592539431465165L;
 

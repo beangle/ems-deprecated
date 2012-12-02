@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<bean id="systemVersion" class="org.beangle.commons.util.meta.SystemVersionBean">
-		<property name="name" value="Beangle Demo"/>
-		<property name="version" value="3.0.0-SNAPSHOT"/>
-		<property name="majorVersion" value="3"/>
-		<property name="minorVersion" value="0"/>
-		<property name="vendor" value="Beangle Software"/>
-	</bean>
-	
-	<bean id="beangle.ems.wiki" class="org.beangle.ems.wiki.DefaultModule"/>
-	
-	<bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="corePlaceHolder" />
-   
-	<bean id="reCaptchaConfig" class="org.beangle.ems.portal.web.helper.RecapchaConfig">
-		<property name="publickey" value="6LcAY9cSAAAAADLHUtPR0Vo1bXTA90fXH8KmnneU"/>
-		<property name="privatekey" value="6LcAY9cSAAAAANedWHNl8NUHyS3ZfJhYf-9Vd6b9"/>
-	</bean>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="systemVersion" class="org.beangle.commons.util.meta.SystemVersionBean">
+    <property name="name" value="Beangle Demo"/>
+    <property name="version" value="3.0.0-SNAPSHOT"/>
+    <property name="majorVersion" value="3"/>
+    <property name="minorVersion" value="0"/>
+    <property name="vendor" value="Beangle Software"/>
+  </bean>
+
+  <bean id="beangle.ems.wiki" class="org.beangle.ems.wiki.DefaultModule"/>
+
+  <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="corePlaceHolder" />
+ 
+  <bean id="reCaptchaConfig" class="org.beangle.ems.portal.web.helper.RecapchaConfig">
+    <property name="publickey" value="6LcAY9cSAAAAADLHUtPR0Vo1bXTA90fXH8KmnneU"/>
+    <property name="privatekey" value="6LcAY9cSAAAAANedWHNl8NUHyS3ZfJhYf-9Vd6b9"/>
+  </bean>
 </beans>

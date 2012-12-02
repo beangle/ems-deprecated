@@ -19,14 +19,14 @@
 
 package org.beangle.ems.meta;
 
-import org.beangle.commons.entity.pojo.LongIdEntity;
+import org.beangle.commons.entity.Entity;
 
 /**
  * 属性元信息
  * </p>
  * 记录实体的属性元信息描述。
  */
-public interface PropertyMeta extends LongIdEntity {
+public interface PropertyMeta extends Entity<Integer> {
 
   /**
    * 获得实体元信息
