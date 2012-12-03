@@ -19,12 +19,15 @@
 
 package org.beangle.ems.config.service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
+import org.beangle.commons.bean.converters.Converters;
 import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.Entity;
+import org.beangle.commons.lang.reflect.Reflections;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
 public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
@@ -47,7 +50,8 @@ public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
       }
       Object value = prop.getValue();
       if (null != itemClass && Entity.class.isAssignableFrom(itemClass)) {
-        value = entityDao.get(itemClass, Long.valueOf(value.toString()));
+        Class<?> idType = Reflections.getPropertyType(itemClass, "id");
+        value = entityDao.get(itemClass.getName(), (Serializable) Converters.Instance.convert(value, idType));
       }
       props.put(prop.getName(), value);
     }

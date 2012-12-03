@@ -19,7 +19,6 @@
 
 package org.beangle.ems.business.web.action;
 
-import org.beangle.commons.dao.query.QueryBuilder;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.log.BusinessLog;
@@ -40,7 +39,7 @@ public class LogAction extends SecurityActionSupport {
   }
 
   @Override
-  protected QueryBuilder<?> getQueryBuilder() {
+  protected OqlBuilder<?> getQueryBuilder() {
     OqlBuilder<BusinessLog> builder = OqlBuilder.from(BusinessLog.class, "log");
     populateConditions(builder);
     QueryHelper.addDateIntervalCondition(builder, "operateAt", "beginDate", "endDate");

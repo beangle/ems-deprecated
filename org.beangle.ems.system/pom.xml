@@ -21,9 +21,14 @@
       <version>${commonscompress.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.beangle.commons</groupId>
+      <artifactId>beangle-commons-orm</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-core</artifactId>
-    <version>${project.version}</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

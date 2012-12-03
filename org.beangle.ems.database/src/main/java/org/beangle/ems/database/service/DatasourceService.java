@@ -34,9 +34,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class DatasourceService extends BaseServiceImpl {
 
-  private Map<Long, DataSource> datasources = CollectUtils.newHashMap();
+  private Map<Integer, DataSource> datasources = CollectUtils.newHashMap();
 
-  public DataSource getDatasource(Long id) {
+  public DataSource getDatasource(Integer id) {
     DataSource datasource = datasources.get(id);
     if (null == datasource) {
       OqlBuilder<DatasourceBean> builder = OqlBuilder.from(DatasourceBean.class, "ds");

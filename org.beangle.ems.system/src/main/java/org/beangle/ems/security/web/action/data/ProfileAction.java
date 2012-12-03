@@ -233,7 +233,7 @@ public class ProfileAction extends SecurityActionSupport {
     if ("user".equals(get("type"))) {
       profiles = dataPermissionService.getUserProfiles(entityDao.get(User.class, id));
     } else {
-      RoleProfile profile = dataPermissionService.getRoleProfile(entityDao.get(Role.class, id));
+      RoleProfile profile = dataPermissionService.getRoleProfile(entityDao.get(Role.class, id.intValue()));
       if (null != profile) profiles = CollectUtils.newArrayList(profile);
       else profiles = Collections.emptyList();
     }

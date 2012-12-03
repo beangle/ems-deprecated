@@ -34,8 +34,6 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.IntegerIdObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 规则参数
@@ -44,7 +42,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.rule.RuleParameter")
 @Cacheable
-@Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleParameterBean extends IntegerIdObject implements RuleParameter {
 
   private static final long serialVersionUID = -5534831174352027516L;
@@ -79,7 +76,6 @@ public class RuleParameterBean extends IntegerIdObject implements RuleParameter 
 
   /** 所有的子参数 */
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-  @Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<RuleParameter> children = CollectUtils.newHashSet();
 
   public Rule getRule() {

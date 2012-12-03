@@ -33,8 +33,6 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.NumberIdTimeObject;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleParameter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 规则
@@ -43,7 +41,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.rule.Rule")
 @Cacheable
-@Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RuleBean extends NumberIdTimeObject<Integer> implements Rule {
 
   private static final long serialVersionUID = -3648535746761474692L;
@@ -76,7 +73,6 @@ public class RuleBean extends NumberIdTimeObject<Integer> implements Rule {
 
   /** 规则参数集合 */
   @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
-  @Cache(region = "beangle", usage = CacheConcurrencyStrategy.READ_WRITE)
   private Set<RuleParameter> params = CollectUtils.newHashSet();
 
   /** 是否启用 */

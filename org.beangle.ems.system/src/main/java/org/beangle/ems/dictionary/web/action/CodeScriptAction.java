@@ -61,7 +61,7 @@ public class CodeScriptAction extends SecurityActionSupport {
    * 编辑
    */
   public String edit() {
-    Long codeScriptId = getLong("codeScriptId");
+    Integer codeScriptId = getInteger("codeScriptId");
     CodeScript codeScript = null;
     if (null == codeScriptId) {
       codeScript = (CodeScript) populate(CodeScript.class, "codeScript");
@@ -76,8 +76,7 @@ public class CodeScriptAction extends SecurityActionSupport {
    * 查看
    */
   public String info() {
-    Long codeScriptId = getLong("codeScriptId");
-    CodeScript codeScript = (CodeScript) entityDao.get(CodeScript.class, codeScriptId);
+    CodeScript codeScript = (CodeScript) entityDao.get(CodeScript.class, getInteger("codeScriptId"));
     put("codeScript", codeScript);
     return forward();
   }
@@ -86,7 +85,7 @@ public class CodeScriptAction extends SecurityActionSupport {
    * 保存
    */
   public String save() {
-    Long codeScriptId = getLong("codeScript.id");
+    Integer codeScriptId = getInteger("codeScript.id");
     CodeScript codeScript = null;
     if (null == codeScriptId) {
       codeScript = new CodeScript();
@@ -117,7 +116,7 @@ public class CodeScriptAction extends SecurityActionSupport {
    * 删除
    */
   public String remove() {
-    Long codeScriptId = getLong("codeScriptId");
+    Integer codeScriptId = getInteger("codeScriptId");
     entityDao.remove(entityDao.get(CodeScript.class, codeScriptId));
     return redirect("search", "info.delete.success");
   }

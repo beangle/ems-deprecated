@@ -34,14 +34,14 @@ import org.beangle.ems.dictionary.service.BaseCodeService;
  */
 public class BaseCodeServiceImpl extends BaseServiceImpl implements BaseCodeService {
 
-  public <T extends BaseCode<?>> T getCode(Class<T> codeClass, String code) {
+  public <T extends BaseCode<Integer>> T getCode(Class<T> codeClass, String code) {
     OqlBuilder<T> builder = OqlBuilder.from(codeClass, "basecode").where("basecode.code=:code", code);
     List<T> rs = entityDao.search(builder);
     if (!rs.isEmpty()) return rs.get(0);
     else return null;
   }
 
-  public <T extends BaseCode<?>> List<T> getCodes(Class<T> codeClass) {
+  public <T extends BaseCode<Integer>> List<T> getCodes(Class<T> codeClass) {
     OqlBuilder<T> builder = OqlBuilder.from(codeClass, "basecode").where(
         "basecode.effectiveAt <= :now and (basecode.invalidAt is null or basecode.invalidAt >= :now)",
         new java.util.Date());
@@ -49,34 +49,34 @@ public class BaseCodeServiceImpl extends BaseServiceImpl implements BaseCodeServ
     return entityDao.search(builder);
   }
 
-  public <T extends BaseCode<?>> T getCode(Class<T> codeClass, Long codeId) {
+  public <T extends BaseCode<Integer>> T getCode(Class<T> codeClass, Integer codeId) {
     return entityDao.get(codeClass, codeId);
   }
 
-  public <T extends BaseCode<?>> List<T> getCodes(Class<T> type, Long... ids) {
+  public <T extends BaseCode<Integer>> List<T> getCodes(Class<T> type, Integer... ids) {
     OqlBuilder<T> builder = OqlBuilder.from(type, "basecode").where("basecode.id in(:ids)", ids);
     return entityDao.search(builder);
   }
 
   @SuppressWarnings("unchecked")
-  public Class<? extends BaseCode<?>> getCodeType(String name) {
+  public Class<? extends BaseCode<Integer>> getCodeType(String name) {
     OqlBuilder<CodeMeta> builder = OqlBuilder.from(CodeMeta.class, "coder");
     builder.where("coder.name=:name or coder.engName=:name", name);
     List<CodeMeta> coders = entityDao.search(builder);
     try {
       if (1 != coders.size()) return null;
-      else return (Class<? extends BaseCode<?>>) Class.forName(coders.get(0).getClassName());
+      else return (Class<? extends BaseCode<Integer>>) Class.forName(coders.get(0).getClassName());
     } catch (ClassNotFoundException e) {
       logger.error("Basecode " + name + "type not found", e);
       throw new RuntimeException(e);
     }
   }
 
-  public void removeCodes(Class<? extends BaseCode<?>> codeClass, Long... codeIds) {
+  public void removeCodes(Class<? extends BaseCode<Integer>> codeClass, Integer... codeIds) {
     entityDao.remove(entityDao.get(codeClass, codeIds));
   }
 
-  public void saveOrUpdate(BaseCode<?> code) {
+  public void saveOrUpdate(BaseCode<Integer> code) {
     if (code.isTransient()) {
       code.setCreatedAt(new Date(System.currentTimeMillis()));
     }

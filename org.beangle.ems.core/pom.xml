@@ -10,18 +10,12 @@
   <packaging>jar</packaging>
   <name>Beangle Ems Core</name>
   <dependencies>
-    <!--captcha dependency
     <dependency>
-      <groupId>com.octo.captcha</groupId>
-      <artifactId>jcaptcha</artifactId>
-      <version>1.0</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+      <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>com.jhlabs</groupId>
-      <artifactId>imaging</artifactId>
-      <version>01012005</version>
-    </dependency>
-    -->
     <dependency>
       <groupId>org.beanshell</groupId>
       <artifactId>bsh</artifactId>

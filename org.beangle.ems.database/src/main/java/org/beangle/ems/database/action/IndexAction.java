@@ -38,7 +38,7 @@ public class IndexAction extends SecurityActionSupport {
 
   public String connect() {
     QueryContext queryContext = getQueryContext();
-    Long datasourceId = getLong("datasource.id");
+    Integer datasourceId = getInteger("datasource.id");
     if (null == queryContext) {
       if (null == datasourceId) {
         List<?> datasources = entityDao.getAll(DatasourceBean.class);

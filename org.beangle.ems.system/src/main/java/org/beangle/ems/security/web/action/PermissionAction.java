@@ -57,7 +57,7 @@ public class PermissionAction extends SecurityActionSupport {
    * 根据菜单配置来分配权限
    */
   public String edit() {
-    Long roleId = getId("role");
+    Integer roleId = getId("role",Integer.class);
     Role role = entityDao.get(Role.class, roleId);
     User user = entityDao.get(User.class, getUserId());
     put("manager", user);
@@ -155,10 +155,10 @@ public class PermissionAction extends SecurityActionSupport {
    * 保存模块级权限
    */
   public String save() {
-    Role role = entityDao.get(Role.class, getLong("role.id"));
-    MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getLong("menuProfileId"));
+    Role role = entityDao.get(Role.class, getInteger("role.id"));
+    MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getInteger("menuProfileId"));
     Set<FuncResource> newResources = CollectUtils.newHashSet(entityDao.get(FuncResource.class,
-        Strings.splitToLong(get("resourceId"))));
+        Strings.splitToInteger(get("resourceId"))));
 
     // 管理员拥有的菜单权限和系统资源
     User manager = entityDao.get(User.class, getUserId());

@@ -33,7 +33,7 @@ public class DatasourceAction extends SecurityActionSupport {
   private DatasourceService datasourceService;
 
   public String test() {
-    Long datasourceId = getId("datasource");
+    Integer datasourceId = getId("datasource",Integer.class);
     DataSource dataSource = datasourceService.getDatasource(datasourceId);
     Map<String, String> driverinfo = CollectUtils.newHashMap();
     Map<String, Object> dbinfo = CollectUtils.newHashMap();

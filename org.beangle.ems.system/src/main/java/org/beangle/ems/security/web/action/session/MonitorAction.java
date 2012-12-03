@@ -93,7 +93,7 @@ public class MonitorAction extends SecurityActionSupport {
         profile.setInactiveInterval(inactiveInterval);
       }
     }
-    Long roleId = getLong("roleId_new");
+    Integer roleId = getInteger("roleId_new");
     Integer max = getInteger("max_new");
     Integer maxSessions = getInteger("maxSessions_new");
     Integer inactiveInterval = getInteger("inactiveInterval_new");

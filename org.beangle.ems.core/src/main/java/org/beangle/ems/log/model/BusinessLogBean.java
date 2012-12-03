@@ -21,6 +21,7 @@ package org.beangle.ems.log.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,8 +33,6 @@ import org.beangle.commons.entity.annotation.LogEntity;
 import org.beangle.commons.entity.pojo.LongIdObject;
 import org.beangle.ems.log.BusinessLog;
 import org.beangle.ems.log.BusinessLogDetail;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * 业务日志实现
@@ -80,8 +79,7 @@ public class BusinessLogBean extends LongIdObject implements BusinessLog {
   private String agent;
 
   /** 操作明细 */
-  @Cascade(CascadeType.ALL)
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
   private BusinessLogDetail detail;
 
   public String getAgent() {

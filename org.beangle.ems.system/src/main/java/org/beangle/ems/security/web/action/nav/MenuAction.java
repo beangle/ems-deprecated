@@ -118,7 +118,7 @@ public class MenuAction extends SecurityActionSupport {
    * 禁用或激活一个或多个模块
    */
   public String activate() {
-    Long[] menuIds = getIds(getShortName());
+    Integer[] menuIds = getIds(getShortName(),Integer.class);
     Boolean enabled = getBoolean("isActivate");
     if (null == enabled) enabled = Boolean.TRUE;
 

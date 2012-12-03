@@ -20,5 +20,17 @@
 
     <mapping class="org.beangle.ems.meta.model.EntityMetaBean"/>
     <mapping class="org.beangle.ems.meta.model.PropertyMetaBean"/>
+    
+    <class-cache class="org.beangle.ems.dictionary.model.CodeCategory" region="beangle" usage="read-write"/>
+    <class-cache class="org.beangle.ems.dictionary.model.CodeMeta" region="beangle" usage="read-write"/>
+    <class-cache class="org.beangle.ems.rule.Rule" region="beangle" usage="read-write"/>
+    <class-cache class="org.beangle.ems.rule.RuleParameter" region="beangle" usage="read-write"/>
+    <class-cache class="org.beangle.ems.rule.model.RuleConfig" region="beangle" usage="read-write"/>
+    <class-cache class="org.beangle.ems.rule.model.RuleConfigParam" region="beangle" usage="read-write"/>
+    <!--
+    <collection-cache collection="org.beangle.ems.rule.Rule.params" region="beangle" usage="read-write"/>
+    <collection-cache collection="org.beangle.ems.rule.RuleParameter.children" region="beangle" usage="read-write"/>
+    <collection-cache collection="org.beangle.ems.rule.RuleConfig.params" region="beangle" usage="read-write"/>
+    -->
   </session-factory>
 </hibernate-configuration>

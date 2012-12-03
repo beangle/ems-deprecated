@@ -32,8 +32,6 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.beangle.commons.entity.TemporalEntity;
 import org.beangle.commons.entity.pojo.NumberIdObject;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 基础代码的基类
@@ -46,7 +44,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @MappedSuperclass
 @Cacheable
-@Cache(region = "beangle", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public abstract class BaseCode<T extends Number> extends NumberIdObject<T> implements Comparable<Object>,
     TemporalEntity {
 
@@ -136,8 +133,7 @@ public abstract class BaseCode<T extends Number> extends NumberIdObject<T> imple
   /**
    * 设置代码
    * 
-   * @param code
-   *          代码
+   * @param code 代码
    */
   public void setCode(String code) {
     this.code = code;
@@ -155,8 +151,7 @@ public abstract class BaseCode<T extends Number> extends NumberIdObject<T> imple
   /**
    * 设置名称
    * 
-   * @param name
-   *          名称
+   * @param name 名称
    */
   public void setName(String name) {
     this.name = name;
@@ -174,8 +169,7 @@ public abstract class BaseCode<T extends Number> extends NumberIdObject<T> imple
   /**
    * 设置英文名
    * 
-   * @param engName
-   *          英文名
+   * @param engName 英文名
    */
   public void setEngName(String engName) {
     this.engName = engName;
@@ -211,8 +205,7 @@ public abstract class BaseCode<T extends Number> extends NumberIdObject<T> imple
   /**
    * 设置失效时间
    * 
-   * @param invalidAt
-   *          失效时间
+   * @param invalidAt 失效时间
    */
   public void setInvalidAt(Date invalidAt) {
     this.invalidAt = invalidAt;

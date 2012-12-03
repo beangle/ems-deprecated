@@ -28,8 +28,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.beangle.commons.entity.pojo.IntegerIdObject;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * 登记系统使用的基础代码
@@ -41,7 +39,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity(name = "org.beangle.ems.dictionary.model.CodeMeta")
 @Cacheable
-@Cache(region = "beangle", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CodeMeta extends IntegerIdObject {
 
   private static final long serialVersionUID = -2272793754309992189L;

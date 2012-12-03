@@ -115,7 +115,7 @@ public class RoleAction extends SecurityActionSupport {
       if (!role.isPersisted()) role.setCreatedAt(new Date(System.currentTimeMillis()));
       entityDao.saveOrUpdate(role);
     }
-    Long newParentId = getLong("parent.id");
+    Integer newParentId = getInteger("parent.id");
     int indexno = getInteger("indexno");
     Role parent = null;
     if (null != newParentId) parent = entityDao.get(Role.class, newParentId);
@@ -134,7 +134,7 @@ public class RoleAction extends SecurityActionSupport {
    * 删除一个或多个角色
    */
   public String remove() {
-    Long[] roleIds = getIds(getShortName());
+    Integer[] roleIds = getIds(getShortName(),Integer.class);
     User curUser = userService.get(getUserId());
     roleService.removeRole(curUser, entityDao.get(Role.class, roleIds));
     return redirect("search", "info.remove.success");
