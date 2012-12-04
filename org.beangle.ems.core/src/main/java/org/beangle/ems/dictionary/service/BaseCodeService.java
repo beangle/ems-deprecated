@@ -21,7 +21,7 @@ package org.beangle.ems.dictionary.service;
 
 import java.util.List;
 
-import org.beangle.ems.dictionary.model.BaseCode;
+import org.beangle.commons.entity.pojo.BaseCode;
 
 /**
  * @author chaostone

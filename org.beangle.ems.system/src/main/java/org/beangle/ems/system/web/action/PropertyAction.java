@@ -83,7 +83,7 @@ public class PropertyAction extends ActionSupport {
   }
 
   public String remove() {
-    PropertyConfigItemBean config = entityDao.get(PropertyConfigItemBean.class, getInteger("config.id"));
+    PropertyConfigItemBean config = entityDao.get(PropertyConfigItemBean.class, getInt("config.id"));
     if (null != config) entityDao.remove(config);
     return redirect("dynaInfo", "info.save.success");
   }

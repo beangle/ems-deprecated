@@ -72,7 +72,7 @@ public class RoleAction extends SecurityActionSupport {
 
   public String profile() {
     OqlBuilder<RoleProfile> builder = OqlBuilder.from(RoleProfile.class, "gp");
-    builder.where("gp.role.id=:roleId", getId("role"));
+    builder.where("gp.role.id=:roleId", getIntId("role"));
     put("profiles", entityDao.search(builder));
     return forward();
   }
@@ -84,6 +84,7 @@ public class RoleAction extends SecurityActionSupport {
     return forward();
   }
 
+  @SuppressWarnings("unchecked")
   protected OqlBuilder<Role> getQueryBuilder() {
     OqlBuilder<Role> entityQuery = OqlBuilder.from(getEntityName(), "role");
     if (!isAdmin()) {
@@ -115,8 +116,8 @@ public class RoleAction extends SecurityActionSupport {
       if (!role.isPersisted()) role.setCreatedAt(new Date(System.currentTimeMillis()));
       entityDao.saveOrUpdate(role);
     }
-    Integer newParentId = getInteger("parent.id");
-    int indexno = getInteger("indexno");
+    Integer newParentId = getInt("parent.id");
+    int indexno = getInt("indexno");
     Role parent = null;
     if (null != newParentId) parent = entityDao.get(Role.class, newParentId);
 

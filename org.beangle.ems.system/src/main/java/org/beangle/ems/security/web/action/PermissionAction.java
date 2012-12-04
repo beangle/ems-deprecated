@@ -155,8 +155,8 @@ public class PermissionAction extends SecurityActionSupport {
    * 保存模块级权限
    */
   public String save() {
-    Role role = entityDao.get(Role.class, getInteger("role.id"));
-    MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getInteger("menuProfileId"));
+    Role role = entityDao.get(Role.class, getInt("role.id"));
+    MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getInt("menuProfileId"));
     Set<FuncResource> newResources = CollectUtils.newHashSet(entityDao.get(FuncResource.class,
         Strings.splitToInteger(get("resourceId"))));
 

@@ -48,7 +48,7 @@ public class IndexAction extends SecurityActionSupport {
   public String index() throws Exception {
     final String name = get("name");
     final MenuProfile profile;
-    final Integer menuId = getInteger("menu.id");
+    final Integer menuId = getInt("menu.id");
     final Set<Menu> family;
     final Menu givenMenu;
     User user = entityDao.get(User.class, getUserId());
@@ -104,7 +104,7 @@ public class IndexAction extends SecurityActionSupport {
     MenuProfile profile = menuService.getProfile(user, getLong("profile.id"));
     List<Menu> menus = menuService.getMenus(profile, user);
     List<Menu> menuPath = CollectUtils.newArrayList();
-    Integer menuId = getInteger("menu.id");
+    Integer menuId = getInt("menu.id");
     if (null != menuId) {
       Menu menu = entityDao.get(Menu.class, menuId);
       menus.retainAll(HierarchyEntityUtils.getFamily(menu));
@@ -123,7 +123,7 @@ public class IndexAction extends SecurityActionSupport {
   }
 
   public String access() {
-    Integer menuId = getInteger("menu.id");
+    Integer menuId = getInt("menu.id");
     Menu menu = entityDao.get(Menu.class, menuId);
     List<Menu> paths = HierarchyEntityUtils.getPath(menu);
     put("menu", menu);

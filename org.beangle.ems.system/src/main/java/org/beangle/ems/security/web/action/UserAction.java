@@ -58,7 +58,7 @@ public class UserAction extends SecurityActionSupport {
   private UserDashboardHelper userDashboardHelper;
 
   public String dashboard() {
-    Long userId = getId("user");
+    Long userId = getLongId("user");
     User managed = null;
     if (null != userId) {
       managed = entityDao.get(User.class, userId);
@@ -80,6 +80,7 @@ public class UserAction extends SecurityActionSupport {
     return forward();
   }
 
+  @SuppressWarnings("unchecked")
   protected OqlBuilder<User> getQueryBuilder() {
     User manager = entityDao.get(User.class, getUserId());
     OqlBuilder<User> userQuery = OqlBuilder.from(getEntityName(), "user");
@@ -209,7 +210,7 @@ public class UserAction extends SecurityActionSupport {
    * 删除一个或多个用户
    */
   public String remove() {
-    Long[] userIds = getIds("user");
+    Long[] userIds = getLongIds("user");
     User creator = userService.get(getUserId());
     List<User> toBeRemoved = userService.getUsers(userIds);
     StringBuilder sb = new StringBuilder();
@@ -244,7 +245,7 @@ public class UserAction extends SecurityActionSupport {
    * 禁用或激活一个或多个用户
    */
   public String activate() {
-    Long[] userIds = getIds("user");
+    Long[] userIds = getLongIds("user");
     String isActivate = get("isActivate");
     int successCnt;
     User manager = userService.get(getUserId());

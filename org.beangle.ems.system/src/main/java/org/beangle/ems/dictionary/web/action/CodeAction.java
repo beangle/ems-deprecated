@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.beangle.commons.dao.EntityDao;
+import org.beangle.commons.entity.pojo.BaseCode;
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.dictionary.model.BaseCode;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
 import org.beangle.struts2.action.ActionSupport;

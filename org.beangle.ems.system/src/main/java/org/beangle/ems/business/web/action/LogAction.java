@@ -38,8 +38,9 @@ public class LogAction extends SecurityActionSupport {
     return BusinessLog.class.getName();
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  protected OqlBuilder<?> getQueryBuilder() {
+  protected  OqlBuilder<BusinessLog> getQueryBuilder() {
     OqlBuilder<BusinessLog> builder = OqlBuilder.from(BusinessLog.class, "log");
     populateConditions(builder);
     QueryHelper.addDateIntervalCondition(builder, "operateAt", "beginDate", "endDate");

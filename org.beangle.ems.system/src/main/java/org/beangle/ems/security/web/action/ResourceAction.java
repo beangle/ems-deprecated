@@ -43,7 +43,7 @@ public class ResourceAction extends SecurityActionSupport {
    * 禁用或激活一个或多个模块
    */
   public String activate() {
-    Long[] resourceIds = getIds("resource");
+    Integer[] resourceIds = getIntIds("resource");
     Boolean enabled = getBoolean("enabled");
     if (null == enabled) {
       enabled = Boolean.FALSE;
@@ -79,7 +79,7 @@ public class ResourceAction extends SecurityActionSupport {
   }
 
   public String info() {
-    Long entityId = getId(getShortName());
+    Integer entityId = getIntId(getShortName());
     Entity<?> entity = getModel(getEntityName(), entityId);
     OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
     query.join("menu.resources", "r").where("r.id=:resourceId", entity.getId())

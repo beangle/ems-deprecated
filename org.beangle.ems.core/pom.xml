@@ -11,6 +11,12 @@
   <name>Beangle Ems Core</name>
   <dependencies>
     <dependency>
+      <groupId>org.beangle.commons</groupId>
+      <artifactId>beangle-commons-model</artifactId>
+      <version>${beangle.library.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>${spring.version}</version>

@@ -84,19 +84,19 @@ public class MonitorAction extends SecurityActionSupport {
     List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
     for (final SessionProfileBean profile : profiles) {
       Integer roleId = profile.getRole().getId();
-      Integer max = getInteger("max_" + roleId);
-      Integer maxSessions = getInteger("maxSessions_" + roleId);
-      Integer inactiveInterval = getInteger("inactiveInterval_" + roleId);
+      Integer max = getInt("max_" + roleId);
+      Integer maxSessions = getInt("maxSessions_" + roleId);
+      Integer inactiveInterval = getInt("inactiveInterval_" + roleId);
       if (null != max && null != maxSessions && null != inactiveInterval) {
         profile.setCapacity(max);
         profile.setUserMaxSessions(maxSessions);
         profile.setInactiveInterval(inactiveInterval);
       }
     }
-    Integer roleId = getInteger("roleId_new");
-    Integer max = getInteger("max_new");
-    Integer maxSessions = getInteger("maxSessions_new");
-    Integer inactiveInterval = getInteger("inactiveInterval_new");
+    Integer roleId = getInt("roleId_new");
+    Integer max = getInt("max_new");
+    Integer maxSessions = getInt("maxSessions_new");
+    Integer inactiveInterval = getInt("inactiveInterval_new");
     if (null != max && null != maxSessions && null != inactiveInterval) {
       SessionProfileBean newProfile = new SessionProfileBean();
       newProfile.setRole(entityDao.get(Role.class, roleId));

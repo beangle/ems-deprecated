@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.ems.dictionary.model.BaseCode;
+import org.beangle.commons.entity.pojo.BaseCode;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
 

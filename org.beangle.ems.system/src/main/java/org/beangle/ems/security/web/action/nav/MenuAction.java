@@ -94,8 +94,8 @@ public class MenuAction extends SecurityActionSupport {
       List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Integer.class));
       menu.getResources().clear();
       menu.getResources().addAll(resources);
-      Integer newParentId = getInteger("parent.id");
-      int indexno = getInteger("indexno");
+      Integer newParentId = getInt("parent.id");
+      int indexno = getInt("indexno");
       Menu parent = null;
       if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);
 
@@ -156,7 +156,7 @@ public class MenuAction extends SecurityActionSupport {
 
   @Override
   public String info() {
-    Long entityId = getId(getShortName());
+    Integer entityId = getIntId(getShortName());
     if (null == entityId) {
       logger.warn("cannot get paremeter {}Id or {}.id", getShortName(), getShortName());
     }
