@@ -33,9 +33,11 @@ import org.beangle.commons.web.access.AccessMonitor;
 import org.beangle.commons.web.access.AccessRequest;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.service.RoleService;
 import org.beangle.security.blueprint.session.model.SessionProfileBean;
 import org.beangle.security.blueprint.session.service.SessionProfileService;
 import org.beangle.security.core.session.SessionRegistry;
+import org.beangle.security.core.session.Sessioninfo;
 import org.beangle.security.core.session.category.SessionStat;
 import org.beangle.security.web.session.model.SessioninfoBean;
 
@@ -52,11 +54,13 @@ public class MonitorAction extends SecurityActionSupport {
 
   private AccessMonitor accessMonitor;
 
+  private RoleService roleService;
+
+  @SuppressWarnings("unchecked")
   public String profiles() {
-    List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
+    List<SessionProfileBean> profiles = (List<SessionProfileBean>) categoryProfileService.getProfiles();
     put("profiles", profiles);
-    List<Role> roles = entityDao.search(OqlBuilder.from(Role.class, "g").where("g.parent is null")
-        .orderBy("g.code"));
+    List<Role> roles = roleService.getRootRoles();
     for (SessionProfileBean profile : profiles)
       roles.remove(profile.getRole());
     put("roles", roles);
@@ -65,9 +69,7 @@ public class MonitorAction extends SecurityActionSupport {
 
   public String index() {
     String orderBy = get("orderBy");
-    if (Strings.isEmpty(orderBy)) {
-      orderBy = "sessioninfo.loginAt desc";
-    }
+    if (Strings.isEmpty(orderBy)) orderBy = "sessioninfo.loginAt desc";
     OqlBuilder<SessioninfoBean> builder = OqlBuilder.from(SessioninfoBean.class, "sessioninfo");
     populateConditions(builder);
     builder.orderBy(get(Order.ORDER_STR)).limit(getPageLimit());
@@ -80,13 +82,14 @@ public class MonitorAction extends SecurityActionSupport {
   /**
    * 保存设置
    */
+  @SuppressWarnings("unchecked")
   public String saveProfile() {
-    List<SessionProfileBean> profiles = entityDao.getAll(SessionProfileBean.class);
+    List<SessionProfileBean> profiles = (List<SessionProfileBean>) categoryProfileService.getProfiles();
     for (final SessionProfileBean profile : profiles) {
       Integer roleId = profile.getRole().getId();
       Integer max = getInt("max_" + roleId);
-      Integer maxSessions = getInt("maxSessions_" + roleId);
-      Integer inactiveInterval = getInt("inactiveInterval_" + roleId);
+      Short maxSessions = getShort("maxSessions_" + roleId);
+      Short inactiveInterval = getShort("inactiveInterval_" + roleId);
       if (null != max && null != maxSessions && null != inactiveInterval) {
         profile.setCapacity(max);
         profile.setUserMaxSessions(maxSessions);
@@ -95,11 +98,11 @@ public class MonitorAction extends SecurityActionSupport {
     }
     Integer roleId = getInt("roleId_new");
     Integer max = getInt("max_new");
-    Integer maxSessions = getInt("maxSessions_new");
-    Integer inactiveInterval = getInt("inactiveInterval_new");
+    Short maxSessions = getShort("maxSessions_new");
+    Short inactiveInterval = getShort("inactiveInterval_new");
     if (null != max && null != maxSessions && null != inactiveInterval) {
       SessionProfileBean newProfile = new SessionProfileBean();
-      newProfile.setRole(entityDao.get(Role.class, roleId));
+      newProfile.setRole(roleService.get(roleId));
       newProfile.setCapacity(max);
       newProfile.setUserMaxSessions(maxSessions);
       newProfile.setInactiveInterval(inactiveInterval);
@@ -116,11 +119,31 @@ public class MonitorAction extends SecurityActionSupport {
     int success = 0;
     for (String sessionId : sessionIds) {
       if (mySessionId.equals(sessionId)) continue;
-      sessionRegistry.expire(sessionId);
-      success++;
+      if (sessionRegistry.expire(sessionId)) success++;
     }
     addFlashMessage(killed ? "security.info.session.kill" : "security.info.session.expire", success);
     return redirect("index");
+  }
+
+  public String kill() {
+    String[] sessionIds = getIds("sessioninfo", String.class);
+    String mySessionId = ServletActionContext.getRequest().getSession().getId();
+    int success = 0;
+    for (String sessionId : sessionIds) {
+      if (mySessionId.equals(sessionId)) continue;
+      Sessioninfo info = sessionRegistry.getSessioninfo(sessionId);
+      if (info.isExpired()) {
+        sessionRegistry.remove(sessionId);
+        success++;
+      }
+    }
+    addFlashMessage("security.info.session.kill", success);
+    return redirect("index");
+  }
+
+  public String stat() {
+    sessionRegistry.getController().stat();
+    return redirect("index", "统计完成");
   }
 
   /**
@@ -150,6 +173,10 @@ public class MonitorAction extends SecurityActionSupport {
 
   public void setAccessMonitor(AccessMonitor accessMonitor) {
     this.accessMonitor = accessMonitor;
+  }
+
+  public void setRoleService(RoleService roleService) {
+    this.roleService = roleService;
   }
 
 }

@@ -6,7 +6,7 @@ bar.addBack("${b.text("action.back")}");
 <table class="infoTable">
    <tr>
    <td class="title" >&nbsp;${b.text("common.id")}:</td>
-   <td class="content">${menu.code}  </td>
+   <td class="content">${menu.indexno}  </td>
    <td class="title" >&nbsp;${b.text("menu.entry")}:</td>
    <td class="content">${menu.entry!}</td>
    </tr>

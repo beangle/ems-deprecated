@@ -22,9 +22,9 @@
   bar.addItem("菜单配置","redirectTo('${b.url('profile!search')}')");
 [/@]
   [@b.row]
-    <tr [#if menu??] title="入口及备注:${menu.entry!} ${(menu.remark?html)!}" id="${menu.code}"[/#if]>
+    <tr [#if menu??] title="入口及备注:${menu.entry!} ${(menu.remark?html)!}" id="${menu.indexno}"[/#if]>
     [@b.boxcol/]
-    [@b.treecol title="common.title" width="30%"][@b.a href="!info?menu.id=${menu.id}"]${menu.code} ${menu.title}[/@][/@]
+    [@b.treecol title="common.title" width="30%"][@b.a href="!info?menu.id=${menu.id}"]${menu.indexno} ${menu.title}[/@][/@]
     [@b.col property="name" title="common.name" width="15%"/]
     [@b.col width="40%" title="使用资源"][#list menu.resources as re]${re.title?html}[#if re_has_next],[/#if][/#list][/@]
     [@b.col property="enabled" width="10%" title="common.status"][@enableInfo menu.enabled/][/@]

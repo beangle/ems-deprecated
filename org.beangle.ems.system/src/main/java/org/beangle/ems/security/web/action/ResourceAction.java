@@ -83,7 +83,7 @@ public class ResourceAction extends SecurityActionSupport {
     Entity<?> entity = getModel(getEntityName(), entityId);
     OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
     query.join("menu.resources", "r").where("r.id=:resourceId", entity.getId())
-        .orderBy("menu.profile.id,menu.code");
+        .orderBy("menu.profile.id,menu.indexno");
 
     OqlBuilder<Permission> roleQuery = OqlBuilder.from(Permission.class, "auth");
     roleQuery.where("auth.resource=:resource", entity).select("auth.role");

@@ -12,7 +12,9 @@
 [#assign refreshInterval=Parameters['interval']!"10"/]
 [@b.grid items=sessioninfos var="sessioninfo" refresh="${refreshInterval}"]
   [@b.gridbar]
-  bar.addItem("过期",action.multi('invalidate','确定过期选择的会话吗?'),'action-edit-delete');
+  bar.addItem("过期在线会话",action.multi('invalidate','确定过期选择的会话吗?'),'action-edit-delete');
+  bar.addItem("清除过期会话",action.multi('kill','确定清除选择的过期会话吗?'),'action-edit-delete');
+  bar.addItem("重新统计会话数",action.method('stat'),'action-default');
   [/@]
   [@b.row]
     [@b.boxcol/]

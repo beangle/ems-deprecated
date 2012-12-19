@@ -76,7 +76,7 @@ public class DefaultRuleExecutorBuilder implements RuleExecutorBuilder, Applicat
     for (RuleConfigParam configParam : ruleConfig.getParams()) {
       map.put(configParam.getParam().getName(), configParam.getValue());
     }
-    Model.populate(map, executor);
+    Model.populate(executor, map);
     return executor;
   }
 

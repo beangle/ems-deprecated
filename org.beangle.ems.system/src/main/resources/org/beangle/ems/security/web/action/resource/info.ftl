@@ -20,7 +20,7 @@
    </tr>
    <tr>
    <td class="title">引用菜单:</td>
-   <td class="content">[#list menus as menu](${menu.code})${menu.title}<br/>[/#list]</td>
+   <td class="content">[#list menus as menu](${menu.indexno})${menu.title}<br/>[/#list]</td>
    <td class="title">&nbsp;可见范围:</td>
    <td class="content">[@resourceScope resource.scope/]</td>
    </tr>

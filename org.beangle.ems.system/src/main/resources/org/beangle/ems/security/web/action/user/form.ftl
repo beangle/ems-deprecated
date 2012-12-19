@@ -27,11 +27,11 @@
   [@b.tab label="user.members"]
     [@b.grid  items=roles?sort_by("code") var="role" sortable="false"]
       [@b.row]
-        <tr [#if role??]id="${role.code}"[/#if]>
+        <tr [#if role??]id="${role.indexno}"[/#if]>
         [@b.col title="common.index" width="5%"]${role_index+1}[/@]
         [@b.treecol title="entity.role" property="name"]
           <span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>
-          ${role.code} ${role.name}[#if role.dynamic] (动态)[/#if] [#if !role.enabled] (禁用)[/#if]
+          ${role.indexno} ${role.name}[#if role.dynamic] (动态)[/#if] [#if !role.enabled] (禁用)[/#if]
           </span>
         [/@]
         [@b.col title="member.member" width="10%"]

@@ -18,20 +18,12 @@
  */
 package org.beangle.ems.dictionary.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.entity.HierarchyEntity;
-import org.beangle.commons.entity.pojo.IntegerIdObject;
+import org.beangle.commons.entity.pojo.NumberIdHierarchyObject;
 
 /**
  * 代码分类
@@ -40,7 +32,7 @@ import org.beangle.commons.entity.pojo.IntegerIdObject;
  * @version $Id: CodeCategory.java Jun 28, 2011 8:32:18 PM chaostone $
  */
 @Entity(name = "org.beangle.ems.dictionary.model.CodeCategory")
-public class CodeCategory extends IntegerIdObject implements HierarchyEntity<CodeCategory, Integer> {
+public class CodeCategory extends  NumberIdHierarchyObject<CodeCategory,Integer> {
 
   private static final long serialVersionUID = -8865890399079481866L;
 
@@ -50,36 +42,12 @@ public class CodeCategory extends IntegerIdObject implements HierarchyEntity<Cod
   @Column(unique = true)
   private String name;
 
-  /** 上级类别 */
-  @ManyToOne(fetch = FetchType.LAZY)
-  private CodeCategory parent;
-
-  /** 下级类别列表 */
-  @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-  private List<CodeCategory> children = CollectUtils.newArrayList();
-
   public String getName() {
     return name;
   }
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public CodeCategory getParent() {
-    return parent;
-  }
-
-  public void setParent(CodeCategory parent) {
-    this.parent = parent;
-  }
-
-  public List<CodeCategory> getChildren() {
-    return children;
-  }
-
-  public void setChildren(List<CodeCategory> children) {
-    this.children = children;
   }
 
 }

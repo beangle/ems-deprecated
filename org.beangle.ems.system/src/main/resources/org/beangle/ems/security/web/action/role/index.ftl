@@ -8,7 +8,7 @@
       [@b.textfields names="role.name;common.name,role.owner.name;common.creator"/]
     [/@]
     </td>
-    <td class="index_content">[@b.div id="rolelist" href="!search?orderBy=role.code" /]</td>
+    <td class="index_content">[@b.div id="rolelist" href="!search?orderBy=role.indexno" /]</td>
   </tr>
 </table>
 [@b.foot/]

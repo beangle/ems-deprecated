@@ -70,7 +70,7 @@
   [#macro i18nTitle(entity)][#if locale.language?index_of("en")!=-1][#if entity.engTitle!?trim==""]${entity.title!}[#else]${entity.engTitle!}[/#if][#else][#if entity.title!?trim!=""]${entity.title!}[#else]${entity.engTitle!}[/#if][/#if][/#macro]
   [#list menus?sort_by("code") as menu]
 
-  <tr class="grayStyle [#if !menu.enabled]ui-disabled[/#if]" id="${menu.code}">
+  <tr class="grayStyle [#if !menu.enabled]ui-disabled[/#if]" id="${menu.indexno}">
     <td  class="gridselect">
       <input type="checkbox" id="checkbox_${menu_index}" onclick="treeToggle(this,checkResource)"  name="menuId" [#if parentMenus?seq_contains(menu)]checked="checked" disabled="disabled"[#else][#if (roleMenus?seq_contains(menu))]checked="checked"[/#if][/#if] value="${menu.id}">
     </td>
@@ -79,12 +79,12 @@
       [#if menu.children?size==0]
       <a href="#" class="tree-item"></a>[#rt]
       [#else]
-      <a href="#" class="tree-folder-open" id="${menu.code}_folder" onclick="toggleRows(this);"></a>[#rt]
+      <a href="#" class="tree-folder-open" id="${menu.indexno}_folder" onclick="toggleRows(this);"></a>[#rt]
       [/#if]
        [@i18nTitle menu/]
     </div>
     </td>
-    <td >&nbsp;${menu.code}</td>
+    <td >&nbsp;${menu.indexno}</td>
     <td>
       [#list menu.resources as resource]
         [#if resources?seq_contains(resource)]

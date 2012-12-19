@@ -12,9 +12,9 @@
     bar.addItem("${b.text("action.export")}",action.exportData("name:${b.text("common.name")},remark:${b.text("common.remark")},owner.name:${b.text("common.creator")},createdAt:${b.text("common.createdAt")},updatedAt:${b.text("common.updatedAt")},users:${b.text("role.users")}",null,"&fileName=角色"));
   [/@]
   [@b.row]
-    <tr id="${(role.code)!}">
+    <tr id="${(role.indexno)!}">
     [@b.boxcol /]
-    [@b.treecol property="name" width="36%" title="common.name"][@b.a href="!info?id=${role.id}"]${role.code} ${role.name}[/@]
+    [@b.treecol property="name" width="36%" title="common.name"][@b.a href="!info?id=${role.id}"]${role.indexno} ${role.name}[/@]
     [/@]
     [@b.col width="15%" property="owner.name" title="common.creator"]${(role.owner.fullname)!}[/@]
     [@b.col width="10%" property="dynamic" title="动态组"]${role.dynamic?string("是","否")}[/@]

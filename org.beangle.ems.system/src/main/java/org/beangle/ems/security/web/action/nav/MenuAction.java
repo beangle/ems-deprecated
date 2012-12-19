@@ -30,6 +30,7 @@ import org.beangle.commons.entity.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.MenuPropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.function.FuncPermission;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
@@ -51,6 +52,8 @@ public class MenuAction extends SecurityActionSupport {
   }
 
   protected void editSetting(Entity<?> entity) {
+    Member a = entityDao.get(Member.class, 1);
+    System.out.print(a.getUser().getId());
     Menu menu = (Menu) entity;
     put("profiles", entityDao.getAll(MenuProfile.class));
     List<Menu> folders = CollectUtils.newArrayList();
@@ -60,7 +63,7 @@ public class MenuAction extends SecurityActionSupport {
       // 查找可以作为父节点的菜单
       OqlBuilder<Menu> folderBuilder = OqlBuilder.from(Menu.class, "m");
       folderBuilder.where("m.entry is null and m.profile=:profile", profile);
-      folderBuilder.orderBy("m.code");
+      folderBuilder.orderBy("m.indexno");
       folders = entityDao.search(folderBuilder);
       if (null != menu.getParent() && !folders.contains(menu.getParent())) folders.add(menu.getParent());
       folders.removeAll(HierarchyEntityUtils.getFamily(menu));
@@ -144,11 +147,11 @@ public class MenuAction extends SecurityActionSupport {
   public String preview() {
     OqlBuilder<Menu> query = OqlBuilder.from(Menu.class, "menu");
     populateConditions(query);
-    query.orderBy("menu.code asc");
+    query.orderBy("menu.indexno asc");
     put("menus", entityDao.search(query));
 
     query.clearOrders();
-    query.select("max(length(menu.code)/2)");
+    query.select("max(length(menu.indexno)/2)");
     List<?> rs = entityDao.search(query);
     put("depth", rs.get(0));
     return forward();

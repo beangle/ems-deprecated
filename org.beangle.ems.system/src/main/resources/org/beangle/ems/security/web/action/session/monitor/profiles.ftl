@@ -12,7 +12,7 @@
   </tr>
   [#list profiles as profile]
   <tr style="background-color:${(profile_index%2!=0)?string("#e1e8f5","#FFFFFF")}">
-    <td>${profile.role.code} ${profile.role.name}</td>
+    <td>${profile.role.indexno} ${profile.role.name}</td>
     <td><input name="max_${profile.role.id}" value="${profile.capacity}" style="width:50px" maxlength="5"/></td>
     <td><input name="inactiveInterval_${profile.role.id}" value="${profile.inactiveInterval}" style="width:50px" maxlength="5"/>分</td>
     <td><input name="maxSessions_${profile.role.id}" value="${profile.userMaxSessions}" style="width:35px" maxlength="2"/></td>

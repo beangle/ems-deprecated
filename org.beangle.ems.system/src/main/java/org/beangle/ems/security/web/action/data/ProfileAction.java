@@ -223,7 +223,7 @@ public class ProfileAction extends SecurityActionSupport {
     } else {
       profile = (Profile) entityDao.get(entityName, profileId);
     }
-    populate(Params.sub("profile"), (Entity<?>) profile, entityName);
+    populate((Entity<?>) profile, entityName,Params.sub("profile"));
     return profile;
   }
 

@@ -93,7 +93,7 @@ public class RoleAction extends SecurityActionSupport {
     }
     populateConditions(entityQuery);
     String orderBy = get("orderBy");
-    if (null == orderBy) orderBy = "role.code";
+    if (null == orderBy) orderBy = "role.indexno";
     entityQuery.limit(getPageLimit()).orderBy(orderBy);
     return entityQuery;
   }
