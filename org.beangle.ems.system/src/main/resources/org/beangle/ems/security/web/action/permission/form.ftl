@@ -42,8 +42,8 @@
   <tr>
     <td>
     角色:<select name="role.id" onchange="this.form.submit()" style="width:250px">
-       [#list mngRoles?sort_by("code")! as r]
-        <option value="${r.id}" [#if r.id=role.id]selected="selected"[/#if]>${r.code} ${r.name}</option>
+       [#list mngRoles?sort_by("indexno")! as r]
+        <option value="${r.id}" [#if r.id=role.id]selected="selected"[/#if]>${r.indexno} ${r.name}</option>
        [/#list]
     </select>
     </td>
@@ -68,7 +68,7 @@
   <th width="6%">${b.text("common.status")}</th>
   </tr>
   [#macro i18nTitle(entity)][#if locale.language?index_of("en")!=-1][#if entity.engTitle!?trim==""]${entity.title!}[#else]${entity.engTitle!}[/#if][#else][#if entity.title!?trim!=""]${entity.title!}[#else]${entity.engTitle!}[/#if][/#if][/#macro]
-  [#list menus?sort_by("code") as menu]
+  [#list menus?sort_by("indexno") as menu]
 
   <tr class="grayStyle [#if !menu.enabled]ui-disabled[/#if]" id="${menu.indexno}">
     <td  class="gridselect">

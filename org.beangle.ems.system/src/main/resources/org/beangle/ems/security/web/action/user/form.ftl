@@ -25,7 +25,7 @@
     [@b.formfoot][@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/][/@]
   [/@]
   [@b.tab label="user.members"]
-    [@b.grid  items=roles?sort_by("code") var="role" sortable="false"]
+    [@b.grid  items=roles?sort_by("indexno") var="role" sortable="false"]
       [@b.row]
         <tr [#if role??]id="${role.indexno}"[/#if]>
         [@b.col title="common.index" width="5%"]${role_index+1}[/@]

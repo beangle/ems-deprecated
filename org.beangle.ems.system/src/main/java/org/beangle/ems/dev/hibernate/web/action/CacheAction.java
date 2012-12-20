@@ -69,8 +69,9 @@ public class CacheAction extends ActionSupport {
       activation = (Date) getSession().get("hibernate.stat.activation");
       deactivation = (Date) getSession().get("hibernate.stat.deactivation");
     }
-
-    addMessage(info.toString());
+    
+    if (info.length() > 0) addMessage(info.toString());
+    
     boolean active = statistics.isStatisticsEnabled();
     if (active) {
       generalStatistics.add(statistics.getConnectCount());

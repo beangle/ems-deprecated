@@ -41,7 +41,7 @@
   Last update: ${lastUpdate?string("dd.MM.yy HH:mm:ss")}<br/>
   Activation: ${(activation?string("dd.MM.yy HH:mm:ss"))!}<br/>
   Deactivation: ${(deactivation?string("dd.MM.yy HH:mm:ss"))!}<br/>
-  Active duration: ${((duration/1000)?floor)!}s
+  Active duration:[#if duration??] ${((duration/1000)?floor)!}s[/#if]
   <p/>
   [#if generalStatistics?size>0]
   <table>

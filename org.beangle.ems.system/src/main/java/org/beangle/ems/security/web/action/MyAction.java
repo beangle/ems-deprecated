@@ -24,9 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.collection.Order;
-import org.beangle.commons.collection.page.PageLimit;
-import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Objects;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.security.helper.UserDashboardHelper;
@@ -37,7 +34,6 @@ import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.security.core.session.SessionRegistry;
-import org.beangle.security.web.session.model.SessioninfoLogBean;
 
 /**
  * 维护个人账户信息
@@ -66,13 +62,7 @@ public class MyAction extends SecurityActionSupport {
   }
 
   public String activity() {
-    OqlBuilder<SessioninfoLogBean> builder = OqlBuilder.from(SessioninfoLogBean.class, "sessioninfoLog");
-    builder.where("sessioninfoLog.username=:name", getUsername());
-    builder.orderBy(Order.parse("sessioninfoLog.loginAt desc"));
-    PageLimit limit = getPageLimit();
-    limit.setPageSize(10);
-    builder.limit(limit);
-    put("sessioninfoLogs", entityDao.search(builder));
+    put("sessioninfoLogs", userDashboardHelper.getSessioninfoLogService().getLoggers(getUsername(), 10));
     put("sessioninfos", sessionRegistry.getSessioninfos(SecurityUtils.getUsername(), true));
     return forward();
   }

@@ -19,15 +19,12 @@
 
 package org.beangle.ems.security.helper;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.collection.page.PageLimit;
 import org.beangle.commons.dao.EntityDao;
-import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
@@ -37,10 +34,9 @@ import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
 import org.beangle.security.core.session.SessionRegistry;
-import org.beangle.security.web.session.model.SessioninfoLogBean;
+import org.beangle.security.web.session.SessioninfoLogService;
 import org.beangle.struts2.helper.ContextHelper;
 import org.beangle.struts2.helper.Params;
-import org.beangle.struts2.helper.QueryHelper;
 
 /**
  * @author chaostone
@@ -58,6 +54,8 @@ public class UserDashboardHelper {
 
   private DataPermissionService dataPermissionService;
 
+  private SessioninfoLogService sessioninfoLogService;
+
   public void buildDashboard(User user) {
     ContextHelper.put("user", user);
     populateMenus(user);
@@ -68,17 +66,11 @@ public class UserDashboardHelper {
   }
 
   private void populateOnlineActivities(User user) {
-    Collection<?> onlineActivities = sessionRegistry.getSessioninfos(user.getName(), true);
-    ContextHelper.put("onlineActivities", onlineActivities);
+    ContextHelper.put("sessioninfos", sessionRegistry.getSessioninfos(user.getName(), true));
   }
 
   private void populateSessioninfoLogs(User user) {
-    OqlBuilder<SessioninfoLogBean> onlineQuery = OqlBuilder.from(SessioninfoLogBean.class, "sessioninfoLog");
-    onlineQuery.where("sessioninfoLog.username = :username", user.getName());
-    PageLimit limit = QueryHelper.getPageLimit();
-    limit.setPageSize(5);
-    onlineQuery.orderBy("sessioninfoLog.loginAt desc").limit(limit);
-    ContextHelper.put("sessioninfoLogs", entityDao.search(onlineQuery));
+    ContextHelper.put("sessioninfoLogs", sessioninfoLogService.getLoggers(user.getName(), 5));
   }
 
   private void populateMenus(User user) {
@@ -121,6 +113,14 @@ public class UserDashboardHelper {
 
   public void setDataPermissionService(DataPermissionService dataPermissionService) {
     this.dataPermissionService = dataPermissionService;
+  }
+
+  public void setSessioninfoLogService(SessioninfoLogService sessioninfoLogService) {
+    this.sessioninfoLogService = sessioninfoLogService;
+  }
+
+  public SessioninfoLogService getSessioninfoLogService() {
+    return sessioninfoLogService;
   }
 
 }

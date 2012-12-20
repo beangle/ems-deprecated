@@ -73,7 +73,8 @@ public class MonitorAction extends SecurityActionSupport {
     OqlBuilder<SessioninfoBean> builder = OqlBuilder.from(SessioninfoBean.class, "sessioninfo");
     populateConditions(builder);
     builder.orderBy(get(Order.ORDER_STR)).limit(getPageLimit());
-    put("sessioninfos", entityDao.search(builder));
+    List<SessioninfoBean> infos=entityDao.search(builder);
+    put("sessioninfos",infos );
     OqlBuilder<SessionStat> statBuilder = OqlBuilder.from(SessionStat.class, "stat");
     put("sessionStats", entityDao.search(statBuilder));
     return forward();

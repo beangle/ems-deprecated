@@ -30,7 +30,6 @@ import org.beangle.ems.log.model.BusinessLogBean;
 import org.beangle.ems.log.model.BusinessLogDetailBean;
 import org.beangle.security.Securities;
 import org.beangle.security.core.Authentication;
-import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.web.auth.WebAuthenticationDetails;
 
 /**
@@ -38,8 +37,6 @@ import org.beangle.security.web.auth.WebAuthenticationDetails;
  * @version $Id: BusinessEventLogger.java Jun 29, 2011 9:28:33 A M chaostone $
  */
 public class BusinessEventLogger extends BaseServiceImpl implements EventListener<Event> {
-
-  private SessionRegistry sessionRegistry;
 
   public void onEvent(Event event) {
     Authentication auth = Securities.getAuthentication();
@@ -54,16 +51,12 @@ public class BusinessEventLogger extends BaseServiceImpl implements EventListene
       WebAuthenticationDetails webDetails = (WebAuthenticationDetails) details;
       log.setIp(webDetails.getAgent().getIp());
       log.setAgent(webDetails.getAgent().getOs() + " " + webDetails.getAgent().getBrowser());
-      log.setEntry(Strings.defaultIfBlank(sessionRegistry.getResource(webDetails.getSessionId()), "--"));
+      log.setEntry(Strings.defaultIfBlank(webDetails.getLastAccessUri(), "--"));
     }
     if (null != event.getDetail()) {
       log.setDetail(new BusinessLogDetailBean(log, event.getDetail()));
     }
     entityDao.saveOrUpdate(log);
-  }
-
-  public void setSessionRegistry(SessionRegistry sessionRegistry) {
-    this.sessionRegistry = sessionRegistry;
   }
 
   public boolean supportsEventType(Class<? extends Event> eventType) {
