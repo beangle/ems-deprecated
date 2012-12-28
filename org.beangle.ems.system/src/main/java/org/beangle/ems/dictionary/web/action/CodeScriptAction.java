@@ -94,7 +94,7 @@ public class CodeScriptAction extends SecurityActionSupport {
       codeScript = (CodeScript) entityDao.get(CodeScript.class, codeScriptId);
     }
     codeScript.setUpdatedAt(new Date(System.currentTimeMillis()));
-    Model.populate(Params.sub("codeScript"), codeScript);
+    Model.populate(codeScript, Params.sub("codeScript"));
     entityDao.saveOrUpdate(codeScript);
     return redirect("search", "info.save.success");
   }

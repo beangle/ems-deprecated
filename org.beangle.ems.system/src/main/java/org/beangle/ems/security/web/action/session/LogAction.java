@@ -57,17 +57,17 @@ public class LogAction extends SecurityActionSupport {
   private void addTimeCondition(OqlBuilder<SessioninfoLogBean> query) {
     String stime = get("startTime");
     String etime = get("endTime");
-    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date sdate = null, edate = null;
     if (Strings.isNotBlank(stime)) {
       try {
         sdate = df.parse(stime);
-        // 截至日期增加一天
+        // 截至日期增加一秒
         if (Strings.isNotBlank(etime)) {
           edate = df.parse(etime);
           Calendar gc = new GregorianCalendar();
           gc.setTime(edate);
-          gc.set(Calendar.DAY_OF_YEAR, gc.get(Calendar.DAY_OF_YEAR) + 1);
+          gc.roll(Calendar.SECOND, 1);
           edate = gc.getTime();
         }
       } catch (ParseException e) {

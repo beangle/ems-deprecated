@@ -108,7 +108,7 @@ public class RoleAction extends SecurityActionSupport {
       return redirect("edit", "error.notUnique");
     if (!role.isPersisted()) {
       User creator = userService.get(getUserId());
-      role.setCode("tmp");
+      role.setIndexno("tmp");
       role.setOwner(creator);
       roleService.createRole(creator, role);
     } else {
