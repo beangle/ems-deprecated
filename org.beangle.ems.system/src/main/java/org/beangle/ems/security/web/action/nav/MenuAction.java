@@ -30,7 +30,6 @@ import org.beangle.commons.entity.util.HierarchyEntityUtils;
 import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.MenuPropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.function.FuncPermission;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
@@ -52,8 +51,6 @@ public class MenuAction extends SecurityActionSupport {
   }
 
   protected void editSetting(Entity<?> entity) {
-    Member a = entityDao.get(Member.class, 1);
-    System.out.print(a.getUser().getId());
     Menu menu = (Menu) entity;
     put("profiles", entityDao.getAll(MenuProfile.class));
     List<Menu> folders = CollectUtils.newArrayList();
@@ -93,26 +90,21 @@ public class MenuAction extends SecurityActionSupport {
 
   protected String saveAndForward(Entity<?> entity) {
     Menu menu = (Menu) entity;
-    try {
-      List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Integer.class));
-      menu.getResources().clear();
-      menu.getResources().addAll(resources);
-      Integer newParentId = getInt("parent.id");
-      int indexno = getInt("indexno");
-      Menu parent = null;
-      if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);
+    List<FuncResource> resources = entityDao.get(FuncResource.class, getAll("resourceId", Integer.class));
+    menu.getResources().clear();
+    menu.getResources().addAll(resources);
+    Integer newParentId = getInt("parent.id");
+    int indexno = getInt("index");
+    Menu parent = null;
+    if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);
 
-      menuService.move(menu, parent, indexno);
-      entityDao.saveOrUpdate(menu);
-      if (!menu.isEnabled()) {
-        Set<Menu> family = HierarchyEntityUtils.getFamily(menu);
-        for (Menu one : family)
-          ((MenuBean) one).setEnabled(false);
-        entityDao.saveOrUpdate(family);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return forward(ERROR);
+    menuService.move(menu, parent, indexno);
+    entityDao.saveOrUpdate(menu);
+    if (!menu.isEnabled()) {
+      Set<Menu> family = HierarchyEntityUtils.getFamily(menu);
+      for (Menu one : family)
+        ((MenuBean) one).setEnabled(false);
+      entityDao.saveOrUpdate(family);
     }
     return redirect("search", "info.save.success");
   }
@@ -121,7 +113,7 @@ public class MenuAction extends SecurityActionSupport {
    * 禁用或激活一个或多个模块
    */
   public String activate() {
-    Integer[] menuIds = getIds(getShortName(),Integer.class);
+    Integer[] menuIds = getIds(getShortName(), Integer.class);
     Boolean enabled = getBoolean("isActivate");
     if (null == enabled) enabled = Boolean.TRUE;
 
