@@ -93,7 +93,7 @@ public class PermissionAction extends SecurityActionSupport {
           if (!m.isGranter()) continue;
           menuSet.addAll(menuService.getMenus(menuProfile, m.getRole(), true));
           params.put("roleId", m.getRole().getId());
-          List<FuncResource> roleResources = entityDao.searchHQLQuery(hql, params);
+          List<FuncResource> roleResources = entityDao.search(hql, params);
           resources.addAll(roleResources);
         }
         menus = CollectUtils.newArrayList(menuSet);
