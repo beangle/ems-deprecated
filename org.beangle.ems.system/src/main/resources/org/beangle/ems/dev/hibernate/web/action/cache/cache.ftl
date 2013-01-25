@@ -2,7 +2,7 @@
 [@b.head/]
 [#include "nav.ftl"/]
   <p align="center">二级缓存统计</p>
-  <table class="gridtable" style="width:80%;margin:auto">
+  <table class="gridtable" style="width:90%;margin:auto">
     <tr>
       <th class="gridhead" width="30%">缓存区域</th>
       <th class="gridhead" width="10%">放置</th>

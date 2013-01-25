@@ -5,5 +5,9 @@
 </head>
 <body>
 你访问的资源暂时不可用。
+<script>
+if(this.document.location.indexOf(".")==-1)
+this.document.location = this.document.location+"/index.action"
+</script>
 </body>
 </html>

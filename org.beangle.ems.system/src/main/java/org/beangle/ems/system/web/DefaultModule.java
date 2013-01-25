@@ -19,7 +19,7 @@
 
 package org.beangle.ems.system.web;
 
-import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.beangle.ems.business.web.action.LogAction;
 import org.beangle.ems.business.web.action.RuleAction;
 import org.beangle.ems.business.web.action.RuleParamAction;

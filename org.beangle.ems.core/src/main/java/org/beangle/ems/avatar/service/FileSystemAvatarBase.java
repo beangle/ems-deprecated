@@ -28,11 +28,11 @@ import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.collection.page.PageLimit;
 import org.beangle.commons.collection.page.PagedList;
 import org.beangle.commons.collection.page.Pages;
-import org.beangle.commons.context.property.PropertyConfig;
-import org.beangle.commons.context.property.PropertyConfigEvent;
-import org.beangle.commons.context.property.PropertyConfigListener;
 import org.beangle.commons.io.Files;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.property.PropertyConfig;
+import org.beangle.commons.property.PropertyConfigEvent;
+import org.beangle.commons.property.PropertyConfigListener;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.model.FileAvatar;
 import org.slf4j.Logger;
@@ -82,6 +82,7 @@ public class FileSystemAvatarBase extends AbstractAvatarBase implements Property
   }
 
   public Avatar getAvatar(String name) {
+    if (null == avatarDir) return null;
     if (Strings.contains(name, '.')) {
       File file = new File(avatarDir + name);
       if (file.exists()) { return new FileAvatar(file); }

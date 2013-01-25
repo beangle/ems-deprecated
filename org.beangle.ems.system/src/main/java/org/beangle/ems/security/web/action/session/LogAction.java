@@ -32,7 +32,7 @@ import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
-import org.beangle.security.web.session.model.SessioninfoLogBean;
+import org.beangle.security.blueprint.session.model.SessioninfoLogBean;
 
 /**
  * 用户登陆退出的会话管理

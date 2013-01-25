@@ -1,6 +1,5 @@
-<@b.head>
-  <@b.css href="/struts2-config.css"/>
-</@>
+<@b.head/>
+ <@b.css href="/struts2-config.css"/>
 <div id="breadcrumbs">
   <table border="0" cellspacing="0" cellpadding="4" width="100%">
     <tr>

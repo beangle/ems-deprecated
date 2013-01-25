@@ -18,7 +18,7 @@
  */
 package org.beangle.ems.database;
 
-import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.beangle.ems.database.action.BrowserAction;
 import org.beangle.ems.database.action.DatasourceAction;
 import org.beangle.ems.database.action.IndexAction;

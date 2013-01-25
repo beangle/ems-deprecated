@@ -35,11 +35,11 @@ import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.service.RoleService;
 import org.beangle.security.blueprint.session.model.SessionProfileBean;
+import org.beangle.security.blueprint.session.model.SessionStat;
+import org.beangle.security.blueprint.session.model.SessioninfoBean;
 import org.beangle.security.blueprint.session.service.SessionProfileService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.security.core.session.Sessioninfo;
-import org.beangle.security.core.session.category.SessionStat;
-import org.beangle.security.web.session.model.SessioninfoBean;
 
 /**
  * 系统在线用户管理

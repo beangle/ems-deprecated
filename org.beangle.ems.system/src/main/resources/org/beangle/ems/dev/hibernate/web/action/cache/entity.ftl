@@ -2,7 +2,7 @@
 [@b.head/]
 [#include "nav.ftl"/]
   <p align="center">实体类统计</p>
-  <table width="80%" class="gridtable" style="width:80%;margin:auto">
+  <table width="80%" class="gridtable" style="width:90%;margin:auto">
     <tr>
       <th class="gridhead" width="5%">Index</th>
       <th class="gridhead" width="53%">Entity</th>

@@ -19,7 +19,6 @@
 
 package org.beangle.ems.rule.impl;
 
-import org.beangle.commons.context.spring.SpringTestCase;
 import org.beangle.ems.rule.Context;
 import org.beangle.ems.rule.Rule;
 import org.beangle.ems.rule.RuleBase;
@@ -30,6 +29,7 @@ import org.beangle.ems.rule.engine.impl.FullPatternMatcher;
 import org.beangle.ems.rule.engine.impl.SimpleEngine;
 import org.beangle.ems.rule.model.RuleBean;
 import org.beangle.ems.rule.model.SimpleContext;
+import org.beangle.inject.spring.SpringTestCase;
 
 public class SimpleEngineTest extends SpringTestCase {
 

@@ -22,11 +22,11 @@ package org.beangle.ems.start;
 import java.util.Map;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.orm.hibernate.OpenSessionInViewFilter;
 import org.beangle.commons.web.filter.CharacterEncodingFilter;
+import org.beangle.commons.web.filter.DelegatingFilterProxy;
 import org.beangle.commons.web.session.HttpSessionEventPublisher;
-import org.beangle.commons.web.spring.ContextListener;
-import org.beangle.commons.web.spring.DelegatingFilterProxy;
+import org.beangle.inject.spring.web.ContextListener;
+import org.beangle.orm.hibernate.OpenSessionInViewFilter;
 import org.beangle.struts2.dispatcher.ActionServlet;
 import org.beangle.struts2.dispatcher.StaticResourceServlet;
 import org.eclipse.jetty.server.Server;

@@ -1,5 +1,6 @@
 [#ftl]
 [@b.head/]
+[@b.css href="useragent.css"/]
 [#include "nav.ftl"/]
 [#assign sessions=0]
 [#assign capacity=0]
@@ -7,6 +8,9 @@
   [#assign sessions=sessions+stat.online/]
   [#assign capacity=capacity+stat.capacity/]
 [/#list]
+
+[#assign browsers={"Internet Explorer":"ie","Firefox":"firefox","Chrome":"chrome","Opera":"opera","Safari":"safari","The World":"theworld","Maxthon":"maxthon","Tencent Traveler":"tt","Sogo":"sogo"} /]
+
 [#assign statTitle] ${sessions}/${capacity}(${b.now?string('yyyy-MM-dd HH:mm:ss')}) [#list sessionStats as stat]${stat.category}(${stat.online}/${stat.capacity}) [/#list][/#assign]
 [@b.toolbar title="当前服务器会话 ${statTitle}"][/@]
 [#assign refreshInterval=Parameters['interval']!"10"/]
@@ -26,10 +30,13 @@
     [@b.col width="8%" title="sessioninfo.onlineTime" property="onlineTime" sort="lastAccessAt-loginAt"]${(sessioninfo.onlineTime)/1000/60}分[/@]
     [@b.col width="10%" title="sessioninfo.ip" property="ip"/]
     [@b.col width="9%" title="sessioninfo.os" property="os"/]
-    [@b.col width="11%" title="sessioninfo.agent" property="agent"/]
+    [@b.col width="12%" title="sessioninfo.agent" property="agent" style="text-align:left"]
+        [#if sessioninfo.agent??]
+          [#list browsers?keys as k][#if sessioninfo.agent?contains(k)]<span class="icon-browser browser-${browsers[k]}"> </span> [#break/][/#if][/#list]
+        [/#if] ${sessioninfo.agent}[/@]
     [@b.col width="8%" title="sessioninfo.category" property="category"/]
-    [@b.col width="7%" title="sessioninfo.expired" property="expiredAt"]${sessioninfo.expired?string("过期","在线")}[/@]
-    [@b.col width="10%" title="节点" property="server"/]
+    [@b.col width="6%" title="sessioninfo.expired" property="expiredAt"]${sessioninfo.expired?string("过期","在线")}[/@]
+    [@b.col width="10%" title="接入点" property="server"/]
   [/@]
 [/@]
 <div>定时每${refreshInterval}秒刷新</div>

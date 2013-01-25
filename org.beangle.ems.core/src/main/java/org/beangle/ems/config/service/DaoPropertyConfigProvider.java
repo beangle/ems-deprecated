@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.Properties;
 
 import org.beangle.commons.bean.converters.Converters;
-import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.reflect.Reflections;
+import org.beangle.commons.property.PropertyConfig;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
 public class DaoPropertyConfigProvider implements PropertyConfig.Provider {

@@ -125,7 +125,7 @@ public class EvolutionAction extends ActionSupport {
     return forward("results");
   }
 
-  public void setDatasource(DataSource datasource) throws SQLException {
+  public void setDataSource(DataSource datasource) throws SQLException {
     this.jdbcTemplate = new JdbcTemplate(datasource);
     Connection connection = datasource.getConnection();
     databaseName = connection.getMetaData().getDatabaseProductName().toLowerCase();

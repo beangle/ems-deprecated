@@ -26,7 +26,7 @@
     <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
   </bean>
 
-  <bean id="secsessionDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+  <bean id="sessionDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
     <property name="url" value="${db.url}" />
     <property name="username" value="sa" />
     <property name="password" value="" />

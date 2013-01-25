@@ -11,14 +11,14 @@
     <tr><td colspan="3">[@b.messages/]</td></tr>
     <tr>
       <td><label for="username"><strong>用户名:</strong></label></td>
-      <td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" value="${(Parameters['username']!)?html}" style="width:300px;background-color:#B0B0B0"/></td>
+      <td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" value="${(Parameters['username']!)?html}" style="width:300px;"/></td>
       <td rowspan="3" valign="top">
       [@b.submit name="submitBtn" tabindex="6" style="height:35pt;width:38pt;" value="登录" onsubmit="checkLogin"][/@]
       </td>
     </tr>
     <tr>
       <td><label for="password"><strong>密码:</strong></label></td>
-      <td><input id="password" name="password"  tabindex="2" type="password" style="width:300px;background-color:#B0B0B0"/>
+      <td><input id="password" name="password"  tabindex="2" type="password" style="width:300px;"/>
       <input name="encodedPassword" type="hidden" value=""/></td>
     </tr>
     [#if needCaptcha && recapchaConfig??]

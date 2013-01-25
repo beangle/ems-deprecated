@@ -19,7 +19,7 @@
 
 package org.beangle.ems.security.web;
 
-import org.beangle.commons.context.inject.AbstractBindModule;
+import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.beangle.ems.avatar.web.action.BoardAction;
 import org.beangle.ems.avatar.web.action.MyUploadAction;
 import org.beangle.ems.security.helper.UserDashboardHelper;

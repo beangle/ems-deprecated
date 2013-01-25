@@ -33,8 +33,8 @@ import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
+import org.beangle.security.blueprint.session.service.SessioninfoLogService;
 import org.beangle.security.core.session.SessionRegistry;
-import org.beangle.security.web.session.SessioninfoLogService;
 import org.beangle.struts2.helper.ContextHelper;
 import org.beangle.struts2.helper.Params;
 

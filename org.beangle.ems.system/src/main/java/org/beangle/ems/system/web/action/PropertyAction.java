@@ -23,10 +23,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
-import org.beangle.commons.context.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.property.PropertyConfig;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 import org.beangle.struts2.action.ActionSupport;
 

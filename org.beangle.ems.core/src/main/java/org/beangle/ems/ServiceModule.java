@@ -16,13 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems;
 
-import org.beangle.commons.context.inject.AbstractBindModule;
-import org.beangle.commons.context.property.MultiProviderPropertyConfig;
-import org.beangle.commons.context.property.UrlPropertyConfigProvider;
-import org.beangle.commons.context.spring.SpringResources;
+import org.beangle.commons.inject.Resources;
+import org.beangle.commons.inject.bind.AbstractBindModule;
+import org.beangle.commons.property.MultiProviderPropertyConfig;
+import org.beangle.commons.property.UrlPropertyConfigProvider;
 import org.beangle.commons.web.io.SplitStreamDownloader;
 import org.beangle.ems.avatar.service.FileSystemAvatarBase;
 import org.beangle.ems.config.service.DaoPropertyConfigProvider;
@@ -33,7 +32,7 @@ import org.beangle.ems.log.service.BusinessEventLogger;
 import org.beangle.ems.rule.engine.impl.DefaultRuleExecutorBuilder;
 import org.beangle.ems.rule.impl.RuleBaseImpl;
 
-public class DefaultModule extends AbstractBindModule {
+public class ServiceModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
@@ -50,7 +49,7 @@ public class DefaultModule extends AbstractBindModule {
     // properties config bean
     bind(UrlPropertyConfigProvider.class).property(
         "resources",
-        bean(SpringResources.class).property("globals", "classpath*:system-default.properties")
+        bean(Resources.class).property("globals", "classpath*:system-default.properties")
             .property("locations", "classpath*:META-INF/system.properties")
             .property("users", "classpath*:system.properties"));
 
