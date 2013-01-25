@@ -18,7 +18,6 @@
  */
 package org.beangle.ems;
 
-import org.beangle.commons.inject.Resources;
 import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.beangle.commons.property.MultiProviderPropertyConfig;
 import org.beangle.commons.property.UrlPropertyConfigProvider;
@@ -47,11 +46,9 @@ public class ServiceModule extends AbstractBindModule {
     bind(DefaultRuleExecutorBuilder.class, RuleBaseImpl.class);
 
     // properties config bean
-    bind(UrlPropertyConfigProvider.class).property(
-        "resources",
-        bean(Resources.class).property("globals", "classpath*:system-default.properties")
-            .property("locations", "classpath*:META-INF/system.properties")
-            .property("users", "classpath*:system.properties"));
+    bind(UrlPropertyConfigProvider.class)
+        .property("resources",
+            "classpath:system-default.properties;classpath*:META-INF/system.properties;classpath:system.properties");
 
     bind(MultiProviderPropertyConfig.class).property("providers",
         list(ref(UrlPropertyConfigProvider.class), DaoPropertyConfigProvider.class));
