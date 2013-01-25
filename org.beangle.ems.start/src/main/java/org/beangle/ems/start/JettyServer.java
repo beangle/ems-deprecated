@@ -61,7 +61,7 @@ public class JettyServer {
 
     Map<String, String> params = CollectUtils.newHashMap();
     params.put("contextConfigLocation", "classpath:spring-context.xml");
-    params.put("templatePath", "webapp:/pages,classpath:");
+    params.put("templatePath", "webapp://pages,class://");
 
     ctx.setInitParams(params);
     Server server = new Server(8080);
