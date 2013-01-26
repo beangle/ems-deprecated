@@ -35,7 +35,7 @@ public final class DefaultModule extends AbstractBindModule {
 
     bind(org.beangle.ems.security.web.action.session.LogAction.class,
         org.beangle.ems.security.web.action.session.MonitorAction.class).property("entityDao",
-        ref("secsessionEntityDao"));
+        ref("sessionEntityDao"));
 
     bind(org.beangle.ems.security.web.action.nav.MenuAction.class,
         org.beangle.ems.security.web.action.nav.IndexAction.class,

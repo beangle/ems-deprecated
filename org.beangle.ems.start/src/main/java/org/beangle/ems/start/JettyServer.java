@@ -36,7 +36,16 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class JettyServer {
 
+  private static int port = 8080;
+
+  private static Server server;
+
   public static void main(String[] args) throws Exception {
+    shutdown();
+    startup();
+  }
+
+  private static void startup() throws Exception {
     WebAppContext ctx = new WebAppContext();
     ctx.setContextPath("/beangle");
     ctx.setResourceBase(".");
@@ -64,9 +73,19 @@ public class JettyServer {
     params.put("templatePath", "webapp://pages,class://");
 
     ctx.setInitParams(params);
-    Server server = new Server(8080);
+    server = new Server(port);
     server.setHandler(ctx);
     server.start();
     server.join();
+
+  }
+
+  private static void shutdown() {
+    if (null != server) {
+      try {
+        server.stop();
+      } catch (Exception e) {
+      }
+    }
   }
 }
