@@ -19,7 +19,7 @@
     <dependency>
       <groupId>org.beangle.ioc</groupId>
       <artifactId>beangle-ioc-spring</artifactId>
-      <version>${project.version}</version>
+      <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

@@ -13,7 +13,7 @@
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-system</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>
