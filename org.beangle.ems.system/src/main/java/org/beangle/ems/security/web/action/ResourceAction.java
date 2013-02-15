@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -50,13 +50,6 @@ public class ResourceAction extends SecurityActionSupport {
     }
     funcPermissionService.updateState(resourceIds, enabled.booleanValue());
     authorityManager.refreshCache();
-    for (int i = 0; i < 20; i++) {
-      System.out.print(i);
-      if (i < 19) {
-        System.out.print(",");
-      }
-      if (i / 2 == 0) break;
-    }
     return redirect("search", "info.save.success");
   }
 

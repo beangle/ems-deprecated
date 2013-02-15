@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.security.web.action.data;
 
 import java.util.Collection;
@@ -25,13 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Operation;
 import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.ems.security.helper.DataPermissionHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
@@ -111,7 +110,7 @@ public class ProfileAction extends SecurityActionSupport {
             allValues = CollectionUtils.select(allValues, new Predicate() {
               public boolean evaluate(Object arg0) {
                 try {
-                  String keyValue = String.valueOf(PropertyUtils.getProperty(arg0, field.getType()
+                  String keyValue = String.valueOf(Mirrors.getProperty(arg0, field.getType()
                       .getKeyName()));
                   return keys.contains(keyValue);
                 } catch (Exception e) {

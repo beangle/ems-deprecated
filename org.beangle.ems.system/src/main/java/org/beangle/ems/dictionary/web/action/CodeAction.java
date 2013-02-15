@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.dictionary.web.action;
 
 import java.io.PrintWriter;
@@ -25,10 +24,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.pojo.BaseCode;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
 import org.beangle.struts2.action.ActionSupport;
@@ -69,7 +68,7 @@ public class CodeAction extends ActionSupport {
             if (Strings.isNotEmpty(format)) {
               for (BaseCode<?> baseCode : baseCodes) {
                 builder.append("<option value='" + baseCode.getId() + "'>" + baseCode.getName().trim() + "["
-                    + PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");
+                    + Mirrors.getProperty(baseCode, format) + "]" + "</option>");
               }
             } else {
               for (BaseCode<?> baseCode : baseCodes) {

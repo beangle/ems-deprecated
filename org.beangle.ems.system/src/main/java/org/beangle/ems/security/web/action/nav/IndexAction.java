@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.security.web.action.nav;
 
 import java.util.Collections;
@@ -64,9 +63,8 @@ public class IndexAction extends SecurityActionSupport {
     put("profile", profile);
 
     List<Menu> menus = Collections.emptyList();
-    if (null != profile) {
-      menus = menuService.getMenus(profile, user);
-    }
+    if (null != profile) menus = menuService.getMenus(profile, user);
+
     CollectionUtils.filter(menus, new Predicate() {
       public boolean evaluate(Object object) {
         Menu amenu = (Menu) object;
@@ -112,11 +110,9 @@ public class IndexAction extends SecurityActionSupport {
       menuPath = HierarchyEntityUtils.getPath(menu);
     }
     put("menuPath", menuPath);
-    if (null != profile) {
-      put("menus", menus);
-    } else {
-      put("menus", Collections.EMPTY_LIST);
-    }
+    if (null != profile) put("menus", menus);
+    else put("menus", Collections.EMPTY_LIST);
+
     put("tops", HierarchyEntityUtils.getRoots(menus));
     put("user", user);
     return forward();

@@ -9,6 +9,12 @@
   <artifactId>beangle-ems-database</artifactId>
   <packaging>jar</packaging>
   <name>Beangle Ems Database</name>
+
+  <properties>
+    <bundle.symbolicName>org.beangle.ems.database</bundle.symbolicName>
+    <bundle.namespace>org.beangle.ems.database</bundle.namespace>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.beangle.ems</groupId>

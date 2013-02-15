@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,11 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.dictionary.service.impl;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.beangle.commons.entity.Entity;
+import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.commons.transfer.AbstractTransferListener;
 import org.beangle.commons.transfer.TransferResult;
 import org.beangle.ems.dictionary.service.CodeFixture;
@@ -42,10 +41,10 @@ public class ImporterCodeGenListener extends AbstractTransferListener {
 
   public void onItemFinish(TransferResult tr) {
     try {
-      String code = (String) PropertyUtils.getProperty((Entity<?>) transfer.getCurrent(), codeAttrName);
+      String code = (String) Mirrors.getProperty((Entity<?>) transfer.getCurrent(), codeAttrName);
       if (!codeGenerator.isValidCode(code)) {
         code = codeGenerator.gen(new CodeFixture((Entity<?>) transfer.getCurrent()));
-        PropertyUtils.setProperty(transfer.getCurrent(), codeAttrName, code);
+        Mirrors.setProperty(transfer.getCurrent(), codeAttrName, code);
       }
     } catch (Exception e) {
       throw new RuntimeException(e);

@@ -10,6 +10,11 @@
   <packaging>jar</packaging>
   <name>Beangle Ems Start</name>
 
+  <properties>
+    <bundle.symbolicName>org.beangle.ems.start</bundle.symbolicName>
+    <bundle.namespace>org.beangle.ems.start</bundle.namespace>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>

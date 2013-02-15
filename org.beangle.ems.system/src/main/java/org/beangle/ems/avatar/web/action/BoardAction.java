@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -23,9 +23,9 @@ import java.util.List;
 
 import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.lang.Strings;
-import org.beangle.commons.util.archiver.ZipUtils;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
+import org.beangle.ems.util.ZipUtils;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.User;
 import org.beangle.struts2.convention.route.Action;

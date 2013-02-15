@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,18 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.config.service;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
-import org.beangle.commons.bean.converters.Converters;
+import org.beangle.commons.config.property.PropertyConfig;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.Entity;
+import org.beangle.commons.lang.conversion.impl.DefaultConversion;
 import org.beangle.commons.lang.reflect.Reflections;
-import org.beangle.commons.property.PropertyConfig;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
 public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
@@ -51,7 +50,7 @@ public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
       Object value = prop.getValue();
       if (null != itemClass && Entity.class.isAssignableFrom(itemClass)) {
         Class<?> idType = Reflections.getPropertyType(itemClass, "id");
-        value = entityDao.get(itemClass.getName(), (Serializable) Converters.Instance.convert(value, idType));
+        value = entityDao.get(itemClass.getName(), (Serializable) DefaultConversion.Instance.convert(value, idType));
       }
       props.put(prop.getName(), value);
     }

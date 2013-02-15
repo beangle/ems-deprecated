@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.database.service;
 
 import org.beangle.commons.collection.page.PageLimit;
@@ -32,19 +31,18 @@ public class SqlService extends JdbcTemplate {
     return queryForInt(countSql);
   }
 
+  @SuppressWarnings("deprecation")
   public String getLimitString(String sql, PageLimit limit) {
     try {
       int offset = (limit.getPageNo() - 1) * limit.getPageSize();
       String newSql = dialect.getLimitString(sql, offset, limit.getPageSize());
       StringBuilder sb = new StringBuilder(newSql);
       int index = sb.lastIndexOf("?");
-      if (-1 != index) {
-        sb.replace(index, index + 1, String.valueOf(limit.getPageSize()));
-      }
+      if (-1 != index) sb.replace(index, index + 1, String.valueOf(limit.getPageSize()));
+
       index = sb.lastIndexOf("?");
-      if (-1 != index) {
-        sb.replace(index, index + 1, String.valueOf(offset));
-      }
+      if (-1 != index) sb.replace(index, index + 1, String.valueOf(offset));
+
       return sb.toString();
     } catch (Exception e) {
       throw new RuntimeException("cannot limit sql:" + sql, e);

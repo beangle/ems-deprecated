@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.system.web.action;
 
 import java.lang.management.ManagementFactory;
@@ -27,13 +26,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.config.Version;
 import org.beangle.commons.lang.SystemInfo;
-import org.beangle.commons.util.meta.SystemVersion;
 import org.beangle.struts2.action.ActionSupport;
 
 public class InfoAction extends ActionSupport {
 
-  SystemVersion systemVersion;
+  Version systemVersion;
 
   public String index() {
     Map<String, Object> clientProps = CollectUtils.newHashMap();
@@ -92,11 +91,11 @@ public class InfoAction extends ActionSupport {
     return forward();
   }
 
-  public SystemVersion getSystemVersion() {
+  public Version getSystemVersion() {
     return systemVersion;
   }
 
-  public void setSystemVersion(SystemVersion systemVersion) {
+  public void setSystemVersion(Version systemVersion) {
     this.systemVersion = systemVersion;
   }
 

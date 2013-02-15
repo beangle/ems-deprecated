@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Java/Scala Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2012, Beangle Software.
+ * Copyright (c) 2005-2013, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,16 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.beangle.ems.security.web.action;
 
 import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.beanutils.BeanPredicate;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.functors.EqualPredicate;
+import org.beangle.commons.bean.predicates.PropertyEqualPredicate;
+import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.entity.Entity;
 import org.beangle.commons.entity.util.HierarchyEntityUtils;
@@ -65,7 +63,7 @@ public class RoleAction extends SecurityActionSupport {
     }
     List<Role> parents = entityDao.search(query);
     parents.removeAll(HierarchyEntityUtils.getFamily(role));
-    CollectionUtils.filter(parents, new BeanPredicate("dynamic", new EqualPredicate(Boolean.FALSE)));
+    CollectUtils.filter(parents, new PropertyEqualPredicate<Role>("dynamic", Boolean.FALSE));
     put("parents", parents);
     return forward();
   }
@@ -135,7 +133,7 @@ public class RoleAction extends SecurityActionSupport {
    * 删除一个或多个角色
    */
   public String remove() {
-    Integer[] roleIds = getIds(getShortName(),Integer.class);
+    Integer[] roleIds = getIds(getShortName(), Integer.class);
     User curUser = userService.get(getUserId());
     roleService.removeRole(curUser, entityDao.get(Role.class, roleIds));
     return redirect("search", "info.remove.success");
