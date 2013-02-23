@@ -36,9 +36,9 @@ import org.beangle.security.blueprint.data.service.DataPermissionService;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.model.UserBean;
-import org.beangle.struts2.action.EntityActionSupport;
+import org.beangle.struts2.action.EntityDrivenAction;
 
-public abstract class SecurityActionSupport extends EntityActionSupport {
+public abstract class SecurityActionSupport extends EntityDrivenAction {
 
   protected FuncPermissionService funcPermissionService;
 

@@ -22,7 +22,7 @@ import org.beangle.commons.entity.Entity;
 import org.beangle.security.blueprint.data.DataType;
 import org.beangle.security.blueprint.data.ProfileField;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
-import org.beangle.struts2.action.EntityActionSupport;
+import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -31,7 +31,7 @@ import org.beangle.struts2.convention.route.Action;
  * @author chaostone
  * @version $Id: FieldAction.java Apr 13, 2012 10:01:36 PM chaostone $
  */
-public class FieldAction extends EntityActionSupport {
+public class FieldAction extends EntityDrivenAction {
 
   private DataPermissionService dataPermissionService;
 

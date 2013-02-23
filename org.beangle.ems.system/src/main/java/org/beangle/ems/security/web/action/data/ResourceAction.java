@@ -28,7 +28,7 @@ import org.beangle.security.blueprint.data.DataResource;
 import org.beangle.security.blueprint.data.DataType;
 import org.beangle.security.blueprint.data.model.DataFieldBean;
 import org.beangle.security.blueprint.data.model.DataResourceBean;
-import org.beangle.struts2.action.EntityActionSupport;
+import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -37,7 +37,7 @@ import org.beangle.struts2.convention.route.Action;
  * @author chaostone
  * @version $Id: ResourceAction.java Apr 13, 2012 10:01:36 PM chaostone $
  */
-public class ResourceAction extends EntityActionSupport {
+public class ResourceAction extends EntityDrivenAction {
 
   @Override
   protected String getEntityName() {

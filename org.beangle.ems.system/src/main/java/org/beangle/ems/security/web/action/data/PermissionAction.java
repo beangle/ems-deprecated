@@ -24,7 +24,7 @@ import org.beangle.security.blueprint.data.DataPermission;
 import org.beangle.security.blueprint.data.DataResource;
 import org.beangle.security.blueprint.data.model.DataPermissionBean;
 import org.beangle.security.blueprint.function.FuncResource;
-import org.beangle.struts2.action.EntityActionSupport;
+import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -33,7 +33,7 @@ import org.beangle.struts2.convention.route.Action;
  * @author chaostone
  * @version $Id: PermissionAction.java Apr 13, 2012 10:01:36 PM chaostone $
  */
-public class PermissionAction extends EntityActionSupport {
+public class PermissionAction extends EntityDrivenAction {
   @Override
   protected String getEntityName() {
     return DataPermission.class.getName();

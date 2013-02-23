@@ -27,9 +27,9 @@ import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
-import org.beangle.struts2.action.ActionSupport;
+import org.beangle.struts2.action.EntityActionSupport;
 
-public class PropertyAction extends ActionSupport {
+public class PropertyAction extends EntityActionSupport {
 
   private PropertyConfig propertyConfig;
 

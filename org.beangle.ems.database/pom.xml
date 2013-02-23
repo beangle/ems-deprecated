@@ -13,6 +13,7 @@
   <properties>
     <bundle.symbolicName>org.beangle.ems.database</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems.database</bundle.namespace>
+    <jqueryplugin.version>3.3.1</jqueryplugin.version>
   </properties>
 
   <dependencies>
@@ -20,6 +21,11 @@
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-system</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jgeppert.struts2.jquery</groupId>
+      <artifactId>struts2-jquery-plugin</artifactId>
+      <version>${jqueryplugin.version}</version>
     </dependency>
   </dependencies>
 </project>

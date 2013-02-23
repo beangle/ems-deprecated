@@ -20,7 +20,7 @@ package org.beangle.ems.security.web.action.data;
 
 import org.beangle.commons.entity.Entity;
 import org.beangle.security.blueprint.data.DataType;
-import org.beangle.struts2.action.EntityActionSupport;
+import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -29,7 +29,7 @@ import org.beangle.struts2.convention.route.Action;
  * @author chaostone
  * @version $Id: TypeAction.java Apr 13, 2012 10:01:36 PM chaostone $
  */
-public class TypeAction extends EntityActionSupport {
+public class TypeAction extends EntityDrivenAction {
 
   @Override
   protected String getEntityName() {
