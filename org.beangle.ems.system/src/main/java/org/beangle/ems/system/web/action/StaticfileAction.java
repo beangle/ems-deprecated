@@ -18,7 +18,9 @@
  */
 package org.beangle.ems.system.web.action;
 
+import java.io.FileInputStream;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.List;
 
 import org.beangle.commons.collection.CollectUtils;
@@ -50,7 +52,8 @@ public class StaticfileAction extends ActionSupport {
         }
       }
       if (null != url) {
-        streamDownloader.download(getRequest(), getResponse(), url, displayName);
+	String path = URLDecoder.decode(url.getPath(), "UTF8");
+        streamDownloader.download(getRequest(), getResponse(), new FileInputStream(path), name, displayName);
       }
     }
     if (null == url) {
