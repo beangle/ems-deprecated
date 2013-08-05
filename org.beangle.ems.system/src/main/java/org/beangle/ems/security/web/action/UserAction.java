@@ -100,6 +100,7 @@ public class UserAction extends SecurityActionSupport {
         params.add(mngRoles);
       }
       queryRole = true;
+      userQuery.where("user.id != :meId", getUserId());
     }
     String roleName = get("roleName");
     if (Strings.isNotEmpty(roleName)) {

@@ -19,6 +19,7 @@
 package org.beangle.ems.security.web.action;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +50,16 @@ public class RoleAction extends SecurityActionSupport {
 
   private UserService userService;
 
+  /**
+   * 对组可管理意为<br>
+   * 1 建立下级组
+   * 2 移动下级组顺序
+   * 不能改变组的1）动态属性、2）权限和3）直接成员，4）删除组，5）重命名，这些将看作组同部分一起看待的。
+   * 只要拥有上级组的管理权限，才能变更这些，这些称之为写权限。
+   * 成员关系可以等价于读权限
+   * 授权关系可以等价于读权限传播
+   * 拥有某组的管理权限，不意味拥有下级组的管理权限。新建组情况自动授予该组的其他管理者管理权限。
+   */
   public String edit() {
     Role role = (Role) getEntity();
     if (role.isPersisted()) {
@@ -102,8 +113,8 @@ public class RoleAction extends SecurityActionSupport {
 
   protected String saveAndForward(Entity<?> entity) {
     RoleBean role = (RoleBean) entity;
-    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName()))
-      return redirect("edit", "error.notUnique");
+    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) return redirect("edit",
+        "error.notUnique");
     if (!role.isPersisted()) {
       User creator = userService.get(getUserId());
       role.setIndexno("tmp");
