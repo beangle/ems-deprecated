@@ -26,11 +26,11 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.Operation;
 import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
-import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.ems.security.helper.DataPermissionHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
@@ -110,7 +110,7 @@ public class ProfileAction extends SecurityActionSupport {
             allValues = CollectionUtils.select(allValues, new Predicate() {
               public boolean evaluate(Object arg0) {
                 try {
-                  String keyValue = String.valueOf(Mirrors.getProperty(arg0, field.getType()
+                  String keyValue = String.valueOf(PropertyUtils.getProperty(arg0, field.getType()
                       .getKeyName()));
                   return keys.contains(keyValue);
                 } catch (Exception e) {

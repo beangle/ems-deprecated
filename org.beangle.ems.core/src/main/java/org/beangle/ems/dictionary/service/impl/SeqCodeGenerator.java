@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
@@ -30,7 +31,6 @@ import org.beangle.commons.entity.util.EntityUtils;
 import org.beangle.commons.lang.Numbers;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.lang.Throwables;
-import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.ems.dictionary.model.CodeScript;
 import org.beangle.ems.dictionary.service.CodeFixture;
 
@@ -76,7 +76,7 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
       if (null == codeScript) { return null; }
       script = codeScript.getScript();
       try {
-        String code = (String) Mirrors.getProperty(fixture.getEntity(), codeScript.getAttr());
+        String code = (String) PropertyUtils.getProperty(fixture.getEntity(), codeScript.getAttr());
         if (isValidCode(code)) { return code; }
       } catch (Exception e) {
         throw new RuntimeException(e);
@@ -132,7 +132,7 @@ public class SeqCodeGenerator extends ScriptCodeGenerator {
     try {
       Class<?> codeClass = Class.forName(codeScript.getCodeClassName());
       Entity<?> entity = (Entity<?>) codeClass.newInstance();
-      Mirrors.getProperty(entity, codeScript.getAttr());
+      PropertyUtils.getProperty(entity, codeScript.getAttr());
       if (null != fixture) {
         for (Iterator<?> iter = fixture.getParams().keySet().iterator(); iter.hasNext();) {
           String param = (String) iter.next();

@@ -24,10 +24,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.pojo.BaseCode;
 import org.beangle.commons.lang.Strings;
-import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.ems.dictionary.model.CodeMeta;
 import org.beangle.ems.dictionary.service.BaseCodeService;
 import org.beangle.struts2.action.ActionSupport;
@@ -68,7 +68,7 @@ public class CodeAction extends ActionSupport {
             if (Strings.isNotEmpty(format)) {
               for (BaseCode<?> baseCode : baseCodes) {
                 builder.append("<option value='" + baseCode.getId() + "'>" + baseCode.getName().trim() + "["
-                    + Mirrors.getProperty(baseCode, format) + "]" + "</option>");
+                    + PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");
               }
             } else {
               for (BaseCode<?> baseCode : baseCodes) {

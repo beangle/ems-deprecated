@@ -157,7 +157,7 @@ public class PermissionAction extends SecurityActionSupport {
     Role role = entityDao.get(Role.class, getInt("role.id"));
     MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getInt("menuProfileId"));
     Set<FuncResource> newResources = CollectUtils.newHashSet(entityDao.get(FuncResource.class,
-        Strings.splitToInteger(get("resourceId"))));
+        Strings.splitToInt(get("resourceId"))));
 
     // 管理员拥有的菜单权限和系统资源
     User manager = entityDao.get(User.class, getUserId());

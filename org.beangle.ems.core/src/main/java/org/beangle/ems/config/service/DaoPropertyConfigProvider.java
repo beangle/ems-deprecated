@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Properties;
 
 import org.beangle.commons.config.property.PropertyConfig;
+import org.beangle.commons.conversion.impl.DefaultConversion;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.Entity;
-import org.beangle.commons.lang.conversion.impl.DefaultConversion;
 import org.beangle.commons.lang.reflect.Reflections;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 

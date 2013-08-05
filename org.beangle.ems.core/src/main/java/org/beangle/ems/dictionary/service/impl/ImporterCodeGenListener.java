@@ -18,8 +18,8 @@
  */
 package org.beangle.ems.dictionary.service.impl;
 
+import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.entity.Entity;
-import org.beangle.commons.lang.asm.Mirrors;
 import org.beangle.commons.transfer.AbstractTransferListener;
 import org.beangle.commons.transfer.TransferResult;
 import org.beangle.ems.dictionary.service.CodeFixture;
@@ -41,10 +41,10 @@ public class ImporterCodeGenListener extends AbstractTransferListener {
 
   public void onItemFinish(TransferResult tr) {
     try {
-      String code = (String) Mirrors.getProperty((Entity<?>) transfer.getCurrent(), codeAttrName);
+      String code = (String) PropertyUtils.getProperty((Entity<?>) transfer.getCurrent(), codeAttrName);
       if (!codeGenerator.isValidCode(code)) {
         code = codeGenerator.gen(new CodeFixture((Entity<?>) transfer.getCurrent()));
-        Mirrors.setProperty(transfer.getCurrent(), codeAttrName, code);
+        PropertyUtils.setProperty(transfer.getCurrent(), codeAttrName, code);
       }
     } catch (Exception e) {
       throw new RuntimeException(e);
