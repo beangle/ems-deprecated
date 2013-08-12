@@ -22,11 +22,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
+import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.config.property.PropertyConfig;
 import org.beangle.commons.conversion.impl.DefaultConversion;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.entity.Entity;
-import org.beangle.commons.lang.reflect.Reflections;
 import org.beangle.ems.config.model.PropertyConfigItemBean;
 
 public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
@@ -49,7 +49,7 @@ public class DaoPropertyConfigProvider implements PropertyConfig.Provider {
       }
       Object value = prop.getValue();
       if (null != itemClass && Entity.class.isAssignableFrom(itemClass)) {
-        Class<?> idType = Reflections.getPropertyType(itemClass, "id");
+        Class<?> idType = PropertyUtils.getPropertyType(itemClass, "id");
         value = entityDao.get(itemClass.getName(), (Serializable) DefaultConversion.Instance.convert(value, idType));
       }
       props.put(prop.getName(), value);
