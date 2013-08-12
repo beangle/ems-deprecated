@@ -28,7 +28,7 @@ public class ProfileAction extends SecurityActionSupport {
 
   protected void editSetting(Entity<?> entity) {
     OqlBuilder<Role> builder = OqlBuilder.from(Role.class, "g");
-    builder.orderBy("g.code");
+    builder.orderBy("g.indexno");
     put("roles", entityDao.search(builder));
   }
 
