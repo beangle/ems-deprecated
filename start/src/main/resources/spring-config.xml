@@ -7,7 +7,7 @@
       </props>
     </property>
   </bean>
-
+<!--
   <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
     <property name="url" value="${db.url}" />
     <property name="username" value="sa" />
@@ -43,11 +43,15 @@
     <property name="poolPreparedStatements" value="true" />
     <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
   </bean>
-  <!--
+  -->
   <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
     <property name="jndiName">
       <value>java:comp/env/jdbc/beangle</value>
     </property>
   </bean>
-  -->
+  <bean id="sessionDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName">
+      <value>java:comp/env/jdbc/beangle</value>
+    </property>
+  </bean>
 </beans>
