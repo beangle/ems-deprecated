@@ -4,7 +4,7 @@
     <td>
       <ul>
       <#list actionNames as name>
-      <li><@b.a href="!config?namespace=${namespace}&actionName=${name}">_${name}_</@></li>
+      <li><@b.a href="!config?namespace=${namespace}&actionName=${name}">&nbsp;${name}&nbsp;</@></li>
       </#list>
       </ul>
     </td>

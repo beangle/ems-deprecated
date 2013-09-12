@@ -19,7 +19,6 @@
 package org.beangle.ems.security.web.action;
 
 import java.sql.Date;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 

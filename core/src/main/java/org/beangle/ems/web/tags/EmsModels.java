@@ -27,8 +27,8 @@ import org.beangle.ems.web.tags.component.Guard;
 import org.beangle.ems.web.tags.component.Userinfo;
 import org.beangle.security.access.AuthorityManager;
 import org.beangle.struts2.view.component.Component;
-import org.beangle.struts2.view.freemarker.AbstractModels;
-import org.beangle.struts2.view.freemarker.TagModel;
+import org.beangle.struts2.view.tag.AbstractModels;
+import org.beangle.struts2.view.tag.TagModel;
 
 import com.opensymphony.xwork2.util.ValueStack;
 

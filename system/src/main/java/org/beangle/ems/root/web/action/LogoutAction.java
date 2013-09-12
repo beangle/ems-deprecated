@@ -16,16 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.beangle.ems.web.action;
+package org.beangle.ems.root.web.action;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.SessionMap;
 import org.beangle.security.web.auth.AuthenticationService;
 import org.beangle.struts2.action.ActionSupport;
+import org.beangle.struts2.annotation.Result;
+import org.beangle.struts2.annotation.Results;
 
 import com.opensymphony.xwork2.ActionContext;
 
+@Results({ @Result(name = "success", type = "redirectAction", location = "login") })
 public class LogoutAction extends ActionSupport {
 
   private AuthenticationService authenticationService;
@@ -38,7 +41,7 @@ public class LogoutAction extends ActionSupport {
   }
 
   protected String determineTarget(HttpServletRequest request) {
-    String target = get("logoutSuccessUrl");
+    String target = get("redirect");
     if (null == target) target = "success";
     else target = "redirect:" + target;
     return target;

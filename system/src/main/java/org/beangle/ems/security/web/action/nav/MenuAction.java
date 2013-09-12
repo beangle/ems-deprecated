@@ -93,7 +93,7 @@ public class MenuAction extends SecurityActionSupport {
     menu.getResources().clear();
     menu.getResources().addAll(resources);
     Integer newParentId = getInt("parent.id");
-    int indexno = getInt("index");
+    int indexno = getInt("indexno");
     Menu parent = null;
     if (null != newParentId) parent = entityDao.get(Menu.class, newParentId);
 

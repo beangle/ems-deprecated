@@ -40,6 +40,7 @@ import org.beangle.commons.lang.ClassLoaders;
 import org.beangle.ems.dev.struts2.web.helper.S2ConfigurationHelper;
 import org.beangle.struts2.action.ActionSupport;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionProxyFactory;
 import com.opensymphony.xwork2.ObjectFactory;
 import com.opensymphony.xwork2.TextProvider;
@@ -47,7 +48,6 @@ import com.opensymphony.xwork2.config.entities.ActionConfig;
 import com.opensymphony.xwork2.conversion.ObjectTypeDeterminer;
 import com.opensymphony.xwork2.conversion.impl.XWorkConverter;
 import com.opensymphony.xwork2.inject.Container;
-import com.opensymphony.xwork2.inject.Inject;
 import com.opensymphony.xwork2.util.reflection.ReflectionContextFactory;
 import com.opensymphony.xwork2.util.reflection.ReflectionException;
 import com.opensymphony.xwork2.validator.Validator;
@@ -56,11 +56,14 @@ import com.opensymphony.xwork2.validator.Validator;
  * @author chaostone
  * @version $Id: Struts2Action.java Dec 24, 2011 4:12:37 PM chaostone $
  */
-public class ConfigBrowserAction extends ActionSupport {
+public class ConfigAction extends ActionSupport {
 
-  protected S2ConfigurationHelper configHelper;
+  protected S2ConfigurationHelper getConfigHelper() {
+    return ActionContext.getContext().getContainer().getInstance(S2ConfigurationHelper.class);
+  }
 
   public String index() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     Set<String> namespaces = configHelper.getNamespaces();
     if (namespaces.size() == 0) {
       addError("There are no namespaces in this configuration");
@@ -77,6 +80,7 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String actions() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     String namespace = get("namespace");
     if (namespace == null) namespace = "";
     Set<String> actionNames = new TreeSet<String>(configHelper.getActionNames(namespace));
@@ -86,6 +90,7 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String config() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     String namespace = get("namespace");
     String actionName = get("actionName");
     ActionConfig config = configHelper.getActionConfig(namespace, actionName);
@@ -115,6 +120,7 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String beans() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     Container container = configHelper.getContainer();
     Set<Binding> bindings = new TreeSet<Binding>();
     addBinding(bindings, container, ObjectFactory.class, StrutsConstants.STRUTS_OBJECTFACTORY);
@@ -144,9 +150,8 @@ public class ConfigBrowserAction extends ActionSupport {
             chosenName, constName, true));
       }
       for (String name : names) {
-        if (!"default".equals(name))
-          bindings.add(new Binding(type.getName(), getInstanceClassName(container, type, name), name,
-              constName, name.equals(chosenName)));
+        if (!"default".equals(name)) bindings.add(new Binding(type.getName(), getInstanceClassName(container,
+            type, name), name, constName, name.equals(chosenName)));
       }
     }
   }
@@ -163,6 +168,7 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String consts() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     Map<String, String> consts = new HashMap<String, String>();
     for (String key : configHelper.getContainer().getInstanceNames(String.class)) {
       consts.put(key, configHelper.getContainer().getInstance(String.class, key));
@@ -172,14 +178,10 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String jars() throws IOException {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     put("jarPoms", configHelper.getJarProperties());
-    put("pluginsLoaded", ClassLoaders.getResources("struts-plugin.xml", ConfigBrowserAction.class));
+    put("pluginsLoaded", ClassLoaders.getResources("struts-plugin.xml", ConfigAction.class));
     return forward();
-  }
-
-  @Inject
-  public void setConfigHelper(S2ConfigurationHelper configHelper) {
-    this.configHelper = configHelper;
   }
 
   public class Binding implements Comparable<Binding> {
@@ -248,12 +250,13 @@ public class ConfigBrowserAction extends ActionSupport {
   }
 
   public String validators() {
+    S2ConfigurationHelper configHelper = getConfigHelper();
     ReflectionContextFactory reflectionContextFactory = configHelper.getReflectionContextFactory();
     Class<?> clazz = getClassInstance(get("clazz"));
     @SuppressWarnings("rawtypes")
     List<Validator> validators = Collections.emptyList();
-    if (clazz != null)
-      validators = configHelper.getActionValidatorManager().getValidators(clazz, get("context"));
+    if (clazz != null) validators = configHelper.getActionValidatorManager().getValidators(clazz,
+        get("context"));
 
     Set<PropertyInfo> properties = new TreeSet<PropertyInfo>();
     put("properties", properties);

@@ -8,7 +8,9 @@
   <tr><td>Action class:</td><td> ${config.className}</td></tr>
   <tr><td>Action method:</td><td> [#if config.methodName?exists]${config.methodName}[/#if]</td></tr>
   <tr><td>Parameters:</td><td> [#list config.params?keys as p]${p}[/#list]</td></tr>
-  <tr><td>Default location:</td><td> <a href="${base}${namespace}/${actionName}.${extension}">${base}${namespace}/${actionName}.${extension}</a></td></tr>
+  <tr><td>Default location:</td><td> <a href="${base}${namespace}[#if !namespace?ends_with('/')]/[/#if]${actionName}.${extension}">
+  ${base}${namespace}[#if !namespace?ends_with('/')]/[/#if]${actionName}.${extension}</a>
+  </td></tr>
 </table>
 
 [@b.tabs]

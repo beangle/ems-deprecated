@@ -52,7 +52,7 @@ public class StaticfileAction extends ActionSupport {
         }
       }
       if (null != url) {
-	String path = URLDecoder.decode(url.getPath(), "UTF8");
+        String path = URLDecoder.decode(url.getPath(), "UTF8");
         streamDownloader.download(getRequest(), getResponse(), new FileInputStream(path), name, displayName);
       }
     }

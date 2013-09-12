@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.beangle.security.access.AuthorityManager;
-import org.beangle.struts2.view.AbstractTagLibrary;
+import org.beangle.struts2.view.tag.AbstractTagLibrary;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ObjectFactory;

@@ -16,17 +16,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.beangle.ems.portal.web.action;
+package org.beangle.ems.root.web.action;
 
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.portal.web.helper.RecapchaConfig;
+import org.beangle.ems.root.web.helper.RecapchaConfig;
 import org.beangle.security.Securities;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
 import org.beangle.security.core.AuthenticationException;
 import org.beangle.security.web.auth.AuthenticationService;
 import org.beangle.struts2.action.ActionSupport;
+import org.beangle.struts2.annotation.Result;
+import org.beangle.struts2.annotation.Results;
 import org.beangle.struts2.view.util.RecaptchaUtils;
 
+@Results({ @Result(name = "home", type = "redirectAction", location = "home"),
+    @Result(name = "failure", type = "freemarker", location = "/login.ftl") })
 public class LoginAction extends ActionSupport {
 
   private RecapchaConfig recapchaConfig;

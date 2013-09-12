@@ -22,11 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.util.HierarchyEntityUtils;
 import org.beangle.commons.lang.Strings;
+import org.beangle.commons.lang.functor.Predicate;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.User;
@@ -65,9 +64,8 @@ public class IndexAction extends SecurityActionSupport {
     List<Menu> menus = Collections.emptyList();
     if (null != profile) menus = menuService.getMenus(profile, user);
 
-    CollectionUtils.filter(menus, new Predicate() {
-      public boolean evaluate(Object object) {
-        Menu amenu = (Menu) object;
+    CollectUtils.filter(menus, new Predicate<Menu>() {
+      public Boolean apply(Menu amenu) {
         if (null != family && !family.contains(amenu)) return false;
         if (Strings.isNotEmpty(name)) {
           if (!amenu.getChildren().isEmpty()) return false;
