@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
 	version="3.0" metadata-complete="true">
 
-	<name>beangle_ems_core</name>
+	<name>beangle_ems_web</name>
 	<distributable/>
 
 </web-fragment>

@@ -25,7 +25,7 @@
      <groupId>org.beangle.orm</groupId>
      <artifactId>beangle-orm-hibernate</artifactId>
      <version>${beangle.library.version}</version>
-   </dependency>
+    </dependency>
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-system</artifactId>

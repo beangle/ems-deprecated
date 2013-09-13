@@ -14,8 +14,6 @@
     <bundle.symbolicName>org.beangle.ems.core</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems</bundle.namespace>
     <commonscompress.version>1.4</commonscompress.version>
-    <ognl.version>3.0.6</ognl.version>
-    <javassist.version>3.15.0-GA</javassist.version>
     <spring.version>3.1.1.RELEASE</spring.version>
   </properties>
   
@@ -24,6 +22,7 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-compress</artifactId>
       <version>${commonscompress.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.beangle.commons</groupId>
@@ -35,33 +34,12 @@
       <groupId>org.beangle.ioc</groupId>
       <artifactId>beangle-ioc-spring</artifactId>
       <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${spring.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.beanshell</groupId>
       <artifactId>bsh</artifactId>
       <version>2.0b4</version>
-    </dependency>
-    <dependency>
-      <groupId>ognl</groupId>
-      <artifactId>ognl</artifactId>
-      <version>${ognl.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javassist</groupId>
-          <artifactId>javassist</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>${javassist.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

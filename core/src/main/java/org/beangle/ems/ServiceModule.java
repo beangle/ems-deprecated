@@ -21,7 +21,6 @@ package org.beangle.ems;
 import org.beangle.commons.config.property.MultiProviderPropertyConfig;
 import org.beangle.commons.config.property.UrlPropertyConfigProvider;
 import org.beangle.commons.inject.bind.AbstractBindModule;
-import org.beangle.commons.web.io.SplitStreamDownloader;
 import org.beangle.ems.avatar.service.FileSystemAvatarBase;
 import org.beangle.ems.config.service.DaoPropertyConfigProvider;
 import org.beangle.ems.dictionary.service.impl.BaseCodeServiceImpl;
@@ -37,7 +36,6 @@ public class ServiceModule extends AbstractBindModule {
   protected void doBinding() {
     bind(FileSystemAvatarBase.class);
     bind(ClasspathDocLoader.class).shortName();
-    bind("streamDownloader", SplitStreamDownloader.class);
     bind("baseCodeService", BaseCodeServiceImpl.class);
     bind(SeqCodeGenerator.class);
     bind(BusinessEventLogger.class);

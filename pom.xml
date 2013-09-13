@@ -25,6 +25,7 @@
 
   <modules>
     <module>core</module>
+    <module>web</module>
     <module>system</module>
     <module>database</module>
     <module>start</module>
@@ -42,34 +43,9 @@
       <version>${beangle.library.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.beangle.struts2</groupId>
-      <artifactId>beangle-struts2-convention</artifactId>
-      <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.beangle.struts2</groupId>
-      <artifactId>beangle-struts2-view</artifactId>
-      <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-core</artifactId>
       <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.beangle.security</groupId>
-      <artifactId>beangle-security-web</artifactId>
-      <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.beangle.security</groupId>
-      <artifactId>beangle-security-blueprint</artifactId>
-      <version>${beangle.library.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-      <version>${commonupload.version}</version>
     </dependency>
     <dependency>
       <groupId>org.testng</groupId>

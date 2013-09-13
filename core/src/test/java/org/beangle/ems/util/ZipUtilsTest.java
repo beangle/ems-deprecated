@@ -25,8 +25,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.io.Files;
 import org.beangle.commons.lang.ClassLoaders;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.lang.SystemInfo;
@@ -68,7 +68,7 @@ public class ZipUtilsTest {
     file.mkdirs();
     ZipUtils.unzip(f, file.getAbsolutePath());
     f.delete();
-    FileUtils.deleteDirectory(file);
+    Files.deleteDirectory(file);
   }
 
   @Test

@@ -20,6 +20,7 @@ package org.beangle.ems.log.service;
 
 import java.util.Date;
 
+import static org.beangle.commons.bean.PropertyUtils.*;
 import org.beangle.commons.dao.impl.BaseServiceImpl;
 import org.beangle.commons.event.BusinessEvent;
 import org.beangle.commons.event.Event;
@@ -29,7 +30,6 @@ import org.beangle.ems.log.model.BusinessLogBean;
 import org.beangle.ems.log.model.BusinessLogDetailBean;
 import org.beangle.security.Securities;
 import org.beangle.security.core.Authentication;
-import org.beangle.security.web.auth.WebAuthenticationDetails;
 
 /**
  * @author chaostone
@@ -46,11 +46,12 @@ public class BusinessEventLogger extends BaseServiceImpl implements EventListene
     log.setResource(Strings.defaultIfBlank(event.getResource(), "  "));
     log.setOperator(auth.getName());
     Object details = auth.getDetails();
-    if ((details instanceof WebAuthenticationDetails)) {
-      WebAuthenticationDetails webDetails = (WebAuthenticationDetails) details;
-      log.setIp(webDetails.getAgent().getIp());
-      log.setAgent(webDetails.getAgent().getOs() + " " + webDetails.getAgent().getBrowser());
-      log.setEntry(Strings.defaultIfBlank(webDetails.getLastAccessUri(), "--"));
+    Object agent = getProperty(details, "agent");
+    if (null != agent) {
+      log.setIp((String) getProperty(agent, "ip"));
+      log.setAgent((String) getProperty(agent, "os") + " " + (String) getProperty(agent, "browser"));
+      String lastAccessUri = (String) getProperty(agent, "lastAccessUri");
+      log.setEntry(Strings.defaultIfBlank(lastAccessUri, "--"));
     }
     if (null != event.getDetail()) {
       log.setDetail(new BusinessLogDetailBean(log, event.getDetail()));

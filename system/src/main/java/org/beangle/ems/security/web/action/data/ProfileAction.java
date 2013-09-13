@@ -88,6 +88,7 @@ public class ProfileAction extends SecurityActionSupport {
     this.identifierDataResolver = identifierDataResolver;
   }
 
+  @SuppressWarnings("unchecked")
   public String save() {
     Profile profile = getProfile();
     List<UserProfile> myProfiles = dataPermissionService.getUserProfiles(entityDao.get(User.class,

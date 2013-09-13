@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.beangle.ems</groupId>
+    <artifactId>beangle-ems-parent</artifactId>
+    <version>3.3.4-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.beangle.ems</groupId>
+  <artifactId>beangle-ems-web</artifactId>
+  <packaging>jar</packaging>
+  <name>Beangle Ems Web</name>
+  
+  <properties>
+    <bundle.symbolicName>org.beangle.ems.web</bundle.symbolicName>
+    <bundle.namespace>org.beangle.ems.web</bundle.namespace>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.beangle.ems</groupId>
+      <artifactId>beangle-ems-core</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.commons</groupId>
+      <artifactId>beangle-commons-web</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-convention</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-view</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-web</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.beangle.security</groupId>
+      <artifactId>beangle-security-blueprint</artifactId>
+      <version>${beangle.library.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>${commonupload.version}</version>
+    </dependency>
+  </dependencies>
+</project>
