@@ -29,13 +29,13 @@
     <dependency>
       <groupId>org.beangle.commons</groupId>
       <artifactId>beangle-commons-model</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.beangle.ioc</groupId>
       <artifactId>beangle-ioc-spring</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>

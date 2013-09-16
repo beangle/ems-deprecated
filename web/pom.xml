@@ -19,32 +19,32 @@
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-core</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.commons</groupId>
       <artifactId>beangle-commons-web</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.struts2</groupId>
       <artifactId>beangle-struts2-convention</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.struts2</groupId>
       <artifactId>beangle-struts2-view</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-web</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.security</groupId>
       <artifactId>beangle-security-blueprint</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>

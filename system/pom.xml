@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-web</artifactId>
-      <version>${beangle.library.version}</version>
+      <version>${library.version}</version>
     </dependency>
     <dependency>
       <groupId>com.jgeppert.struts2.jquery</groupId>
