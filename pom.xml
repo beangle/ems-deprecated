@@ -9,7 +9,7 @@
   <artifactId>beangle-ems-parent</artifactId>
   <packaging>pom</packaging>
   <name>Beangle Ems Parent</name>
-  <version>3.3.4</version>
+  <version>3.3.5-SNAPSHOT</version>
 
   <issueManagement>
     <system>github</system>
@@ -20,7 +20,7 @@
     <connection>scm:git:git://github.com/beangle/ems.git</connection>
     <developerConnection>scm:git:git@github.com:beangle/ems.git</developerConnection>
     <url>https://github.com/beangle/ems</url>
-    <tag>3.3.4</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <modules>
