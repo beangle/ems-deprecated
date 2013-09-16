@@ -19,7 +19,7 @@
     <dependency>
       <groupId>org.beangle.ems</groupId>
       <artifactId>beangle-ems-core</artifactId>
-      <version>${library.version}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.beangle.commons</groupId>
