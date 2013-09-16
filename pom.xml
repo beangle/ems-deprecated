@@ -33,7 +33,7 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <beangle.library.version>3.3.4-SNAPSHOT</beangle.library.version>
+    <beangle.library.version>3.3.4</beangle.library.version>
   </properties>
 
   <dependencies>

@@ -15,6 +15,8 @@
     <bundle.namespace>org.beangle.ems</bundle.namespace>
     <commonscompress.version>1.4</commonscompress.version>
     <spring.version>3.1.1.RELEASE</spring.version>
+    <ognl.version>3.0.6</ognl.version>
+    <javassist.version>3.17.1-GA</javassist.version>
   </properties>
   
   <dependencies>
@@ -40,6 +42,22 @@
       <groupId>org.beanshell</groupId>
       <artifactId>bsh</artifactId>
       <version>2.0b4</version>
+    </dependency>
+    <dependency>
+      <groupId>ognl</groupId>
+      <artifactId>ognl</artifactId>
+      <version>${ognl.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javassist</groupId>
+          <artifactId>javassist</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>${javassist.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

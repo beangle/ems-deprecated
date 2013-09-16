@@ -29,6 +29,7 @@ import org.beangle.ems.io.ClasspathDocLoader;
 import org.beangle.ems.log.service.BusinessEventLogger;
 import org.beangle.ems.rule.engine.impl.DefaultRuleExecutorBuilder;
 import org.beangle.ems.rule.impl.RuleBaseImpl;
+import org.beangle.ems.script.OgnlExpressionEvaluator;
 
 public class ServiceModule extends AbstractBindModule {
 
@@ -39,6 +40,7 @@ public class ServiceModule extends AbstractBindModule {
     bind("baseCodeService", BaseCodeServiceImpl.class);
     bind(SeqCodeGenerator.class);
     bind(BusinessEventLogger.class);
+    bind(OgnlExpressionEvaluator.class);
 
     // rule bean
     bind(DefaultRuleExecutorBuilder.class, RuleBaseImpl.class);
