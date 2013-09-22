@@ -33,7 +33,7 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <library.version>3.3.5-SNAPSHOT</library.version>
+    <library.version>3.3.5</library.version>
   </properties>
 
   <dependencies>
