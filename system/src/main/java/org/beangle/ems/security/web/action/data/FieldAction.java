@@ -58,11 +58,10 @@ public class FieldAction extends EntityDrivenAction {
       return forward(new Action(this, "edit"));
     }
     try {
-      // FIXME FOR general id
-      dataPermissionService.getFieldValues(field, 1L);
+      dataPermissionService.getFieldValues(field, "1");
     } catch (Exception e) {
       e.printStackTrace();
-      addError("不能按照给定描述提取数据");
+      addError("不能按照给定描述提取数据:" + e.getClass().getName() + ":" + e.getMessage());
       return forward(new Action(this, "edit"));
     }
 

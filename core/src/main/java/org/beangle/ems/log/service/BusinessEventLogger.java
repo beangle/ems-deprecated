@@ -49,7 +49,7 @@ public class BusinessEventLogger extends BaseServiceImpl implements EventListene
     Object agent = getProperty(details, "agent");
     if (null != agent) {
       log.setIp((String) getProperty(agent, "ip"));
-      log.setAgent((String) getProperty(agent, "os") + " " + (String) getProperty(agent, "browser"));
+      log.setAgent(getProperty(agent, "os") + " " + getProperty(agent, "browser"));
       String lastAccessUri = (String) getProperty(agent, "lastAccessUri");
       log.setEntry(Strings.defaultIfBlank(lastAccessUri, "--"));
     }

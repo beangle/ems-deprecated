@@ -73,6 +73,7 @@ public class CodeMetaAction extends SecurityActionSupport {
         duplicatedNames.add(newCategory.getName());
       } else {
         names.add(newCategory.getName());
+        newCategory.setIndexno("1");
         updated.add(newCategory);
       }
     }
