@@ -8,7 +8,7 @@
 [#if (profiles?size==0)]没有设置[/#if]
  [#list profiles as profile]
   <fieldSet  align="center">
-  <legend><a href="#" onclick="edit('${profile.id}')">修改</a>  <a href="#" onclick="remove('${profile.id}')">删除</a></legend>
+  <legend><a href="#" onclick="edit('${profile.id}')">修改</a>  <a href="#" onclick="removeProfile('${profile.id}')">删除</a></legend>
   [#list profile.properties as property]
   [#assign field=property.field/]
   <li>${field.title}</li>
@@ -41,7 +41,7 @@
     form.action="${b.url('!edit')}";
     bg.form.submit(form);
   }
-  function remove(profileId){
+  function removeProfile(profileId){
     if(!confirm("确定删除?")) return;
     var form =document.profileForm;
     bg.form.addInput(form,"profile.id",profileId);

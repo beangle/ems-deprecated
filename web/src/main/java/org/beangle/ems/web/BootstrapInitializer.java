@@ -24,17 +24,29 @@ public class BootstrapInitializer implements StartupInitializer {
     sc.addListener(new HttpSessionEventPublisher());
     sc.addListener(new ContextListener());
 
-    sc.addFilter("characterEncoding", new CharacterEncodingFilter()).addMappingForUrlPatterns(
-        EnumSet.of(REQUEST), true, "*.action");
-    sc.addFilter("accessMonitorFilter", DelegatingFilterProxy.class).addMappingForUrlPatterns(
-        EnumSet.of(REQUEST), true, "*.action");
-    sc.addFilter("OpenSessionInViewFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(
-        EnumSet.of(REQUEST), true, "*.action");
-    sc.addFilter("securityFilterChain", DelegatingFilterProxy.class).addMappingForUrlPatterns(
-        EnumSet.of(REQUEST), true, "*.action");
+    if (null == sc.getFilterRegistration("characterEncoding")) {
+      sc.addFilter("characterEncoding", new CharacterEncodingFilter()).addMappingForUrlPatterns(
+          EnumSet.of(REQUEST), true, "*.action");
+    }
+    if (null == sc.getFilterRegistration("accessMonitorFilter")) {
+      sc.addFilter("accessMonitorFilter", DelegatingFilterProxy.class).addMappingForUrlPatterns(
+          EnumSet.of(REQUEST), true, "*.action");
+    }
+    if (null == sc.getFilterRegistration("openSessionInViewFilter")) {
+      sc.addFilter("openSessionInViewFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(
+          EnumSet.of(REQUEST), true, "*.action");
+    }
+    if (null == sc.getFilterRegistration("securityFilterChain")) {
+      sc.addFilter("securityFilterChain", DelegatingFilterProxy.class).addMappingForUrlPatterns(
+          EnumSet.of(REQUEST), true, "*.action");
+    }
 
-    sc.addServlet("Action", new ActionServlet()).addMapping("*.action");
-    sc.addServlet("StaticResource", new StaticResourceServlet()).addMapping("/static/*");
+    if (null == sc.getServletRegistration("Action")) {
+      sc.addServlet("action", new ActionServlet()).addMapping("*.action");
+    }
+    if (null == sc.getServletRegistration("staticResource")) {
+      sc.addServlet("staticResource", new StaticResourceServlet()).addMapping("/static/*");
+    }
   }
 
 }
