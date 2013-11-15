@@ -23,7 +23,7 @@
   [@b.row]
     [@b.boxcol/]
     [@b.col width="15%" title="sessioninfo.username" property="username"]
-      [@b.a href="user!dashboard?user.name=${sessioninfo.username}" target="_blank"]${(sessioninfo.fullname!(''))?html}(${(sessioninfo.username!(''))?html})[/@]
+      [@b.a href="/security/user!dashboard?user.name=${sessioninfo.username}" target="_blank"]${(sessioninfo.fullname!(''))?html}(${(sessioninfo.username!(''))?html})[/@]
     [/@]
     [@b.col width="10%" title="sessioninfo.loginAt" property="loginAt"]<span title="${sessioninfo.id}">${sessioninfo.loginAt?string("MM-dd HH:mm")}</span>[/@]
     [@b.col width="8%" title="最后访问" property="lastAccessAt"]${(sessioninfo.lastAccessAt?string("HH:mm:ss"))!}[/@]
