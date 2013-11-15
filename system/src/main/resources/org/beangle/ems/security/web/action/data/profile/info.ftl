@@ -8,13 +8,13 @@
 [#if (profiles?size==0)]没有设置[/#if]
  [#list profiles as profile]
   <fieldSet  align="center">
-  <legend><a href="#" onclick="edit('${profile.id}')">修改</a>  <a href="#" onclick="removeProfile('${profile.id}')">删除</a></legend>
+  <legend><a href="javascript:void(0)" onclick="edit('${profile.id}')">修改</a>  <a href="javascript:void(0)" onclick="removeProfile('${profile.id}')">删除</a></legend>
   [#list profile.properties as property]
   [#assign field=property.field/]
   <li>${field.title}</li>
     [#if property.value??]
     [#if field.multiple && field.type.properties?? && property.value!='*']
-    [#list fieldMaps[profile.id?string][field.name]! as value][#list field.type.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]</td>
+    [#list fieldMaps[profile.id?string][field.name]! as value][#list field.type.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]
     [#else]
     ${fieldMaps[profile.id?string][field.name]!}
     [/#if]
