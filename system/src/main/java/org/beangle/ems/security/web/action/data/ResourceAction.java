@@ -25,7 +25,6 @@ import org.beangle.commons.entity.Entity;
 import org.beangle.commons.lang.Strings;
 import org.beangle.security.blueprint.data.DataField;
 import org.beangle.security.blueprint.data.DataResource;
-import org.beangle.security.blueprint.data.DataType;
 import org.beangle.security.blueprint.data.model.DataFieldBean;
 import org.beangle.security.blueprint.data.model.DataResourceBean;
 import org.beangle.struts2.action.EntityDrivenAction;
@@ -47,11 +46,6 @@ public class ResourceAction extends EntityDrivenAction {
   @Override
   protected String getShortName() {
     return "resource";
-  }
-
-  @Override
-  protected void editSetting(Entity<?> entity) {
-    put("types", entityDao.getAll(DataType.class));
   }
 
   @Override

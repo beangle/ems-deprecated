@@ -51,5 +51,3 @@ alter table sys_business_logs alter column resource rename to resrc;
 alter table sys_business_logs alter column operater rename to operator;
 
 alter table se_resources alter column need_params rename to entry;
-alter table se_groups add column dynamic boolean;
-update se_groups set dynamic =false;

@@ -27,11 +27,12 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.web.util.RequestUtils;
+import org.beangle.security.blueprint.Field;
+import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.SecurityUtils;
+import org.beangle.security.blueprint.UserProfile;
 import org.beangle.security.blueprint.data.DataPermission;
-import org.beangle.security.blueprint.data.ProfileField;
-import org.beangle.security.blueprint.data.UserProfile;
 import org.beangle.security.blueprint.data.service.DataPermissionService;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.FuncPermissionService;
@@ -58,18 +59,15 @@ public abstract class SecurityActionSupport extends EntityDrivenAction {
   }
 
   @SuppressWarnings({ "unchecked" })
-  protected <T> List<T> getUserPropertyValues(String name) {
-    ProfileField field = dataPermissionService.getProfileField(name);
+  protected <T> List<T> getUserProperties(String name) {
+    Field field = dataPermissionService.getField(name);
     UserBean user = new UserBean(getUserId());
-    List<UserProfile> profiles = dataPermissionService.getUserProfiles(user);
+    List<Profile> profiles = dataPermissionService.getUserProfiles(user);
     Set<T> results = CollectUtils.newHashSet();
-    for (UserProfile profile : profiles) {
-      Object prop = dataPermissionService.getPropertyValue(field, profile);
-      if (prop instanceof Collection<?>) {
-        results.addAll((Collection<T>) prop);
-      } else {
-        results.add((T) prop);
-      }
+    for (Profile profile : profiles) {
+      Object prop = dataPermissionService.getProperty(profile, field);
+      if (prop instanceof Collection<?>) results.addAll((Collection<T>) prop);
+      else results.add((T) prop);
     }
     return CollectUtils.newArrayList(results);
   }

@@ -8,9 +8,8 @@
 [/@]
 [@b.form name="profileForm" action="!save"]
   <input type="hidden" name="profile.id" value="${profile.id!}"/>
-  <input type="hidden" name="type" value="${Parameters['type']}"/>
-  <input type="hidden" name="holder.id" value="${profile.principal.id}"/>
-  <input type="hidden" name="params" value="&type=${Parameters['type']}&holder.id=${profile.principal.id}"/>
+  <input type="hidden" name="user.id" value="${profile.user.id}"/>
+  <input type="hidden" name="params" value="&user.id=${profile.user.id}"/>
   [@b.tabs]
     [#list fields?sort_by("title") as field]
     [@b.tab label="${field.name}(${field.title})"]
@@ -20,12 +19,12 @@
       <input name="ignoreField${field.id}" type="radio" value="0" [#if !holderIgnoreFields?seq_contains(field)]checked="checked"[/#if] id="ignoreField${field.id}_2"><label for="ignoreField${field.id}_2">选择或填写具体值</label>
     </div>
     [/#if]
-    [#if field.multiple && field.type.keyName?exists]
+    [#if field.multiple && field.keyName?exists]
       [@b.grid items=mngFields[field.name] var="value"]
         [@b.row]
-          [@b.boxcol property=field.type.keyName boxname=field.name checked=(aoFields[field.name]?seq_contains(value))!false /]
-          [#if field.type.properties??]
-          [#list field.type.properties?split(",") as pName][@b.col title=pName]${value[pName]!}[/@][/#list]
+          [@b.boxcol property=field.keyName boxname=field.name checked=(aoFields[field.name]?seq_contains(value))!false /]
+          [#if field.properties??]
+          [#list field.properties?split(",") as pName][@b.col title=pName]${value[pName]!}[/@][/#list]
           [#else]
           [@b.col title="可选值"]${value}[/@]
           [/#if]

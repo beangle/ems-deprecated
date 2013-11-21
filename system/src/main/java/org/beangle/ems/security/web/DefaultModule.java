@@ -30,7 +30,7 @@ public final class DefaultModule extends AbstractBindModule {
   protected void doBinding() {
     // security
     bind(PermissionAction.class, RoleAction.class, IndexAction.class, MyAction.class, PasswordAction.class,
-        ResourceAction.class, UserAction.class);
+        ResourceAction.class, UserAction.class, FieldAction.class, ProfileAction.class);
 
     bind(org.beangle.ems.security.web.action.session.LogAction.class,
         org.beangle.ems.security.web.action.session.MonitorAction.class).property("entityDao",
@@ -43,11 +43,8 @@ public final class DefaultModule extends AbstractBindModule {
     bind(UserDashboardHelper.class).shortName();
 
     // data security
-    bind(org.beangle.ems.security.web.action.data.FieldAction.class,
-        org.beangle.ems.security.web.action.data.ResourceAction.class,
-        org.beangle.ems.security.web.action.data.PermissionAction.class,
-        org.beangle.ems.security.web.action.data.ProfileAction.class,
-        org.beangle.ems.security.web.action.data.TypeAction.class);
+    bind(org.beangle.ems.security.web.action.data.ResourceAction.class,
+        org.beangle.ems.security.web.action.data.PermissionAction.class);
 
     // avatar
     bind(BoardAction.class, org.beangle.ems.avatar.web.action.MyAction.class, MyUploadAction.class,

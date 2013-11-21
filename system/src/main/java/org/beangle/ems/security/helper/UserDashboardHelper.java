@@ -60,7 +60,7 @@ public class UserDashboardHelper {
     populateMenus(user);
     populateSessioninfoLogs(user);
     populateOnlineActivities(user);
-    new DataPermissionHelper(entityDao, dataPermissionService).populateInfo(dataPermissionService
+    new ProfileHelper(entityDao, dataPermissionService).populateInfo(dataPermissionService
         .getUserProfiles(user));
   }
 

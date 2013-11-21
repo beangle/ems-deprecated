@@ -1,9 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.toolbar title="数据配置项"]
-  [#if !(Parameters['type']='role' && profiles?size>0)]
   bar.addItem("${b.text('action.new')}","add()");
-  [/#if]
 [/@]
 [#if (profiles?size==0)]没有设置[/#if]
  [#list profiles as profile]
@@ -13,8 +11,8 @@
   [#assign field=property.field/]
   <li>${field.title}</li>
     [#if property.value??]
-    [#if field.multiple && field.type.properties?? && property.value!='*']
-    [#list fieldMaps[profile.id?string][field.name]! as value][#list field.type.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]
+    [#if field.multiple && field.properties?? && property.value!='*']
+    [#list fieldMaps[profile.id?string][field.name]! as value][#list field.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]
     [#else]
     ${fieldMaps[profile.id?string][field.name]!}
     [/#if]
@@ -25,9 +23,8 @@
 <br/>
 
 [@b.form name="profileForm" ]
-  <input type="hidden" name="holder.id" value="${Parameters['holder.id']}"/>
-  <input type="hidden" name="type" value="${Parameters['type']}"/>
-  <input type="hidden" name="params" value="&holder.id=${Parameters['holder.id']}&type=${Parameters['type']}"/>
+  <input type="hidden" name="user.id" value="${Parameters['user.id']}"/>
+  <input type="hidden" name="params" value="&user.id=${Parameters['user.id']}"/>
 [/@]
 <script type="text/javascript">
   function add(){

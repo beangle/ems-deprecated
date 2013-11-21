@@ -24,8 +24,8 @@ import java.util.Map;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.Field;
 import org.beangle.security.blueprint.Member;
-import org.beangle.security.blueprint.data.ProfileField;
 import org.beangle.security.blueprint.data.model.DataPermissionBean;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
@@ -52,9 +52,9 @@ public class IndexAction extends SecurityActionSupport {
     put("resourceStat", entityDao.search(resourceQuery));
 
     // stat dataPermission and restriction
-    put("dataPermissionStat",
+    put("dataPermissionCnt",
         entityDao.search(OqlBuilder.from(DataPermissionBean.class, "p").select("count(*)")));
-    put("propertyMetaStat", entityDao.search(OqlBuilder.from(ProfileField.class, "param").select("count(*)")));
+    put("fieldCnt", entityDao.search(OqlBuilder.from(Field.class, "param").select("count(*)")));
     return forward();
   }
 

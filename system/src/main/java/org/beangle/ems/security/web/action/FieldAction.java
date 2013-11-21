@@ -16,11 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.beangle.ems.security.web.action.data;
+package org.beangle.ems.security.web.action;
 
 import org.beangle.commons.entity.Entity;
-import org.beangle.security.blueprint.data.DataType;
-import org.beangle.security.blueprint.data.ProfileField;
+import org.beangle.security.blueprint.Field;
 import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
@@ -34,23 +33,13 @@ public class FieldAction extends EntityDrivenAction {
 
   @Override
   protected String getEntityName() {
-    return ProfileField.class.getName();
-  }
-
-  @Override
-  protected String getShortName() {
-    return "field";
-  }
-
-  @Override
-  protected void editSetting(Entity<?> entity) {
-    put("types", entityDao.getAll(DataType.class));
+    return Field.class.getName();
   }
 
   @Override
   protected String saveAndForward(Entity<?> entity) {
-    ProfileField field = (ProfileField) entity;
-    if (entityDao.duplicate(ProfileField.class, field.getId(), "name", field.getName())) {
+    Field field = (Field) entity;
+    if (entityDao.duplicate(Field.class, field.getId(), "name", field.getName())) {
       addError("名称重复");
       return forward(new Action(this, "edit"));
     }

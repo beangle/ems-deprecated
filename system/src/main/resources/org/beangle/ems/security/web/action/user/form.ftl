@@ -31,21 +31,21 @@
         [@b.col title="common.index" width="5%"]${role_index+1}[/@]
         [@b.treecol title="entity.role" property="name"]
           <span [#if !role.enabled]class="ui-disabled" title="${b.text('action.freeze')}"[/#if]>
-          ${role.indexno} ${role.name}[#if role.dynamic] (动态)[/#if] [#if !role.enabled] (禁用)[/#if]
+          ${role.indexno} ${role.name}[#if !role.enabled] (禁用)[/#if]
           </span>
         [/@]
         [@b.col title="member.member" width="10%"]
-          [#assign displayMember=(role.enabled && !role.dynamic)]
+          [#assign displayMember=role.enabled]
           <input type="checkbox" [#if !displayMember]style="display:none"[/#if] name="member${role.id}" onchange="changeMember(${role.id},this)" ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
           [#if !displayMember && (memberMap.get(role).member)!false]&radic;[/#if]
         [/@]
         [@b.col title="member.granter" width="10%"]
-          [#assign displayGranter=(role.enabled && !role.dynamic && curMemberMap.get(role).manager)/]
+          [#assign displayGranter=(role.enabled && curMemberMap.get(role).manager)/]
           <input type="checkbox" name="granter${role.id}" [#if !displayGranter]style="display:none"[/#if] ${(memberMap.get(role).granter)?default(false)?string('checked="checked"','')}/>
           [#if !displayGranter && (memberMap.get(role).granter)!false]&radic;[/#if]
         [/@]
         [@b.col title="member.manager" width="10%"]
-          [#assign displayManager=(role.enabled && !role.dynamic && curMemberMap.get(role).manager)/]
+          [#assign displayManager=(role.enabled && curMemberMap.get(role).manager)/]
           <input type="checkbox" name="manager${role.id}" [#if !displayManager]style="display:none"[/#if] ${(memberMap.get(role).manager)?default(false)?string('checked="checked"','')}/>
           [#if !displayManager && (memberMap.get(role).manager)!false]&radic;[/#if]
         [/@]
@@ -56,7 +56,7 @@
   [/@]
 [/@]
   [#if user.id??]
-  [@b.tab label="全局数据权限" href="/security/data/profile!info?forEdit=1&holder.id=${user.id}&type=user" /]
+  [@b.tab label="全局数据权限" href="/security/profile!info?forEdit=1&user.id=${user.id}" /]
   [/#if]
 [/@]
 <script  type="text/javascript">

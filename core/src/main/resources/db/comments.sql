@@ -132,7 +132,6 @@ comment on column se_groups.parent_id is '父级组ID';
 comment on column se_groups.owner_id is '创建人ID';
 comment on column se_groups.remark is '备注';
 comment on column se_groups.enabled is '是否启用';
-comment on column se_groups.dynamic is '动态组';
 comment on column se_groups.created_at is '创建时间';
 comment on column se_groups.updated_at is '最后修改时间';
 comment on column se_groups.code is '代码';

@@ -29,7 +29,7 @@
 [/@]
 
 [@b.module title="数据权限"]
-  限制模式数量:${dataPermissionStat[0]}<br/>
-  属性配置数量:${propertyMetaStat[0]!0}<br/>
+  限制模式数量:${dataPermissionCnt[0]}<br/>
+  属性配置数量:${fieldCnt[0]!0}<br/>
 [/@]
 </div>

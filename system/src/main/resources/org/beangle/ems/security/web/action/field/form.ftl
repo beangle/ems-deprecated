@@ -1,0 +1,18 @@
+[#ftl]
+[@b.head/]
+[@b.toolbar title="entity.field"]bar.addBack("${b.text("action.back")}");[/@]
+[@b.form action="!save" theme="list"]
+  [@b.textfield label="common.name" name="field.name" value="${field.name!}" required="true" maxlength="50"/]
+  [@b.textfield label="标题" name="field.title" value="${field.title!}" required="true" maxlength="50"/]
+  [@b.textfield  label="类型" name="field.typeName" value=field.typeName! required="true" style="width:300px"/]
+  [@b.textfield label="关键字" name="field.keyName" value="${field.keyName!}" maxlength="50" style="width:50px"/]
+  [@b.textfield label="其他属性" name="field.properties" value="${(field.properties)!}" style="width:300x;" maxlength="100" comment="多个属性用,分割"/]
+  [@b.textfield label="数据源" name="field.source" value="${(field.source)!}" style="width:400px;" maxlength="100" comment="基本类型，此处可以为空;使用oql:表示对象查询,sql:表示sql查询"/]
+  [@b.radios label="是否允许多值" name="field.multiple"  value=field.multiple/]
+  [@b.formfoot]
+    <input type="hidden" name="field.id" value="${(field.id)!}"/>
+    [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit" /]
+  [/@]
+</table>
+[/@]
+[@b.foot/]

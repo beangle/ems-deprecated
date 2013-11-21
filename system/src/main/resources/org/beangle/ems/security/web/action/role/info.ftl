@@ -17,10 +17,8 @@ bar.addBack("${b.text("action.back")}");
    <td class="content">${role.updatedAt?string("yyyy-MM-dd")}</td>
   </tr>
   <tr>
-  <td class="title" >是否动态角色:</td>
-  <td  class="content">${role.dynamic?string("是","否")}</td>
   <td class="title" >&nbsp;${b.text("common.status")}:</td>
-  <td class="content">
+  <td class="content" colspan="3">
     [#if role.enabled] ${b.text("action.activate")}
     [#else]${b.text("action.freeze")}
     [/#if]

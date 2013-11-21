@@ -4,7 +4,5 @@
 [@b.tabs]
   [@b.tab label="entity.dataResource" href="resource!search"/]
   [@b.tab label="entity.dataPermission" href="permission!search"/]
-  [@b.tab label="entity.profileField" href="field!search"/]
-  [@b.tab label="entity.dataType" href="type!search"/]
 [/@]
 [@b.foot/]

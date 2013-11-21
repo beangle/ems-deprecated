@@ -3,33 +3,23 @@
 bar.addBack("${b.text("action.back")}");
 [/@]
 [@b.form theme="list" action="!save"]
-  [@b.textfield name="resource.name" required="true" value=resource.name! label="common.name"/]
   [@b.textfield name="resource.title" required="true" value=resource.title! label="common.title"/]
+  [@b.textfield name="resource.name" required="true" value=resource.name! label="common.name" style="width:300px"/]
   [@b.field label="属性"]
   <div id="fieldtable" style="display:table;">
       [#list resource.fields as field]
       <div id="field${field_index}">
-        <input name="field${field_index}.name" size="14" type="text" placeholder="请输入名称" value="${field.name}"/>
-        <input name="field${field_index}.title" size="14" type="text" placeholder="请输入标题" value="${field.title}" />
-        <select name="field${field_index}.type.id" required="true" style="width:150px">
-          <option value="">...</option>
-          [#list types as type]
-          <option value="${type.id}"[#if field.type.id=type.id]selected="selected"[/#if]>${type.name}</option>
-          [/#list]
-        </select>
-        <input type="button" value="删除" />
+        <input name="field${field_index}.name" maxlength="14" type="text" placeholder="请输入名称" value="${field.name}"/>
+        <input name="field${field_index}.title" maxlength="14" type="text" placeholder="请输入标题" value="${field.title}" />
+        <input name="field${field_index}.typeName" maxlength="100" required="true" value="${field.typeName}" style="width:300px" />
+        <input type="button" value="删除" onclick="removeField(this)" />
       </div>
       [/#list]
       <input id="fieldaddbutton" type="button" value="添加条目" onclick="addField()" />
       <div id="fieldblueprint" style="display:none;">
-        <input name="" size="14" role="name" type="text" placeholder="请输入名称" value="" />
-        <input name="" size="14" role="title" type="text" placeholder="请输入标题" value="" />
-        <select name="" role="type" style="width:150px">
-          <option value="">...</option>
-          [#list types as type]
-          <option value="${type.id}">${type.name}</option>
-          [/#list]
-        </select>
+        <input name="" maxlength="14" role="name" type="text" placeholder="请输入名称" value="" />
+        <input name="" maxlength="14" role="title" type="text" placeholder="请输入标题" value="" />
+        <input name="" maxlength="100" role="type" style="width:300px" type="text" placeholder="请输入类型" value="" />
         <input type="button" value="删除" onclick="removeField(this)"/>
       </div>
     </div>
@@ -51,7 +41,7 @@ function addField() {
   newField.insertBefore(jQuery("#" + prefix + "addbutton"));
   newField.find("input[role='name']").attr('name', prefix + count + ".name");
   newField.find("input[role='title']").attr('name', prefix + count + ".title");
-  newField.find("select[role='type']").attr('name', prefix + count + ".type.id");
+  newField.find("input[role='type']").attr('name', prefix + count + ".typeName");
   jQuery("#fieldCount").val(count);
   count++;
 }

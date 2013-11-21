@@ -10,8 +10,8 @@
     [#assign field=property.field/]
     <li>${field.title}</li>
       [#if property.value??]
-      [#if field.multiple && field.type.properties?? && property.value!='*']
-      [#list fieldMaps[profile.id?string][field.name]! as value][#list field.type.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]</td>
+      [#if field.multiple && field.properties?? && property.value!='*']
+      [#list fieldMaps[profile.id?string][field.name]! as value][#list field.properties?split(",") as pName]${value[pName]!} [/#list][#if value_has_next],[/#if][/#list]</td>
       [#else]
       ${fieldMaps[profile.id?string][field.name]!}
       [/#if]

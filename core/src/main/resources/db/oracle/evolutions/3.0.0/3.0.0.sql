@@ -50,7 +50,6 @@ drop table sys_parameters;
 
 alter table sys_business_logs rename column operater to operator;
 alter table se_resources rename column need_params  to entry;
-alter table se_groups add  dynamic number(1) default 0;
 
 --------------------
 --rename group table and sequence

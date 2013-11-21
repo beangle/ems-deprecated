@@ -14,10 +14,9 @@
   [@b.row]
     <tr id="${(role.indexno)!}">
     [@b.boxcol /]
-    [@b.treecol property="name" width="36%" title="common.name"][@b.a href="!info?id=${role.id}"]${role.indexno} ${role.name}[/@]
+    [@b.treecol property="name" width="46%" title="common.name"][@b.a href="!info?id=${role.id}"]${role.indexno} ${role.name}[/@]
     [/@]
     [@b.col width="15%" property="owner.name" title="common.creator"]${(role.owner.fullname)!}[/@]
-    [@b.col width="10%" property="dynamic" title="动态组"]${role.dynamic?string("是","否")}[/@]
     [@b.col width="10%" property="enabled" title="common.status"][@enableInfo role.enabled/][/@]
     [@b.col width="12%" property="updatedAt" title="common.updatedAt"]${role.updatedAt?string("yy-MM-dd")}[/@]
     [@b.col title="权限" width="12%"][@b.a target="_blank" href="permission!edit?role.id=${role.id}"]<span class="icon-action action-config"></span>功能权限[/@][/@]
