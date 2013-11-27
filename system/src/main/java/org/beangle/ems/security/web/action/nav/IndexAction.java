@@ -57,7 +57,7 @@ public class IndexAction extends SecurityActionSupport {
     } else {
       family = null;
       givenMenu = null;
-      profile = menuService.getProfile(user, getLong("profile.id"));
+      profile = menuService.getProfile(user, getInt("profile.id"));
     }
     put("profile", profile);
 
@@ -97,7 +97,7 @@ public class IndexAction extends SecurityActionSupport {
 
   public String search() {
     User user = entityDao.get(User.class, getUserId());
-    MenuProfile profile = menuService.getProfile(user, getLong("profile.id"));
+    MenuProfile profile = menuService.getProfile(user, getInt("profile.id"));
     List<Menu> menus = menuService.getMenus(profile, user, getProfiles());
     List<Menu> menuPath = CollectUtils.newArrayList();
     Integer menuId = getInt("menu.id");

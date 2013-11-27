@@ -69,7 +69,7 @@ public class PermissionAction extends SecurityActionSupport {
     List<MenuProfile> menuProfiles = securityHelper.getMenuService().getProfiles(role);
     put("menuProfiles", menuProfiles);
 
-    MenuProfile menuProfile = securityHelper.getMenuService().getProfile(role, getLong("menuProfileId"));
+    MenuProfile menuProfile = securityHelper.getMenuService().getProfile(role, getInt("menuProfileId"));
     if (null == menuProfile && !menuProfiles.isEmpty()) {
       menuProfile = menuProfiles.get(0);
     }

@@ -98,7 +98,10 @@ public class SecurityHelper {
         SecurityUtils.getResource());
     if (null == dp) return;
     List<Profile> profiles = getProfiles(user, getResource());
-    if (profiles.isEmpty()) return;
+
+    if (profiles.isEmpty()) throw new AccessDeniedException(SecurityUtils.getResource(),
+        "error.security.errorprofile");
+
     dataPermissionService.apply(query, dp, profiles);
   }
 

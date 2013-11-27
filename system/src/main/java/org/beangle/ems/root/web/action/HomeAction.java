@@ -44,7 +44,7 @@ public class HomeAction extends SecurityActionSupport {
     if (profiles.isEmpty()) {
       put("menus", Collections.EMPTY_LIST);
     } else {
-      Long profileId = getLong("security.menuProfileId");
+      Integer profileId = getInt("security.menuProfileId");
       MenuProfile profile = null;
       if (null != profileId) profile = menuService.getProfile(user, profileId);
       else profile = profiles.get(0);
