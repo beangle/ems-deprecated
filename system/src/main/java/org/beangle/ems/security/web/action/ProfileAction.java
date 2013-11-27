@@ -26,8 +26,8 @@ import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.UserProfile;
-import org.beangle.security.blueprint.data.service.UserDataResolver;
 import org.beangle.security.blueprint.model.UserProfileBean;
+import org.beangle.security.blueprint.service.UserDataResolver;
 import org.beangle.struts2.helper.Params;
 
 /**
@@ -59,9 +59,9 @@ public class ProfileAction extends SecurityActionSupport {
    * 查看限制资源界面
    */
   public String info() {
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     Long id = getLong("user.id");
-    List<Profile> profiles = dataPermissionService.getUserProfiles(entityDao.get(User.class, id));
+    List<Profile> profiles = entityDao.get(User.class, id).getProfiles();
     helper.populateInfo(profiles);
     return forward();
   }
@@ -72,7 +72,7 @@ public class ProfileAction extends SecurityActionSupport {
 
   public String save() {
     Profile profile = getProfile();
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.setIdentifierDataResolver(identifierDataResolver);
     helper.populateSaveInfo(profile, getUserId(), isAdmin());
     if (profile.getProperties().isEmpty()) {
@@ -90,7 +90,7 @@ public class ProfileAction extends SecurityActionSupport {
   public String edit() {
     // 取得各参数的值
     Profile profile = getProfile();
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.fillEditInfo(profile, getUserId(), isAdmin());
     return forward();
   }

@@ -62,7 +62,7 @@ public class IndexAction extends SecurityActionSupport {
     put("profile", profile);
 
     List<Menu> menus = Collections.emptyList();
-    if (null != profile) menus = menuService.getMenus(profile, user);
+    if (null != profile) menus = menuService.getMenus(profile, user, getProfiles());
 
     CollectUtils.filter(menus, new Predicate<Menu>() {
       public Boolean apply(Menu amenu) {
@@ -98,7 +98,7 @@ public class IndexAction extends SecurityActionSupport {
   public String search() {
     User user = entityDao.get(User.class, getUserId());
     MenuProfile profile = menuService.getProfile(user, getLong("profile.id"));
-    List<Menu> menus = menuService.getMenus(profile, user);
+    List<Menu> menus = menuService.getMenus(profile, user, getProfiles());
     List<Menu> menuPath = CollectUtils.newArrayList();
     Integer menuId = getInt("menu.id");
     if (null != menuId) {

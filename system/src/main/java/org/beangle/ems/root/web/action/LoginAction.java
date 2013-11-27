@@ -20,24 +20,21 @@ package org.beangle.ems.root.web.action;
 
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.root.web.helper.RecapchaConfig;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.Securities;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
 import org.beangle.security.core.AuthenticationException;
-import org.beangle.security.web.auth.AuthenticationService;
-import org.beangle.struts2.action.ActionSupport;
 import org.beangle.struts2.annotation.Result;
 import org.beangle.struts2.annotation.Results;
 import org.beangle.struts2.view.util.RecaptchaUtils;
 
 @Results({ @Result(name = "home", type = "redirectAction", location = "home"),
     @Result(name = "failure", type = "freemarker", location = "/login.ftl") })
-public class LoginAction extends ActionSupport {
+public class LoginAction extends SecurityActionSupport {
 
   private RecapchaConfig recapchaConfig;
 
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
-
-  private AuthenticationService authenticationService;
 
   public String index() {
     if (Securities.hasValidAuthentication()) { return "home"; }
@@ -71,11 +68,11 @@ public class LoginAction extends ActionSupport {
   protected String doLogin() {
     String username = get("username");
     String password = get("password");
-    if (Strings.isBlank(username) || Strings.isBlank(password)) { return "failure"; }
+    if (Strings.isBlank(username) || Strings.isBlank(password)) return "failure";
     username = username.trim();
     UsernamePasswordAuthentication auth = new UsernamePasswordAuthentication(username, password);
     try {
-      authenticationService.login(getRequest(), auth);
+      securityHelper.getAuthenticationService().login(getRequest(), auth);
     } catch (AuthenticationException e) {
       return e.getMessage();
     }
@@ -106,10 +103,6 @@ public class LoginAction extends ActionSupport {
 
   public RecapchaConfig getRecapchaConfig() {
     return recapchaConfig;
-  }
-
-  public void setAuthenticationService(AuthenticationService authenticationService) {
-    this.authenticationService = authenticationService;
   }
 
 }

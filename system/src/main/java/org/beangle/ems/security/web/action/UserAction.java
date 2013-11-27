@@ -41,7 +41,6 @@ import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.MemberBean;
 import org.beangle.security.blueprint.model.UserBean;
-import org.beangle.security.blueprint.service.UserService;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
 
@@ -52,8 +51,6 @@ import org.beangle.struts2.convention.route.Action;
  */
 public class UserAction extends SecurityActionSupport {
 
-  private UserService userService;
-
   private UserDashboardHelper userDashboardHelper;
 
   public String dashboard() {
@@ -63,11 +60,11 @@ public class UserAction extends SecurityActionSupport {
       managed = entityDao.get(User.class, userId);
     } else {
       String username = get("user.name");
-      if (null != username) managed = userService.get(username);
+      if (null != username) managed = securityHelper.getUserService().get(username);
     }
     User me = entityDao.get(User.class, getUserId());
     if (null != managed) {
-      if (me.equals(managed) || userService.isManagedBy(me, managed)) {
+      if (me.equals(managed) || securityHelper.getUserService().isManagedBy(me, managed)) {
         userDashboardHelper.buildDashboard(managed);
         return forward();
       } else {
@@ -88,7 +85,7 @@ public class UserAction extends SecurityActionSupport {
     List<Object> params = CollectUtils.newArrayList();
     boolean queryRole = false;
     if (!isAdmin()) {
-      List<Member> members = userService.getMembers(manager, Member.Ship.MANAGER);
+      List<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.MANAGER);
       List<Role> mngRoles = CollectUtils.newArrayList();
       for (Member m : members) {
         mngRoles.add(m.getRole());
@@ -139,10 +136,10 @@ public class UserAction extends SecurityActionSupport {
     if (Strings.isNotEmpty(errorMsg)) { return forward(new Action("edit"), errorMsg); }
     processPassword(user);
     if (!user.isPersisted()) {
-      User creator = userService.get(getUserId());
-      userService.createUser(creator, user);
+      User creator = securityHelper.getUserService().get(getUserId());
+      securityHelper.getUserService().createUser(creator, user);
     } else {
-      userService.saveOrUpdate(user);
+      securityHelper.getUserService().saveOrUpdate(user);
     }
     updateUserRole(user);
     return redirect("search", "info.save.success");
@@ -157,7 +154,7 @@ public class UserAction extends SecurityActionSupport {
     Set<Member> newMembers = CollectUtils.newHashSet();
     Set<Member> removedMembers = CollectUtils.newHashSet();
     User manager = entityDao.get(User.class, getUserId());
-    Collection<Member> members = userService.getMembers(manager, Member.Ship.GRANTER);
+    Collection<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.GRANTER);
     for (Member member : members) {
       MemberBean myMember = memberMap.get(member.getRole());
       boolean isMember = getBool("member" + member.getRole().getId());
@@ -186,7 +183,7 @@ public class UserAction extends SecurityActionSupport {
     User manager = entityDao.get(User.class, getUserId());
     Set<Role> roles = CollectUtils.newHashSet();
     Map<Role, Member> curMemberMap = CollectUtils.newHashMap();
-    Collection<Member> members = userService.getMembers(manager, Member.Ship.GRANTER);
+    Collection<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.GRANTER);
     for (Member gm : members) {
       roles.add(gm.getRole());
       curMemberMap.put(gm.getRole(), gm);
@@ -201,7 +198,7 @@ public class UserAction extends SecurityActionSupport {
     }
     put("memberMap", memberMap);
     put("curMemberMap", curMemberMap);
-    put("isadmin", userService.isRoot(user));
+    put("isadmin", securityHelper.getUserService().isRoot(user));
     put("isme", getUserId().equals(user.getId()));
     put("settings", new Settings(getConfig()));
   }
@@ -211,8 +208,8 @@ public class UserAction extends SecurityActionSupport {
    */
   public String remove() {
     Long[] userIds = getLongIds("user");
-    User creator = userService.get(getUserId());
-    List<User> toBeRemoved = userService.getUsers(userIds);
+    User creator = securityHelper.getUserService().get(getUserId());
+    List<User> toBeRemoved = securityHelper.getUserService().getUsers(userIds);
     StringBuilder sb = new StringBuilder();
     User removed = null;
     int success = 0;
@@ -222,7 +219,7 @@ public class UserAction extends SecurityActionSupport {
         removed = one;
         // 不能删除自己
         if (!one.getId().equals(getUserId())) {
-          userService.removeUser(creator, one);
+          securityHelper.getUserService().removeUser(creator, one);
           success++;
         } else {
           addFlashError("security.info.cannotRemoveSelf");
@@ -248,13 +245,13 @@ public class UserAction extends SecurityActionSupport {
     Long[] userIds = getLongIds("user");
     String isActivate = get("isActivate");
     int successCnt;
-    User manager = userService.get(getUserId());
+    User manager = securityHelper.getUserService().get(getUserId());
     String msg = "security.info.freeze.success";
     if (Strings.isNotEmpty(isActivate) && "false".equals(isActivate)) {
-      successCnt = userService.updateState(manager, userIds, false);
+      successCnt = securityHelper.getUserService().updateState(manager, userIds, false);
     } else {
       msg = "security.info.activate.success";
-      successCnt = userService.updateState(manager, userIds, true);
+      successCnt = securityHelper.getUserService().updateState(manager, userIds, true);
     }
     addFlashMessage(msg, successCnt);
     return redirect("search");
@@ -268,7 +265,7 @@ public class UserAction extends SecurityActionSupport {
   public String info() throws Exception {
     String name = get("name");
     if (Strings.isNotBlank(name)) {
-      User user = userService.get(name);
+      User user = securityHelper.getUserService().get(name);
       if (null != user) {
         put("user", user);
         return forward(new Action((Class<?>) null, "dashboard", "&user.id=" + user.getId()));
@@ -288,10 +285,6 @@ public class UserAction extends SecurityActionSupport {
       password = User.DEFAULT_PASSWORD;
       user.setPassword(EncryptUtil.encode(password));
     }
-  }
-
-  public void setUserService(UserService userService) {
-    this.userService = userService;
   }
 
   public void setUserDashboardHelper(UserDashboardHelper userDashboardHelper) {

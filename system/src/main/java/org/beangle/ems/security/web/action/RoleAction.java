@@ -33,11 +33,9 @@ import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
-import org.beangle.security.blueprint.data.service.UserDataResolver;
-import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.model.RoleBean;
 import org.beangle.security.blueprint.service.RoleService;
-import org.beangle.security.blueprint.service.UserService;
+import org.beangle.security.blueprint.service.UserDataResolver;
 
 /**
  * 角色信息维护响应类
@@ -45,11 +43,8 @@ import org.beangle.security.blueprint.service.UserService;
  * @author chaostone 2005-9-29
  */
 public class RoleAction extends SecurityActionSupport {
-
   private UserDataResolver identifierDataResolver;
   private RoleService roleService;
-
-  private UserService userService;
 
   /**
    * 对组可管理意为<br>
@@ -109,7 +104,7 @@ public class RoleAction extends SecurityActionSupport {
     if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) return redirect("edit",
         "error.notUnique");
     if (!role.isPersisted()) {
-      User creator = userService.get(getUserId());
+      User creator = securityHelper.getUserService().get(getUserId());
       role.setIndexno("tmp");
       role.setOwner(creator);
       roleService.createRole(creator, role);
@@ -135,7 +130,7 @@ public class RoleAction extends SecurityActionSupport {
 
   public String profile() {
     Role role = entityDao.get(Role.class, getId("role", Integer.class));
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.populateInfo(Collections.singletonList((Profile) role));
     put("role", role);
     return forward();
@@ -143,7 +138,7 @@ public class RoleAction extends SecurityActionSupport {
 
   public String editProfile() {
     Role role = entityDao.get(Role.class, getId("role", Integer.class));
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.fillEditInfo(role, getUserId(), isAdmin());
     put("role", role);
     return forward();
@@ -157,7 +152,7 @@ public class RoleAction extends SecurityActionSupport {
   }
 
   public String saveProfile() {
-    ProfileHelper helper = new ProfileHelper(entityDao, dataPermissionService);
+    ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.setIdentifierDataResolver(identifierDataResolver);
     Role role = entityDao.get(Role.class, getId("role", Integer.class));
     helper.populateSaveInfo(role, getUserId(), isAdmin());
@@ -170,17 +165,9 @@ public class RoleAction extends SecurityActionSupport {
    */
   public String remove() {
     Integer[] roleIds = getIds(getShortName(), Integer.class);
-    User curUser = userService.get(getUserId());
+    User curUser = securityHelper.getUserService().get(getUserId());
     roleService.removeRole(curUser, entityDao.get(Role.class, roleIds));
     return redirect("search", "info.remove.success");
-  }
-
-  public void setAuthorityService(FuncPermissionService authorityService) {
-    this.funcPermissionService = authorityService;
-  }
-
-  public void setUserService(UserService userService) {
-    this.userService = userService;
   }
 
   public void setRoleService(RoleService roleService) {

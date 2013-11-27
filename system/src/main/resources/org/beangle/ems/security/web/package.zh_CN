@@ -13,6 +13,7 @@ error.captcha=验证码不对
 error.emptyAuthenticationCode=<li>验证码不能为空</li>
 error.notEnoughAuthority=权限不足
 error.notUnique=名称已存在
+error.security.errorprofile=数据权限不足
 field.user.suggestive=提示
 info.authority.moduleRole=模块(角色{0})
 info.authority.moduleUser=模块(用户{0})

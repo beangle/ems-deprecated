@@ -32,8 +32,8 @@ import org.beangle.security.blueprint.Field;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.Property;
 import org.beangle.security.blueprint.User;
-import org.beangle.security.blueprint.data.service.DataPermissionService;
-import org.beangle.security.blueprint.data.service.UserDataResolver;
+import org.beangle.security.blueprint.service.ProfileService;
+import org.beangle.security.blueprint.service.UserDataResolver;
 import org.beangle.struts2.helper.ContextHelper;
 import org.beangle.struts2.helper.Params;
 
@@ -41,14 +41,14 @@ public class ProfileHelper {
 
   final EntityDao entityDao;
 
-  final DataPermissionService dataPermissionService;
+  final ProfileService profileService;
 
   UserDataResolver identifierDataResolver;
-  
-  public ProfileHelper(EntityDao entityDao, DataPermissionService dataPermissionService) {
+
+  public ProfileHelper(EntityDao entityDao, ProfileService profileService) {
     super();
     this.entityDao = entityDao;
-    this.dataPermissionService = dataPermissionService;
+    this.profileService = profileService;
   }
 
   /**
@@ -67,7 +67,7 @@ public class ProfileHelper {
           } else if (value.equals("*")) {
             aoFields.put(fieldName, "不限");
           } else {
-            aoFields.put(fieldName, dataPermissionService.getProperty(profile, property.getField()));
+            aoFields.put(fieldName, profileService.getProperty(profile, property.getField()));
           }
         }
       }
@@ -81,7 +81,7 @@ public class ProfileHelper {
     Map<String, Object> mngFields = CollectUtils.newHashMap();
     Map<String, Object> aoFields = CollectUtils.newHashMap();
 
-    List<Profile> myProfiles = dataPermissionService.getUserProfiles(entityDao.get(User.class, userId));
+    List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
     Set<Field> ignores = getIgnoreFields(myProfiles);
     ContextHelper.put("ignoreFields", ignores);
     Set<Field> holderIgnoreFields = CollectUtils.newHashSet();
@@ -89,7 +89,7 @@ public class ProfileHelper {
     List<Field> fields = entityDao.getAll(Field.class);
     ContextHelper.put("fields", fields);
     for (Field field : fields) {
-      List<?> mngFieldValues = dataPermissionService.getFieldValues(field);
+      List<?> mngFieldValues = profileService.getFieldValues(field);
       if (!isAdmin) mngFieldValues.retainAll(getMyProfileValues(myProfiles, field));
       else ignores.add(field);
 
@@ -102,7 +102,7 @@ public class ProfileHelper {
       if (null == field.getSource()) {
         aoFields.put(field.getName(), fieldValue);
       } else {
-        aoFields.put(field.getName(), dataPermissionService.getProperty(profile, field));
+        aoFields.put(field.getName(), profileService.getProperty(profile, field));
       }
     }
     ContextHelper.put("mngFields", mngFields);
@@ -112,7 +112,7 @@ public class ProfileHelper {
 
   @SuppressWarnings("unchecked")
   public void populateSaveInfo(Profile profile, Long userId, Boolean isAdmin) {
-    List<Profile> myProfiles = dataPermissionService.getUserProfiles(entityDao.get(User.class, userId));
+    List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
     Set<Field> ignoreFields = getIgnoreFields(myProfiles);
     for (final Field field : entityDao.getAll(Field.class)) {
       String[] values = (String[]) Params.getAll(field.getName());
@@ -126,7 +126,7 @@ public class ProfileHelper {
           if (null != field.getKeyName()) {
             final Set<String> keys = CollectUtils.newHashSet(values);
             List<Object> allValues = null;
-            Collection<?> originValues = dataPermissionService.getFieldValues(field);
+            Collection<?> originValues = profileService.getFieldValues(field);
             if (originValues instanceof List<?>) {
               allValues = (List<Object>) originValues;
             } else {
@@ -161,9 +161,9 @@ public class ProfileHelper {
         String value = property.getValue();
         if (null != value) {
           if (property.getField().isMultiple()) {
-            values.addAll((Collection<?>) dataPermissionService.getProperty(profile, field));
+            values.addAll((Collection<?>) profileService.getProperty(profile, field));
           } else {
-            values.add(dataPermissionService.getProperty(profile, field));
+            values.add(profileService.getProperty(profile, field));
           }
         }
       }

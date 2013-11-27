@@ -18,68 +18,38 @@
  */
 package org.beangle.ems.web.action;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-import org.apache.struts2.ServletActionContext;
-import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
-import org.beangle.commons.web.util.RequestUtils;
-import org.beangle.security.blueprint.Field;
+import org.beangle.ems.web.helper.SecurityHelper;
 import org.beangle.security.blueprint.Profile;
-import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.SecurityUtils;
-import org.beangle.security.blueprint.UserProfile;
-import org.beangle.security.blueprint.data.DataPermission;
-import org.beangle.security.blueprint.data.service.DataPermissionService;
 import org.beangle.security.blueprint.function.FuncResource;
-import org.beangle.security.blueprint.function.service.FuncPermissionService;
-import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.struts2.action.EntityDrivenAction;
 
 public abstract class SecurityActionSupport extends EntityDrivenAction {
 
-  protected FuncPermissionService funcPermissionService;
-
-  protected DataPermissionService dataPermissionService;
+  protected SecurityHelper securityHelper;
 
   protected FuncResource getResource() {
-    String resourceName = SecurityUtils.getResource();
-    if (null == resourceName) {
-      resourceName = funcPermissionService.extractResource(RequestUtils.getServletPath(ServletActionContext
-          .getRequest()));
-    }
-    return funcPermissionService.getResource(resourceName);
+    return securityHelper.getResource();
   }
 
   protected boolean isAdmin() {
-    return funcPermissionService.getUserService().isRoot(getUserId());
+    return securityHelper.getUserService().isRoot(getUserId());
   }
 
-  @SuppressWarnings({ "unchecked" })
-  protected <T> List<T> getUserProperties(String name) {
-    Field field = dataPermissionService.getField(name);
-    UserBean user = new UserBean(getUserId());
-    List<Profile> profiles = dataPermissionService.getUserProfiles(user);
-    Set<T> results = CollectUtils.newHashSet();
-    for (Profile profile : profiles) {
-      Object prop = dataPermissionService.getProperty(profile, field);
-      if (prop instanceof Collection<?>) results.addAll((Collection<T>) prop);
-      else results.add((T) prop);
-    }
-    return CollectUtils.newArrayList(results);
+  protected List<Profile> getProfiles() {
+    return securityHelper.getProfiles();
   }
 
-  protected DataPermission getDataPermission(String dataResource) {
-    Resource resource = getResource();
-    return dataPermissionService.getPermission(getUserId(), dataResource,
-        (null == resource ? null : resource.getName()));
+  protected <T> List<T> getProperties(String name) {
+    return securityHelper.getProperties(name);
   }
 
-  protected void applyPermission(OqlBuilder<?> query, UserProfile profile) {
-    dataPermissionService.apply(query, getDataPermission(query.getEntityClass().getName()), profile);
+  protected void applyPermission(OqlBuilder<?> query) {
+    securityHelper.applyPermission(query);
   }
 
   protected Long getUserId() {
@@ -94,12 +64,8 @@ public abstract class SecurityActionSupport extends EntityDrivenAction {
     return Strings.concat(SecurityUtils.getUsername(), "(", SecurityUtils.getFullname(), ")");
   }
 
-  public void setFuncPermissionService(FuncPermissionService permissionService) {
-    this.funcPermissionService = permissionService;
-  }
-
-  public void setDataPermissionService(DataPermissionService dataPermissionService) {
-    this.dataPermissionService = dataPermissionService;
+  public void setSecurityHelper(SecurityHelper securityHelper) {
+    this.securityHelper = securityHelper;
   }
 
 }

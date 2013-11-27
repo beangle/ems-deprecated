@@ -26,12 +26,12 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
-import org.beangle.security.blueprint.data.service.DataPermissionService;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.FuncPermissionService;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
+import org.beangle.security.blueprint.service.ProfileService;
 import org.beangle.security.blueprint.session.service.SessioninfoLogService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.struts2.helper.ContextHelper;
@@ -51,7 +51,7 @@ public class UserDashboardHelper {
 
   private MenuService menuService;
 
-  private DataPermissionService dataPermissionService;
+  private ProfileService profileService;
 
   private SessioninfoLogService sessioninfoLogService;
 
@@ -60,8 +60,7 @@ public class UserDashboardHelper {
     populateMenus(user);
     populateSessioninfoLogs(user);
     populateOnlineActivities(user);
-    new ProfileHelper(entityDao, dataPermissionService).populateInfo(dataPermissionService
-        .getUserProfiles(user));
+    new ProfileHelper(entityDao, profileService).populateInfo(user.getProfiles());
   }
 
   private void populateOnlineActivities(User user) {
@@ -81,7 +80,7 @@ public class UserDashboardHelper {
     }
     if (null != menuProfileId) {
       MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, menuProfileId);
-      List<Menu> menus = menuService.getMenus(menuProfile, user);
+      List<Menu> menus = menuService.getMenus(menuProfile, user, user.getProfiles());
       Set<FuncResource> resources = CollectUtils.newHashSet(permissionService.getResources(user));
       Map<Role, List<Menu>> roleMenusMap = CollectUtils.newHashMap();
 
@@ -110,8 +109,8 @@ public class UserDashboardHelper {
     this.permissionService = permissionService;
   }
 
-  public void setDataPermissionService(DataPermissionService dataPermissionService) {
-    this.dataPermissionService = dataPermissionService;
+  public void setProfileService(ProfileService profileService) {
+    this.profileService = profileService;
   }
 
   public void setSessioninfoLogService(SessioninfoLogService sessioninfoLogService) {

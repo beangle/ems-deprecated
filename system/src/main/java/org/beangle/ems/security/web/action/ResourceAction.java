@@ -48,7 +48,7 @@ public class ResourceAction extends SecurityActionSupport {
     if (null == enabled) {
       enabled = Boolean.FALSE;
     }
-    funcPermissionService.updateState(resourceIds, enabled.booleanValue());
+    securityHelper.getFuncPermissionService().updateState(resourceIds, enabled.booleanValue());
     authorityManager.refreshCache();
     return redirect("search", "info.save.success");
   }

@@ -38,6 +38,7 @@ info.role=Role infomation
 info.role.canBeChoosed=role list
 info.role.count=role count
 error.notUnique=The name must be uniquely!
+error.security.errorprofile=Error Profile
 info.user.canBeChoosed=user list
 info.user.count=user count
 alert.authoritySave={0}'s module authority will be setted according to choosed,continue?

@@ -37,7 +37,6 @@ import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.internal.CacheableAuthorityManager;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
-import org.beangle.security.blueprint.nav.service.MenuService;
 import org.beangle.security.core.authority.GrantedAuthorityBean;
 import org.beangle.struts2.convention.route.Action;
 
@@ -50,13 +49,11 @@ public class PermissionAction extends SecurityActionSupport {
 
   private CacheableAuthorityManager authorityManager;
 
-  private MenuService menuService;
-
   /**
    * 根据菜单配置来分配权限
    */
   public String edit() {
-    Integer roleId = getId("role",Integer.class);
+    Integer roleId = getId("role", Integer.class);
     Role role = entityDao.get(Role.class, roleId);
     User user = entityDao.get(User.class, getUserId());
     put("manager", user);
@@ -69,10 +66,10 @@ public class PermissionAction extends SecurityActionSupport {
       }
     }
     put("mngRoles", mngRoles);
-    List<MenuProfile> menuProfiles = menuService.getProfiles(role);
+    List<MenuProfile> menuProfiles = securityHelper.getMenuService().getProfiles(role);
     put("menuProfiles", menuProfiles);
 
-    MenuProfile menuProfile = menuService.getProfile(role, getLong("menuProfileId"));
+    MenuProfile menuProfile = securityHelper.getMenuService().getProfile(role, getLong("menuProfileId"));
     if (null == menuProfile && !menuProfiles.isEmpty()) {
       menuProfile = menuProfiles.get(0);
     }
@@ -90,7 +87,7 @@ public class PermissionAction extends SecurityActionSupport {
         Set<Menu> menuSet = CollectUtils.newHashSet();
         for (Member m : user.getMembers()) {
           if (!m.isGranter()) continue;
-          menuSet.addAll(menuService.getMenus(menuProfile, m.getRole(), true));
+          menuSet.addAll(securityHelper.getMenuService().getMenus(menuProfile, m.getRole(), true));
           params.put("roleId", m.getRole().getId());
           List<FuncResource> roleResources = entityDao.search(hql, params);
           resources.addAll(roleResources);
@@ -108,8 +105,8 @@ public class PermissionAction extends SecurityActionSupport {
         menus.removeAll(freezed);
       }
       Set<FuncResource> roleResources = CollectUtils.newHashSet();
-      List<FuncPermission> permissions = funcPermissionService.getPermissions(role);
-      Collection<Menu> roleMenus = menuService.getMenus(menuProfile, role, null);
+      List<FuncPermission> permissions = securityHelper.getFuncPermissionService().getPermissions(role);
+      Collection<Menu> roleMenus = securityHelper.getMenuService().getMenus(menuProfile, role, null);
       for (final FuncPermission permission : permissions) {
         roleResources.add(permission.getResource());
       }
@@ -121,8 +118,9 @@ public class PermissionAction extends SecurityActionSupport {
       Set<Menu> parentMenus = CollectUtils.newHashSet();
       Role parent = role.getParent();
       while (null != parent && !parents.contains(parent)) {
-        List<FuncPermission> parentPermissions = funcPermissionService.getPermissions(parent);
-        parentMenus.addAll(menuService.getMenus(menuProfile, parent, null));
+        List<FuncPermission> parentPermissions = securityHelper.getFuncPermissionService().getPermissions(
+            parent);
+        parentMenus.addAll(securityHelper.getMenuService().getMenus(menuProfile, parent, null));
         for (final FuncPermission permission : parentPermissions) {
           parentResources.add(permission.getResource());
         }
@@ -166,13 +164,14 @@ public class PermissionAction extends SecurityActionSupport {
     if (isAdmin()) {
       mngMenus = CollectUtils.newHashSet(menuProfile.getMenus());
     } else {
-      mngMenus = CollectUtils.newHashSet(menuService.getMenus(menuProfile, (User) manager));
+      mngMenus = CollectUtils.newHashSet(securityHelper.getMenuService().getMenus(menuProfile, manager,
+          manager.getProfiles()));
     }
     for (final Menu m : mngMenus) {
       mngResources.addAll(m.getResources());
     }
     newResources.retainAll(mngResources);
-    funcPermissionService.authorize(role, newResources);
+    securityHelper.getFuncPermissionService().authorize(role, newResources);
     authorityManager.refreshRolePermissions(new GrantedAuthorityBean(role.getId()));
 
     Action redirect = Action.to(this).method("edit");
@@ -185,10 +184,6 @@ public class PermissionAction extends SecurityActionSupport {
 
   public void setAuthorityManager(CacheableAuthorityManager authorityManager) {
     this.authorityManager = authorityManager;
-  }
-
-  public void setMenuService(MenuService menuService) {
-    this.menuService = menuService;
   }
 
 }

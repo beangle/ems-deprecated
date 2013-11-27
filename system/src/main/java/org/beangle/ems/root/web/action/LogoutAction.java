@@ -21,21 +21,18 @@ package org.beangle.ems.root.web.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.SessionMap;
-import org.beangle.security.web.auth.AuthenticationService;
-import org.beangle.struts2.action.ActionSupport;
+import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.struts2.annotation.Result;
 import org.beangle.struts2.annotation.Results;
 
 import com.opensymphony.xwork2.ActionContext;
 
 @Results({ @Result(name = "success", type = "redirectAction", location = "login") })
-public class LogoutAction extends ActionSupport {
-
-  private AuthenticationService authenticationService;
+public class LogoutAction extends SecurityActionSupport {
 
   public String index() {
     String result = determineTarget(getRequest());
-    boolean success = authenticationService.logout(getRequest(), getResponse());
+    boolean success = securityHelper.getAuthenticationService().logout(getRequest(), getResponse());
     if (!success) ((SessionMap<?, ?>) ActionContext.getContext().getSession()).clear();
     return result;
   }
@@ -45,10 +42,6 @@ public class LogoutAction extends ActionSupport {
     if (null == target) target = "success";
     else target = "redirect:" + target;
     return target;
-  }
-
-  public void setAuthenticationService(AuthenticationService authenticationService) {
-    this.authenticationService = authenticationService;
   }
 
 }

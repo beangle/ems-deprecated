@@ -37,12 +37,10 @@ import org.beangle.security.blueprint.nav.service.MenuService;
  */
 public class HomeAction extends SecurityActionSupport {
 
-  private MenuService menuService;
-
   public String index() {
     User user = entityDao.get(User.class, getUserId());
+    MenuService menuService = securityHelper.getMenuService();
     List<MenuProfile> profiles = menuService.getProfiles(user);
-
     if (profiles.isEmpty()) {
       put("menus", Collections.EMPTY_LIST);
     } else {
@@ -50,7 +48,7 @@ public class HomeAction extends SecurityActionSupport {
       MenuProfile profile = null;
       if (null != profileId) profile = menuService.getProfile(user, profileId);
       else profile = profiles.get(0);
-      put("menus", HierarchyEntityUtils.getRoots(menuService.getMenus(profile, user)));
+      put("menus", HierarchyEntityUtils.getRoots(menuService.getMenus(profile, user, getProfiles())));
       put("profile", profile);
     }
     put("menuProfiles", profiles);
@@ -68,15 +66,8 @@ public class HomeAction extends SecurityActionSupport {
     OqlBuilder<MenuProfile> query = OqlBuilder.from(MenuProfile.class, "mp");
     query.where("category.id=:categoryId", categoryId).cacheable();
     List<MenuProfile> mps = entityDao.search(query);
-    if (mps.isEmpty()) {
-      return null;
-    } else {
-      return mps.get(0);
-    }
-  }
-
-  public void setMenuService(MenuService menuService) {
-    this.menuService = menuService;
+    if (mps.isEmpty()) return null;
+    else return mps.get(0);
   }
 
 }
