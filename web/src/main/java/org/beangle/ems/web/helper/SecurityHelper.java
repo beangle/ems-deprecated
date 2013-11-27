@@ -28,6 +28,8 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class SecurityHelper {
 
+  private static final String ProfileIdSessionAttributeName = "security.profileId";
+
   private FuncPermissionService funcPermissionService;
 
   private DataPermissionService dataPermissionService;
@@ -44,9 +46,14 @@ public class SecurityHelper {
     return getProfiles(userService.get(getUserId()), getResource());
   }
 
+  public void setSessionProfile(Profile profile) {
+    ActionContext.getContext().getSession()
+        .put(ProfileIdSessionAttributeName, PropertyUtils.getProperty(profile, "id"));
+  }
+
   private List<Profile> getProfiles(User user, FuncResource resource) {
-    List<Profile> profiles = profileService.getProfiles(user, getResource());
-    Long profileId = (Long) ActionContext.getContext().getSession().get("security.profileId");
+    List<Profile> profiles = profileService.getProfiles(user, resource);
+    Object profileId = ActionContext.getContext().getSession().get(ProfileIdSessionAttributeName);
     if (null == profileId) return profiles;
     else {
       Profile sessionProfile = null;
