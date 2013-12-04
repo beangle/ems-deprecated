@@ -46,6 +46,12 @@ public class SecurityHelper {
     return getProfiles(userService.get(getUserId()), getResource());
   }
 
+  public Profile getSessionProfile() {
+    Object profileId = ActionContext.getContext().getSession().get(ProfileIdSessionAttributeName);
+    if (null == profileId) return null;
+    else return profileService.get((Long) profileId);
+  }
+
   public void setSessionProfile(Profile profile) {
     if (null == profile) {
       ActionContext.getContext().getSession().remove(ProfileIdSessionAttributeName);
