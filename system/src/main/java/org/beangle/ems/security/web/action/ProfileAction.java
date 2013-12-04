@@ -100,7 +100,7 @@ public class ProfileAction extends SecurityActionSupport {
     UserProfileBean profile = null;
     if (null == profileId) {
       profile = new UserProfileBean();
-      profile.setUser(entityDao.get(User.class, getUserId()));
+      profile.setUser(entityDao.get(User.class, getLong("user.id")));
     } else profile = entityDao.get(UserProfileBean.class, profileId);
     populate((Entity<?>) profile, getEntityName(), Params.sub("profile"));
     return profile;
