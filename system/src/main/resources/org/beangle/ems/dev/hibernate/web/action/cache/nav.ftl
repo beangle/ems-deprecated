@@ -1,7 +1,7 @@
 [#ftl]
 [@b.navmenu]
   [@b.navitem title="系统信息" href="!index"/]
-  [@b.navitem title="配置" href="!conf" /]
+  [#--[@b.navitem title="配置" href="!conf" /]--]
   [@b.navitem title="实体" href="!entity" /]
   [@b.navitem title="集合" href="!collection" /]
   [@b.navitem title="二级缓存" href="!cache" /]

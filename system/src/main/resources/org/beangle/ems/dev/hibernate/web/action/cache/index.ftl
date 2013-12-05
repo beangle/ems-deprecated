@@ -38,8 +38,8 @@
   [@b.a href="!index"]Reload[/@] |
   [@b.a href="!index?do=${active?string('deactivate','activate')}"]${active?string('Deactivate','Activate')}[/@] | [@b.a href="!index?do=clear"]CLEAR[/@]
   <p/>
-  Last update: ${lastUpdate?string("dd.MM.yy HH:mm:ss")}<br/>
-  Activation: ${(activation?string("dd.MM.yy HH:mm:ss"))!}<br/>
+  Last update: ${lastUpdate?string("MM-dd HH:mm:ss")}<br/>
+  Activation: ${(activation?string("MM-dd HH:mm:ss"))!}<br/>
   Deactivation: ${(deactivation?string("dd.MM.yy HH:mm:ss"))!}<br/>
   Active duration:[#if duration??] ${((duration/1000)?floor)!}s[/#if]
   <p/>

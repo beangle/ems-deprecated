@@ -35,4 +35,5 @@
     </tr>
     [/#list]
   </table>
+  <br/>
 [@b.foot/]
