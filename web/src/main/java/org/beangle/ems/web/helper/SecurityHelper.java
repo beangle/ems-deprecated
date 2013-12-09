@@ -111,6 +111,9 @@ public class SecurityHelper {
 
   public void applyPermission(OqlBuilder<?> query) {
     User user = userService.get(getUserId());
+
+    if (userService.isRoot(user)) return;
+
     DataPermission dp = dataPermissionService.getPermission(user, query.getEntityClass().getName(),
         SecurityUtils.getResource());
     if (null == dp) return;
