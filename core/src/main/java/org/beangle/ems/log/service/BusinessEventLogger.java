@@ -50,8 +50,7 @@ public class BusinessEventLogger extends BaseServiceImpl implements EventListene
     if (null != agent) {
       log.setIp((String) getProperty(agent, "ip"));
       log.setAgent(getProperty(agent, "os") + " " + getProperty(agent, "browser"));
-      String lastAccessUri = (String) getProperty(agent, "lastAccessUri");
-      log.setEntry(Strings.defaultIfBlank(lastAccessUri, "--"));
+      log.setEntry(Strings.defaultIfBlank((String) getProperty(details, "lastAccessUri"), "--"));
     }
     if (null != event.getDetail()) {
       log.setDetail(new BusinessLogDetailBean(log, event.getDetail()));

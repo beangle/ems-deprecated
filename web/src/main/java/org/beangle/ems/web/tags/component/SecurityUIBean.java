@@ -20,7 +20,6 @@ package org.beangle.ems.web.tags.component;
 
 import java.io.Writer;
 
-import org.beangle.commons.web.url.UrlRender;
 import org.beangle.security.access.AuthorityManager;
 import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.core.context.SecurityContextHolder;
@@ -38,8 +37,6 @@ public abstract class SecurityUIBean extends UIBean {
 
   private AuthorityManager authorityManager;
 
-  private static UrlRender render = new UrlRender(null);
-
   public SecurityUIBean(ValueStack stack, AuthorityManager authorityManager) {
     super(stack);
     this.authorityManager = authorityManager;
@@ -53,7 +50,10 @@ public abstract class SecurityUIBean extends UIBean {
     if (null == res) { return false; }
     int queryIndex = res.indexOf('?');
     if (-1 != queryIndex) res = res.substring(0, queryIndex);
-    if ('/' != res.charAt(0)) res = render.render(SecurityUtils.getResource(), res);
+    if ('/' != res.charAt(0)) {
+      String refer = SecurityUtils.getResource();
+      res = refer.substring(0, refer.lastIndexOf("/")) + "/" + res;
+    }
     return authorityManager.isAuthorized(SecurityContextHolder.getContext().getAuthentication(), res);
   }
 
