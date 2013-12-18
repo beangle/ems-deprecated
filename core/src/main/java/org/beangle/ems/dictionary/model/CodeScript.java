@@ -52,7 +52,7 @@ public class CodeScript extends NumberIdTimeObject<Integer> {
 
   /** 编码脚本 */
   @NotNull
-  @Size(max = 500)
+  @Size(max = 1000)
   private String script;
 
   /** 编码简要描述 */
