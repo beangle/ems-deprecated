@@ -21,10 +21,10 @@
       <td><input id="password" name="password"  tabindex="2" type="password" style="width:300px;"/>
       <input name="encodedPassword" type="hidden" value=""/></td>
     </tr>
-    [#if needCaptcha && recapchaConfig??]
+    [#if needCaptcha && captchaProvider??]
     <tr>
       <td><label for="captcha"><strong>验证码:</strong></label></td>
-      <td>[@b.recaptcha publickey=recapchaConfig.publickey theming="onlyimage"/]</td>
+      <td>[@captcha.recaptcha theming="onlyimage" provider=captchaProvider/]</td>
     </tr>
     [/#if]
     <tr>

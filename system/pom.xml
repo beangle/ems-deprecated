@@ -24,6 +24,10 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.beangle.struts2</groupId>
+      <artifactId>beangle-struts2-captcha</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.jgeppert.struts2.jquery</groupId>
       <artifactId>struts2-jquery-plugin</artifactId>
       <version>${jqueryplugin.version}</version>

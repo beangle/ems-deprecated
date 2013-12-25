@@ -33,8 +33,18 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <library.version>3.4.4</library.version>
+    <library.version>3.4.5-SNAPSHOT</library.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.beangle.struts2</groupId>
+        <artifactId>beangle-struts2-captcha</artifactId>
+        <version>${library.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>

@@ -20,12 +20,14 @@ package org.beangle.ems.wiki;
 
 import org.beangle.commons.inject.bind.AbstractBindModule;
 import org.beangle.ems.wiki.web.action.IndexAction;
+import org.beangle.struts2.captcha.service.impl.RecaptchaProvider;
 
 public class DefaultModule extends AbstractBindModule {
 
   @Override
   protected void doBinding() {
     bind(IndexAction.class);
+    bind("recaptchaProvider",RecaptchaProvider.class);
   }
 
 }

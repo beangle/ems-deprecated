@@ -19,20 +19,19 @@
 package org.beangle.ems.root.web.action;
 
 import org.beangle.commons.lang.Strings;
-import org.beangle.ems.root.web.helper.RecapchaConfig;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.Securities;
 import org.beangle.security.auth.UsernamePasswordAuthentication;
 import org.beangle.security.core.AuthenticationException;
 import org.beangle.struts2.annotation.Result;
 import org.beangle.struts2.annotation.Results;
-import org.beangle.struts2.view.util.RecaptchaUtils;
+import org.beangle.struts2.captcha.service.CaptchaProvider;
 
 @Results({ @Result(name = "home", type = "redirectAction", location = "home"),
     @Result(name = "failure", type = "freemarker", location = "/login.ftl") })
 public class LoginAction extends SecurityActionSupport {
 
-  private RecapchaConfig recapchaConfig;
+  private CaptchaProvider captchaProvider;
 
   public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
 
@@ -49,15 +48,17 @@ public class LoginAction extends SecurityActionSupport {
     return "home";
   }
 
+  /**
+   * @return true if all other checker is pass.
+   */
   protected boolean shouldLogin() {
     String username = get("username");
     String password = get("password");
     if (Strings.isBlank(username) || Strings.isBlank(password)) { return false; }
     if (notFailEnough()) { return true; }
 
-    if (null != recapchaConfig && null != recapchaConfig.getPrivatekey()) {
-      boolean valid = RecaptchaUtils.isValid(getRemoteAddr(), recapchaConfig.getPrivatekey(),
-          get("recaptcha_challenge_field"), get("recaptcha_response_field"));
+    if (null != captchaProvider) {
+      boolean valid = captchaProvider.verify(getRequest());
       if (!valid) addError("security.WrongCaptcha");
       return valid;
     } else {
@@ -97,12 +98,12 @@ public class LoginAction extends SecurityActionSupport {
     getSession().remove(LOGIN_FAILURE_COUNT);
   }
 
-  public void setRecapchaConfig(RecapchaConfig recapchaConfig) {
-    this.recapchaConfig = recapchaConfig;
+  public CaptchaProvider getCaptchaProvider() {
+    return captchaProvider;
   }
 
-  public RecapchaConfig getRecapchaConfig() {
-    return recapchaConfig;
+  public void setCaptchaProvider(CaptchaProvider captchaProvider) {
+    this.captchaProvider = captchaProvider;
   }
 
 }

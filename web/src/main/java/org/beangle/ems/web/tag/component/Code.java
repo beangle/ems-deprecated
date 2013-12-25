@@ -16,38 +16,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.beangle.ems.web.tags.component;
+package org.beangle.ems.web.tag.component;
 
-import java.io.Writer;
-
-import org.beangle.security.access.AuthorityManager;
+import org.beangle.struts2.view.component.Select;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
-/**
- * 对资源和内置区域进行守护
- * 
- * @author chaostone
- */
-public class Guard extends SecurityUIBean {
+public class Code extends Select {
 
-  private String res;
+  private String type;
 
-  public Guard(ValueStack stack, AuthorityManager authorityManager) {
-    super(stack, authorityManager);
+  private String format;
+
+  public Code(ValueStack stack) {
+    super(stack);
   }
 
-  public boolean end(Writer writer, String body) {
-    return end(writer, body, true);
+  public String getType() {
+    return type;
   }
 
-  @Override
-  protected String getResource() {
-    return res;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public void setRes(String res) {
-    this.res = res;
+  public String getFormat() {
+    return format;
+  }
+
+  public void setFormat(String format) {
+    this.format = format;
   }
 
 }

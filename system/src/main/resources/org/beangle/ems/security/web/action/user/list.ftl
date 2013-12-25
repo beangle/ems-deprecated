@@ -18,7 +18,7 @@
     [@b.col title="user.members" width="20%"][#list user.members as m][#if m.member]${m.role.name} [/#if][/#list][/@]
     [@b.col property="mail" width="20%"/]
     [@b.col property="creator.name" width="10%"/]
-    [@b.col property="effectiveAt" width="12%"]${user.effectiveAt?string("yyyy-MM")}~${(user.invalidOn?string("yyyy-MM"))!}[/@]
+    [@b.col property="effectiveAt" width="12%"]${user.effectiveAt?string("yyyy-MM")}~${(user.invalidAt?string("yyyy-MM"))!}[/@]
     [@b.col property="enabled" width="8%"][@enableInfo user.enabled/][/@]
   [/@]
 [/@]

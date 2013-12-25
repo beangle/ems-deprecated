@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Beangle.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.beangle.ems.web.tags;
+package org.beangle.ems.web.tag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.beangle.ems.web.tags.component.AvatarImage;
-import org.beangle.ems.web.tags.component.Code;
-import org.beangle.ems.web.tags.component.Guard;
-import org.beangle.ems.web.tags.component.Userinfo;
+import org.beangle.ems.web.tag.component.AvatarImage;
+import org.beangle.ems.web.tag.component.Code;
+import org.beangle.ems.web.tag.component.Guard;
+import org.beangle.ems.web.tag.component.Userinfo;
 import org.beangle.security.access.AuthorityManager;
 import org.beangle.struts2.view.component.Component;
 import org.beangle.struts2.view.tag.AbstractModels;
