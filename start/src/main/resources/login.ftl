@@ -11,7 +11,7 @@
     <tr><td colspan="3">[@b.messages/]</td></tr>
     <tr>
       <td><label for="username"><strong>用户名:</strong></label></td>
-      <td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" value="${(Parameters['username']!)?html}" style="width:300px;"/></td>
+      <td><input name="username" id="username" tabindex="1" title="请输入用户名" type="text" autofocus="autofocus" value="${(Parameters['username']!)?html}" style="width:300px;"/></td>
       <td rowspan="3" valign="top">
       [@b.submit name="submitBtn" tabindex="6" style="height:35pt;width:38pt;" value="登录" onsubmit="checkLogin"][/@]
       </td>
@@ -24,7 +24,7 @@
     [#if needCaptcha && captchaProvider??]
     <tr>
       <td><label for="captcha"><strong>验证码:</strong></label></td>
-      <td>[@captcha.recaptcha theming="onlyimage" provider=captchaProvider/]</td>
+      <td>[@captcha.recaptcha theming="onlyimage" provider=captchaProvider /]</td>
     </tr>
     [/#if]
     <tr>
@@ -52,7 +52,7 @@
       alert("密码不能为空");return false;
     }
     [#if needCaptcha]
-    if(!form['recaptcha_response_field'].value){
+    if(!form['captcha_response'].value){
       alert("验证码不能为空");return false;
     }
     [/#if]

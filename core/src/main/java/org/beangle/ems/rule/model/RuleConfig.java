@@ -27,6 +27,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.pojo.NumberIdTimeObject;
@@ -43,6 +44,10 @@ public class RuleConfig extends NumberIdTimeObject<Integer> {
 
   private static final long serialVersionUID = -5404097831423072886L;
 
+  /**规则配置名称*/
+  @Size(max=150)
+  private String name;
+  
   /** 业务规则 */
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
@@ -79,4 +84,5 @@ public class RuleConfig extends NumberIdTimeObject<Integer> {
   public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
+  
 }

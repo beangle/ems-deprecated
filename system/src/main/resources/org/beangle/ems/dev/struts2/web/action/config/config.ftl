@@ -22,7 +22,7 @@
         <td>${r.name}</td>
         <td>${r.className}</td>
         <td>
-        [#list r.params.keySet() as p]
+        [#list r.params?keys as p]
           ${p} = ${r.params[p]}<br>
         [/#list]
         </td>

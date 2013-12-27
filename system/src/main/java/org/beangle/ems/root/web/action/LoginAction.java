@@ -58,7 +58,7 @@ public class LoginAction extends SecurityActionSupport {
     if (notFailEnough()) { return true; }
 
     if (null != captchaProvider) {
-      boolean valid = captchaProvider.verify(getRequest());
+      boolean valid = captchaProvider.verify(getRequest(),get("captcha_response"));
       if (!valid) addError("security.WrongCaptcha");
       return valid;
     } else {
