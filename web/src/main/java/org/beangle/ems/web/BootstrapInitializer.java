@@ -6,6 +6,7 @@ import java.util.EnumSet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
 import org.beangle.commons.web.filter.CharacterEncodingFilter;
 import org.beangle.commons.web.filter.DelegatingFilterProxy;
@@ -14,6 +15,7 @@ import org.beangle.commons.web.resource.StaticResourceServlet;
 import org.beangle.commons.web.session.HttpSessionEventPublisher;
 import org.beangle.inject.spring.web.ContextListener;
 import org.beangle.orm.hibernate.OpenSessionInViewFilter;
+import org.beangle.struts2.convention.config.PropertyConstantProvider;
 import org.beangle.struts2.dispatcher.ActionServlet;
 
 public class BootstrapInitializer implements StartupInitializer {
@@ -42,11 +44,12 @@ public class BootstrapInitializer implements StartupInitializer {
     }
 
     if (null == sc.getServletRegistration("Action")) {
-      sc.addServlet("action", new ActionServlet()).addMapping("*.action");
+      ServletRegistration sr = sc.addServlet("action", new ActionServlet());
+      sr.addMapping("*.action");
+      sr.setInitParameter("configProviders", PropertyConstantProvider.class.getName());
     }
     if (null == sc.getServletRegistration("staticResource")) {
       sc.addServlet("staticResource", new StaticResourceServlet()).addMapping("/static/*");
     }
   }
-
 }
