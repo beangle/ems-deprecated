@@ -84,5 +84,13 @@ public class RuleConfig extends NumberIdTimeObject<Integer> {
   public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
   
 }
