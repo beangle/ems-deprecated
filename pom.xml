@@ -28,7 +28,6 @@
     <module>web</module>
     <module>system</module>
     <module>database</module>
-    <module>start</module>
   </modules>
 
   <properties>
