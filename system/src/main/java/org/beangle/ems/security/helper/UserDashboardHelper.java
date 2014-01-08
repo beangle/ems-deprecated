@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.beangle.commons.collection.CollectUtils;
+import org.beangle.commons.collection.page.Page;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.User;
@@ -32,6 +33,7 @@ import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
 import org.beangle.security.blueprint.service.ProfileService;
+import org.beangle.security.blueprint.session.model.SessioninfoLogBean;
 import org.beangle.security.blueprint.session.service.SessioninfoLogService;
 import org.beangle.security.core.session.SessionRegistry;
 import org.beangle.struts2.helper.ContextHelper;
@@ -68,7 +70,9 @@ public class UserDashboardHelper {
   }
 
   private void populateSessioninfoLogs(User user) {
-    ContextHelper.put("sessioninfoLogs", sessioninfoLogService.getLoggers(user.getName(), 5));
+    List<SessioninfoLogBean> page = sessioninfoLogService.getLoggers(user.getName(), 5);
+    if (page instanceof Page) page = ((Page<SessioninfoLogBean>) page).getItems();
+    ContextHelper.put("sessioninfoLogs", page);
   }
 
   private void populateMenus(User user) {

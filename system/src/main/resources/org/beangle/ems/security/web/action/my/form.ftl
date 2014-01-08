@@ -18,7 +18,7 @@ function validateMyAccount(form){
   if(form['password'].value!=form['repeatedPassword'].value){alert("新密码与重复输入的不相同");return false;}
   else{
     form['password'].value=hex_md5(form['password'].value);
-    form['password'].value=form['password'].value;
+    form['repeatedPassword'].value=form['password'].value;
     return true;
   }
   return false;
