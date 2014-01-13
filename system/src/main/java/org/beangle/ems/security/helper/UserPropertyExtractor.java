@@ -41,11 +41,7 @@ public class UserPropertyExtractor extends DefaultPropertyExtractor {
       if (enabled) return getText("action.activate");
       else return getText("action.freeze");
     }
-    if ("members".equals(property)) {
-      return getPropertyIn(user.getMembers(), "role.name");
-    } else {
-      return super.getPropertyValue(target, property);
-    }
+    return super.getPropertyValue(target, property);
   }
 
   public static final StringBuilder getUserNames(Collection<User> users) {

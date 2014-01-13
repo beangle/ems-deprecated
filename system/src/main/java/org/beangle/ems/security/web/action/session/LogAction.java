@@ -30,7 +30,6 @@ import org.beangle.commons.bean.comparators.PropertyComparator;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.session.model.SessioninfoLogBean;
 
 /**
@@ -58,20 +57,20 @@ public class LogAction extends SecurityActionSupport {
     String etime = get("endTime");
     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date sdate = null, edate = null;
-    if (Strings.isNotBlank(stime)) {
-      try {
+    try {
+      if (Strings.isNotBlank(stime)) {
         sdate = df.parse(stime);
-        // 截至日期增加一秒
-        if (Strings.isNotBlank(etime)) {
-          edate = df.parse(etime);
-          Calendar gc = new GregorianCalendar();
-          gc.setTime(edate);
-          gc.roll(Calendar.SECOND, 1);
-          edate = gc.getTime();
-        }
-      } catch (ParseException e) {
-        throw new RuntimeException(e);
       }
+      if (Strings.isNotBlank(etime)) {
+        // 截至日期增加一秒
+        edate = df.parse(etime);
+        Calendar gc = new GregorianCalendar();
+        gc.setTime(edate);
+        gc.roll(Calendar.SECOND, 1);
+        edate = gc.getTime();
+      }
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
     }
     if (null != sdate && null == edate) {
       query.where("sessioninfoLog.loginAt >=:sdate", sdate);
@@ -98,11 +97,6 @@ public class LogAction extends SecurityActionSupport {
   private void addConditions(OqlBuilder<SessioninfoLogBean> query) {
     populateConditions(query);
     addTimeCondition(query);
-    String roleName = get("roleName");
-    if (Strings.isNotEmpty(roleName)) {
-      query.where("exists(select u.id from " + User.class.getName() + " u join u.roles as gm "
-          + "where u.name=sessioninfoLog.username and gm.role.name like :roleName )", "%" + roleName + "%");
-    }
   }
 
   /**

@@ -19,7 +19,7 @@
    <tr>
     <td>
     [@b.form name="uploadForm" action="!upload" enctype="multipart/form-data"]
-      [@s.file name="avatar" label="文件目录" theme="simple"/]
+      [@s.file name="avatar" label="文件目录" theme="simple" accept="image/*"/]
       [@b.submit value="提交"/]
     [/@]
    </td>

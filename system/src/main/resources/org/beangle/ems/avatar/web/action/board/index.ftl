@@ -14,7 +14,7 @@
      <tr>
        <td align="right">打包上传</td><td>
       [@b.form action="!uploadBatch" enctype="multipart/form-data"]
-        <input type="file" id="avatar" value="" name="avatar">
+        <input type="file" id="avatar" value="" name="avatar" accept="application/zip">
         [@b.submit value="提交" /]
       [/@]
       </td>

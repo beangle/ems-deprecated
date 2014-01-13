@@ -14,7 +14,7 @@ import org.beangle.commons.web.init.StartupInitializer;
 import org.beangle.commons.web.resource.StaticResourceServlet;
 import org.beangle.commons.web.session.HttpSessionEventPublisher;
 import org.beangle.inject.spring.web.ContextListener;
-import org.beangle.orm.hibernate.OpenSessionInViewFilter;
+import org.beangle.orm.hibernate.web.OpenSessionInViewFilter;
 import org.beangle.struts2.convention.config.PropertyConstantProvider;
 import org.beangle.struts2.dispatcher.ActionServlet;
 

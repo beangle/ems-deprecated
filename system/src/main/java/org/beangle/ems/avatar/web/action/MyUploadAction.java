@@ -46,14 +46,14 @@ public class MyUploadAction extends SecurityActionSupport {
     Object[] files = getAll("avatar");
     if (null == files || files.length == 0) return redirect(new Action(MyAction.class, "info"),
         "error.nofile");
+    String type = Strings.substringAfter(get("avatarFileName"), ".");
 
-    if (files.length > 0) {
-      String type = Strings.substringAfter(get("avatarFileName"), ".");
-      if (null != type) {
-        if (avatarBase.containType(type)) avatarBase.updateAvatar(getUsername(), (File) files[0], type);
-      }
+    if (files.length > 0 && null != type && avatarBase.containType(type)) {
+      avatarBase.updateAvatar(getUsername(), (File) files[0], type);
+      return redirect(new Action(MyAction.class, "info"), "info.upload.success");
+    } else {
+      return redirect(new Action(MyAction.class, "info"), "info.save.failure");
     }
-    return redirect(new Action(MyAction.class, "info"), "info.upload.success");
   }
 
   public void setAvatarBase(AvatarBase avatarBase) {

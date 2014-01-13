@@ -32,7 +32,7 @@
 
   <properties>
     <commonupload.version>1.2.2</commonupload.version>
-    <library.version>3.4.7</library.version>
+    <library.version>3.4.8</library.version>
   </properties>
 
   <dependencyManagement>
