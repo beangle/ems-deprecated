@@ -6,8 +6,8 @@
 [#assign labInfo][#if user.id??]${b.text("action.modify")}[#else]${b.text("action.new")}[/#if] ${b.text("entity.user")}[/#assign]
 [@b.toolbar title=labInfo]bar.addBack("${b.text("action.back")}");[/@]
 [@b.messages/]
-[@b.tabs]
-[@b.form name="userForm" action="!save" class="listform" theme="list"]
+[@b.tabs id="userinfotabs"]
+[@b.form name="userForm" action="!save" class="listform" theme="list" onsubmit="validateMembers()"]
   <input type="hidden" name="user.id" value="${user.id!}" />
   [@b.tab label="ui.userInfo"]
     [@b.textfield name="user.name" value="${user.name!}" style="width:200px;" required="true" maxlength="30"/]
@@ -36,7 +36,7 @@
         [/@]
         [@b.col title="member.member" width="10%"]
           [#assign displayMember=role.enabled]
-          <input type="checkbox" [#if !displayMember]style="display:none"[/#if] name="member${role.id}" onchange="changeMember(${role.id},this)" ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
+          <input type="checkbox" class="security_member" [#if !displayMember]style="display:none"[/#if] name="member${role.id}" onchange="changeMember(${role.id},this)" ${(memberMap.get(role).member)?default(false)?string('checked="checked"','')}/>
           [#if !displayMember && (memberMap.get(role).member)!false]&radic;[/#if]
         [/@]
         [@b.col title="member.granter" width="10%"]
@@ -71,12 +71,18 @@
     if(typeof form['member'+roleId]!="undefined"){
       form['member'+roleId].checked=newStatus;
     }
-    /*if(typeof form['granter'+roleId]!="undefined"){
-      if(!form['granter'+roleId].disabled) form['granter'+roleId].checked=newStatus;
+  }
+  function validateMembers(){
+    var memberselected=false;
+    jQuery('.security_member').each(
+      function(index,t){
+        if(t.checked) memberselected=true;
+      }
+    );
+    if(!memberselected){
+      jQuery('#userinfotabs > ul > li:nth-child(2)').removeClass('ui-state-default').addClass('ui-state-error').css('font-weight', '400');
     }
-    if(typeof form['manager'+roleId]!="undefined"){
-      if(!form['manager'+roleId].disabled) form['manager'+roleId].checked=newStatus;
-    }*/
+    return memberselected;
   }
 </script>
 [@b.foot/]
