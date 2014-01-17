@@ -65,19 +65,18 @@ public class BoardAction extends SecurityActionSupport {
   }
 
   public String upload() throws Exception {
-    File[] files = (File[]) getAll("avatar");
     String userName = get("user.name");
-    if (files.length > 0) {
-      String type = Strings.substringAfter(get("avatarFileName"), ".");
-      boolean passed = avatarBase.containType(type);
-      if (passed) {
-        avatarBase.updateAvatar(userName, files[0], type);
-      } else {
-        addError("不支持的文件类型");
-        return forward("info");
-      }
+    Object[] files = getAll("avatar");
+    if (null == files || files.length == 0) return redirect("info", "error.nofile", "&user.name=" + userName);
+
+    String type = Strings.substringAfter(get("avatarFileName"), ".");
+    if (files.length > 0 && null != type && avatarBase.containType(type)) {
+      avatarBase.updateAvatar(userName, (File) files[0], type);
+      return redirect(new Action(UserAction.class, "info", "&user.name=" + userName), "info.save.success");
+    } else {
+      addError("不支持的文件类型");
+      return forward("info");
     }
-    return redirect(new Action(UserAction.class, "info", "&user.name=" + userName), "info.save.success");
   }
 
   public String uploadBatch() throws Exception {
