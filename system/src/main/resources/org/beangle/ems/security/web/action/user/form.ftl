@@ -7,7 +7,7 @@
 [@b.toolbar title=labInfo]bar.addBack("${b.text("action.back")}");[/@]
 [@b.messages/]
 [@b.tabs id="userinfotabs"]
-[@b.form name="userForm" action="!save" class="listform" theme="list" onsubmit="validateMembers()"]
+[@b.form name="userForm" action="!save" class="listform" theme="list" onsubmit="return validateMembers()"]
   <input type="hidden" name="user.id" value="${user.id!}" />
   [@b.tab label="ui.userInfo"]
     [@b.textfield name="user.name" value="${user.name!}" style="width:200px;" required="true" maxlength="30"/]
@@ -80,7 +80,9 @@
       }
     );
     if(!memberselected){
-      jQuery('#userinfotabs > ul > li:nth-child(2)').removeClass('ui-state-default').addClass('ui-state-error').css('font-weight', '400');
+      jQuery('#userinfotabs > ul > li:nth-child(2)').removeClass('ui-state-default').addClass('ui-state-error');
+    }else{
+      jQuery('#userinfotabs > ul > li:nth-child(2)').removeClass('ui-state-error').addClass('ui-state-default');
     }
     return memberselected;
   }
