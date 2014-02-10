@@ -32,7 +32,7 @@
       [#list nameList as name]
       <td style="padding:5px" align="center">
         <img src="${b.url('user')}?user.name=${name}" title="${name}" alt="${name}" width="120px" align="top"/><br/>
-        <a href="${b.url('board!info')}?user.name=${name}" title="点击查看照片详情">${name}</a>
+        <a href="${b.url('board!info')}?user.name=${name}" target="_blank" title="点击查看照片详情">${name}</a>
       </td>
       [/#list]
      </tr>
