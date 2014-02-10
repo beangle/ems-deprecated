@@ -16,7 +16,7 @@
   <hr>
   <table width="100%" style="font-size:13px">
     <tr>
-      <td>名称:</td><td>${os.name}</td><td>版本:</td><td>${os.version}</td>
+      <td width="10%">名称:</td><td>${os.name}</td><td width="10%">版本:</td><td>${os.version}</td>
     </tr>
     <tr>
       <td>体系结构:</td><td>${os.arch}</td><td>文件分割符:</td><td>${os.fileSeparator}</td>
