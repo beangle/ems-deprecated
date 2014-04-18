@@ -9,7 +9,7 @@
   <artifactId>beangle-ems-parent</artifactId>
   <packaging>pom</packaging>
   <name>Beangle Ems Parent</name>
-  <version>3.4.x</version>
+  <version>3.4.14</version>
 
   <issueManagement>
     <system>github</system>
