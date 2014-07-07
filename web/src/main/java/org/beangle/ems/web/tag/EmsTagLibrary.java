@@ -37,7 +37,7 @@ public class EmsTagLibrary extends AbstractTagLibrary {
 
   AuthorityManager authorityManager;
 
-  public Object getFreemarkerModels(ValueStack stack, HttpServletRequest req, HttpServletResponse res) {
+  public Object getModels(ValueStack stack, HttpServletRequest req, HttpServletResponse res) {
     if (null == authorityManager) {
       Container container = (Container) stack.getContext().get(ActionContext.CONTAINER);
       ObjectFactory objectFactory = container.getInstance(ObjectFactory.class);

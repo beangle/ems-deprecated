@@ -59,8 +59,11 @@ public class RoleAction extends SecurityActionSupport {
   public String edit() {
     Role role = (Role) getEntity();
     if (role.isPersisted()) {
-      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) { return redirect("search",
-          "不能修改该组,你没有" + role.getParent().getName() + "的管理权限"); }
+      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) {
+        if (null != role.getParent()) return redirect("search", "不能修改该组,你没有" + role.getParent().getName()
+            + "的管理权限");
+        else return redirect("search", "不能修改该组,你没有Root的管理权限");
+      }
     }
     put("role", role);
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");

@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.beangle.ems</groupId>
     <artifactId>beangle-ems-parent</artifactId>
-    <version>3.4.14</version>
+    <version>3.4.15-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.beangle.ems</groupId>
@@ -14,7 +14,7 @@
     <bundle.symbolicName>org.beangle.ems.system</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems</bundle.namespace>
     <commonscompress.version>1.4</commonscompress.version>
-    <jqueryplugin.version>3.6.1</jqueryplugin.version>
+    <jqueryplugin.version>3.7.1</jqueryplugin.version>
   </properties>
 
   <dependencies>
