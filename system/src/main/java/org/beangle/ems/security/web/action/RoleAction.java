@@ -59,8 +59,8 @@ public class RoleAction extends SecurityActionSupport {
   public String edit() {
     Role role = (Role) getEntity();
     if (role.isPersisted()) {
-      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) { return redirect("search",
-          "不能修改该组,你没有" + role.getParent().getName() + "的管理权限"); }
+      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()),
+          role)) { return redirect("search", "不能修改该组,你没有" + role.getParent().getName() + "的管理权限"); }
     }
     put("role", role);
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");
@@ -101,16 +101,15 @@ public class RoleAction extends SecurityActionSupport {
 
   protected String saveAndForward(Entity<?> entity) {
     RoleBean role = (RoleBean) entity;
-    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName())) return redirect("edit",
-        "error.notUnique");
+    if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName()))
+      return redirect("edit", "error.notUnique");
     if (!role.isPersisted()) {
       User creator = securityHelper.getUserService().get(getUserId());
       role.setIndexno("tmp");
-      role.setOwner(creator);
+      role.setCreator(creator);
       roleService.createRole(creator, role);
     } else {
       role.setUpdatedAt(new Date(System.currentTimeMillis()));
-      if (!role.isPersisted()) role.setCreatedAt(new Date(System.currentTimeMillis()));
       entityDao.saveOrUpdate(role);
     }
     Integer newParentId = getInt("parent.id");

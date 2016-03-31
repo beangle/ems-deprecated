@@ -17,7 +17,6 @@
   </tr>
   <tr>
   [@info 'mail' /]
-  [@info 'createdAt','common.createdAt' /]
   </tr>
   <tr>
   [@info 'enabled'][#if user.enabled] ${b.text("action.activate")}[#else]${b.text("action.freeze")}[/#if][/@]

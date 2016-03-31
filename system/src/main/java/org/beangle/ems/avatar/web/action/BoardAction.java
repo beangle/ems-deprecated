@@ -55,7 +55,7 @@ public class BoardAction extends SecurityActionSupport {
     List<User> users = entityDao.get(User.class, "name", userName);
     if (!users.isEmpty()) {
       User user = users.get(0);
-      put("user", Strings.concat(userName, "(", user.getFullname(), ")"));
+      put("user", Strings.concat(userName, "(", user.getName(), ")"));
     } else {
       put("user", userName);
     }

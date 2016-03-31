@@ -28,9 +28,9 @@ import org.beangle.commons.bean.comparators.PropertyComparator;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.RoleMember;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.function.FuncPermission;
 import org.beangle.security.blueprint.function.FuncResource;
@@ -61,7 +61,7 @@ public class PermissionAction extends SecurityActionSupport {
     if (isAdmin()) {
       mngRoles = entityDao.getAll(Role.class);
     } else {
-      for (Member m : user.getMembers()) {
+      for (RoleMember m : user.getMembers()) {
         if (m.isGranter()) mngRoles.add(m.getRole());
       }
     }
@@ -85,7 +85,7 @@ public class PermissionAction extends SecurityActionSupport {
         String hql = "select distinct fp.resource from " + FuncPermission.class.getName()
             + " fp where fp.role.id = :roleId";
         Set<Menu> menuSet = CollectUtils.newHashSet();
-        for (Member m : user.getMembers()) {
+        for (RoleMember m : user.getMembers()) {
           if (!m.isGranter()) continue;
           menuSet.addAll(securityHelper.getMenuService().getMenus(menuProfile, m.getRole(), true));
           params.put("roleId", m.getRole().getId());
@@ -118,8 +118,8 @@ public class PermissionAction extends SecurityActionSupport {
       Set<Menu> parentMenus = CollectUtils.newHashSet();
       Role parent = role.getParent();
       while (null != parent && !parents.contains(parent)) {
-        List<FuncPermission> parentPermissions = securityHelper.getFuncPermissionService().getPermissions(
-            parent);
+        List<FuncPermission> parentPermissions = securityHelper.getFuncPermissionService()
+            .getPermissions(parent);
         parentMenus.addAll(securityHelper.getMenuService().getMenus(menuProfile, parent, null));
         for (final FuncPermission permission : parentPermissions) {
           parentResources.add(permission.getResource());
@@ -154,8 +154,8 @@ public class PermissionAction extends SecurityActionSupport {
   public String save() {
     Role role = entityDao.get(Role.class, getInt("role.id"));
     MenuProfile menuProfile = (MenuProfile) entityDao.get(MenuProfile.class, getInt("menuProfileId"));
-    Set<FuncResource> newResources = CollectUtils.newHashSet(entityDao.get(FuncResource.class,
-        Strings.splitToInt(get("resourceId"))));
+    Set<FuncResource> newResources = CollectUtils
+        .newHashSet(entityDao.get(FuncResource.class, Strings.splitToInt(get("resourceId"))));
 
     // 管理员拥有的菜单权限和系统资源
     User manager = entityDao.get(User.class, getUserId());
@@ -164,8 +164,8 @@ public class PermissionAction extends SecurityActionSupport {
     if (isAdmin()) {
       mngMenus = CollectUtils.newHashSet(menuProfile.getMenus());
     } else {
-      mngMenus = CollectUtils.newHashSet(securityHelper.getMenuService().getMenus(menuProfile, manager,
-          manager.getProfiles()));
+      mngMenus = CollectUtils
+          .newHashSet(securityHelper.getMenuService().getMenus(menuProfile, manager, manager.getProfiles()));
     }
     for (final Menu m : mngMenus) {
       mngResources.addAll(m.getResources());

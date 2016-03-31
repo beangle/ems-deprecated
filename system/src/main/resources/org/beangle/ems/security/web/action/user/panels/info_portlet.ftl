@@ -14,8 +14,6 @@
      <tr>
      <td class="title" >&nbsp;${b.text("common.email")}:</td>
      <td class="content">${user.mail!} </td>
-     <td class="title" >&nbsp;${b.text("common.createdAt")}:</td>
-     <td class="content">${user.createdAt?string("yyyy-MM-dd")}</td>
      </tr>
      <tr>
      <td class="title" >&nbsp;${b.text("common.status")}:</td>

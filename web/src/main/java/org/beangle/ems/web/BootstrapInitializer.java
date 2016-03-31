@@ -52,9 +52,9 @@ public class BootstrapInitializer implements StartupInitializer {
       sc.addFilter("accessMonitorFilter", DelegatingFilterProxy.class).addMappingForUrlPatterns(
           EnumSet.of(REQUEST), true, "*.action");
     }
-    if (null == sc.getFilterRegistration("openSessionInViewFilter")) {
-      sc.addFilter("openSessionInViewFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(
-          EnumSet.of(REQUEST), true, "*.action");
+    if (null == sc.getFilterRegistration("OpenSessionInViewFilter")) {
+      sc.addFilter("OpenSessionInViewFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(
+          EnumSet.of(REQUEST), true, "*.action", "/dwr/*");
     }
     if (null == sc.getFilterRegistration("securityFilterChain")) {
       sc.addFilter("securityFilterChain", DelegatingFilterProxy.class).addMappingForUrlPatterns(
@@ -62,12 +62,12 @@ public class BootstrapInitializer implements StartupInitializer {
     }
 
     if (null == sc.getServletRegistration("Action")) {
-      ServletRegistration sr = sc.addServlet("action", new ActionServlet());
+      ServletRegistration sr = sc.addServlet("Action", new ActionServlet());
       sr.addMapping("*.action");
       sr.setInitParameter("configProviders", PropertyConstantProvider.class.getName());
     }
-    if (null == sc.getServletRegistration("staticResource")) {
-      sc.addServlet("staticResource", new StaticResourceServlet()).addMapping("/static/*");
+    if (null == sc.getServletRegistration("StaticResource")) {
+      sc.addServlet("StaticResource", new StaticResourceServlet()).addMapping("/static/*");
     }
   }
 }

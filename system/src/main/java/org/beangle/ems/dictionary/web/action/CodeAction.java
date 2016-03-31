@@ -26,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.beangle.commons.bean.PropertyUtils;
 import org.beangle.commons.dao.EntityDao;
-import org.beangle.commons.entity.pojo.BaseCode;
+import org.beangle.commons.entity.pojo.Code;
 import org.beangle.commons.lang.Strings;
 import org.beangle.ems.dictionary.model.CodeMeta;
-import org.beangle.ems.dictionary.service.BaseCodeService;
+import org.beangle.ems.dictionary.service.CodeService;
 import org.beangle.struts2.action.ActionSupport;
 
 /**
@@ -40,7 +40,7 @@ import org.beangle.struts2.action.ActionSupport;
  */
 public class CodeAction extends ActionSupport {
 
-  private BaseCodeService baseCodeService;
+  private CodeService codeService;
   private EntityDao entityDao;
 
   public void setEntityDao(EntityDao entityDao) {
@@ -62,16 +62,16 @@ public class CodeAction extends ActionSupport {
           out = response.getWriter();
           @SuppressWarnings("rawtypes")
           Class baseCodeClass = Class.forName(it.next().getClassName());
-          if (BaseCode.class.isAssignableFrom(baseCodeClass)) {
+          if (Code.class.isAssignableFrom(baseCodeClass)) {
             @SuppressWarnings("unchecked")
-            List<? extends BaseCode<?>> baseCodes = baseCodeService.getCodes(baseCodeClass);
+            List<? extends Code<?>> baseCodes = codeService.getCodes(baseCodeClass);
             if (Strings.isNotEmpty(format)) {
-              for (BaseCode<?> baseCode : baseCodes) {
+              for (Code<?> baseCode : baseCodes) {
                 builder.append("<option value='" + baseCode.getId() + "'>" + baseCode.getName().trim() + "["
                     + PropertyUtils.getProperty(baseCode, format) + "]" + "</option>");
               }
             } else {
-              for (BaseCode<?> baseCode : baseCodes) {
+              for (Code<?> baseCode : baseCodes) {
                 builder
                     .append("<option value='" + baseCode.getId() + "'>" + baseCode.getName() + "</option>");
               }
@@ -88,8 +88,8 @@ public class CodeAction extends ActionSupport {
     return null;
   }
 
-  public void setBaseCodeService(BaseCodeService baseCodeService) {
-    this.baseCodeService = baseCodeService;
+  public void setCodeService(CodeService baseCodeService) {
+    this.codeService = baseCodeService;
   }
 
 }

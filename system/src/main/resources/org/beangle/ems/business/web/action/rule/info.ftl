@@ -27,8 +27,6 @@
      </td>
      </tr>
      <tr>
-    <td class="title">&nbsp;${b.text("common.createdAt")}:</td>
-    <td class="content">${(rule.createdAt?string("yyyy-MM-dd"))?if_exists}</td>
     <td class="title">&nbsp;${b.text("common.updatedAt")}:</td>
     <td class="content">${(rule.updatedAt?string("yyyy-MM-dd"))?if_exists}</td>
      </tr>

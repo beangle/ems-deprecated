@@ -28,7 +28,7 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.EntityDao;
 import org.beangle.commons.lang.Strings;
 import org.beangle.commons.lang.functor.Predicate;
-import org.beangle.security.blueprint.Field;
+import org.beangle.security.blueprint.Dimension;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.Property;
 import org.beangle.security.blueprint.User;
@@ -57,66 +57,67 @@ public class ProfileHelper {
   public void populateInfo(List<? extends Profile> profiles) {
     Map<String, Map<String, Object>> fieldMaps = CollectUtils.newHashMap();
     for (Profile profile : profiles) {
-      Map<String, Object> aoFields = CollectUtils.newHashMap();
+      Map<String, Object> aoDimensions = CollectUtils.newHashMap();
       for (Property property : profile.getProperties()) {
         String value = property.getValue();
-        String fieldName = property.getField().getName();
+        String fieldName = property.getDimension().getName();
         if (Strings.isNotEmpty(value)) {
-          if (null == property.getField().getSource()) {
-            aoFields.put(fieldName, value);
+          if (null == property.getDimension().getSource()) {
+            aoDimensions.put(fieldName, value);
           } else if (value.equals("*")) {
-            aoFields.put(fieldName, "不限");
+            aoDimensions.put(fieldName, "不限");
           } else {
-            aoFields.put(fieldName, profileService.getProperty(profile, property.getField()));
+            aoDimensions.put(fieldName, profileService.getProperty(profile, property.getDimension()));
           }
         }
       }
-      fieldMaps.put(PropertyUtils.getProperty(profile, "id").toString(), aoFields);
+      fieldMaps.put(PropertyUtils.getProperty(profile, "id").toString(), aoDimensions);
     }
     ContextHelper.put("profiles", profiles);
     ContextHelper.put("fieldMaps", fieldMaps);
   }
 
   public void fillEditInfo(Profile profile, Long userId, boolean isAdmin) {
-    Map<String, Object> mngFields = CollectUtils.newHashMap();
-    Map<String, Object> aoFields = CollectUtils.newHashMap();
+    Map<String, Object> mngDimensions = CollectUtils.newHashMap();
+    Map<String, Object> aoDimensions = CollectUtils.newHashMap();
 
     List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
-    Set<Field> ignores = getIgnoreFields(myProfiles);
-    ContextHelper.put("ignoreFields", ignores);
-    Set<Field> holderIgnoreFields = CollectUtils.newHashSet();
-    ContextHelper.put("holderIgnoreFields", holderIgnoreFields);
-    List<Field> fields = entityDao.getAll(Field.class);
+    Set<Dimension> ignores = getIgnoreDimensions(myProfiles);
+    ContextHelper.put("ignoreDimensions", ignores);
+    Set<Dimension> holderIgnoreDimensions = CollectUtils.newHashSet();
+    ContextHelper.put("holderIgnoreDimensions", holderIgnoreDimensions);
+    List<Dimension> fields = entityDao.getAll(Dimension.class);
     ContextHelper.put("fields", fields);
-    for (Field field : fields) {
-      List<?> mngFieldValues = profileService.getFieldValues(field);
-      if (!isAdmin) mngFieldValues.retainAll(getMyProfileValues(myProfiles, field));
+    for (Dimension field : fields) {
+      List<?> mngDimensionValues = profileService.getDimensionValues(field);
+      if (!isAdmin) mngDimensionValues.retainAll(getMyProfileValues(myProfiles, field));
       else ignores.add(field);
 
       String fieldValue = "";
       Property property = profile.getProperty(field);
       if (null != property) fieldValue = property.getValue();
-      if ("*".equals(fieldValue)) holderIgnoreFields.add(field);
+      if ("*".equals(fieldValue)) holderIgnoreDimensions.add(field);
 
-      mngFields.put(field.getName(), mngFieldValues);
+      mngDimensions.put(field.getName(), mngDimensionValues);
       if (null == field.getSource()) {
-        aoFields.put(field.getName(), fieldValue);
+        aoDimensions.put(field.getName(), fieldValue);
       } else {
-        aoFields.put(field.getName(), profileService.getProperty(profile, field));
+        aoDimensions.put(field.getName(), profileService.getProperty(profile, field));
       }
     }
-    ContextHelper.put("mngFields", mngFields);
-    ContextHelper.put("aoFields", aoFields);
+    ContextHelper.put("mngDimensions", mngDimensions);
+    ContextHelper.put("aoDimensions", aoDimensions);
     ContextHelper.put("profile", profile);
   }
 
   @SuppressWarnings("unchecked")
   public void populateSaveInfo(Profile profile, Long userId, Boolean isAdmin) {
     List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
-    Set<Field> ignoreFields = getIgnoreFields(myProfiles);
-    for (final Field field : entityDao.getAll(Field.class)) {
+    Set<Dimension> ignoreDimensions = getIgnoreDimensions(myProfiles);
+    for (final Dimension field : entityDao.getAll(Dimension.class)) {
       String[] values = (String[]) Params.getAll(field.getName());
-      if ((ignoreFields.contains(field) || isAdmin) && Params.getBool("ignoreField" + field.getId())) {
+      if ((ignoreDimensions.contains(field) || isAdmin)
+          && Params.getBool("ignoreDimension" + field.getId())) {
         profile.setProperty(field, "*");
       } else {
         if (null == values || values.length == 0) {
@@ -126,7 +127,7 @@ public class ProfileHelper {
           if (null != field.getKeyName()) {
             final Set<String> keys = CollectUtils.newHashSet(values);
             List<Object> allValues = null;
-            Collection<?> originValues = profileService.getFieldValues(field);
+            Collection<?> originValues = profileService.getDimensionValues(field);
             if (originValues instanceof List<?>) {
               allValues = (List<Object>) originValues;
             } else {
@@ -153,14 +154,14 @@ public class ProfileHelper {
     }
   }
 
-  private List<Object> getMyProfileValues(List<Profile> Profiles, Field field) {
+  private List<Object> getMyProfileValues(List<Profile> Profiles, Dimension field) {
     List<Object> values = CollectUtils.newArrayList();
     for (Profile profile : Profiles) {
       Property property = profile.getProperty(field);
       if (null != property) {
         String value = property.getValue();
         if (null != value) {
-          if (property.getField().isMultiple()) {
+          if (property.getDimension().isMultiple()) {
             values.addAll((Collection<?>) profileService.getProperty(profile, field));
           } else {
             values.add(profileService.getProperty(profile, field));
@@ -171,12 +172,12 @@ public class ProfileHelper {
     return values;
   }
 
-  private Set<Field> getIgnoreFields(List<Profile> profiles) {
-    Set<Field> ignores = CollectUtils.newHashSet();
+  private Set<Dimension> getIgnoreDimensions(List<Profile> profiles) {
+    Set<Dimension> ignores = CollectUtils.newHashSet();
     for (Profile profile : profiles) {
       for (Property property : profile.getProperties()) {
         String value = property.getValue();
-        if ("*".equals(value)) ignores.add(property.getField());
+        if ("*".equals(value)) ignores.add(property.getDimension());
       }
     }
     return ignores;

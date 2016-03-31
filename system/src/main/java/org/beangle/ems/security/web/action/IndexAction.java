@@ -24,8 +24,8 @@ import java.util.Map;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.Field;
-import org.beangle.security.blueprint.Member;
+import org.beangle.security.blueprint.Dimension;
+import org.beangle.security.blueprint.RoleMember;
 import org.beangle.security.blueprint.data.model.DataPermissionBean;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.nav.Menu;
@@ -54,14 +54,14 @@ public class IndexAction extends SecurityActionSupport {
     // stat dataPermission and restriction
     put("dataPermissionCnt",
         entityDao.search(OqlBuilder.from(DataPermissionBean.class, "p").select("count(*)")));
-    put("fieldCnt", entityDao.search(OqlBuilder.from(Field.class, "param").select("count(*)")));
+    put("fieldCnt", entityDao.search(OqlBuilder.from(Dimension.class, "param").select("count(*)")));
     return forward();
   }
 
   private void populateUserStat() {
-    OqlBuilder<Member> userQuery = OqlBuilder.from(Member.class, "gm");
-    userQuery.select("gm.role.indexno,gm.role.name,gm.user.enabled,count(*)").groupBy(
-        "gm.role.indexno,gm.role.name,gm.user.enabled");
+    OqlBuilder<RoleMember> userQuery = OqlBuilder.from(RoleMember.class, "gm");
+    userQuery.select("gm.role.indexno,gm.role.name,gm.user.enabled,count(*)")
+        .groupBy("gm.role.indexno,gm.role.name,gm.user.enabled");
     List<?> datas = entityDao.search(userQuery);
     Map<String, Map<Object, Object>> rs = CollectUtils.newHashMap();
     for (Object data : datas) {

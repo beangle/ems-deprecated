@@ -6,7 +6,7 @@
     <td class="index_view">
       [@b.form action="!search?orderBy=menu.indexno" title="ui.searchForm" target="menulist" theme="search"]
         [@b.select name="menu.profile.id" items=profiles label="配置"/]
-        [@b.textfields names="menu.indexno;common.code,menu.title;标题,menu.entry;menu.entry"/]
+        [@b.textfields names="menu.indexno;common.code,menu.title;标题,menu.entry.name;menu.entry"/]
         [@b.select name="menu.enabled" items=profiles label="common.status" items={'true':'${b.text("action.activate")}','false':'${b.text("action.freeze")}'}  empty="..."/]
       [/@]
     </td>

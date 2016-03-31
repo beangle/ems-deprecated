@@ -36,12 +36,7 @@ public class RuleAction extends SecurityActionSupport {
   @Override
   protected String saveAndForward(Entity<?> entity) {
     Rule rule = (Rule) entity;
-    if (null == rule.getId()) {
-      rule.setCreatedAt(new Date());
-      rule.setUpdatedAt(new Date());
-    } else {
-      rule.setUpdatedAt(new Date());
-    }
+    rule.setUpdatedAt(new Date());
     entityDao.saveOrUpdate(rule);
     return redirect("search", "info.save.success");
   }

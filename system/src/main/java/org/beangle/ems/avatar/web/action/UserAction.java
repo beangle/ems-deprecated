@@ -41,16 +41,16 @@ public class UserAction extends SecurityActionSupport {
    * 查看照片信息
    */
   public String info() {
-    String userName = get("user.name");
-    if (Strings.isEmpty(userName)) { return null; }
-    List<User> users = entityDao.get(User.class, "name", userName);
+    String userCode = get("user.code");
+    if (Strings.isEmpty(userCode)) { return null; }
+    List<User> users = entityDao.get(User.class, "code", userCode);
     if (!users.isEmpty()) {
       User user = users.get(0);
-      put("user", Strings.concat(userName, "(", user.getFullname(), ")"));
+      put("user", Strings.concat(userCode, "(", user.getName(), ")"));
     } else {
-      put("user", userName);
+      put("user", userCode);
     }
-    Avatar avatar = avatarBase.getAvatar(userName);
+    Avatar avatar = avatarBase.getAvatar(userCode);
     put("avatar", avatar);
     return forward();
   }

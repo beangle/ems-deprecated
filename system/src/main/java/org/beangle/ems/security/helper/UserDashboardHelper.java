@@ -66,11 +66,11 @@ public class UserDashboardHelper {
   }
 
   private void populateOnlineActivities(User user) {
-    ContextHelper.put("sessioninfos", sessionRegistry.getSessioninfos(user.getName(), true));
+    ContextHelper.put("sessioninfos", sessionRegistry.getSessioninfos(user.getCode(), true));
   }
 
   private void populateSessioninfoLogs(User user) {
-    List<SessioninfoLogBean> page = sessioninfoLogService.getLoggers(user.getName(), 5);
+    List<SessioninfoLogBean> page = sessioninfoLogService.getLoggers(user.getCode(), 5);
     if (page instanceof Page) page = ((Page<SessioninfoLogBean>) page).getItems();
     ContextHelper.put("sessioninfoLogs", page);
   }

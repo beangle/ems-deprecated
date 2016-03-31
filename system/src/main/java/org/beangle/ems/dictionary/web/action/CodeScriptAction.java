@@ -89,7 +89,6 @@ public class CodeScriptAction extends SecurityActionSupport {
     CodeScript codeScript = null;
     if (null == codeScriptId) {
       codeScript = new CodeScript();
-      codeScript.setCreatedAt(new Date(System.currentTimeMillis()));
     } else {
       codeScript = (CodeScript) entityDao.get(CodeScript.class, codeScriptId);
     }

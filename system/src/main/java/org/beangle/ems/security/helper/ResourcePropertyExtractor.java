@@ -20,7 +20,6 @@ package org.beangle.ems.security.helper;
 
 import org.beangle.commons.text.i18n.TextResource;
 import org.beangle.commons.transfer.exporter.DefaultPropertyExtractor;
-import org.beangle.security.blueprint.Resource;
 
 /**
  * @author chaostone
@@ -37,10 +36,7 @@ public class ResourcePropertyExtractor extends DefaultPropertyExtractor {
   }
 
   public Object getPropertyValue(Object target, String property) throws Exception {
-    Resource resource = (Resource) target;
-    if ("enabled".equals(property)) {
-      return resource.isEnabled() ? "激活" : "冻结";
-    } else return super.getPropertyValue(target, property);
+    return super.getPropertyValue(target, property);
   }
 
 }

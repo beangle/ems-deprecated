@@ -47,8 +47,8 @@ public class UserPropertyExtractor extends DefaultPropertyExtractor {
   public static final StringBuilder getUserNames(Collection<User> users) {
     StringBuilder sb = new StringBuilder();
     for (final User user : users) {
-      sb.append(user.getFullname());
-      sb.append('(').append(user.getName()).append(')').append(' ');
+      sb.append(user.getName());
+      sb.append('(').append(user.getCode()).append(')').append(' ');
     }
     if (sb.length() > 0) {
       sb.deleteCharAt(sb.length() - 1);

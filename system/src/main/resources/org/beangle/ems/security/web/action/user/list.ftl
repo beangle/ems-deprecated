@@ -9,7 +9,7 @@
   bar.addItem("${b.text("action.freeze")}",activateUser('false'),'action-freeze');
   bar.addItem("${b.text("action.activate")}",activateUser('true'),'action-activate');
   bar.addItem("${b.text("action.delete")}",action.remove());
-  bar.addItem("${b.text("action.export")}",action.exportData("name,fullname,mail,creator.fullname,effectiveAt,invalidAt:common.invalidAt,passwordExpiredAt,createdAt:common.createdAt,updatedAt:common.updatedAt,enabled","Csv","&fileName=用户信息"));
+  bar.addItem("${b.text("action.export")}",action.exportData("code,name,creator.name,beginOn,endOn:common.endAt,passwordExpiredOn,updatedAt:common.updatedAt,enabled","Csv","&fileName=用户信息"));
   [/@]
   [@b.row]
     [@b.boxcol/]

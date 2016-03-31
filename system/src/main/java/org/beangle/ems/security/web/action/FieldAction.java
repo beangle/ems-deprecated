@@ -19,7 +19,7 @@
 package org.beangle.ems.security.web.action;
 
 import org.beangle.commons.entity.Entity;
-import org.beangle.security.blueprint.Field;
+import org.beangle.security.blueprint.Dimension;
 import org.beangle.struts2.action.EntityDrivenAction;
 import org.beangle.struts2.convention.route.Action;
 
@@ -33,13 +33,13 @@ public class FieldAction extends EntityDrivenAction {
 
   @Override
   protected String getEntityName() {
-    return Field.class.getName();
+    return Dimension.class.getName();
   }
 
   @Override
   protected String saveAndForward(Entity<?> entity) {
-    Field field = (Field) entity;
-    if (entityDao.duplicate(Field.class, field.getId(), "name", field.getName())) {
+    Dimension field = (Dimension) entity;
+    if (entityDao.duplicate(Dimension.class, field.getId(), "name", field.getName())) {
       addError("名称重复");
       return forward(new Action(this, "edit"));
     }

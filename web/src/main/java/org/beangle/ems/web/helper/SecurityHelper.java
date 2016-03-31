@@ -29,7 +29,7 @@ import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.dao.query.builder.OqlBuilder;
 import org.beangle.commons.web.util.RequestUtils;
 import org.beangle.security.access.AccessDeniedException;
-import org.beangle.security.blueprint.Field;
+import org.beangle.security.blueprint.Dimension;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
@@ -74,8 +74,8 @@ public class SecurityHelper {
     if (null == profile) {
       ActionContext.getContext().getSession().remove(ProfileIdSessionAttributeName);
     } else {
-      ActionContext.getContext().getSession()
-          .put(ProfileIdSessionAttributeName, PropertyUtils.getProperty(profile, "id"));
+      ActionContext.getContext().getSession().put(ProfileIdSessionAttributeName,
+          PropertyUtils.getProperty(profile, "id"));
     }
   }
 
@@ -100,8 +100,8 @@ public class SecurityHelper {
   public FuncResource getResource() {
     String resourceName = SecurityUtils.getResource();
     if (null == resourceName) {
-      resourceName = funcPermissionService.extractResource(RequestUtils.getServletPath(ServletActionContext
-          .getRequest()));
+      resourceName = funcPermissionService
+          .extractResource(RequestUtils.getServletPath(ServletActionContext.getRequest()));
     }
     return funcPermissionService.getResource(resourceName);
   }
@@ -113,7 +113,7 @@ public class SecurityHelper {
   @SuppressWarnings({ "unchecked" })
   public <T> List<T> getProperties(String name) {
     List<Profile> profiles = getProfiles(userService.get(getUserId()), getResource());
-    Field field = profileService.getField(name);
+    Dimension field = profileService.getDimension(name);
     Set<T> results = CollectUtils.newHashSet();
     for (Profile profile : profiles) {
       Object prop = profileService.getProperty(profile, field);
@@ -137,8 +137,8 @@ public class SecurityHelper {
     if (null == dp) return;
     List<Profile> profiles = getProfiles(user, getResource());
 
-    if (profiles.isEmpty()) throw new AccessDeniedException(SecurityUtils.getResource(),
-        "error.security.errorprofile");
+    if (profiles.isEmpty())
+      throw new AccessDeniedException(SecurityUtils.getResource(), "error.security.errorprofile");
 
     dataPermissionService.apply(query, dp, profiles);
   }

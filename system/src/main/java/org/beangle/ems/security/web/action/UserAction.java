@@ -35,11 +35,11 @@ import org.beangle.commons.transfer.exporter.PropertyExtractor;
 import org.beangle.ems.security.helper.UserDashboardHelper;
 import org.beangle.ems.security.helper.UserPropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
-import org.beangle.security.blueprint.Member;
 import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.RoleMember;
 import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
-import org.beangle.security.blueprint.model.MemberBean;
+import org.beangle.security.blueprint.model.RoleMemberBean;
 import org.beangle.security.blueprint.model.UserBean;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
@@ -85,9 +85,9 @@ public class UserAction extends SecurityActionSupport {
     List<Object> params = CollectUtils.newArrayList();
     boolean queryRole = false;
     if (!isAdmin()) {
-      List<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.MANAGER);
+      List<RoleMember> members = securityHelper.getUserService().getMembers(manager, RoleMember.Ship.MANAGER);
       List<Role> mngRoles = CollectUtils.newArrayList();
-      for (Member m : members) {
+      for (RoleMember m : members) {
         mngRoles.add(m.getRole());
       }
       if (mngRoles.isEmpty()) {
@@ -126,8 +126,8 @@ public class UserAction extends SecurityActionSupport {
    */
   protected String saveAndForward(Entity<?> entity) {
     UserBean user = (UserBean) entity;
-    if (entityDao.duplicate(User.class, user.getId(), "name", user.getName())) {
-      addMessage("security.error.usernameNotAvaliable", user.getName());
+    if (entityDao.duplicate(User.class, user.getId(), "code", user.getCode())) {
+      addMessage("security.error.usernameNotAvaliable", user.getCode());
       return forward(new Action(this, "edit"));
     }
     String errorMsg = "";
@@ -146,17 +146,18 @@ public class UserAction extends SecurityActionSupport {
   }
 
   private void updateUserRole(User user) {
-    Set<Member> userMembers = user.getMembers();
-    Map<Role, MemberBean> memberMap = CollectUtils.newHashMap();
-    for (Member gm : userMembers) {
-      memberMap.put(gm.getRole(), (MemberBean) gm);
+    Set<RoleMember> userMembers = user.getMembers();
+    Map<Role, RoleMemberBean> memberMap = CollectUtils.newHashMap();
+    for (RoleMember gm : userMembers) {
+      memberMap.put(gm.getRole(), (RoleMemberBean) gm);
     }
-    Set<Member> newMembers = CollectUtils.newHashSet();
-    Set<Member> removedMembers = CollectUtils.newHashSet();
+    Set<RoleMember> newMembers = CollectUtils.newHashSet();
+    Set<RoleMember> removedMembers = CollectUtils.newHashSet();
     User manager = entityDao.get(User.class, getUserId());
-    Collection<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.GRANTER);
-    for (Member member : members) {
-      MemberBean myMember = memberMap.get(member.getRole());
+    Collection<RoleMember> members = securityHelper.getUserService().getMembers(manager,
+        RoleMember.Ship.GRANTER);
+    for (RoleMember member : members) {
+      RoleMemberBean myMember = memberMap.get(member.getRole());
       boolean isMember = getBool("member" + member.getRole().getId());
       boolean isGranter = getBool("granter" + member.getRole().getId());
       boolean isManager = getBool("manager" + member.getRole().getId());
@@ -167,7 +168,7 @@ public class UserAction extends SecurityActionSupport {
         }
       } else {
         if (null == myMember) {
-          myMember = new MemberBean(member.getRole(), user, null);
+          myMember = new RoleMemberBean(member.getRole(), user, null);
         }
         myMember.setUpdatedAt(new Date());
         myMember.setMember(isMember);
@@ -182,18 +183,19 @@ public class UserAction extends SecurityActionSupport {
   protected void editSetting(Entity<?> entity) {
     User manager = entityDao.get(User.class, getUserId());
     Set<Role> roles = CollectUtils.newHashSet();
-    Map<Role, Member> curMemberMap = CollectUtils.newHashMap();
-    Collection<Member> members = securityHelper.getUserService().getMembers(manager, Member.Ship.GRANTER);
-    for (Member gm : members) {
+    Map<Role, RoleMember> curMemberMap = CollectUtils.newHashMap();
+    Collection<RoleMember> members = securityHelper.getUserService().getMembers(manager,
+        RoleMember.Ship.GRANTER);
+    for (RoleMember gm : members) {
       roles.add(gm.getRole());
       curMemberMap.put(gm.getRole(), gm);
     }
     put("roles", roles);
 
     User user = (User) entity;
-    Set<Member> userMembers = user.getMembers();
-    Map<Role, Member> memberMap = CollectUtils.newHashMap();
-    for (Member gm : userMembers) {
+    Set<RoleMember> userMembers = user.getMembers();
+    Map<Role, RoleMember> memberMap = CollectUtils.newHashMap();
+    for (RoleMember gm : userMembers) {
       memberMap.put(gm.getRole(), gm);
     }
     put("memberMap", memberMap);
@@ -258,7 +260,8 @@ public class UserAction extends SecurityActionSupport {
   }
 
   protected String checkUser(User user) {
-    if (!user.isPersisted() && entityDao.exist(getEntityName(), "name", user.getName())) { return "error.model.existed"; }
+    if (!user.isPersisted()
+        && entityDao.exist(getEntityName(), "code", user.getCode())) { return "error.model.existed"; }
     return "";
   }
 

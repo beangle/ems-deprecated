@@ -11,8 +11,6 @@ bar.addBack("${b.text("action.back")}");
    <td class="content" width="40%">${role.owner.name!}  </td>
   </tr>
   <tr>
-   <td class="title" >${b.text("common.createdAt")}:</td>
-   <td class="content">${role.createdAt?string("yyyy-MM-dd")}</td>
    <td class="title" >${b.text("common.updatedAt")}:</td>
    <td class="content">${role.updatedAt?string("yyyy-MM-dd")}</td>
   </tr>

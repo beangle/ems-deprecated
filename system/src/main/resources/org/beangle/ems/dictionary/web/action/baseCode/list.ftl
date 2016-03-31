@@ -14,7 +14,7 @@
       </td>
       <td><input style="width:99%" type="text" name="${shortName}.code" maxlength="32" value="${Parameters['${shortName}.code']?if_exists}"/></td>
       <td><input style="width:99%" type="text" name="${shortName}.name" maxlength="32" value="${Parameters['${shortName}.name']?if_exists}"/></td>
-      <td><input style="width:99%" type="text" name="${shortName}.engName" maxlength="32" value="${Parameters['${shortName}.engName']?if_exists}"/></td>
+      <td><input style="width:99%" type="text" name="${shortName}.enName" maxlength="32" value="${Parameters['${shortName}.enName']?if_exists}"/></td>
       <td><input style="width:99%" type="hidden" name="${shortName}.updatedAt" maxlength="32" value="${Parameters['${shortName}.updatedAt']?if_exists}"/></td>
       <td><input style="width:99%" type="hidden" name="${shortName}.effectAt" maxlength="32" value="${Parameters['${shortName}.enabled']?if_exists}"/></td>
       <td><input style="width:99%" type="hidden" name="${shortName}.invalidAt" maxlength="32" value="${Parameters['${shortName}.enabled']?if_exists}"/></td>      
@@ -23,7 +23,7 @@
        [@b.boxcol/]
       [@b.col property="code" title="common.code"/]
        [@b.col property="name" title="common.name"/]
-       [@b.col property="engName" title="common.engName"/]
+       [@b.col property="enName" title="common.enName"/]
        [@b.col property="updatedAt" title="common.updatedAt"]
          ${(baseCode.updatedAt?string("yyyy-MM-dd"))?if_exists}
        [/@]
@@ -43,7 +43,7 @@
   form.target = "_self";
   goToPage(form,pageNo,pageSize,orderBy);
    }
-  keys="code,name,engName,updatedAt,effectAt,invalidAt";
+  keys="code,name,enName,updatedAt,effectAt,invalidAt";
   titles="代码,名称,英文名,修改时间,生效时间,失效时间";
 [#list 1..30 as i]<br/>[/#list]
 [@b.foot/]
