@@ -14,7 +14,7 @@
     <bundle.symbolicName>org.beangle.ems.system</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems</bundle.namespace>
     <commonscompress.version>1.4</commonscompress.version>
-    <jqueryplugin.version>3.6.1</jqueryplugin.version>
+    <jqueryplugin.version>3.7.1</jqueryplugin.version>
   </properties>
 
   <dependencies>

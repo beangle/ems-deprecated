@@ -10,7 +10,7 @@
   <profiles>
     [#list menuProfiles as mp]
     <profile name="${mp.name}" role="${mp.role.name}">
-      [#list mp.menus?sort_by('code') as m]
+      [#list mp.menus?sort_by('indexno') as m]
       <menu [#if m.entry??]entry="${m.entry?xml}"[/#if] name="${m.name!}" title="${m.title}" [#if m.parent??]parent="${(m.parent.name)!}"[/#if] remark="${(m.parent.remark)!}"/>
       [/#list]
     </profile>

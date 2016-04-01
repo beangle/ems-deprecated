@@ -9,12 +9,12 @@
   <artifactId>beangle-ems-web</artifactId>
   <packaging>jar</packaging>
   <name>Beangle Ems Web</name>
-  
+
   <properties>
     <bundle.symbolicName>org.beangle.ems.web</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems.web</bundle.namespace>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.beangle.ems</groupId>

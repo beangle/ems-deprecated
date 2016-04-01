@@ -1,7 +1,7 @@
 /*
  * Beangle, Agile Development Scaffold and Toolkit
  *
- * Copyright (c) 2005-2014, Beangle Software.
+ * Copyright (c) 2005-2016, Beangle Software.
  *
  * Beangle is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -39,7 +39,7 @@ import org.beangle.security.blueprint.service.UserDataResolver;
 
 /**
  * 角色信息维护响应类
- * 
+ *
  * @author chaostone 2005-9-29
  */
 public class RoleAction extends SecurityActionSupport {
@@ -59,8 +59,11 @@ public class RoleAction extends SecurityActionSupport {
   public String edit() {
     Role role = (Role) getEntity();
     if (role.isPersisted()) {
-      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()),
-          role)) { return redirect("search", "不能修改该组,你没有" + role.getParent().getName() + "的管理权限"); }
+      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) {
+        if (null != role.getParent()) return redirect("search", "不能修改该组,你没有" + role.getParent().getName()
+            + "的管理权限");
+        else return redirect("search", "不能修改该组,你没有Root的管理权限");
+      }
     }
     put("role", role);
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");

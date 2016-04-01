@@ -9,7 +9,7 @@
   <artifactId>beangle-ems-core</artifactId>
   <packaging>jar</packaging>
   <name>Beangle Ems Core</name>
-  
+
   <properties>
     <bundle.symbolicName>org.beangle.ems.core</bundle.symbolicName>
     <bundle.namespace>org.beangle.ems</bundle.namespace>
@@ -18,7 +18,7 @@
     <ognl.version>3.0.6</ognl.version>
     <javassist.version>3.17.1-GA</javassist.version>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
