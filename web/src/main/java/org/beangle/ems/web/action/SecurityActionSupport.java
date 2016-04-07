@@ -37,7 +37,7 @@ public abstract class SecurityActionSupport extends EntityDrivenAction {
   }
 
   protected boolean isAdmin() {
-    return securityHelper.getUserService().isRoot(getUserId());
+    return securityHelper.getUserService().isRoot(SecurityUtils.getUsername());
   }
 
   protected List<Profile> getProfiles() {
