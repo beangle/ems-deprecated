@@ -107,7 +107,7 @@ public class SecurityHelper {
   }
 
   protected boolean isAdmin() {
-    return funcPermissionService.getUserService().isRoot(getUserId());
+    return funcPermissionService.getUserService().isRoot(SecurityUtils.getUsername());
   }
 
   @SuppressWarnings({ "unchecked" })
