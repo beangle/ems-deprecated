@@ -26,8 +26,6 @@ import org.beangle.ems.dictionary.web.action.CodeAction;
 import org.beangle.ems.dictionary.web.action.CodeMetaAction;
 import org.beangle.ems.dictionary.web.action.CodeScriptAction;
 import org.beangle.ems.io.ClasspathDocLoader;
-import org.beangle.ems.root.web.action.LoginAction;
-import org.beangle.ems.root.web.action.LogoutAction;
 import org.beangle.ems.system.web.action.FileAction;
 import org.beangle.ems.system.web.action.InfoAction;
 import org.beangle.ems.system.web.action.PropertyAction;
@@ -39,8 +37,6 @@ public final class DefaultModule extends AbstractBindModule {
   protected void doBinding() {
     // property
     bind(FileAction.class, InfoAction.class, PropertyAction.class);
-    // home
-    bind(LoginAction.class, LogoutAction.class);
 
     bind(LogAction.class, RuleAction.class, RuleParamAction.class);
 
