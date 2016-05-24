@@ -9,7 +9,7 @@
   <artifactId>beangle-ems-parent</artifactId>
   <packaging>pom</packaging>
   <name>Beangle Ems Parent</name>
-  <version>3.5.1.M2</version>
+  <version>3.5.1.M3</version>
 
   <issueManagement>
     <system>github</system>
@@ -32,18 +32,8 @@
 
   <properties>
     <commonupload.version>1.3.1</commonupload.version>
-    <library.version>3.5.1.M2</library.version>
+    <library.version>3.5.1.M3</library.version>
    </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.beangle.struts2</groupId>
-        <artifactId>beangle-struts2-captcha</artifactId>
-        <version>${library.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>

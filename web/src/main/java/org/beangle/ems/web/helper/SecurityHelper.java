@@ -61,7 +61,7 @@ public class SecurityHelper {
   private AuthenticationService authenticationService;
 
   public List<Profile> getProfiles() {
-    return getProfiles(userService.get(getUserId()), getResource());
+    return getProfiles(userService.get(SecurityUtils.getUsername()), getResource());
   }
 
   public Profile getSessionProfile() {
@@ -112,7 +112,7 @@ public class SecurityHelper {
 
   @SuppressWarnings({ "unchecked" })
   public <T> List<T> getProperties(String name) {
-    List<Profile> profiles = getProfiles(userService.get(getUserId()), getResource());
+    List<Profile> profiles = getProfiles(userService.get(SecurityUtils.getUsername()), getResource());
     Dimension field = profileService.getDimension(name);
     Set<T> results = CollectUtils.newHashSet();
     for (Profile profile : profiles) {
@@ -123,12 +123,8 @@ public class SecurityHelper {
     return CollectUtils.newArrayList(results);
   }
 
-  protected Long getUserId() {
-    return SecurityUtils.getUserId();
-  }
-
   public void applyPermission(OqlBuilder<?> query) {
-    User user = userService.get(getUserId());
+    User user = userService.get(SecurityUtils.getUsername());
 
     if (userService.isRoot(user)) return;
 

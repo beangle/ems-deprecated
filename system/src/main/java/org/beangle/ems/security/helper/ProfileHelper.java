@@ -77,11 +77,11 @@ public class ProfileHelper {
     ContextHelper.put("fieldMaps", fieldMaps);
   }
 
-  public void fillEditInfo(Profile profile, Long userId, boolean isAdmin) {
+  public void fillEditInfo(Profile profile, User user, boolean isAdmin) {
     Map<String, Object> mngDimensions = CollectUtils.newHashMap();
     Map<String, Object> aoDimensions = CollectUtils.newHashMap();
 
-    List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
+    List<Profile> myProfiles = user.getProfiles();
     Set<Dimension> ignores = getIgnoreDimensions(myProfiles);
     ContextHelper.put("ignoreDimensions", ignores);
     Set<Dimension> holderIgnoreDimensions = CollectUtils.newHashSet();
@@ -111,8 +111,8 @@ public class ProfileHelper {
   }
 
   @SuppressWarnings("unchecked")
-  public void populateSaveInfo(Profile profile, Long userId, Boolean isAdmin) {
-    List<Profile> myProfiles = entityDao.get(User.class, userId).getProfiles();
+  public void populateSaveInfo(Profile profile, User user, Boolean isAdmin) {
+    List<Profile> myProfiles = user.getProfiles();
     Set<Dimension> ignoreDimensions = getIgnoreDimensions(myProfiles);
     for (final Dimension field : entityDao.getAll(Dimension.class)) {
       String[] values = (String[]) Params.getAll(field.getName());

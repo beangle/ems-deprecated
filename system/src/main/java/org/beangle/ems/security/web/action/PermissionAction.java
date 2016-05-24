@@ -31,12 +31,14 @@ import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Resource;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.RoleMember;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.function.FuncPermission;
 import org.beangle.security.blueprint.function.FuncResource;
 import org.beangle.security.blueprint.function.service.internal.CacheableAuthorityManager;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
+import org.beangle.security.blueprint.service.UserService;
 import org.beangle.security.core.authority.GrantedAuthorityBean;
 import org.beangle.struts2.convention.route.Action;
 
@@ -48,6 +50,7 @@ import org.beangle.struts2.convention.route.Action;
 public class PermissionAction extends SecurityActionSupport {
 
   private CacheableAuthorityManager authorityManager;
+  private UserService userService;
 
   /**
    * 根据菜单配置来分配权限
@@ -55,7 +58,7 @@ public class PermissionAction extends SecurityActionSupport {
   public String edit() {
     Integer roleId = getId("role", Integer.class);
     Role role = entityDao.get(Role.class, roleId);
-    User user = entityDao.get(User.class, getUserId());
+    User user = userService.get(SecurityUtils.getUsername());
     put("manager", user);
     List<Role> mngRoles = CollectUtils.newArrayList();
     if (isAdmin()) {
@@ -158,7 +161,7 @@ public class PermissionAction extends SecurityActionSupport {
         .newHashSet(entityDao.get(FuncResource.class, Strings.splitToInt(get("resourceId"))));
 
     // 管理员拥有的菜单权限和系统资源
-    User manager = entityDao.get(User.class, getUserId());
+    User manager = userService.get(SecurityUtils.getUsername());
     Set<Menu> mngMenus = null;
     Set<Resource> mngResources = CollectUtils.newHashSet();
     if (isAdmin()) {
@@ -184,6 +187,10 @@ public class PermissionAction extends SecurityActionSupport {
 
   public void setAuthorityManager(CacheableAuthorityManager authorityManager) {
     this.authorityManager = authorityManager;
+  }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
 
 }

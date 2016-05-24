@@ -37,10 +37,12 @@ import org.beangle.ems.security.helper.UserPropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Role;
 import org.beangle.security.blueprint.RoleMember;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.RoleMemberBean;
 import org.beangle.security.blueprint.model.UserBean;
+import org.beangle.security.blueprint.service.UserService;
 import org.beangle.security.codec.EncryptUtil;
 import org.beangle.struts2.convention.route.Action;
 
@@ -52,6 +54,7 @@ import org.beangle.struts2.convention.route.Action;
 public class UserAction extends SecurityActionSupport {
 
   private UserDashboardHelper userDashboardHelper;
+  private UserService userService;
 
   public String dashboard() {
     Long userId = getLongId("user");
@@ -62,7 +65,7 @@ public class UserAction extends SecurityActionSupport {
       String username = get("user.name");
       if (null != username) managed = securityHelper.getUserService().get(username);
     }
-    User me = entityDao.get(User.class, getUserId());
+    User me = userService.get(SecurityUtils.getUsername());
     if (null != managed) {
       if (me.equals(managed) || securityHelper.getUserService().isManagedBy(me, managed)) {
         userDashboardHelper.buildDashboard(managed);
@@ -78,7 +81,7 @@ public class UserAction extends SecurityActionSupport {
 
   @SuppressWarnings("unchecked")
   protected OqlBuilder<User> getQueryBuilder() {
-    User manager = entityDao.get(User.class, getUserId());
+    User manager = userService.get(SecurityUtils.getUsername());
     OqlBuilder<User> userQuery = OqlBuilder.from(getEntityName(), "user");
     // 查询角色
     StringBuilder sb = new StringBuilder("exists(from user.members m where ");
@@ -97,7 +100,7 @@ public class UserAction extends SecurityActionSupport {
         params.add(mngRoles);
       }
       queryRole = true;
-      userQuery.where("user.id != :meId", getUserId());
+      userQuery.where("user.id != :meId", manager.getId());
     }
     String roleName = get("roleName");
     if (Strings.isNotEmpty(roleName)) {
@@ -136,7 +139,7 @@ public class UserAction extends SecurityActionSupport {
     if (Strings.isNotEmpty(errorMsg)) { return forward(new Action("edit"), errorMsg); }
     processPassword(user);
     if (!user.isPersisted()) {
-      User creator = securityHelper.getUserService().get(getUserId());
+      User creator = userService.get(SecurityUtils.getUsername());
       securityHelper.getUserService().createUser(creator, user);
     } else {
       securityHelper.getUserService().saveOrUpdate(user);
@@ -153,7 +156,7 @@ public class UserAction extends SecurityActionSupport {
     }
     Set<RoleMember> newMembers = CollectUtils.newHashSet();
     Set<RoleMember> removedMembers = CollectUtils.newHashSet();
-    User manager = entityDao.get(User.class, getUserId());
+    User manager = userService.get(SecurityUtils.getUsername());
     Collection<RoleMember> members = securityHelper.getUserService().getMembers(manager,
         RoleMember.Ship.GRANTER);
     for (RoleMember member : members) {
@@ -181,7 +184,7 @@ public class UserAction extends SecurityActionSupport {
   }
 
   protected void editSetting(Entity<?> entity) {
-    User manager = entityDao.get(User.class, getUserId());
+    User manager = userService.get(SecurityUtils.getUsername());
     Set<Role> roles = CollectUtils.newHashSet();
     Map<Role, RoleMember> curMemberMap = CollectUtils.newHashMap();
     Collection<RoleMember> members = securityHelper.getUserService().getMembers(manager,
@@ -201,7 +204,7 @@ public class UserAction extends SecurityActionSupport {
     put("memberMap", memberMap);
     put("curMemberMap", curMemberMap);
     put("isadmin", securityHelper.getUserService().isRoot(user));
-    put("isme", getUserId().equals(user.getId()));
+    put("isme", manager.getId().equals(user.getId()));
     put("settings", new Settings(getConfig()));
   }
 
@@ -210,7 +213,7 @@ public class UserAction extends SecurityActionSupport {
    */
   public String remove() {
     Long[] userIds = getLongIds("user");
-    User creator = securityHelper.getUserService().get(getUserId());
+    User creator = userService.get(SecurityUtils.getUsername());
     List<User> toBeRemoved = securityHelper.getUserService().getUsers(userIds);
     StringBuilder sb = new StringBuilder();
     User removed = null;
@@ -220,7 +223,7 @@ public class UserAction extends SecurityActionSupport {
       for (User one : toBeRemoved) {
         removed = one;
         // 不能删除自己
-        if (!one.getId().equals(getUserId())) {
+        if (!one.getId().equals(creator.getId())) {
           securityHelper.getUserService().removeUser(creator, one);
           success++;
         } else {
@@ -247,7 +250,7 @@ public class UserAction extends SecurityActionSupport {
     Long[] userIds = getLongIds("user");
     String isActivate = get("isActivate");
     int successCnt;
-    User manager = securityHelper.getUserService().get(getUserId());
+    User manager = userService.get(SecurityUtils.getUsername());
     String msg = "security.info.freeze.success";
     if (Strings.isNotEmpty(isActivate) && "false".equals(isActivate)) {
       successCnt = securityHelper.getUserService().updateState(manager, userIds, false);
@@ -297,6 +300,10 @@ public class UserAction extends SecurityActionSupport {
   @Override
   protected String getEntityName() {
     return User.class.getName();
+  }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
 
 }

@@ -24,6 +24,7 @@ import org.apache.struts2.ServletActionContext;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.SecurityUtils;
 
 /**
  * 查看下载自己的照片
@@ -48,7 +49,7 @@ public class MyAction extends SecurityActionSupport {
   public String info() {
     Avatar avatar = avatarBase.getAvatar(getUsername());
     put("avatar", avatar);
-    put("user", getUser());
+    put("user", SecurityUtils.getUsername());
     return forward();
   }
 

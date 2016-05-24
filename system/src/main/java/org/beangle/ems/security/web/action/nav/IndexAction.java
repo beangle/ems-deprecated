@@ -28,10 +28,12 @@ import org.beangle.commons.lang.Strings;
 import org.beangle.commons.lang.functor.Predicate;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Resource;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.nav.Menu;
 import org.beangle.security.blueprint.nav.MenuProfile;
 import org.beangle.security.blueprint.nav.service.MenuService;
+import org.beangle.security.blueprint.service.UserService;
 
 /**
  * 菜单浏览导航器
@@ -43,13 +45,15 @@ public class IndexAction extends SecurityActionSupport {
 
   private MenuService menuService;
 
+  private UserService userService;
+
   public String index() throws Exception {
     final String name = get("name");
     final MenuProfile profile;
     final Integer menuId = getInt("menu.id");
     final Set<Menu> family;
     final Menu givenMenu;
-    User user = entityDao.get(User.class, getUserId());
+    User user = userService.get(SecurityUtils.getUsername());
     if (null != menuId) {
       givenMenu = entityDao.get(Menu.class, menuId);
       profile = givenMenu.getProfile();
@@ -69,8 +73,8 @@ public class IndexAction extends SecurityActionSupport {
         if (null != family && !family.contains(amenu)) return false;
         if (Strings.isNotEmpty(name)) {
           if (!amenu.getChildren().isEmpty()) return false;
-          StringBuilder searchTarget = new StringBuilder(Strings.concat(amenu.getName(), amenu.getTitle(),
-              amenu.getRemark()));
+          StringBuilder searchTarget = new StringBuilder(
+              Strings.concat(amenu.getName(), amenu.getTitle(), amenu.getRemark()));
           for (Resource res : amenu.getResources()) {
             searchTarget.append(Strings.concat(res.getName(), res.getTitle(), res.getRemark()));
           }
@@ -96,7 +100,7 @@ public class IndexAction extends SecurityActionSupport {
   }
 
   public String search() {
-    User user = entityDao.get(User.class, getUserId());
+    User user = userService.get(SecurityUtils.getUsername());
     MenuProfile profile = menuService.getProfile(user, getInt("profile.id"));
     List<Menu> menus = menuService.getMenus(profile, user, getProfiles());
     List<Menu> menuPath = CollectUtils.newArrayList();
@@ -128,4 +132,9 @@ public class IndexAction extends SecurityActionSupport {
   public void setMenuService(MenuService menuService) {
     this.menuService = menuService;
   }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
+  }
+
 }

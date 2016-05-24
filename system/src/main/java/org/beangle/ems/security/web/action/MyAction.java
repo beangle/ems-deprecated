@@ -25,7 +25,8 @@ import org.beangle.ems.security.helper.UserDashboardHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.Settings;
-import org.beangle.security.blueprint.User;
+import org.beangle.security.blueprint.model.UserBean;
+import org.beangle.security.blueprint.service.UserService;
 import org.beangle.security.core.session.SessionRegistry;
 
 /**
@@ -39,18 +40,20 @@ public class MyAction extends SecurityActionSupport {
 
   private UserDashboardHelper userDashboardHelper;
 
+  private UserService userService;
+
   public String index() {
-    userDashboardHelper.buildDashboard(entityDao.get(User.class, getUserId()));
+    userDashboardHelper.buildDashboard(userService.get(SecurityUtils.getUsername()));
     return forward();
   }
 
   public String infolet() {
-    put("user", entityDao.get(User.class, getUserId()));
+    put("user", userService.get(SecurityUtils.getUsername()));
     return forward();
   }
 
   public String dashboard() {
-    userDashboardHelper.buildDashboard(entityDao.get(User.class, getUserId()));
+    userDashboardHelper.buildDashboard(userService.get(SecurityUtils.getUsername()));
     return forward();
   }
 
@@ -68,7 +71,7 @@ public class MyAction extends SecurityActionSupport {
    * 用户修改自己的密码
    */
   public String edit() {
-    put("user", entityDao.get(User.class, getUserId()));
+    put("user", userService.get(SecurityUtils.getUsername()));
     put("settings", new Settings(getConfig()));
     return forward();
   }
@@ -77,13 +80,14 @@ public class MyAction extends SecurityActionSupport {
    * 用户更新自己的密码和邮箱
    */
   public String save() {
-    Long userId = getUserId();
     String email = get("mail");
     String pwd = get("password");
     Map<String, Object> valueMap = CollectUtils.newHashMap();
     valueMap.put("password", pwd);
     valueMap.put("mail", email);
-    entityDao.update(User.class, "id", new Object[] { userId }, valueMap);
+    UserBean user = (UserBean) userService.get(SecurityUtils.getUsername());
+    user.setPassword(pwd);
+    entityDao.saveOrUpdate(user);
     return redirect("infolet", "ok.passwordChanged");
   }
 
@@ -91,16 +95,12 @@ public class MyAction extends SecurityActionSupport {
     this.sessionRegistry = sessionRegistry;
   }
 
-  // public void setMailSender(MailSender mailSender) {
-  // this.mailSender = mailSender;
-  // }
-  //
-  // public void setMessage(SimpleMailMessage message) {
-  // this.message = message;
-  // }
-
   public void setUserDashboardHelper(UserDashboardHelper userDashboardHelper) {
     this.userDashboardHelper = userDashboardHelper;
+  }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
 
 }

@@ -24,6 +24,7 @@ import org.beangle.commons.lang.Strings;
 import org.beangle.ems.avatar.Avatar;
 import org.beangle.ems.avatar.service.AvatarBase;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.struts2.convention.route.Action;
 
 /**
@@ -38,14 +39,14 @@ public class MyUploadAction extends SecurityActionSupport {
   public String index() {
     Avatar avatar = avatarBase.getAvatar(getUsername());
     put("avatar", avatar);
-    put("user", getUser());
+    put("user", SecurityUtils.getUsername());
     return forward();
   }
 
   public String upload() throws Exception {
     Object[] files = getAll("avatar");
-    if (null == files || files.length == 0) return redirect(new Action(MyAction.class, "info"),
-        "error.nofile");
+    if (null == files || files.length == 0)
+      return redirect(new Action(MyAction.class, "info"), "error.nofile");
     String type = Strings.substringAfter(get("avatarFileName"), ".");
 
     if (files.length > 0 && null != type && avatarBase.containType(type)) {
