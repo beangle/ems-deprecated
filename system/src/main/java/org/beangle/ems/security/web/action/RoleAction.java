@@ -32,10 +32,12 @@ import org.beangle.ems.security.helper.RolePropertyExtractor;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.Role;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.model.RoleBean;
 import org.beangle.security.blueprint.service.RoleService;
 import org.beangle.security.blueprint.service.UserDataResolver;
+import org.beangle.security.blueprint.service.UserService;
 
 /**
  * 角色信息维护响应类
@@ -45,6 +47,7 @@ import org.beangle.security.blueprint.service.UserDataResolver;
 public class RoleAction extends SecurityActionSupport {
   private UserDataResolver identifierDataResolver;
   private RoleService roleService;
+  private UserService userService;
 
   /**
    * 对组可管理意为<br>
@@ -58,10 +61,11 @@ public class RoleAction extends SecurityActionSupport {
    */
   public String edit() {
     Role role = (Role) getEntity();
+    User me = userService.get(SecurityUtils.getUsername());
     if (role.isPersisted()) {
-      if (!roleService.isAdmin(entityDao.get(User.class, getUserId()), role)) {
-        if (null != role.getParent()) return redirect("search", "不能修改该组,你没有" + role.getParent().getName()
-            + "的管理权限");
+      if (!roleService.isAdmin(me, role)) {
+        if (null != role.getParent())
+          return redirect("search", "不能修改该组,你没有" + role.getParent().getName() + "的管理权限");
         else return redirect("search", "不能修改该组,你没有Root的管理权限");
       }
     }
@@ -69,7 +73,7 @@ public class RoleAction extends SecurityActionSupport {
     OqlBuilder<Role> query = OqlBuilder.from(getEntityName(), "role");
     if (!isAdmin()) {
       query.join("role.members", "gm");
-      query.where("gm.user.id=:me and gm.manager=true", getUserId());
+      query.where("gm.user=:me and gm.manager=true", me);
     }
     List<Role> parents = entityDao.search(query);
     parents.removeAll(HierarchyEntityUtils.getFamily(role));
@@ -89,7 +93,7 @@ public class RoleAction extends SecurityActionSupport {
     OqlBuilder<Role> entityQuery = OqlBuilder.from(getEntityName(), "role");
     if (!isAdmin()) {
       entityQuery.join("role.members", "gm");
-      entityQuery.where("gm.user.id=:me and gm.manager=true", getUserId());
+      entityQuery.where("gm.user=:me and gm.manager=true", userService.get(SecurityUtils.getUsername()));
     }
     populateConditions(entityQuery);
     String orderBy = get("orderBy");
@@ -107,7 +111,7 @@ public class RoleAction extends SecurityActionSupport {
     if (entityDao.duplicate(Role.class, role.getId(), "name", role.getName()))
       return redirect("edit", "error.notUnique");
     if (!role.isPersisted()) {
-      User creator = securityHelper.getUserService().get(getUserId());
+      User creator = userService.get(SecurityUtils.getUsername());
       role.setIndexno("tmp");
       role.setCreator(creator);
       roleService.createRole(creator, role);
@@ -141,7 +145,7 @@ public class RoleAction extends SecurityActionSupport {
   public String editProfile() {
     Role role = entityDao.get(Role.class, getId("role", Integer.class));
     ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
-    helper.fillEditInfo(role, getUserId(), isAdmin());
+    helper.fillEditInfo(role, userService.get(SecurityUtils.getUsername()), isAdmin());
     put("role", role);
     return forward();
   }
@@ -157,7 +161,7 @@ public class RoleAction extends SecurityActionSupport {
     ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.setIdentifierDataResolver(identifierDataResolver);
     Role role = entityDao.get(Role.class, getId("role", Integer.class));
-    helper.populateSaveInfo(role, getUserId(), isAdmin());
+    helper.populateSaveInfo(role, userService.get(SecurityUtils.getUsername()), isAdmin());
     entityDao.saveOrUpdate(role);
     return redirect("profile", "info.save.success");
   }
@@ -167,7 +171,7 @@ public class RoleAction extends SecurityActionSupport {
    */
   public String remove() {
     Integer[] roleIds = getIds(getShortName(), Integer.class);
-    User curUser = securityHelper.getUserService().get(getUserId());
+    User curUser = userService.get(SecurityUtils.getUsername());
     roleService.removeRole(curUser, entityDao.get(Role.class, roleIds));
     return redirect("search", "info.remove.success");
   }
@@ -183,6 +187,10 @@ public class RoleAction extends SecurityActionSupport {
 
   public void setIdentifierDataResolver(UserDataResolver identifierDataResolver) {
     this.identifierDataResolver = identifierDataResolver;
+  }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
 
 }

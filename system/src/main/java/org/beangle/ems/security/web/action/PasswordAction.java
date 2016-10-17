@@ -23,6 +23,7 @@ import java.util.Map;
 import org.beangle.commons.collection.CollectUtils;
 import org.beangle.commons.entity.util.ValidEntityKeyPredicate;
 import org.beangle.ems.web.action.SecurityActionSupport;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.Settings;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.service.UserService;
@@ -47,7 +48,7 @@ public class PasswordAction extends SecurityActionSupport {
     Long userId = getLong("user.id");
     if (ValidEntityKeyPredicate.Instance.apply(userId)) {
       User user = userService.get(userId);
-      User manager = entityDao.get(User.class, getUserId());
+      User manager = userService.get(SecurityUtils.getUsername());
       if (userService.isManagedBy(manager, user)) {
         return updateAccount(userId);
       } else {

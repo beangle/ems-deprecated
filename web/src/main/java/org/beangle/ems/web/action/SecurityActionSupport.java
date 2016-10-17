@@ -21,7 +21,6 @@ package org.beangle.ems.web.action;
 import java.util.List;
 
 import org.beangle.commons.dao.query.builder.OqlBuilder;
-import org.beangle.commons.lang.Strings;
 import org.beangle.ems.web.helper.SecurityHelper;
 import org.beangle.security.blueprint.Profile;
 import org.beangle.security.blueprint.SecurityUtils;
@@ -52,16 +51,8 @@ public abstract class SecurityActionSupport extends EntityDrivenAction {
     securityHelper.applyPermission(query);
   }
 
-  protected Long getUserId() {
-    return SecurityUtils.getUserId();
-  }
-
   protected String getUsername() {
     return SecurityUtils.getUsername();
-  }
-
-  protected String getUser() {
-    return Strings.concat(SecurityUtils.getUsername(), "(", SecurityUtils.getFullname(), ")");
   }
 
   public void setSecurityHelper(SecurityHelper securityHelper) {

@@ -24,10 +24,12 @@ import org.beangle.commons.entity.Entity;
 import org.beangle.ems.security.helper.ProfileHelper;
 import org.beangle.ems.web.action.SecurityActionSupport;
 import org.beangle.security.blueprint.Profile;
+import org.beangle.security.blueprint.SecurityUtils;
 import org.beangle.security.blueprint.User;
 import org.beangle.security.blueprint.UserProfile;
 import org.beangle.security.blueprint.model.UserProfileBean;
 import org.beangle.security.blueprint.service.UserDataResolver;
+import org.beangle.security.blueprint.service.UserService;
 import org.beangle.struts2.helper.Params;
 
 /**
@@ -36,6 +38,7 @@ import org.beangle.struts2.helper.Params;
  */
 public class ProfileAction extends SecurityActionSupport {
   protected UserDataResolver identifierDataResolver;
+  private UserService userService;
 
   @Override
   protected String getEntityName() {
@@ -74,7 +77,7 @@ public class ProfileAction extends SecurityActionSupport {
     Profile profile = getProfile();
     ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
     helper.setIdentifierDataResolver(identifierDataResolver);
-    helper.populateSaveInfo(profile, getUserId(), isAdmin());
+    helper.populateSaveInfo(profile, userService.get(SecurityUtils.getUsername()), isAdmin());
     if (profile.getProperties().isEmpty()) {
       if (((Entity<?>) profile).isPersisted()) entityDao.remove(profile);
       return redirect("info", "info.save.success");
@@ -91,7 +94,7 @@ public class ProfileAction extends SecurityActionSupport {
     // 取得各参数的值
     Profile profile = getProfile();
     ProfileHelper helper = new ProfileHelper(entityDao, securityHelper.getProfileService());
-    helper.fillEditInfo(profile, getUserId(), isAdmin());
+    helper.fillEditInfo(profile, userService.get(SecurityUtils.getUsername()), isAdmin());
     return forward();
   }
 
@@ -104,6 +107,10 @@ public class ProfileAction extends SecurityActionSupport {
     } else profile = entityDao.get(UserProfileBean.class, profileId);
     populate((Entity<?>) profile, getEntityName(), Params.sub("profile"));
     return profile;
+  }
+
+  public void setUserService(UserService userService) {
+    this.userService = userService;
   }
 
 }
