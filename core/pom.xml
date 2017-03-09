@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.beangle.ems</groupId>
     <artifactId>beangle-ems-parent</artifactId>
-    <version>3.5.2-SNAPSHOT</version>
+    <version>3.5.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.beangle.ems</groupId>
@@ -15,7 +15,7 @@
     <bundle.namespace>org.beangle.ems</bundle.namespace>
     <commonscompress.version>1.4</commonscompress.version>
     <spring.version>3.1.1.RELEASE</spring.version>
-    <ognl.version>3.0.6</ognl.version>
+    <ognl.version>3.0.19</ognl.version>
     <javassist.version>3.17.1-GA</javassist.version>
   </properties>
 
